@@ -108,10 +108,15 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
+  // load nav as fragment (resolve path relative to current page for AEM /content/.../jp.html)
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  let navPath = navMeta ? new URL(navMeta, window.location).pathname : null;
+  if (!navPath) {
+    const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
+    navPath = `${basePath}/nav`;
+  }
   const fragment = await loadFragment(navPath);
+  if (!fragment) return;
 
   // decorate nav DOM
   block.textContent = '';
