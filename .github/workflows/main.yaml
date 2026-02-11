@@ -11,6 +11,4 @@ jobs:
       with:
         node-version: '20'
     - run: npm ci
-    - name: Normalize line endings to LF
-      run: find . -type f \( -name '*.js' -o -name '*.json' -o -name '*.css' -o -name '*.yaml' -o -name '*.yml' \) -not -path './node_modules/*' -print0 | xargs -0 -r sed -i 's/\r$//'
     - run: npm run lint
