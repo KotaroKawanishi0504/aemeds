@@ -40,3 +40,12 @@ npm run lint
 1. Install the [AEM CLI](https://github.com/adobe/helix-cli): `npm install -g @adobe/aem-cli`
 1. Start AEM Proxy: `aem up` (opens your browser at `http://localhost:3000`)
 1. Open the `{repo}` directory in your favorite IDE and start coding :)
+
+## Marubeni: Header and Footer (Fragments)
+
+Header and footer are loaded as **fragments**. Create these in AEM so they are available at:
+
+- **Nav (header)**: Path resolved from page metadata `nav` or default `/nav`. Create content at `/content/marubeni/jp/nav` (or set metadata `nav` to your nav path).
+- **Footer**: Path resolved from page metadata `footer` or default `/footer`. Create content at `/content/marubeni/jp/footer` (or set metadata `footer` to your footer path).
+
+Each fragment is a normal page; its main content is included in the header or footer block. Use `.plain.html` delivery for fragment content (e.g. `/nav.plain.html`, `/footer.plain.html`).

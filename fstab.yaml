@@ -1,3 +1,4 @@
+# Marubeni EDS: Replace url with your AEM Author Franklin delivery URL for production
 mountpoints:
   /:
     url: "https://author-p159816-e1708144.adobeaemcloud.com/bin/franklin.delivery/KotaroKawanishi0504/aemeds/main"

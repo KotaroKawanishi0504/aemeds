@@ -142,6 +142,23 @@
     ]
   },
   {
+    "id": "alert",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Alert text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link (optional)"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -156,6 +173,32 @@
         "name": "text",
         "value": "",
         "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "carousel",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "caption",
+        "value": "",
+        "label": "Caption",
         "valueType": "string"
       }
     ]
@@ -211,6 +254,90 @@
         "name": "text",
         "value": "",
         "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "news-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "date",
+        "label": "Date",
+        "multi": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category",
+        "label": "Category",
+        "multi": true
+      },
+      {
+        "component": "richtext",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link",
+        "multi": true
+      }
+    ]
+  },
+  {
+    "id": "notice-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "message",
+        "label": "Message",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "date",
+        "label": "Date (optional)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "tabs",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "labels",
+        "label": "Tab labels (comma-separated)",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "panel1",
+        "value": "",
+        "label": "Panel 1",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "panel2",
+        "value": "",
+        "label": "Panel 2",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "panel3",
+        "value": "",
+        "label": "Panel 3",
         "valueType": "string"
       }
     ]

@@ -1,10 +1,8 @@
 {
   "mappings": [
-    "/content/aemedssite/:/",
-    "/content/aemedssite/configuration:/.helix/config.json",
-    "/content/aemedssite/metadata:/metadata.json"
+    "/content/marubeni/jp/:/",
+    "/content/marubeni/jp/configuration:/.helix/config.json",
+    "/content/marubeni/jp/metadata:/metadata.json"
   ],
-  "includes": [
-    "/content/aemedssite/"
-  ]
+  "includes": ["/content/marubeni/jp/"]
 }

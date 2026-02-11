@@ -1,0 +1,64 @@
+.tabs-triggers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--text-color, #333);
+}
+
+.tabs-trigger {
+  margin: 0;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.tabs-trigger[aria-selected="true"] {
+  border-bottom-color: var(--text-color, #333);
+  font-weight: 600;
+}
+
+.tabs-trigger:hover,
+.tabs-trigger:focus-visible {
+  outline: 2px solid var(--text-color, #333);
+  outline-offset: 2px;
+}
+
+.tabs-panels {
+  min-height: 1em;
+}
+
+.tabs-panel[hidden] {
+  display: none;
+}
+
+.tabs-panel-content {
+  padding: 8px 0;
+}
+
+.tabs-panel-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs-panel-content li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.tabs-panel-content li:last-child {
+  border-bottom: none;
+}
+
+.tabs-panel-content a {
+  text-decoration: none;
+}
+
+.tabs-panel-content a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,29 @@
+.notice-banner {
+  background-color: #f5f5f5;
+  padding: 12px 24px;
+  font-size: 0.9375rem;
+}
+
+.notice-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.notice-banner-date {
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.notice-banner-message {
+  color: var(--text-color, #333);
+}
+
+@media (width >= 900px) {
+  .notice-banner {
+    padding: 16px 32px;
+  }
+}
