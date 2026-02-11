@@ -9,6 +9,9 @@ jobs:
     - name: Use Node.js 20
       uses: actions/setup-node@v6
       with:
-        node-version: 24
+        node-version: '20'
     - run: npm ci
+    - name: Normalize line endings to LF
+      run: |
+        find . -type f \( -name "*.js" -o -name "*.json" -o -name "*.css" -o -name "*.yaml" -o -name "*.yml" \) -not -path "./node_modules/*" -exec sed -i 's/\r$//' {} \;
     - run: npm run lint
