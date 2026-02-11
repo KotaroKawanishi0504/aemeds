@@ -111,11 +111,13 @@ export default async function decorate(block) {
   // load nav as fragment (resolve path relative to current page for AEM /content/.../jp.html)
   const navMeta = getMetadata('nav');
   let navPath = navMeta ? new URL(navMeta, window.location).pathname : null;
-  if (!navPath) {
-    const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
-    navPath = `${basePath}/nav`;
+  const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
+  const candidates = navPath ? [navPath] : [`${basePath}/nav`, `${basePath}/Header/nav`];
+  let fragment = null;
+  for (const path of candidates) {
+    fragment = await loadFragment(path);
+    if (fragment) break;
   }
-  const fragment = await loadFragment(navPath);
   if (!fragment) return;
 
   // decorate nav DOM

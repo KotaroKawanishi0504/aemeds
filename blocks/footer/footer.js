@@ -9,11 +9,13 @@ export default async function decorate(block) {
   // load footer as fragment (resolve path relative to current page for AEM /content/.../jp.html)
   const footerMeta = getMetadata('footer');
   let footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : null;
-  if (!footerPath) {
-    const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
-    footerPath = `${basePath}/footer`;
+  const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
+  const candidates = footerPath ? [footerPath] : [`${basePath}/footer`, `${basePath}/Footer/footer`];
+  let fragment = null;
+  for (const path of candidates) {
+    fragment = await loadFragment(path);
+    if (fragment) break;
   }
-  const fragment = await loadFragment(footerPath);
   if (!fragment) return;
 
   // decorate footer DOM
