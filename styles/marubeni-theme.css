@@ -18,9 +18,13 @@
   --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
   --heading-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
 
-  /* section/block overrides (analysis §4, §6) */
-  --card-border-radius: 4px;
-  --card-border-color: #e0e0e0;
+  /* section/block overrides (analysis §4, §6). 本家 https://www.marubeni.com/jp/ のカードに合わせる */
+  --card-border-radius: 8px;
+  --card-border-color: rgb(0 0 0 / 6%);
+  --card-box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+
+  /* 本家は画像下テキスト部分を白にしていない。カード全体を --light-color にするとセクションと調和 */
+  --card-background: var(--light-color);
 }
 
 /* stylelint-disable no-descending-specificity -- main + fallback selectors for Author */
@@ -32,6 +36,7 @@
 main .cards > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
+  box-shadow: var(--card-box-shadow);
   color: var(--text-color);
   font-family: var(--body-font-family);
 }
@@ -47,6 +52,7 @@ main .cards .cards-card-body {
 main .cards-wrapper.cards-wrapper > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
+  box-shadow: var(--card-box-shadow);
   color: var(--text-color);
   font-family: var(--body-font-family);
 }
@@ -55,6 +61,7 @@ main .cards-wrapper.cards-wrapper > ul > li {
 main .cards-wrapper.cards-wrapper > div > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
+  box-shadow: var(--card-box-shadow);
   color: var(--text-color);
   font-family: var(--body-font-family);
 }
@@ -76,6 +83,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body {
 main .cards-wrapper.cards-wrapper .cards > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
+  box-shadow: var(--card-box-shadow);
   color: var(--text-color);
   font-family: var(--body-font-family);
 }

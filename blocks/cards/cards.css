@@ -15,9 +15,10 @@ main .cards > ul {
 
 .cards > ul > li,
 main .cards > ul > li {
-  border: 1px solid var(--card-border-color, #dadada);
+  border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
-  background-color: var(--background-color);
+  background-color: var(--card-background, var(--background-color));
+  box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
 .cards .cards-card-body,
@@ -30,11 +31,13 @@ main .cards .cards-card-image {
   line-height: 0;
 }
 
+/* 本家 https://www.marubeni.com/jp/ に合わせ、画像はアスペクト比を強制しない */
 .cards > ul > li img,
 main .cards > ul > li img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  vertical-align: middle;
 }
 
 /* Platform .cards-wrapper (AEM Author); fallback when no main */
@@ -50,9 +53,10 @@ main .cards-wrapper > ul {
 
 .cards-wrapper > ul > li,
 main .cards-wrapper > ul > li {
-  border: 1px solid var(--card-border-color, #dadada);
+  border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
-  background-color: var(--background-color);
+  background-color: var(--card-background, var(--background-color));
+  box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
 .cards-wrapper .cards-card-body,
@@ -68,8 +72,9 @@ main .cards-wrapper .cards-card-image {
 .cards-wrapper > ul > li img,
 main .cards-wrapper > ul > li img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  vertical-align: middle;
 }
 
 /* .cards-wrapper > div > ul (Author: wrapper 直下に div). 詳細度を上げて lazy-styles 等より優先 */
@@ -85,16 +90,18 @@ main .cards-wrapper.cards-wrapper > div > ul {
 
 .cards-wrapper.cards-wrapper > div > ul > li,
 main .cards-wrapper.cards-wrapper > div > ul > li {
-  border: 1px solid var(--card-border-color, #dadada);
+  border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
-  background-color: var(--background-color);
+  background-color: var(--card-background, var(--background-color));
+  box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
 .cards-wrapper.cards-wrapper > div > ul > li img,
 main .cards-wrapper.cards-wrapper > div > ul > li img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  vertical-align: middle;
 }
 
 /* 従来セレクタも維持（詳細度が足りない環境用） */
@@ -110,16 +117,18 @@ main .cards-wrapper > div > ul {
 
 .cards-wrapper > div > ul > li,
 main .cards-wrapper > div > ul > li {
-  border: 1px solid var(--card-border-color, #dadada);
+  border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
-  background-color: var(--background-color);
+  background-color: var(--card-background, var(--background-color));
+  box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
 .cards-wrapper > div > ul > li img,
 main .cards-wrapper > div > ul > li img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  vertical-align: middle;
 }
 
 /* .cards inside .cards-wrapper; fallback when no main */
@@ -135,9 +144,10 @@ main .cards-wrapper .cards > ul {
 
 .cards-wrapper .cards > ul > li,
 main .cards-wrapper .cards > ul > li {
-  border: 1px solid var(--card-border-color, #dadada);
+  border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
-  background-color: var(--background-color);
+  background-color: var(--card-background, var(--background-color));
+  box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
 .cards-wrapper .cards .cards-card-body,
@@ -153,6 +163,7 @@ main .cards-wrapper .cards .cards-card-image {
 .cards-wrapper .cards > ul > li img,
 main .cards-wrapper .cards > ul > li img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  vertical-align: middle;
 }

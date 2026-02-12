@@ -3,6 +3,8 @@
 **Source:** Marubeni TOP (https://www.marubeni.com/jp/).  
 **Purpose:** Document layout, typography, colors, spacing, and borders so blocks can be aligned to Marubeni design. Use with **analyze-and-plan** (Visual Analysis) and **building-blocks** (Step 4: CSS).
 
+**本家 HTML の参照:** 同一リポジトリの `drafts/tmp/import-work/cleaned.html` にスクレープした本家の HTML を格納。カードは `ul.c-card-list` > `li.c-card-list__item` > `a.c-card-list__link` > `div.c-card-list__image`（img のみ・アスペクト比指定なし）+ `div.c-card-list__title`。デザイン再現時はこの構造と見た目を参照する。
+
 ---
 
 ## 1. Layout
@@ -58,7 +60,7 @@
 | Block / area | Acceptance criteria |
 |--------------|---------------------|
 | Hero | Full-width; height min 400px desktop; overlay for text contrast; CTA button uses --link-color/--link-hover-color; heading/body use theme fonts and sizes. |
-| Cards / Columns | Card background #fff; shadow subtle; radius 4px–8px; title/body use --heading-font-family / --body-font-family; spacing 24px padding. |
+| Cards / Columns | **画像:** 本家と同様にアスペクト比を強制しない（aspect-ratio なし、height: auto）。**テキスト部分:** 本家は白でないため --card-background: var(--light-color)。box-shadow 0 2px 12px; radius 8px; border 極薄。参照: cleaned.html の .c-card-list__image / .c-card-list__title。 |
 | Carousel | Nav arrows/indicators use theme colors; slide spacing consistent. |
 | Tabs + News list | Tab underline --link-color; list spacing 12px–16px; link style matches --link-color, hover underline. |
 | Notice banner / Alert | Background --light-color or #fff; text --text-color; icon 24px; border-left or icon position per design. |
