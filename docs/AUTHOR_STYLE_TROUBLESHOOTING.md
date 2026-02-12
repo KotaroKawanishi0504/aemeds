@@ -28,10 +28,12 @@ Git に push したあと、AEM Author のプレビューで丸紅用スタイ�
 1. Author で該当ページを開き、**開発者ツール**（F12）→ **Elements（要素）** を開く。
 2. 画面上の「Cards」のエリアを **右クリック → 検証** で選択する。
 3. 要素ツリーで、Cards の親が次のどちらか確認する。
-   - **`<div class="block cards">` の下に `<ul>` → `<li>`** がある  
-     → このプロジェクトのブロックです。テーマと `blocks/cards/cards.css` が変数（`--card-border-radius`, `--card-border-color` 等）を使うようになっているので、push 後に Code Sync が済んでいれば反映されます。
+   - **`<div class="cards-wrapper">` の内側に `<div class="cards block">` → `<ul>` → `<li>`** がある  
+     → AEM Author がブロックをラップした状態です。このプロジェクトでは `.cards-wrapper .cards` にもスタイルを当てているので、テーマが反映されます。
+   - **`<div class="block cards">` の直下に `<ul>` → `<li>`** がある（ラップなし）  
+     → 同じくこのプロジェクトのブロックです。push と Code Sync 後は丸紅テーマが当たります。
    - **別のクラス名（例: `cmp-list` など）や構造**  
-     → AEM の別コンポーネントの可能性があります。Universal Editor で「Cards」を **このリポジトリのブロック**（component-definition で定義した Cards）として配置し直す必要がある場合があります。
+     → AEM の別コンポーネントの可能性があります。Universal Editor で「Cards」をこのリポジトリのブロックとして配置し直す必要がある場合があります。
 
 リポジトリ側では、`blocks/cards/cards.css` でテーマ変数を使い、`styles/marubeni-theme.css` で `.cards > ul > li` と `.cards .cards-card-body` に色・フォントを明示指定するようにしています。変更を push して Code Sync 後に再度プレビューしてください。
 
