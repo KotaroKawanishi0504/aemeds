@@ -14,6 +14,9 @@
   --link-color: #0066a1;
   --link-hover-color: #004d7a;
 
+  /* 本家のカード: テキストホバーで赤 (analysis §3 Accent #c41230) */
+  --card-text-hover-color: #c41230;
+
   /* fonts – corporate JP (analysis §2) */
   --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
   --heading-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;

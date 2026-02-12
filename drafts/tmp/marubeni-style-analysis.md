@@ -60,7 +60,7 @@
 | Block / area | Acceptance criteria |
 |--------------|---------------------|
 | Hero | Full-width; height min 400px desktop; overlay for text contrast; CTA button uses --link-color/--link-hover-color; heading/body use theme fonts and sizes. |
-| Cards / Columns | **画像:** 本家と同様にアスペクト比を強制しない（aspect-ratio なし、height: auto）。**テキスト部分:** 本家は白でないため --card-background: var(--light-color)。box-shadow 0 2px 12px; radius 8px; border 極薄。参照: cleaned.html の .c-card-list__image / .c-card-list__title。 |
+| Cards / Columns | **画像:** 本家と同様にアスペクト比を強制しない。**テキスト:** 本家は赤い矢印アイコンなしでテキストのみ。**ホバー:** 本家は画像またはテキストエリアにマウスオーバーで画像が少し拡大（cleaned.html の img.-zoom）、テキストは赤（#c41230）に変化。--card-background: var(--light-color)。box-shadow / radius / border 上記のとおり。 |
 | Carousel | Nav arrows/indicators use theme colors; slide spacing consistent. |
 | Tabs + News list | Tab underline --link-color; list spacing 12px–16px; link style matches --link-color, hover underline. |
 | Notice banner / Alert | Background --light-color or #fff; text --text-color; icon 24px; border-left or icon position per design. |

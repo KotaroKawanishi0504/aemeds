@@ -29,6 +29,30 @@ main .cards .cards-card-body {
 .cards .cards-card-image,
 main .cards .cards-card-image {
   line-height: 0;
+  overflow: hidden;
+}
+
+/* 本家 https://www.marubeni.com/jp/ と同様: カードホバーで画像を少し拡大 (cleaned.html の img.-zoom) */
+.cards > ul > li .cards-card-image img,
+main .cards > ul > li .cards-card-image img {
+  transition: transform 0.35s ease;
+}
+
+.cards > ul > li:hover .cards-card-image img,
+main .cards > ul > li:hover .cards-card-image img {
+  transform: scale(1.05);
+}
+
+.cards .cards-card-body a,
+main .cards .cards-card-body a {
+  transition: color 0.2s ease;
+}
+
+.cards > ul > li:hover .cards-card-body,
+.cards > ul > li:hover .cards-card-body a,
+main .cards > ul > li:hover .cards-card-body,
+main .cards > ul > li:hover .cards-card-body a {
+  color: var(--card-text-hover-color, #c41230);
 }
 
 /* 本家 https://www.marubeni.com/jp/ に合わせ、画像はアスペクト比を強制しない */
@@ -67,6 +91,24 @@ main .cards-wrapper .cards-card-body {
 .cards-wrapper .cards-card-image,
 main .cards-wrapper .cards-card-image {
   line-height: 0;
+  overflow: hidden;
+}
+
+.cards-wrapper > ul > li:hover .cards-card-image img,
+main .cards-wrapper > ul > li:hover .cards-card-image img {
+  transform: scale(1.05);
+}
+
+.cards-wrapper > ul > li:hover .cards-card-body,
+.cards-wrapper > ul > li:hover .cards-card-body a,
+main .cards-wrapper > ul > li:hover .cards-card-body,
+main .cards-wrapper > ul > li:hover .cards-card-body a {
+  color: var(--card-text-hover-color, #c41230);
+}
+
+.cards-wrapper > ul > li .cards-card-image img,
+main .cards-wrapper > ul > li .cards-card-image img {
+  transition: transform 0.35s ease;
 }
 
 .cards-wrapper > ul > li img,
@@ -102,6 +144,28 @@ main .cards-wrapper.cards-wrapper > div > ul > li img {
   height: auto;
   display: block;
   vertical-align: middle;
+}
+
+.cards-wrapper.cards-wrapper > div > ul > li .cards-card-image,
+main .cards-wrapper.cards-wrapper > div > ul > li .cards-card-image {
+  overflow: hidden;
+}
+
+.cards-wrapper.cards-wrapper > div > ul > li .cards-card-image img,
+main .cards-wrapper.cards-wrapper > div > ul > li .cards-card-image img {
+  transition: transform 0.35s ease;
+}
+
+.cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-image img,
+main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-image img {
+  transform: scale(1.05);
+}
+
+.cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body,
+.cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a,
+main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body,
+main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
+  color: var(--card-text-hover-color, #c41230);
 }
 
 /* 従来セレクタも維持（詳細度が足りない環境用） */
@@ -158,6 +222,24 @@ main .cards-wrapper .cards .cards-card-body {
 .cards-wrapper .cards .cards-card-image,
 main .cards-wrapper .cards .cards-card-image {
   line-height: 0;
+  overflow: hidden;
+}
+
+.cards-wrapper .cards > ul > li .cards-card-image img,
+main .cards-wrapper .cards > ul > li .cards-card-image img {
+  transition: transform 0.35s ease;
+}
+
+.cards-wrapper .cards > ul > li:hover .cards-card-image img,
+main .cards-wrapper .cards > ul > li:hover .cards-card-image img {
+  transform: scale(1.05);
+}
+
+.cards-wrapper .cards > ul > li:hover .cards-card-body,
+.cards-wrapper .cards > ul > li:hover .cards-card-body a,
+main .cards-wrapper .cards > ul > li:hover .cards-card-body,
+main .cards-wrapper .cards > ul > li:hover .cards-card-body a {
+  color: var(--card-text-hover-color, #c41230);
 }
 
 .cards-wrapper .cards > ul > li img,
