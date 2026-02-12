@@ -49,7 +49,7 @@ document.querySelectorAll('.cards-wrapper > ul > li').length
 ```
 
 - 1つ目の結果が **0** で、2つ目が **0 より大きい** → **原因: DOM に main が無い。** フォールバック（`main` を付けないセレクタ）が CSS に含まれていれば、2つ目は 0 より大きくなり、その要素にスタイルが当たります。
-- 両方 0 → Cards ブロックの DOM が `.cards-wrapper > ul > li` ではない可能性があります。Elements タブで `div.cards-wrapper` の子を確認してください。
+- 両方 0 → Cards ブロックの DOM が `.cards-wrapper > ul > li` ではない可能性があります。**プレビュー側の document**（Elements で Cards を選んでから `$0.ownerDocument`）で `.cards-wrapper > div > ul > li` を試してください。1 以上なら、リポジトリでその構造用のセレクタ（`.cards-wrapper > div > ul > li`）を追加済みなので、push と Code Sync 後に反映されます。
 
 ---
 

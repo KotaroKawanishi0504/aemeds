@@ -51,8 +51,22 @@ main .cards-wrapper > ul > li {
   font-family: var(--body-font-family);
 }
 
+.cards-wrapper > div > ul > li,
+main .cards-wrapper > div > ul > li {
+  border-radius: var(--card-border-radius);
+  border-color: var(--card-border-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+}
+
 .cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+}
+
+.cards-wrapper > div .cards-card-body,
+main .cards-wrapper > div .cards-card-body {
   color: var(--text-color);
   font-family: var(--body-font-family);
 }

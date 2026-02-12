@@ -72,6 +72,31 @@ main .cards-wrapper > ul > li img {
   object-fit: cover;
 }
 
+/* .cards-wrapper > div > ul (Author: wrapper 直下に div がある場合) */
+.cards-wrapper > div > ul,
+main .cards-wrapper > div > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  gap: 24px;
+}
+
+.cards-wrapper > div > ul > li,
+main .cards-wrapper > div > ul > li {
+  border: 1px solid var(--card-border-color, #dadada);
+  border-radius: var(--card-border-radius, 0);
+  background-color: var(--background-color);
+}
+
+.cards-wrapper > div > ul > li img,
+main .cards-wrapper > div > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 /* .cards inside .cards-wrapper; fallback when no main */
 .cards-wrapper .cards > ul,
 main .cards-wrapper .cards > ul {
