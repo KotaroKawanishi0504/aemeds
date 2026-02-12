@@ -11,13 +11,14 @@
  *
  * Run from aemeds root: node scripts/run-marubeni-scrape.js
  */
-import { analyzeWebpage } from '../.cursor/skills/scrape-webpage/scripts/analyze-webpage.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { analyzeWebpage } from '../.cursor/skills/scrape-webpage/scripts/analyze-webpage.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outputDir = path.resolve(__dirname, '..', 'drafts', 'tmp', 'import-work');
+const dirName = path.dirname(fileURLToPath(import.meta.url));
+const outputDir = path.resolve(dirName, '..', 'drafts', 'tmp', 'import-work');
 const url = 'https://www.marubeni.com/jp/';
 
 const result = await analyzeWebpage(url, outputDir);
+// eslint-disable-next-line no-console
 console.log(JSON.stringify(result, null, 2));
