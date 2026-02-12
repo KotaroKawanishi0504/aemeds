@@ -23,9 +23,12 @@
   --card-border-color: #e0e0e0;
 }
 
-/* Cards block: scoped per building-blocks skill (main .{block-name}) */
+/* stylelint-disable no-descending-specificity -- main + fallback selectors for Author */
 
-/* Structure with .cards (local/preview) */
+/* Cards block: main scoped + fallback when no main (AEM Author canvas). */
+
+/* .cards (local/preview) */
+.cards > ul > li,
 main .cards > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
@@ -33,13 +36,14 @@ main .cards > ul > li {
   font-family: var(--body-font-family);
 }
 
+.cards .cards-card-body,
 main .cards .cards-card-body {
   color: var(--text-color);
   font-family: var(--body-font-family);
 }
 
-/* Platform .cards-wrapper (AEM Author): .cards-wrapper > ul > li */
-
+/* Platform .cards-wrapper (AEM Author) */
+.cards-wrapper > ul > li,
 main .cards-wrapper > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
@@ -47,12 +51,14 @@ main .cards-wrapper > ul > li {
   font-family: var(--body-font-family);
 }
 
+.cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
   color: var(--text-color);
   font-family: var(--body-font-family);
 }
 
-/* AEM Author with .cards inside wrapper */
+/* .cards inside .cards-wrapper */
+.cards-wrapper .cards > ul > li,
 main .cards-wrapper .cards > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
@@ -60,6 +66,7 @@ main .cards-wrapper .cards > ul > li {
   font-family: var(--body-font-family);
 }
 
+.cards-wrapper .cards .cards-card-body,
 main .cards-wrapper .cards .cards-card-body {
   color: var(--text-color);
   font-family: var(--body-font-family);

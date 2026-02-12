@@ -1,6 +1,9 @@
-/* Block scoping per building-blocks skill: main .{block-name} */
+/* stylelint-disable no-descending-specificity -- main + fallback selectors intentional for Author */
 
-/* .cards (local/preview) */
+/* Block scoping: main .{block-name}. Fallback without main for AEM Author (canvas may omit main). */
+
+/* .cards (local/preview); fallback when no main */
+.cards > ul,
 main .cards > ul {
   list-style: none;
   margin: 0;
@@ -10,27 +13,32 @@ main .cards > ul {
   gap: 24px;
 }
 
+.cards > ul > li,
 main .cards > ul > li {
   border: 1px solid var(--card-border-color, #dadada);
   border-radius: var(--card-border-radius, 0);
   background-color: var(--background-color);
 }
 
+.cards .cards-card-body,
 main .cards .cards-card-body {
   margin: 16px;
 }
 
+.cards .cards-card-image,
 main .cards .cards-card-image {
   line-height: 0;
 }
 
+.cards > ul > li img,
 main .cards > ul > li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-/* Platform adds .cards-wrapper outside block (AEM Author): .cards-wrapper > ul */
+/* Platform .cards-wrapper (AEM Author); fallback when no main */
+.cards-wrapper > ul,
 main .cards-wrapper > ul {
   list-style: none;
   margin: 0;
@@ -40,27 +48,32 @@ main .cards-wrapper > ul {
   gap: 24px;
 }
 
+.cards-wrapper > ul > li,
 main .cards-wrapper > ul > li {
   border: 1px solid var(--card-border-color, #dadada);
   border-radius: var(--card-border-radius, 0);
   background-color: var(--background-color);
 }
 
+.cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
   margin: 16px;
 }
 
+.cards-wrapper .cards-card-image,
 main .cards-wrapper .cards-card-image {
   line-height: 0;
 }
 
+.cards-wrapper > ul > li img,
 main .cards-wrapper > ul > li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-/* AEM Author with .cards inside wrapper */
+/* .cards inside .cards-wrapper; fallback when no main */
+.cards-wrapper .cards > ul,
 main .cards-wrapper .cards > ul {
   list-style: none;
   margin: 0;
@@ -70,20 +83,24 @@ main .cards-wrapper .cards > ul {
   gap: 24px;
 }
 
+.cards-wrapper .cards > ul > li,
 main .cards-wrapper .cards > ul > li {
   border: 1px solid var(--card-border-color, #dadada);
   border-radius: var(--card-border-radius, 0);
   background-color: var(--background-color);
 }
 
+.cards-wrapper .cards .cards-card-body,
 main .cards-wrapper .cards .cards-card-body {
   margin: 16px;
 }
 
+.cards-wrapper .cards .cards-card-image,
 main .cards-wrapper .cards .cards-card-image {
   line-height: 0;
 }
 
+.cards-wrapper .cards > ul > li img,
 main .cards-wrapper .cards > ul > li img {
   width: 100%;
   aspect-ratio: 4 / 3;

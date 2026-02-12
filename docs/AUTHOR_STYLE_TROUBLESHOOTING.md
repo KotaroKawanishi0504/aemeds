@@ -2,6 +2,8 @@
 
 Git に push したあと、AEM Author のプレビューで丸紅用スタイル（色・フォント）が反映されない場合の確認手順です。
 
+**原因を手早く切り分けたいとき** → **[AUTHOR_STYLE_DIAGNOSIS.md](./AUTHOR_STYLE_DIAGNOSIS.md)** に「1. main の有無」「2. CSS の URL」「3. セレクタのマッチ」の順で確認する手順と、Console で実行するコマンドをまとめています。まずそちらを試してください。
+
 ## 1. marubeni-theme.css が読み込まれているか
 
 **確認方法:**
