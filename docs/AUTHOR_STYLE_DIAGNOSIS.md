@@ -53,12 +53,31 @@ document.querySelectorAll('.cards-wrapper > ul > li').length
 
 ---
 
+## 4. セレクタはマッチするがスタイルが変わらない場合（CSS の読み込み確認）
+
+「3」で **`.cards-wrapper > div > ul > li` が 3 など 0 より大きい**のに、見た目が変わらないときは、**プレビュー用の document に私たちの CSS が読み込まれていない**可能性が高いです。
+
+**確認（Elements でプレビュー内の Cards を選んだ状態で、Console に 1 行ずつ実行）:**
+
+```js
+Array.from($0.ownerDocument.styleSheets).map(s => s.href).filter(Boolean)
+```
+
+- 出てきた URL の一覧に **`marubeni-theme.css`** や **`cards.css`** が **含まれていない**  
+  → **原因: その document（プレビュー用 iframe）には私たちの CSS が読み込まれていない。** 配信やプレビュー設定で、プレビュー用 HTML の `<head>` に当リポジトリの CSS が含まれるようにする必要があります。詳しくは `AUTHOR_STYLE_SKILL_APPROACH.md` の「3. セレクタは合っているのにスタイルが変わらない場合」を参照してください。
+- **含まれている** → 読み込みはされているので、詳細度や上書き、キャッシュを疑います。
+
+---
+
 ## まとめ（原因と対処）
 
 | 確認結果 | 想定原因 | 対処 |
 |----------|----------|------|
-| `document.querySelector('main')` が null | Author の HTML に `<main>` が無い | CSS に `.cards-wrapper …` など main なしのフォールバックを追加する（本リポジトリで対応済みの場合は push と Code Sync を再確認） |
+| `document.querySelector('main')` が null | Author の HTML に `<main>` が無い | CSS に main なしのフォールバックを追加（対応済みの場合は push と Code Sync を再確認） |
 | marubeni-theme.css / cards.css の URL が違う・404 | 配信元・ブランチ・Code Sync のずれ | `fstab.yaml`・配信設定・Code Sync のログを確認 |
-| セレクタのマッチ数が 0 | DOM 構造が想定と違う、または main なしでフォールバックも無い | 上記の両方に対応 |
+| セレクタのマッチ数が 0 | DOM 構造が想定と違う | `.cards-wrapper > div > ul > li` など複数パターンのセレクタを追加（対応済み） |
+| セレクタはマッチするがスタイルが変わらない | **プレビュー用 document に CSS が読み込まれていない** | 上記「4」で読み込み有無を確認。読み込まれていなければ配信・プレビュー設定を修正 |
 
-まず **「1. main の有無」** を必ず確認してください。ここで null なら、それ以降の修正（例: フォールバック追加）が効いているかどうかも、push 後に再度「1」と「3」で確認するとよいです。
+**Skill に基づく方針（どの Class を信頼するか・Editor と Preview の違い）** は **`AUTHOR_STYLE_SKILL_APPROACH.md`** にまとめています。
+
+まず **「1. main の有無」** を必ず確認してください。セレクタがマッチしているのにスタイルが付かない場合は **「4. CSS の読み込み確認」** を実行してください。
