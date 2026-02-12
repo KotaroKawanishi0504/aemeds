@@ -1,0 +1,76 @@
+{
+  "url": "https://www.marubeni.com/jp/",
+  "timestamp": "2026-02-12T04:38:42.982Z",
+  "paths": {
+    "documentPath": "/jp/index",
+    "htmlFilePath": "/jp/index.plain.html",
+    "mdFilePath": "/jp/index.md",
+    "dirPath": "/jp",
+    "filename": "index"
+  },
+  "screenshot": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\screenshot.png",
+  "html": {
+    "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\cleaned.html",
+    "size": 234074
+  },
+  "metadata": {
+    "title": "丸紅株式会社",
+    "og:title": "丸紅株式会社",
+    "twitter:title": "丸紅株式会社",
+    "description": "丸紅は、ライフスタイル、フォレストプロダクツ、情報・物流、食料、アグリ事業、化学品、金属、エネルギー、電力、インフラプロジェクト、航空・船舶、金融・リース・不動産、建機・産機・モビリティ、次世代分野においてグローバルに事業を展開しています。",
+    "og:description": "丸紅は、ライフスタイル、フォレストプロダクツ、情報・物流、食料、アグリ事業、化学品、金属、エネルギー、電力、インフラプロジェクト、航空・船舶、金融・リース・不動産、建機・産機・モビリティ、次世代分野においてグローバルに事業を展開しています。",
+    "twitter:description": "丸紅は、ライフスタイル、フォレストプロダクツ、情報・物流、食料、アグリ事業、化学品、金属、エネルギー、電力、インフラプロジェクト、航空・船舶、金融・リース・不動産、建機・産機・モビリティ、次世代分野においてグローバルに事業を展開しています。",
+    "og:url": "https://www.marubeni.com/jp/",
+    "viewport": "width=device-width, initial-scale=1",
+    "format-detection": "telephone=no",
+    "og:site_name": "丸紅株式会社",
+    "og:locale": "ja_JP",
+    "og:type": "website",
+    "og:image": "https://www.marubeni.com/common/images/ogp.jpg",
+    "twitter:card": "summary_large_image",
+    "twitter:site": "@Marubeni_Corp",
+    "twitter:image": "https://www.marubeni.com/common/images/ogp.jpg"
+  },
+  "images": {
+    "count": 29,
+    "mapping": {
+      "https://www.marubeni.com/jp/images/home/spotlight-06.jpg": "./images/508b61bf0486fff00d14793e7335ae1c.jpg",
+      "https://www.marubeni.com/jp/images/home/spotlight-05.jpg": "./images/58ce9c2edaa9d9e8715315d266016559.jpg",
+      "https://www.marubeni.com/jp/images/home/spotlight-03.jpg": "./images/75235e921097f4b525c781d8031159f2.jpg",
+      "https://www.marubeni.com/jp/images/home/hero-02-mobile.png": "./images/21b772a9a76a91773c2284ab6ab194c2.png",
+      "https://www.marubeni.com/common/images/home/about-01.jpg": "./images/37508d867361cbfe90c440abeb2c5858.jpg",
+      "https://www.marubeni.com/common/images/home/message-01-desktop.jpg": "./images/bc7b3a9641631f64fee0af7e6c4345ba.jpg",
+      "https://www.marubeni.com/common/images/home/about-02.jpg": "./images/4b4ecc73e50e535cdf986bbc8bcade2b.jpg",
+      "https://www.marubeni.com/common/images/home/about-03.jpg": "./images/b631e0a8a558f86ee9b8249c6674256e.jpg",
+      "https://www.marubeni.com/common/images/banner/brand_media-collection.jpg": "./images/b64b0b834bf448f3376c4e48e38db848.jpg",
+      "https://www.marubeni.com/common/images/banner/brand_media-history.jpg": "./images/60fb00a48fcd9e71134c04d805538cbe.jpg",
+      "https://www.marubeni.com/jp/common/images/banner/company-plan.png": "./images/4c9898bd93a4fe2f112d1da61c0bfb67.png",
+      "https://www.marubeni.com/common/images/banner/marubeni-or-jp.png": "./images/a755bdb58f9cbcc0a3bfb52482a2e9b7.png",
+      "https://www.marubeni.com/common/images/banner/sustainability-green-portal.jpg": "./images/c771a619a6e99412618c0699e672903e.jpg",
+      "https://www.marubeni.com/common/images/banner/sustainability-contribution.jpg": "./images/f1d82bf5ebb49ba5478e551282801c8d.jpg",
+      "https://www.marubeni.com/common/images/banner/research.png": "./images/f1fe7793be18e8caf0b6d1248006b112.png",
+      "https://www.marubeni.com/common/images/home/about-04.jpg": "./images/97a1879f6a8b0373f2da09ea61f22358.jpg",
+      "https://www.marubeni.com/common/images/banner/digital-innovation-s.png": "./images/bce384f4a008cc332ba71cf2d9d48034.png",
+      "https://www.marubeni.com/jp/common/images/banner/marubeni-recruit-com.png": "./images/c52446ffc8a9ca6092493ebb776c83a3.png",
+      "https://www.marubeni.com/jp/common/images/banner/conference-room.jpg": "./images/66323f0d09b1dc32f7ead1c8003986cd.jpg",
+      "https://www.marubeni.com/common/images/logo-01.svg": "./images/1fc222463f1cb31da9a6c42b509220f4.png",
+      "https://www.marubeni.com/common/images/background-01-desktop.jpg": "./images/8e42cae6d7bbb221c3e473446649a4d5.jpg",
+      "https://www.marubeni.com/jp/common/images/banner/ir-individual-number-s.jpg": "./images/31fc69dfe37c68d272d25ae54ca2a8fa.jpg",
+      "https://www.marubeni.com/common/images/gradient-instagram-01.jpg": "./images/1168aaca7855f2aea2022acae4c22721.jpg",
+      "https://www.marubeni.com/jp/common/images/banner/company-plan-s.png": "./images/b7d3d386ebf952c2a60315cec4e73f70.png",
+      "https://www.marubeni.com/jp/common/images/banner/ir-reports-integrated_report-s.png": "./images/e1caf6d618b799a1166ddce07343ba35.png",
+      "https://www.marubeni.com/common/images/banner/sustainability-green-portal-s.jpg": "./images/081130a81061465bfeb62bb9bd1f130e.jpg",
+      "https://cdn-au.onetrust.com/logos/0290038d-7118-4843-a65d-7bed9d5222cc/0193b949-6394-75c8-adbd-05a0e27d6003/3ae8e684-0576-4d77-aff3-3b8904ed7d37/marubeni_logo_red.jpg": "./images/7dc3eab4d7495418063d7d8c64dfa788.jpg",
+      "https://cdn-au.onetrust.com/logos/static/powered_by_logo.svg": "./images/af6d5d2e48185c79ecb9c3faa8ee0f30.png",
+      "https://www.marubeni.com/common/images/background-01-mobile.jpg": "./images/1a1b9eecb7381c5c708de3581621e46c.jpg"
+    },
+    "stats": {
+      "total": 30,
+      "converted": 2,
+      "skipped": 27,
+      "failed": 0,
+      "tooLarge": 0,
+      "limitReached": 0
+    }
+  }
+}

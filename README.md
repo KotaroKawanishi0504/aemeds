@@ -49,3 +49,12 @@ Header and footer are loaded as **fragments**. Create these in AEM so they are a
 - **Footer**: Path resolved from page metadata `footer` or default `/footer`. Create content at `/content/marubeni/jp/footer` (or set metadata `footer` to your footer path).
 
 Each fragment is a normal page; its main content is included in the header or footer block. Use `.plain.html` delivery for fragment content (e.g. `/nav.plain.html`, `/footer.plain.html`).
+
+## Marubeni: EDS skills (block development, content migration, style alignment)
+
+- **[docs/SETUP_EDS_SKILLS.md](docs/SETUP_EDS_SKILLS.md)** – How to clone the Adobe EDS skills repo and copy skills into `.cursor/skills/`.
+- **[docs/MARUBENI_EDS_SKILLS.md](docs/MARUBENI_EDS_SKILLS.md)** – When and in what order to use each skill (style alignment, page import, new blocks).
+- **[docs/MARUBENI_EDS_SKILLS_JA.md](docs/MARUBENI_EDS_SKILLS_JA.md)** – 日本語解説：どのスキルが使えるか／スキル外で行う必要があること。
+- **drafts/tmp/marubeni-style-analysis.md** – Template for visual analysis output (analyze-and-plan). Fill it, then use building-blocks to apply CSS.
+- **styles/marubeni-theme.css** – Marubeni overrides for CSS custom properties; load after `styles.css` when serving Marubeni content.
+- **[docs/PAGE_IMPORT_TOP.md](docs/PAGE_IMPORT_TOP.md)** – 丸紅TOPのページインポート手順（スクレープ〜プレビュー〜配置）。

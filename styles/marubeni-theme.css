@@ -1,0 +1,23 @@
+/*
+ * Marubeni theme overrides for EDS blocks.
+ * Load after styles.css (e.g. in head or via metadata) when serving Marubeni content.
+ * Values from drafts/tmp/marubeni-style-analysis.md (analyze-and-plan Visual Analysis).
+ * See building-blocks Step 4.
+ */
+
+:root {
+  /* colors – Marubeni brand (analysis §3) */
+  --background-color: #fff;
+  --light-color: #f5f5f5;
+  --dark-color: #505050;
+  --text-color: #131313;
+  --link-color: #0066a1;
+  --link-hover-color: #004d7a;
+
+  /* fonts – corporate JP (analysis §2) */
+  --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
+  --heading-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
+
+  /* section/block overrides (analysis §4, §6) */
+  --card-border-radius: 4px;
+}
