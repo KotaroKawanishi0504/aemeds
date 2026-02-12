@@ -20,4 +20,18 @@
 
   /* section/block overrides (analysis §4, §6) */
   --card-border-radius: 4px;
+  --card-border-color: #e0e0e0;
+}
+
+/* Cards block: ensure theme applies even if block CSS loads first */
+.cards > ul > li {
+  border-radius: var(--card-border-radius);
+  border-color: var(--card-border-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+}
+
+.cards .cards-card-body {
+  color: var(--text-color);
+  font-family: var(--body-font-family);
 }

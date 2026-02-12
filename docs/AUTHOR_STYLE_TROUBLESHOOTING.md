@@ -1,0 +1,67 @@
+# Author で Marubeni スタイルが当たらないとき
+
+Git に push したあと、AEM Author のプレビューで丸紅用スタイル（色・フォント）が反映されない場合の確認手順です。
+
+## 1. marubeni-theme.css が読み込まれているか
+
+**確認方法:**
+
+1. Author でプレビューしているページを開いた状態で、ブラウザの **開発者ツール**（F12）を開く。
+2. **Network（ネットワーク）** タブで `marubeni-theme` でフィルタする。
+3. **`marubeni-theme.css`** が一覧に出て、ステータスが **200** か確認する。
+
+- **200 で読み込まれている** → 次の「2. 読み込まれているのに効かない場合」へ。
+- **404 や一覧に出てこない** → 次の「3. 読み込まれない場合」へ。
+
+## 2. 読み込まれているのに見た目が変わらない場合
+
+- ブラウザの **キャッシュ** の影響のことがあります。**スーパーリロード**（Ctrl+Shift+R / Cmd+Shift+R）して再表示してみてください。
+- 表示しているコンポーネントが **AEM のデフォルト（Text, Title, Image, Button 等）** の場合、それら用のスタイルが別にあると、丸紅テーマより強く当たっていることがあります。  
+  **開発したブロック**（Hero, Cards, Tabs, News list, Notice banner 等）を配置したページでも同じか確認してください。
+
+### 2.1 Cards が「同じまま」の場合（DOM の確認）
+
+丸紅テーマは **このプロジェクトの Cards ブロック**（`div.cards > ul > li` の構造）を前提にスタイルを当てています。
+
+**確認手順:**
+
+1. Author で該当ページを開き、**開発者ツール**（F12）→ **Elements（要素）** を開く。
+2. 画面上の「Cards」のエリアを **右クリック → 検証** で選択する。
+3. 要素ツリーで、Cards の親が次のどちらか確認する。
+   - **`<div class="block cards">` の下に `<ul>` → `<li>`** がある  
+     → このプロジェクトのブロックです。テーマと `blocks/cards/cards.css` が変数（`--card-border-radius`, `--card-border-color` 等）を使うようになっているので、push 後に Code Sync が済んでいれば反映されます。
+   - **別のクラス名（例: `cmp-list` など）や構造**  
+     → AEM の別コンポーネントの可能性があります。Universal Editor で「Cards」を **このリポジトリのブロック**（component-definition で定義した Cards）として配置し直す必要がある場合があります。
+
+リポジトリ側では、`blocks/cards/cards.css` でテーマ変数を使い、`styles/marubeni-theme.css` で `.cards > ul > li` と `.cards .cards-card-body` に色・フォントを明示指定するようにしています。変更を push して Code Sync 後に再度プレビューしてください。
+
+## 3. 読み込まれない場合（404 など）
+
+**考えられる原因と対処:**
+
+| 原因 | 対処 |
+|------|------|
+| **Code Sync がまだ実行されていない / 失敗している** | GitHub に push したあと、AEM Code Sync がそのリポジトリを同期しているか確認する。同期が成功していないと、Author が参照するコードに `head.html` や `styles/marubeni-theme.css` が含まれない。 |
+| **参照ブランチが違う** | `fstab.yaml` の Franklin 配信 URL が指しているブランチ（例: `main`）に、最新の `head.html` と `styles/marubeni-theme.css` が含まれているか確認する。 |
+| **head がリポジトリの head.html になっていない** | 配信設定で、ページの head がこのプロジェクトの `head.html` を参照しているか確認する。`head.html` に `<link rel="stylesheet" href="/styles/marubeni-theme.css"/>` が含まれている必要がある。 |
+
+**リポジトリ側の確認:**
+
+- 最新の `head.html` に次の行があるか確認する。  
+  `<link rel="stylesheet" href="/styles/marubeni-theme.css"/>`
+- `styles/marubeni-theme.css` がリポジトリに存在し、同じブランチに push されているか確認する。
+
+## 4. ローカルでは効くが Author では効かない場合
+
+- ローカルは `npm run preview:import` などで **このリポジトリの静的ファイル** をそのまま配信している。
+- Author のプレビューは **Franklin 配信**（`fstab.yaml` の URL）経由で、**AEM とリポジトリを組み合わせた結果**を表示している。
+- そのため、「リポジトリのどのブランチを配信が参照しているか」「Code Sync でそのブランチが AEM に反映されているか」の両方を確認する必要がある。
+
+## 5. セクションの「Style」が「なし」の場合
+
+Author のプロパティで **Section の Style: なし** のままでも、**ページ全体**には `head.html` で読み込んだ `styles.css` と `marubeni-theme.css` が当たります。  
+セクションの「Style」は、セクション単位の背景やレイアウト用です。丸紅の**基本の色・フォント**は、`marubeni-theme.css` の `:root` と `styles.css` の body/見出し/リンクで適用されるため、「なし」のままで問題ありません。
+
+---
+
+上記でも解消しない場合は、開発者ツールの Network で `styles.css` と `marubeni-theme.css` の **リクエスト URL** と **ステータスコード** を確認し、配信のベース URL やパスのずれがないか確認すると原因を切り分けやすくなります。

@@ -85,6 +85,8 @@
    - 各ブロック（Hero, Cards, Tabs, News list, Notice banner, Alert 等）が、丸紅テーマ（`marubeni-theme.css`）を含め想定どおりのスタイルで表示されるか確認する。
    - 必要に応じて Universal Editor でブロックを追加・編集し、見た目と挙動を確認する。
 
+**Marubeni スタイルが Author で当たらない場合:** [AUTHOR_STYLE_TROUBLESHOOTING.md](AUTHOR_STYLE_TROUBLESHOOTING.md) で、`marubeni-theme.css` の読み込み確認や Code Sync・参照ブランチの確認を行ってください。
+
 これで「コードはリポジトリにあり、Author 上でブロックが正しくスタイルを再現できる」状態を確認できる。そのうえで、TOP ページのコンテンツをオーサリングで再現する（セクション 6）。
 
 ---
