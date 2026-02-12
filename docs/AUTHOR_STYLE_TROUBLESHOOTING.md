@@ -19,23 +19,36 @@ Git に push したあと、AEM Author のプレビューで丸紅用スタイ�
 - 表示しているコンポーネントが **AEM のデフォルト（Text, Title, Image, Button 等）** の場合、それら用のスタイルが別にあると、丸紅テーマより強く当たっていることがあります。  
   **開発したブロック**（Hero, Cards, Tabs, News list, Notice banner 等）を配置したページでも同じか確認してください。
 
-### 2.1 Cards が「同じまま」の場合（DOM の確認）
+### 2.1 ブロックごとのタグ構造はどこで決まるか
 
-丸紅テーマは **このプロジェクトの Cards ブロック**（`div.cards > ul > li` の構造）を前提にスタイルを当てています。
+**AEM のスキルで定義されています。** プラットフォームがブロックの**外側**に自動でラップを追加します。
+
+- **参照:** `.cursor/skills/building-blocks/resources/css-guidelines.md`  
+  - 「**Special note on `-wrapper` and `-container` classes**」に記載あり。  
+  - **プラットフォームが `.{block-name}-wrapper` と `.{block-name}-container` の div をブロックの外側に自動追加する**と定義されています。  
+  - 例: Cards ブロック → `div.cards-wrapper`（と `div.cards-container`）が外側に付く。
+- **スコープ:** 同スキルでは「**セレクタは必ず `main .{block-name}` で始める**」とあります。このリポジトリのブロック CSS（`blocks/*/*.css`）と `styles/marubeni-theme.css` の Cards 部分は、このルールに合わせて `main .cards` / `main .cards-wrapper` などでスコープしています。
+- ブロック**内側**の構造（例: Cards の `ul` / `li` / `.cards-card-image`）は、各ブロックの `blocks/<name>/<name>.js` の decorate で決まります。`component-definition.json` は Universal Editor 用のコンポーネント名・リソースタイプなどで、**HTML のラップ構造は定義していません**。
+
+### 2.2 Cards が「同じまま」の場合（DOM の確認）
+
+丸紅テーマは、**ローカル**では `div.cards > ul > li`、**Author** ではプラットフォームのラップも含めた複数パターンを想定してスタイルを当てています。
 
 **確認手順:**
 
 1. Author で該当ページを開き、**開発者ツール**（F12）→ **Elements（要素）** を開く。
 2. 画面上の「Cards」のエリアを **右クリック → 検証** で選択する。
-3. 要素ツリーで、Cards の親が次のどちらか確認する。
-   - **`<div class="cards-wrapper">` の内側に `<div class="cards block">` → `<ul>` → `<li>`** がある  
-     → AEM Author がブロックをラップした状態です。このプロジェクトでは `.cards-wrapper .cards` にもスタイルを当てているので、テーマが反映されます。
-   - **`<div class="block cards">` の直下に `<ul>` → `<li>`** がある（ラップなし）  
-     → 同じくこのプロジェクトのブロックです。push と Code Sync 後は丸紅テーマが当たります。
+3. 要素ツリーで、Cards の親が次のどれか確認する。
+   - **`<div class="cards-wrapper">` の直下に `<ul>` → `<li>`**（`div.cards` なし）  
+     → プラットフォームのラップのみ。このプロジェクトでは `.cards-wrapper > ul > li` にスタイルを当てています。
+   - **`<div class="cards-wrapper">` の内側に `<div class="cards block">` → `<ul>` → `<li>`**  
+     → ラップ＋ブロック div。`.cards-wrapper .cards` にもスタイルを当てています。
+   - **`<div class="block cards">` の直下に `<ul>` → `<li>`**（ラップなし）  
+     → ローカルプレビューと同じ。push と Code Sync 後は丸紅テーマが当たります。
    - **別のクラス名（例: `cmp-list` など）や構造**  
      → AEM の別コンポーネントの可能性があります。Universal Editor で「Cards」をこのリポジトリのブロックとして配置し直す必要がある場合があります。
 
-リポジトリ側では、`blocks/cards/cards.css` でテーマ変数を使い、`styles/marubeni-theme.css` で `.cards > ul > li` と `.cards .cards-card-body` に色・フォントを明示指定するようにしています。変更を push して Code Sync 後に再度プレビューしてください。
+リポジトリ側では、`blocks/cards/cards.css` でテーマ変数を使い、`styles/marubeni-theme.css` で上記の各パターンに色・フォントを指定しています。変更を push して Code Sync 後に再度プレビューしてください。
 
 ## 3. 読み込まれない場合（404 など）
 

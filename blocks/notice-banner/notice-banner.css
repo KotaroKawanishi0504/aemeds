@@ -1,10 +1,11 @@
-.notice-banner {
+/* Block scoping: main .notice-banner */
+main .notice-banner {
   background-color: #f5f5f5;
   padding: 12px 24px;
   font-size: 0.9375rem;
 }
 
-.notice-banner-inner {
+main .notice-banner .notice-banner-inner {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -13,17 +14,17 @@
   flex-wrap: wrap;
 }
 
-.notice-banner-date {
+main .notice-banner .notice-banner-date {
   font-weight: 600;
   flex-shrink: 0;
 }
 
-.notice-banner-message {
+main .notice-banner .notice-banner-message {
   color: var(--text-color, #333);
 }
 
 @media (width >= 900px) {
-  .notice-banner {
+  main .notice-banner {
     padding: 16px 32px;
   }
 }

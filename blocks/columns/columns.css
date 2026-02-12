@@ -1,32 +1,33 @@
-.columns > div {
+/* Block scoping: main .columns */
+main .columns > div {
   display: flex;
   flex-direction: column;
 }
 
-.columns img {
+main .columns img {
   width: 100%;
 }
 
-.columns > div > div {
+main .columns > div > div {
   order: 1;
 }
 
-.columns > div > .columns-img-col {
+main .columns > div > .columns-img-col {
   order: 0;
 }
 
-.columns > div > .columns-img-col img {
+main .columns > div > .columns-img-col img {
   display: block;
 }
 
 @media (width >= 900px) {
-  .columns > div {
+  main .columns > div {
     align-items: center;
     flex-direction: unset;
     gap: 24px;
   }
 
-  .columns > div > div {
+  main .columns > div > div {
     flex: 1;
     order: unset;
   }

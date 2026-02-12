@@ -1,28 +1,29 @@
-.alert {
+/* Block scoping: main .alert */
+main .alert {
   background-color: #fff3cd;
   border: 1px solid #ffc107;
   padding: 16px 24px;
   font-size: 0.9375rem;
 }
 
-.alert-inner {
+main .alert .alert-inner {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
 
-.alert-link {
+main .alert .alert-link {
   font-weight: 600;
   text-decoration: underline;
   color: var(--text-color, #333);
 }
 
-.alert-link:hover {
+main .alert .alert-link:hover {
   text-decoration: none;
 }
 
 @media (width >= 900px) {
-  .alert {
+  main .alert {
     padding: 20px 32px;
   }
 }
