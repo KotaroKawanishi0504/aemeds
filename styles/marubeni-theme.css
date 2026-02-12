@@ -24,6 +24,7 @@
 }
 
 /* Cards block: ensure theme applies even if block CSS loads first */
+
 /* AEM Author wraps block in .cards-wrapper, so support both structures */
 .cards > ul > li,
 .cards-wrapper .cards > ul > li {
