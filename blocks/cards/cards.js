@@ -5,7 +5,7 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 function createCardBodyIconSVG() {
   const r = Number(
     getComputedStyle(document.documentElement).getPropertyValue('--card-icon-circle-r')?.trim(),
-    10
+    10,
   ) || 12;
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
