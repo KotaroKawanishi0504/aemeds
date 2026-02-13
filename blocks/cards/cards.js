@@ -1,14 +1,15 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-/** Card body icon: red fill circle + white fill arrow (Marubeni spec in marubeni-style-analysis.md). */
+/** Card body icon: red circle + white arrow (Marubeni spec). */
 function createCardBodyIconSVG() {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('class', 'cards-card-body-icon-svg');
-  /* Circle: fill only, explicit red (no currentColor to avoid inheritance). Arrow: fill only, white. */
-  svg.innerHTML = '<circle cx="12" cy="12" r="10" fill="#e60012"/><path d="M10 6 L10 18 L18 12 Z" fill="#fff"/>';
+  /* Circle fill red, arrow fill white; no currentColor to avoid inheritance. */
+  svg.innerHTML = '<circle cx="12" cy="12" r="10" fill="#e60012"/>'
+    + '<path d="M10 6 L10 18 L18 12 Z" fill="#fff"/>';
   return svg;
 }
 
