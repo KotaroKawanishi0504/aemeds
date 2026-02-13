@@ -26,7 +26,7 @@ main .cards > ul > li {
 main .cards .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
 }
 
 .cards .cards-card-body-icon,
@@ -35,12 +35,12 @@ main .cards .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 48px);
-  height: var(--card-icon-size, 48px);
+  width: var(--card-icon-size, 28px);
+  height: var(--card-icon-size, 28px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
-  color: var(--card-icon-color, rgb(230 0 18));
+  color: var(--card-icon-color, #e60012);
   transition: color 0.2s ease;
 }
 
@@ -112,7 +112,7 @@ main .cards-wrapper > ul > li {
 main .cards-wrapper .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
 }
 
 .cards-wrapper .cards-card-body-icon,
@@ -121,12 +121,12 @@ main .cards-wrapper .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 48px);
-  height: var(--card-icon-size, 48px);
+  width: var(--card-icon-size, 28px);
+  height: var(--card-icon-size, 28px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
-  color: var(--card-icon-color, rgb(230 0 18));
+  color: var(--card-icon-color, #e60012);
 }
 
 .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg,
@@ -220,7 +220,7 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon,
@@ -229,12 +229,12 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 48px);
-  height: var(--card-icon-size, 48px);
+  width: var(--card-icon-size, 28px);
+  height: var(--card-icon-size, 28px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
-  color: var(--card-icon-color, rgb(230 0 18));
+  color: var(--card-icon-color, #e60012);
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg,
@@ -294,7 +294,7 @@ main .cards-wrapper .cards > ul > li {
 main .cards-wrapper .cards .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
 }
 
 .cards-wrapper .cards .cards-card-body-icon,
@@ -303,12 +303,12 @@ main .cards-wrapper .cards .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 48px);
-  height: var(--card-icon-size, 48px);
+  width: var(--card-icon-size, 28px);
+  height: var(--card-icon-size, 28px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
-  color: var(--card-icon-color, rgb(230 0 18));
+  color: var(--card-icon-color, #e60012);
 }
 
 .cards-wrapper .cards .cards-card-body-icon .cards-card-body-icon-svg,

@@ -241,6 +241,19 @@ When the goal is to match an existing reference site (e.g. scraped HTML in `draf
 | **Interaction** | Hover, focus, active state changes | Same state changes (e.g. color, scale) |
 | **Responsive** | Breakpoints, layout change, show/hide | Same behavior at same breakpoints |
 
+**Icons and SVG (avoid fill/stroke and size gaps):**
+
+When the reference uses icons (including inline SVG or icon fonts), capture the following **before** implementing so that fill/stroke reversal and wrong size do not occur:
+
+| What to capture | How | Why |
+|-----------------|-----|-----|
+| **Fill vs stroke** | For each shape (circle, path): note whether it uses `fill`, `stroke`, or both, and with what color. Inspect the reference's SVG markup or Computed styles on the SVG child elements. | Using `currentColor` or assuming "stroke" when the reference uses "fill" causes reversed or wrong appearance. |
+| **Exact colors** | Record fill and stroke colors (hex/rgb) per element. Do not rely only on the parent's `color`; check the actual painted result. | Inheritance can make our implementation show different colors than the reference. |
+| **Size in context** | Note the icon's displayed size (width/height) **in the same component context** (e.g. "card body icon") and viewport. If the reference uses different sizes per breakpoint, record each. | Computed size from another page area or viewport can be wrong for the component we are building. |
+| **Drawing method** | If the icon is an SVG, record whether the arrow/symbol is drawn with a filled path or a stroked path, and approximate stroke-width or path thickness. | Stroke-based arrows look thinner or different than filled ones at the same visual size. |
+
+Add the captured "Icon spec" to the block's reference doc (e.g. in `marubeni-style-analysis.md` or block-by-block structure) so implementation uses it as the single source of truth.
+
 Use this checklist every time you are asked to "match the reference site" or "align with the original design," so the model lists gaps first and then applies fixes.
 
 ---

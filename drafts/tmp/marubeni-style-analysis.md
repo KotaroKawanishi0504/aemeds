@@ -13,6 +13,12 @@
 `div.c-card-list__title.c-icon-link`（内に `i.c-icon-link__icon`（img または SVG）＋ `span.c-icon-link__label`（テキスト））。  
 本家はテキスト前に赤い円＋矢印アイコンを表示。
 
+**Cards icon spec (reference capture):**  
+- **Circle:** 塗り（fill）のみ。色は赤 `rgb(230 0 18)` / `#e60012`。ストローク（線）なし。  
+- **Arrow:** 塗り（fill）で白。ストロークなし。矢印は円内中央に右向き。  
+- **Size:** カードボディ内では約 28–32px。コンポーネント文脈での表示サイズを参照すること（他セクションの 48px 等は使わない）。  
+- **Implementation:** 円は `fill` で明示色指定（`currentColor` は継承で白になる可能性があるため避ける）。矢印は `fill="white"` の path で描く（stroke の線ではなく塗り）。
+
 ---
 
 ## 1. Layout
