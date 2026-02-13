@@ -17,6 +17,11 @@
   /* 本家のカード: テキストホバーで赤 (analysis §3 Accent #c41230) */
   --card-text-hover-color: #c41230;
 
+  /* 本家 DevTools: i.c-icon-link__icon の color: rgb(230, 0, 18)、サイズ 47.75px → 48px */
+  --card-icon-color: rgb(230 0 18);
+  --card-icon-size: 48px;
+  --card-icon-gap: 8px;
+
   /* fonts – corporate JP (analysis §2) */
   --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
   --heading-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;

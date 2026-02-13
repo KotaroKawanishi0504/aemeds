@@ -21,21 +21,26 @@ main .cards > ul > li {
   box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
-/* 本家と同様: テキスト前に赤い円＋矢印アイコン (cleaned.html .c-icon-link__icon) */
+/* 本家と同様: テキスト前に赤い円＋矢印アイコン。本家は i.c-icon-link__icon で position:absolute, 48px, rgb(230,0,18), top:50% translateY(-50%) */
 .cards .cards-card-body,
 main .cards .cards-card-body {
   margin: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  position: relative;
+  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
 }
 
 .cards .cards-card-body-icon,
 main .cards .cards-card-body-icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  color: var(--card-text-hover-color, #c41230);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--card-icon-size, 48px);
+  height: var(--card-icon-size, 48px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  color: var(--card-icon-color, rgb(230 0 18));
   transition: color 0.2s ease;
 }
 
@@ -106,17 +111,22 @@ main .cards-wrapper > ul > li {
 .cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
   margin: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  position: relative;
+  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
 }
 
 .cards-wrapper .cards-card-body-icon,
 main .cards-wrapper .cards-card-body-icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  color: var(--card-text-hover-color, #c41230);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--card-icon-size, 48px);
+  height: var(--card-icon-size, 48px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  color: var(--card-icon-color, rgb(230 0 18));
 }
 
 .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg,
@@ -208,17 +218,23 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
 
 .cards-wrapper.cards-wrapper > div .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin: 16px;
+  position: relative;
+  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon,
 main .cards-wrapper.cards-wrapper > div .cards-card-body-icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  color: var(--card-text-hover-color, #c41230);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--card-icon-size, 48px);
+  height: var(--card-icon-size, 48px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  color: var(--card-icon-color, rgb(230 0 18));
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg,
@@ -277,17 +293,22 @@ main .cards-wrapper .cards > ul > li {
 .cards-wrapper .cards .cards-card-body,
 main .cards-wrapper .cards .cards-card-body {
   margin: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  position: relative;
+  padding-left: calc(var(--card-icon-size, 48px) + var(--card-icon-gap, 8px));
 }
 
 .cards-wrapper .cards .cards-card-body-icon,
 main .cards-wrapper .cards .cards-card-body-icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  color: var(--card-text-hover-color, #c41230);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--card-icon-size, 48px);
+  height: var(--card-icon-size, 48px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  color: var(--card-icon-color, rgb(230 0 18));
 }
 
 .cards-wrapper .cards .cards-card-body-icon .cards-card-body-icon-svg,
