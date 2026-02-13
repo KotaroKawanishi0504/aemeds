@@ -3,7 +3,15 @@
 **Source:** Marubeni TOP (https://www.marubeni.com/jp/).  
 **Purpose:** Document layout, typography, colors, spacing, and borders so blocks can be aligned to Marubeni design. Use with **analyze-and-plan** (Visual Analysis) and **building-blocks** (Step 4: CSS).
 
-**本家 HTML の参照:** 同一リポジトリの `drafts/tmp/import-work/cleaned.html` にスクレープした本家の HTML を格納。カードは `ul.c-card-list` > `li.c-card-list__item` > `a.c-card-list__link` > `div.c-card-list__image`（img のみ・アスペクト比指定なし）+ `div.c-card-list__title`。デザイン再現時はこの構造と見た目を参照する。
+**本家 HTML の参照:** 同一リポジトリの `drafts/tmp/import-work/cleaned.html` にスクレープした本家の HTML を格納。デザイン再現時はこの構造と見た目を参照する。
+
+### Block-by-block reference structure (from cleaned.html)
+
+**Cards:**  
+`ul.c-card-list` → `li.c-card-list__item` → `a.c-card-list__link` →  
+`div.c-card-list__image`（内に `img.-zoom` のみ・アスペクト比指定なし）、  
+`div.c-card-list__title.c-icon-link`（内に `i.c-icon-link__icon`（img または SVG）＋ `span.c-icon-link__label`（テキスト））。  
+本家はテキスト前に赤い円＋矢印アイコンを表示。
 
 ---
 
@@ -60,7 +68,7 @@
 | Block / area | Acceptance criteria |
 |--------------|---------------------|
 | Hero | Full-width; height min 400px desktop; overlay for text contrast; CTA button uses --link-color/--link-hover-color; heading/body use theme fonts and sizes. |
-| Cards / Columns | **画像:** 本家と同様にアスペクト比を強制しない。**テキスト:** 本家は赤い矢印アイコンなしでテキストのみ。**ホバー:** 本家は画像またはテキストエリアにマウスオーバーで画像が少し拡大（cleaned.html の img.-zoom）、テキストは赤（#c41230）に変化。--card-background: var(--light-color)。box-shadow / radius / border 上記のとおり。 |
+| Cards / Columns | **画像:** 本家と同様にアスペクト比を強制しない。**テキスト:** 本家はテキスト前に赤い円＋矢印アイコンあり（cleaned.html の .c-icon-link__icon）。**ホバー:** 本家は画像またはテキストエリアにマウスオーバーで画像が少し拡大（img.-zoom）、テキストは赤（#c41230）に変化。--card-background: var(--light-color)。box-shadow / radius / border 上記のとおり。 |
 | Carousel | Nav arrows/indicators use theme colors; slide spacing consistent. |
 | Tabs + News list | Tab underline --link-color; list spacing 12px–16px; link style matches --link-color, hover underline. |
 | Notice banner / Alert | Background --light-color or #fff; text --text-color; icon 24px; border-left or icon position per design. |

@@ -219,6 +219,32 @@ Map the design to AEM implementation patterns:
 
 ---
 
+### 7. Design parity with reference site
+
+When the goal is to match an existing reference site (e.g. scraped HTML in `drafts/tmp/import-work/cleaned.html` or a live URL), use a **design parity checklist** so gaps are found systematically instead of ad hoc.
+
+**Procedure:**
+
+1. Load the reference (reference URL and/or `cleaned.html` for the relevant section) and the current implementation (e.g. `blocks/{block-name}/` and theme CSS).
+2. For each component or block, compare reference vs implementation against the **7 aspects** below and write a **gap list** (what the reference has that implementation is missing or differs on).
+3. Implement or adjust code to close the gaps from the list.
+
+**7-aspect design parity checklist:**
+
+| Aspect | Check on reference | Check on implementation |
+|--------|---------------------|--------------------------|
+| **Size** | Font sizes, icon dimensions, spacing values (px/rem) | Same values or shared variables |
+| **Aspect ratio** | Whether images have fixed aspect ratio or natural | `aspect-ratio` / `object-fit` match or intentionally omitted |
+| **Color** | Background, text, border, accent (exact codes) | CSS variables or hex match reference |
+| **Shape** | Border radius, sharp vs rounded corners | Same radius values |
+| **Effects** | Box-shadow, transition, transform | Same or equivalent effect |
+| **Interaction** | Hover, focus, active state changes | Same state changes (e.g. color, scale) |
+| **Responsive** | Breakpoints, layout change, show/hide | Same behavior at same breakpoints |
+
+Use this checklist every time you are asked to "match the reference site" or "align with the original design," so the model lists gaps first and then applies fixes.
+
+---
+
 ## Documentation Template
 
 Use this template to document your visual analysis:

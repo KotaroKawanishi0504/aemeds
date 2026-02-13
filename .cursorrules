@@ -1,0 +1,8 @@
+# AEM EDS blocks
+
+When asked to align blocks or styles with the reference site (e.g. Marubeni TOP):
+1. Read the reference: `drafts/tmp/import-work/cleaned.html` (relevant section) and `drafts/tmp/marubeni-style-analysis.md`.
+2. Compare with the implementation using the 7-aspect design parity checklist (size, aspect ratio, color, shape, effects, interaction, responsive) and list gaps.
+3. Implement changes to close the gaps.
+
+See [DESIGN_ALIGNMENT.md](DESIGN_ALIGNMENT.md) for the full workflow.
