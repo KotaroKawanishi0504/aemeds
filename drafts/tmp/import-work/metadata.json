@@ -1,6 +1,6 @@
 {
   "url": "https://www.marubeni.com/jp/",
-  "timestamp": "2026-02-13T03:16:04.600Z",
+  "timestamp": "2026-02-13T04:22:53.491Z",
   "paths": {
     "documentPath": "/jp/index",
     "htmlFilePath": "/jp/index.plain.html",
@@ -35,31 +35,31 @@
     "count": 30,
     "mapping": {
       "https://www.marubeni.com/jp/images/home/spotlight-06.jpg": "./images/508b61bf0486fff00d14793e7335ae1c.jpg",
-      "https://www.marubeni.com/jp/images/home/spotlight-03.jpg": "./images/75235e921097f4b525c781d8031159f2.jpg",
-      "https://www.marubeni.com/jp/images/home/spotlight-05.jpg": "./images/58ce9c2edaa9d9e8715315d266016559.jpg",
-      "https://www.marubeni.com/common/images/home/about-02.jpg": "./images/4b4ecc73e50e535cdf986bbc8bcade2b.jpg",
-      "https://www.marubeni.com/common/images/home/about-01.jpg": "./images/37508d867361cbfe90c440abeb2c5858.jpg",
       "https://www.marubeni.com/jp/images/home/hero-02-mobile.png": "./images/21b772a9a76a91773c2284ab6ab194c2.png",
-      "https://www.marubeni.com/common/images/home/about-03.jpg": "./images/b631e0a8a558f86ee9b8249c6674256e.jpg",
+      "https://www.marubeni.com/jp/images/home/spotlight-05.jpg": "./images/58ce9c2edaa9d9e8715315d266016559.jpg",
       "https://www.marubeni.com/common/images/home/message-01-desktop.jpg": "./images/bc7b3a9641631f64fee0af7e6c4345ba.jpg",
-      "https://www.marubeni.com/jp/common/images/banner/company-plan.png": "./images/4c9898bd93a4fe2f112d1da61c0bfb67.png",
+      "https://www.marubeni.com/jp/images/home/spotlight-03.jpg": "./images/75235e921097f4b525c781d8031159f2.jpg",
+      "https://www.marubeni.com/common/images/home/about-02.jpg": "./images/4b4ecc73e50e535cdf986bbc8bcade2b.jpg",
       "https://www.marubeni.com/common/images/banner/brand_media-history.jpg": "./images/60fb00a48fcd9e71134c04d805538cbe.jpg",
-      "https://www.marubeni.com/common/images/banner/sustainability-contribution.jpg": "./images/f1d82bf5ebb49ba5478e551282801c8d.jpg",
-      "https://www.marubeni.com/common/images/banner/brand_media-collection.jpg": "./images/b64b0b834bf448f3376c4e48e38db848.jpg",
-      "https://www.marubeni.com/common/images/banner/sustainability-green-portal.jpg": "./images/c771a619a6e99412618c0699e672903e.jpg",
       "https://www.marubeni.com/common/images/home/about-04.jpg": "./images/97a1879f6a8b0373f2da09ea61f22358.jpg",
-      "https://www.marubeni.com/jp/common/images/banner/marubeni-recruit-com.png": "./images/c52446ffc8a9ca6092493ebb776c83a3.png",
-      "https://www.marubeni.com/common/images/banner/research.png": "./images/f1fe7793be18e8caf0b6d1248006b112.png",
+      "https://www.marubeni.com/common/images/home/about-03.jpg": "./images/b631e0a8a558f86ee9b8249c6674256e.jpg",
+      "https://www.marubeni.com/common/images/home/about-01.jpg": "./images/37508d867361cbfe90c440abeb2c5858.jpg",
+      "https://www.marubeni.com/jp/common/images/banner/company-plan.png": "./images/4c9898bd93a4fe2f112d1da61c0bfb67.png",
+      "https://www.marubeni.com/common/images/banner/brand_media-collection.jpg": "./images/b64b0b834bf448f3376c4e48e38db848.jpg",
       "https://www.marubeni.com/common/images/banner/marubeni-or-jp.png": "./images/a755bdb58f9cbcc0a3bfb52482a2e9b7.png",
+      "https://www.marubeni.com/common/images/banner/sustainability-green-portal.jpg": "./images/c771a619a6e99412618c0699e672903e.jpg",
       "https://www.marubeni.com/jp/common/images/banner/conference-room.jpg": "./images/66323f0d09b1dc32f7ead1c8003986cd.jpg",
-      "https://www.marubeni.com/jp/common/images/banner/company-plan-s.png": "./images/b7d3d386ebf952c2a60315cec4e73f70.png",
-      "https://www.marubeni.com/jp/common/images/banner/ir-individual-number-s.jpg": "./images/31fc69dfe37c68d272d25ae54ca2a8fa.jpg",
+      "https://www.marubeni.com/common/images/banner/sustainability-contribution.jpg": "./images/f1d82bf5ebb49ba5478e551282801c8d.jpg",
+      "https://www.marubeni.com/common/images/banner/research.png": "./images/f1fe7793be18e8caf0b6d1248006b112.png",
+      "https://www.marubeni.com/common/images/background-01-desktop.jpg": "./images/8e42cae6d7bbb221c3e473446649a4d5.jpg",
+      "https://www.marubeni.com/jp/common/images/banner/marubeni-recruit-com.png": "./images/c52446ffc8a9ca6092493ebb776c83a3.png",
+      "https://www.marubeni.com/common/images/banner/sustainability-green-portal-s.jpg": "./images/081130a81061465bfeb62bb9bd1f130e.jpg",
       "https://www.marubeni.com/common/images/banner/digital-innovation-s.png": "./images/bce384f4a008cc332ba71cf2d9d48034.png",
       "https://www.marubeni.com/jp/common/images/banner/ir-reports-integrated_report-s.png": "./images/e1caf6d618b799a1166ddce07343ba35.png",
-      "https://www.marubeni.com/common/images/banner/sustainability-green-portal-s.jpg": "./images/081130a81061465bfeb62bb9bd1f130e.jpg",
-      "https://www.marubeni.com/common/images/gradient-instagram-01.jpg": "./images/1168aaca7855f2aea2022acae4c22721.jpg",
-      "https://www.marubeni.com/common/images/background-01-desktop.jpg": "./images/8e42cae6d7bbb221c3e473446649a4d5.jpg",
+      "https://www.marubeni.com/jp/common/images/banner/ir-individual-number-s.jpg": "./images/31fc69dfe37c68d272d25ae54ca2a8fa.jpg",
+      "https://www.marubeni.com/jp/common/images/banner/company-plan-s.png": "./images/b7d3d386ebf952c2a60315cec4e73f70.png",
       "https://www.marubeni.com/common/images/logo-01.svg": "./images/1fc222463f1cb31da9a6c42b509220f4.png",
+      "https://www.marubeni.com/common/images/gradient-instagram-01.jpg": "./images/1168aaca7855f2aea2022acae4c22721.jpg",
       "https://cdn-au.onetrust.com/logos/0290038d-7118-4843-a65d-7bed9d5222cc/0193b949-6394-75c8-adbd-05a0e27d6003/3ae8e684-0576-4d77-aff3-3b8904ed7d37/marubeni_logo_red.jpg": "./images/7dc3eab4d7495418063d7d8c64dfa788.jpg",
       "https://cdn-au.onetrust.com/logos/static/powered_by_logo.svg": "./images/af6d5d2e48185c79ecb9c3faa8ee0f30.png",
       "https://www.marubeni.com/common/images/background-01-mobile.jpg": "./images/1a1b9eecb7381c5c708de3581621e46c.jpg",
@@ -97,6 +97,138 @@
       {
         "url": "https://rsv.dga.jp/s/mbeni_ja/new_ac.css",
         "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\styles\\05-new_ac.css"
+      }
+    ],
+    "inlineStylesPath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\styles\\inline-styles.css"
+  },
+  "scripts": {
+    "dirPath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts",
+    "count": 12,
+    "files": [
+      {
+        "url": "https://www.google-analytics.com/analytics.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\01-analytics.js"
+      },
+      {
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-B6Y793ZF43&cx=c&gtm=4e62b1",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\02-js"
+      },
+      {
+        "url": "https://cdn-au.onetrust.com/scripttemplates/otSDKStub.js?did=01934e17-d92d-72ad-9320-c6720eb78eb2",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\03-otSDKStub.js"
+      },
+      {
+        "url": "https://rsv.dga.jp/s/mbeni_ja/search_tool_n3.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\04-search_tool_n3.js"
+      },
+      {
+        "url": "https://www.googletagmanager.com/gtm.js?id=GTM-KK575WW",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\05-gtm.js"
+      },
+      {
+        "url": "https://cdn-au.onetrust.com/scripttemplates/202503.1.0/otBannerSdk.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\06-otBannerSdk.js"
+      },
+      {
+        "url": "https://www.marubeni.com/common/scripts/header.min.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\07-header.min.js"
+      },
+      {
+        "url": "https://www.marubeni.com/common/scripts/footer.min.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\08-footer.min.js"
+      },
+      {
+        "url": "https://www.marubeni.com/common/scripts/common.min.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\09-common.min.js"
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\10-fancybox.umd.js"
+      },
+      {
+        "url": "https://www.marubeni.com/common/scripts/home.min.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\11-home.min.js"
+      },
+      {
+        "url": "https://rsv.dga.jp/s/mbeni_ja/new_i_search_assist.js",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\scripts\\12-new_i_search_assist.js"
+      }
+    ]
+  },
+  "fonts": {
+    "dirPath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\fonts",
+    "count": 1,
+    "files": [
+      {
+        "url": "https://www.marubeni.com/common/fonts/ben.woff?v=20250919",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\fonts\\01-ben.woff"
+      }
+    ]
+  },
+  "svgs": {
+    "dirPath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\svgs",
+    "count": 5,
+    "files": [
+      {
+        "url": "https://www.marubeni.com/common/images/icon-video-01.svg",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\svgs\\01-icon-video-01.svg"
+      },
+      {
+        "url": "https://www.marubeni.com/common/images/icon-youtube-01.svg",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\svgs\\02-icon-youtube-01.svg"
+      },
+      {
+        "url": "https://www.marubeni.com/common/images/icon-tiktok-01.svg",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\svgs\\03-icon-tiktok-01.svg"
+      },
+      {
+        "url": "https://www.marubeni.com/common/images/icon-tiktok-01-hover.svg",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\svgs\\04-icon-tiktok-01-hover.svg"
+      },
+      {
+        "url": "https://cdn-au.onetrust.com/logos/static/powered_by_logo.svg",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\svgs\\05-powered_by_logo.svg"
+      }
+    ]
+  },
+  "designExtract": {
+    "dirPath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract",
+    "files": [
+      {
+        "name": "breakpoints",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\breakpoints.json"
+      },
+      {
+        "name": "root-font",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\root-font.json"
+      },
+      {
+        "name": "keyframes",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\keyframes.json"
+      },
+      {
+        "name": "image-dimensions",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\image-dimensions.json"
+      },
+      {
+        "name": "colors",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\colors.json"
+      },
+      {
+        "name": "shadows-filters",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\shadows-filters.json"
+      },
+      {
+        "name": "pseudo-elements",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\pseudo-elements.json"
+      },
+      {
+        "name": "hover-styles",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\hover-styles.json"
+      },
+      {
+        "name": "cards-computed-styles",
+        "filePath": "C:\\Users\\kawanish\\OneDrive - Adobe\\Desktop\\Work\\Cursor\\eds\\aemeds\\drafts\\tmp\\import-work\\design-extract\\cards-computed-styles.json"
       }
     ]
   }

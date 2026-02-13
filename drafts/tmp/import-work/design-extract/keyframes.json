@@ -1,0 +1,92 @@
+{
+  "keyframes": [
+    {
+      "name": "c-icon-link-animation",
+      "content": "0%{opacity:1;stroke-dasharray:var(--c) var(--c)}9%{opacity:0;stroke-dasharray:var(--c) var(--c)}10%{opacity:0;stroke-dasharray:0 var(--c)}100%{opacity:1;stroke-dasharray:var(--c) var(--c)}"
+    },
+    {
+      "name": "mmfadeIn",
+      "content": "from{opacity:0}to{opacity:1}"
+    },
+    {
+      "name": "mmfadeOut",
+      "content": "from{opacity:1}to{opacity:0}"
+    },
+    {
+      "name": "f-spinner",
+      "content": "to{transform:rotate(360deg)}"
+    },
+    {
+      "name": "f-fadeIn",
+      "content": "0%{opacity:0}to{opacity:1}"
+    },
+    {
+      "name": "f-fadeOut",
+      "content": "to{opacity:0}"
+    },
+    {
+      "name": "f-crossfadeIn",
+      "content": "0%{opacity:0}to{opacity:1}"
+    },
+    {
+      "name": "f-crossfadeOut",
+      "content": "to{opacity:0}"
+    },
+    {
+      "name": "f-slideInPrevX",
+      "content": "0%{transform:translate(calc(100% + var(--f-carousel-gap, 0)))}to{transform:translateZ(0)}"
+    },
+    {
+      "name": "f-slideInNextX",
+      "content": "0%{transform:translate(calc(-100% - var(--f-carousel-gap, 0)))}to{transform:translateZ(0)}"
+    },
+    {
+      "name": "f-slideOutNextX",
+      "content": "to{transform:translate(calc(-100% - var(--f-carousel-gap, 0)))}"
+    },
+    {
+      "name": "f-slideOutPrevX",
+      "content": "to{transform:translate(calc(100% + var(--f-carousel-gap, 0)))}"
+    },
+    {
+      "name": "f-slideInPrevY",
+      "content": "0%{transform:translateY(calc(100% + var(--f-carousel-gap, 0)))}to{transform:translateZ(0)}"
+    },
+    {
+      "name": "f-slideInNextY",
+      "content": "0%{transform:translateY(calc(-100% - var(--f-carousel-gap, 0)))}to{transform:translateZ(0)}"
+    },
+    {
+      "name": "f-slideOutNextY",
+      "content": "to{transform:translateY(calc(-100% - var(--f-carousel-gap, 0)))}"
+    },
+    {
+      "name": "f-slideOutPrevY",
+      "content": "to{transform:translateY(calc(100% + var(--f-carousel-gap, 0)))}"
+    },
+    {
+      "name": "f-zoomInUp",
+      "content": "0%{transform:scale(var(--f-zoomInUp-scale, .975)) translate3d(var(--f-zoomInUp-x, 0),var(--f-zoomInUp-y, 16px),0);opacity:var(--f-zoomInUp-opacity, 0)}to{transform:scale(1) translateZ(0);opacity:1}"
+    },
+    {
+      "name": "f-zoomOutDown",
+      "content": "to{transform:scale(var(--f-zoomOutDown-scale, .975)) translate3d(var(--f-zoomOutDown-x, 0),var(--f-zoomOutDown-y, 16px),0);opacity:0}"
+    },
+    {
+      "name": "f-throwOutUp",
+      "content": "to{transform:translate3d(0,calc(var(--f-throwOutUp-y, 150px) * -1),0);opacity:0}"
+    },
+    {
+      "name": "f-throwOutDown",
+      "content": "to{transform:translate3d(0,var(--f-throwOutDown-y, 150px),0);opacity:0}"
+    },
+    {
+      "name": "f-progressbar",
+      "content": "0%{transform:scaleX(0)}to{transform:scaleX(1)}"
+    },
+    {
+      "name": "onetrust-fade-in",
+      "content": "0%{opacity:0}100%{opacity:1}"
+    }
+  ]
+}

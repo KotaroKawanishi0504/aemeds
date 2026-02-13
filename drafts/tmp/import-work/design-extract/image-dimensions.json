@@ -1,0 +1,104 @@
+{
+  "images": [
+    {
+      "src": "https://www.marubeni.com/jp/images/home/hero-02-mobile.png",
+      "naturalWidth": 786,
+      "naturalHeight": 906
+    },
+    {
+      "src": "https://www.marubeni.com/jp/images/home/spotlight-06.jpg",
+      "naturalWidth": 864,
+      "naturalHeight": 288
+    },
+    {
+      "src": "https://www.marubeni.com/jp/images/home/spotlight-05.jpg",
+      "naturalWidth": 864,
+      "naturalHeight": 288
+    },
+    {
+      "src": "https://www.marubeni.com/jp/images/home/spotlight-03.jpg",
+      "naturalWidth": 864,
+      "naturalHeight": 288
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/home/message-01-desktop.jpg",
+      "naturalWidth": 2688,
+      "naturalHeight": 815
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/home/about-01.jpg",
+      "naturalWidth": 612,
+      "naturalHeight": 760
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/home/about-02.jpg",
+      "naturalWidth": 613,
+      "naturalHeight": 761
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/home/about-03.jpg",
+      "naturalWidth": 612,
+      "naturalHeight": 760
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/home/about-04.jpg",
+      "naturalWidth": 612,
+      "naturalHeight": 760
+    },
+    {
+      "src": "https://www.marubeni.com/jp/common/images/banner/company-plan.png",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/banner/brand_media-history.jpg",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/banner/brand_media-collection.jpg",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/banner/sustainability-contribution.jpg",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/banner/sustainability-green-portal.jpg",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/banner/marubeni-or-jp.png",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/common/images/banner/research.png",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/jp/common/images/banner/marubeni-recruit-com.png",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://www.marubeni.com/jp/common/images/banner/conference-room.jpg",
+      "naturalWidth": 486,
+      "naturalHeight": 274
+    },
+    {
+      "src": "https://cdn-au.onetrust.com/logos/0290038d-7118-4843-a65d-7bed9d5222cc/0193b949-6394-75c8-adbd-05a0e27d6003/3ae8e684-0576-4d77-aff3-3b8904ed7d37/marubeni_logo_red.jpg",
+      "naturalWidth": 2559,
+      "naturalHeight": 309
+    },
+    {
+      "src": "https://cdn-au.onetrust.com/logos/static/powered_by_logo.svg",
+      "naturalWidth": 136,
+      "naturalHeight": 16
+    }
+  ]
+}

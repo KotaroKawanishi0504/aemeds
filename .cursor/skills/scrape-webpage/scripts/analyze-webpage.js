@@ -389,6 +389,308 @@ async function fetchAndSaveStylesheets(page, urls, outputDir) {
 }
 
 /**
+ * Get all external script URLs (script[src]).
+ */
+async function getScriptUrls(page) {
+  return page.evaluate(() => {
+    return Array.from(document.querySelectorAll('script[src]'))
+      .map((s) => s.src)
+      .filter(Boolean);
+  });
+}
+
+/**
+ * Fetch URLs and save to outputDir/subdir with unique filenames (01-basename, 02-basename, ...).
+ */
+async function fetchAndSaveAssets(page, urls, outputDir, subdir, defaultExt) {
+  const dir = path.join(outputDir, subdir);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  const saved = [];
+  const seen = new Set();
+
+  for (let i = 0; i < urls.length; i += 1) {
+    const assetUrl = urls[i];
+    let basename;
+    try {
+      const u = new URL(assetUrl);
+      basename = path.basename(u.pathname) || `asset-${i + 1}${defaultExt}`;
+    } catch {
+      basename = `asset-${i + 1}${defaultExt}`;
+    }
+    basename = basename.replace(/[^a-zA-Z0-9._-]/g, '_');
+    if (seen.has(basename)) {
+      const ext = path.extname(basename) || defaultExt;
+      const base = basename.slice(0, -ext.length) || basename;
+      basename = `${base}-${i + 1}${ext}`;
+    }
+    seen.add(basename);
+
+    const prefix = String(i + 1).padStart(2, '0');
+    const filename = `${prefix}-${basename}`;
+    const filePath = path.join(dir, filename);
+
+    try {
+      const response = await page.request.get(assetUrl);
+      if (!response.ok()) {
+        console.error(`⚠️  ${subdir} ${assetUrl} returned ${response.status()}`);
+        continue;
+      }
+      const body = await response.body();
+      fs.writeFileSync(filePath, body);
+      saved.push({ url: assetUrl, filePath });
+    } catch (err) {
+      console.error(`⚠️  Failed to fetch ${subdir} ${assetUrl}: ${err.message}`);
+    }
+  }
+  return saved;
+}
+
+/**
+ * Get inline <style> tag contents concatenated.
+ */
+async function getInlineStyles(page) {
+  return page.evaluate(() => {
+    return Array.from(document.querySelectorAll('style'))
+      .map((s) => s.textContent)
+      .filter(Boolean)
+      .join('\n\n/* --- next style tag --- */\n\n');
+  });
+}
+
+/**
+ * Parse CSS content for @font-face src url() and url(*.svg). baseUrl is the URL of the CSS file for resolving relative URLs.
+ */
+function extractAssetUrlsFromCss(cssContent, baseUrl) {
+  const fonts = [];
+  const svgs = [];
+  const urlRe = /url\(['"]?([^'")\s]+)['"]?\)/g;
+  let match;
+  const base = baseUrl ? baseUrl.replace(/\/[^/]*$/, '/') : '';
+
+  const fontBlockRe = /@font-face\s*\{[^}]*\}/g;
+  let block;
+  while ((block = fontBlockRe.exec(cssContent)) !== null) {
+    const blockStr = block[0];
+    const urlsInBlock = blockStr.match(urlRe);
+    if (urlsInBlock) {
+      urlsInBlock.forEach((u) => {
+        const raw = u.replace(/^url\(['"]?|['"]?\)$/g, '').trim();
+        const resolved = base ? new URL(raw, base).href : raw;
+        if (!fonts.includes(resolved)) fonts.push(resolved);
+      });
+    }
+  }
+
+  urlRe.lastIndex = 0;
+  while ((match = urlRe.exec(cssContent)) !== null) {
+    const raw = match[1].trim();
+    if (!/\.(svg|SVG)(\?|$)/.test(raw)) continue;
+    const resolved = base ? new URL(raw, base).href : raw;
+    if (!svgs.includes(resolved)) svgs.push(resolved);
+  }
+
+  return { fonts, svgs };
+}
+
+/**
+ * Get SVG URLs from DOM (img[src], object[data], etc.).
+ */
+async function getSvgUrlsFromPage(page) {
+  return page.evaluate(() => {
+    const urls = new Set();
+    document.querySelectorAll('img[src*=".svg"], object[data*=".svg"], image[href*=".svg"]').forEach((el) => {
+      const u = el.src || el.data || el.getAttribute?.('href');
+      if (u && u.includes('.svg')) urls.add(u);
+    });
+    return Array.from(urls);
+  });
+}
+
+// --- Design extract: parse CSS and page for design tokens ---
+
+/**
+ * Extract @media breakpoints from CSS. sourceLabel is e.g. "01-common.min.css".
+ */
+function extractBreakpointsFromCss(cssContent, sourceLabel) {
+  const breakpoints = [];
+  const mediaRe = /@media\s*\(([^)]+)\)/g;
+  let m;
+  while ((m = mediaRe.exec(cssContent)) !== null) {
+    const condition = m[1].trim();
+    breakpoints.push({ condition, source: sourceLabel });
+  }
+  return breakpoints;
+}
+
+/**
+ * Extract root font-size from :root or html in CSS.
+ */
+function extractRootFontFromCss(cssContent) {
+  const rootBlockRe = /(:root|html)\s*\{([^}]*)\}/g;
+  let m;
+  while ((m = rootBlockRe.exec(cssContent)) !== null) {
+    const block = m[2];
+    const fontSizeMatch = block.match(/font-size\s*:\s*([^;]+)/);
+    if (fontSizeMatch) return fontSizeMatch[1].trim();
+  }
+  return null;
+}
+
+/**
+ * Extract @keyframes name and content from CSS. Simple brace-counting for block end.
+ */
+function extractKeyframesFromCss(cssContent) {
+  const keyframes = [];
+  const keyframesRe = /@keyframes\s+([^{]+)\s*\{/g;
+  let m;
+  while ((m = keyframesRe.exec(cssContent)) !== null) {
+    const name = m[1].trim();
+    const start = m.index + m[0].length;
+    let depth = 1;
+    let end = start;
+    while (end < cssContent.length && depth > 0) {
+      const ch = cssContent[end];
+      if (ch === '{') depth += 1;
+      else if (ch === '}') depth -= 1;
+      end += 1;
+    }
+    const content = cssContent.slice(start, end - 1).trim();
+    keyframes.push({ name, content });
+  }
+  return keyframes;
+}
+
+/**
+ * Extract color values from CSS (color, background, border-color, fill, stroke, box-shadow, etc.).
+ */
+function extractColorsFromCss(cssContent) {
+  const colorRe = /#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b|rgb\s*\([^)]+\)|rgba\s*\([^)]+\)|hsl\s*\([^)]+\)|hsla\s*\([^)]+\)|\btransparent\b/g;
+  const seen = new Set();
+  let m;
+  colorRe.lastIndex = 0;
+  while ((m = colorRe.exec(cssContent)) !== null) {
+    const raw = m[0].trim();
+    if (!seen.has(raw)) seen.add(raw);
+  }
+  return Array.from(seen);
+}
+
+/**
+ * Extract box-shadow and filter declaration values from CSS.
+ */
+function extractShadowsAndFiltersFromCss(cssContent) {
+  const boxShadows = [];
+  const filters = [];
+  const shadowRe = /(?:-webkit-)?box-shadow\s*:\s*([^;]+);/g;
+  let m;
+  while ((m = shadowRe.exec(cssContent)) !== null) {
+    const v = m[1].trim();
+    if (v && !boxShadows.includes(v)) boxShadows.push(v);
+  }
+  const filterRe = /(?:-webkit-)?filter\s*:\s*([^;]+);/g;
+  filterRe.lastIndex = 0;
+  while ((m = filterRe.exec(cssContent)) !== null) {
+    const v = m[1].trim();
+    if (v && !filters.includes(v)) filters.push(v);
+  }
+  return { boxShadows, filters };
+}
+
+/**
+ * Extract rules whose selector contains ::before or ::after. Simple rule scan.
+ */
+function extractPseudoElementsFromCss(cssContent) {
+  const rules = [];
+  const ruleRe = /([^{]+)\s*\{([^}]*)\}/g;
+  let m;
+  while ((m = ruleRe.exec(cssContent)) !== null) {
+    const selector = m[1].trim();
+    if (selector.includes('::before') || selector.includes('::after')) {
+      rules.push({ selector, declarations: m[2].trim() });
+    }
+  }
+  return rules;
+}
+
+/**
+ * Extract base selectors that have :hover or :focus (for runtime style sampling).
+ */
+function extractHoverSelectorsFromCss(cssContent) {
+  const baseSelectors = new Set();
+  const selectorRe = /([^{]+)\s*\{/g;
+  const pseudoRe = /\s*:(?:hover|focus(?:-visible)?)(?=[\s,\)]|$)/g;
+  let m;
+  while ((m = selectorRe.exec(cssContent)) !== null) {
+    const full = m[1].trim();
+    if (!full.includes(':hover') && !full.includes(':focus')) continue;
+    full.split(',').forEach((part) => {
+      const base = part.trim().replace(pseudoRe, '').replace(/\s+/g, ' ').trim();
+      if (base.length > 0) baseSelectors.add(base);
+    });
+  }
+  return Array.from(baseSelectors);
+}
+
+/**
+ * Get image natural dimensions from the page.
+ */
+async function getImageDimensions(page) {
+  return page.evaluate(() => {
+    return Array.from(document.querySelectorAll('img')).map((img) => ({
+      src: img.currentSrc || img.src,
+      naturalWidth: img.naturalWidth,
+      naturalHeight: img.naturalHeight
+    }));
+  });
+}
+
+/** CSS properties to capture for block computed styles (e.g. Cards). */
+const BLOCK_COMPUTED_STYLE_PROPS = [
+  'color', 'font-size', 'font-weight', 'line-height', 'letter-spacing',
+  'margin', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+  'padding', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+  'width', 'height', 'min-width', 'min-height', 'max-width', 'max-height',
+  'border-width', 'border-radius', 'border-color', 'border-style',
+  'box-shadow', 'background-color', 'background-image',
+  'gap', 'display', 'flex-direction', 'align-items', 'justify-content',
+  'text-decoration', 'opacity', 'transform'
+];
+
+/**
+ * Get computed styles for all elements inside a container. Dedupes by signature (tag + class).
+ * Returns array of { signature, tag, className, styles }.
+ */
+async function getComputedStylesForContainer(page, containerSelector, props = BLOCK_COMPUTED_STYLE_PROPS) {
+  return page.evaluate(({ selector, styleProps }) => {
+    const container = document.querySelector(selector);
+    if (!container) return { containerFound: false, entries: [] };
+    const elements = [container, ...container.querySelectorAll('*')];
+    const seen = new Set();
+    const entries = [];
+    for (const el of elements) {
+      const tag = el.tagName.toLowerCase();
+      const rawClass = (el.className && typeof el.className === 'string')
+        ? el.className
+        : (el.className && el.className.baseVal != null) ? el.className.baseVal : '';
+      const cls = rawClass.trim().split(/\s+/).filter(Boolean).join('.');
+      const signature = cls ? `${tag}.${cls}` : tag;
+      if (seen.has(signature)) continue;
+      seen.add(signature);
+      const c = getComputedStyle(el);
+      const styles = {};
+      styleProps.forEach((p) => {
+        const v = c.getPropertyValue(p);
+        if (v) styles[p] = v;
+      });
+      entries.push({ signature, tag, className: rawClass, styles });
+    }
+    return { containerFound: true, containerSelector: selector, entries };
+  }, { selector: containerSelector, styleProps: props });
+}
+
+/**
  * Main analysis function
  */
 async function analyzeWebpage(url, outputDir) {
@@ -447,6 +749,210 @@ async function analyzeWebpage(url, outputDir) {
     const stylesSaved = await fetchAndSaveStylesheets(page, stylesheetUrls, outputDir);
     console.error(`✅ Stylesheets: ${stylesSaved.length} saved to ${stylesDir}`);
 
+    // Fetch scripts
+    console.error('Fetching scripts...');
+    const scriptUrls = await getScriptUrls(page);
+    const scriptsDir = path.join(outputDir, 'scripts');
+    const scriptsSaved = await fetchAndSaveAssets(page, scriptUrls, outputDir, 'scripts', '.js');
+    console.error(`✅ Scripts: ${scriptsSaved.length} saved to ${scriptsDir}`);
+
+    // Inline styles
+    console.error('Extracting inline styles...');
+    const inlineStylesContent = await getInlineStyles(page);
+    const inlineStylesPath = path.join(stylesDir, 'inline-styles.css');
+    if (inlineStylesContent) {
+      fs.writeFileSync(inlineStylesPath, inlineStylesContent, 'utf-8');
+    }
+    console.error(`✅ Inline styles: ${inlineStylesContent ? 'saved' : 'none'} to ${inlineStylesPath}`);
+
+    // Parse saved CSS for @font-face and url(*.svg), then fetch
+    const allFontUrls = new Set();
+    const allSvgUrlsFromCss = new Set();
+    for (let i = 0; i < stylesSaved.length; i += 1) {
+      try {
+        const cssPath = stylesSaved[i].filePath;
+        const cssContent = fs.readFileSync(cssPath, 'utf-8');
+        const baseUrl = stylesSaved[i].url;
+        const { fonts, svgs } = extractAssetUrlsFromCss(cssContent, baseUrl);
+        fonts.forEach((u) => allFontUrls.add(u));
+        svgs.forEach((u) => allSvgUrlsFromCss.add(u));
+      } catch (e) {
+        console.error(`⚠️  Could not read CSS for asset extraction: ${stylesSaved[i].filePath}`);
+      }
+    }
+
+    console.error('Fetching fonts from CSS...');
+    const fontsDir = path.join(outputDir, 'fonts');
+    const fontsSaved = await fetchAndSaveAssets(
+      page,
+      Array.from(allFontUrls),
+      outputDir,
+      'fonts',
+      '.woff2'
+    );
+    console.error(`✅ Fonts: ${fontsSaved.length} saved to ${fontsDir}`);
+
+    const svgUrlsFromPage = await getSvgUrlsFromPage(page);
+    const allSvgUrls = new Set([...allSvgUrlsFromCss, ...svgUrlsFromPage]);
+    console.error('Fetching SVGs (from CSS + DOM)...');
+    const svgsDir = path.join(outputDir, 'svgs');
+    const svgsSaved = await fetchAndSaveAssets(
+      page,
+      Array.from(allSvgUrls),
+      outputDir,
+      'svgs',
+      '.svg'
+    );
+    console.error(`✅ SVGs: ${svgsSaved.length} saved to ${svgsDir}`);
+
+    // Design extract: breakpoints, root font, keyframes, colors, shadows/filters, pseudo-elements, image dimensions, hover styles
+    const designExtractDir = path.join(outputDir, 'design-extract');
+    fs.mkdirSync(designExtractDir, { recursive: true });
+    const designExtractFiles = [];
+    const cssFilesWithContent = [];
+    for (let i = 0; i < stylesSaved.length; i += 1) {
+      try {
+        const content = fs.readFileSync(stylesSaved[i].filePath, 'utf-8');
+        const label = path.basename(stylesSaved[i].filePath);
+        cssFilesWithContent.push({ sourceLabel: label, content });
+      } catch (e) {
+        console.error(`⚠️  Skip CSS for design extract: ${stylesSaved[i].filePath}`);
+      }
+    }
+    if (inlineStylesContent) {
+      cssFilesWithContent.push({ sourceLabel: 'inline-styles.css', content: inlineStylesContent });
+    }
+    const concatenatedCss = cssFilesWithContent.map((f) => f.content).join('\n');
+
+    const HOVER_STYLE_PROPS = ['color', 'background-color', 'border-color', 'transform', 'opacity', 'box-shadow'];
+
+    try {
+      const breakpointsAll = [];
+      for (const f of cssFilesWithContent) {
+        const list = extractBreakpointsFromCss(f.content, f.sourceLabel);
+        breakpointsAll.push(...list);
+      }
+      const breakpointsPath = path.join(designExtractDir, 'breakpoints.json');
+      fs.writeFileSync(breakpointsPath, JSON.stringify({ breakpoints: breakpointsAll }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'breakpoints', filePath: breakpointsPath });
+      console.error(`✅ Design extract: breakpoints (${breakpointsAll.length})`);
+    } catch (e) {
+      console.error(`⚠️  Design extract breakpoints failed: ${e.message}`);
+    }
+
+    try {
+      const fromCss = extractRootFontFromCss(concatenatedCss);
+      const computed = await page.evaluate(() => {
+        return getComputedStyle(document.documentElement).fontSize;
+      });
+      const rootFontPath = path.join(designExtractDir, 'root-font.json');
+      fs.writeFileSync(rootFontPath, JSON.stringify({ fromCss, computed }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'root-font', filePath: rootFontPath });
+      console.error('✅ Design extract: root-font');
+    } catch (e) {
+      console.error(`⚠️  Design extract root-font failed: ${e.message}`);
+    }
+
+    try {
+      const keyframes = extractKeyframesFromCss(concatenatedCss);
+      const keyframesPath = path.join(designExtractDir, 'keyframes.json');
+      fs.writeFileSync(keyframesPath, JSON.stringify({ keyframes }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'keyframes', filePath: keyframesPath });
+      console.error(`✅ Design extract: keyframes (${keyframes.length})`);
+    } catch (e) {
+      console.error(`⚠️  Design extract keyframes failed: ${e.message}`);
+    }
+
+    try {
+      const images = await getImageDimensions(page);
+      const imageDimsPath = path.join(designExtractDir, 'image-dimensions.json');
+      fs.writeFileSync(imageDimsPath, JSON.stringify({ images }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'image-dimensions', filePath: imageDimsPath });
+      console.error(`✅ Design extract: image-dimensions (${images.length})`);
+    } catch (e) {
+      console.error(`⚠️  Design extract image-dimensions failed: ${e.message}`);
+    }
+
+    try {
+      const colors = extractColorsFromCss(concatenatedCss);
+      const colorsPath = path.join(designExtractDir, 'colors.json');
+      fs.writeFileSync(colorsPath, JSON.stringify({ colors, sources: 'from CSS declarations' }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'colors', filePath: colorsPath });
+      console.error(`✅ Design extract: colors (${colors.length})`);
+    } catch (e) {
+      console.error(`⚠️  Design extract colors failed: ${e.message}`);
+    }
+
+    try {
+      const { boxShadows, filters } = extractShadowsAndFiltersFromCss(concatenatedCss);
+      const shadowsPath = path.join(designExtractDir, 'shadows-filters.json');
+      fs.writeFileSync(shadowsPath, JSON.stringify({ boxShadows, filters }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'shadows-filters', filePath: shadowsPath });
+      console.error(`✅ Design extract: shadows-filters`);
+    } catch (e) {
+      console.error(`⚠️  Design extract shadows-filters failed: ${e.message}`);
+    }
+
+    try {
+      const rules = extractPseudoElementsFromCss(concatenatedCss);
+      const pseudoPath = path.join(designExtractDir, 'pseudo-elements.json');
+      fs.writeFileSync(pseudoPath, JSON.stringify({ rules }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'pseudo-elements', filePath: pseudoPath });
+      console.error(`✅ Design extract: pseudo-elements (${rules.length})`);
+    } catch (e) {
+      console.error(`⚠️  Design extract pseudo-elements failed: ${e.message}`);
+    }
+
+    try {
+      const baseSelectors = extractHoverSelectorsFromCss(concatenatedCss);
+      const entries = [];
+      for (const selector of baseSelectors) {
+        try {
+          const count = await page.locator(selector).count();
+          if (count === 0) continue;
+          const defaultStyles = await page.evaluate((sel, props) => {
+            const el = document.querySelector(sel);
+            if (!el) return null;
+            const c = getComputedStyle(el);
+            const o = {};
+            props.forEach((p) => { o[p] = c.getPropertyValue(p); });
+            return o;
+          }, selector, HOVER_STYLE_PROPS);
+          if (!defaultStyles) continue;
+          await page.hover(selector).catch(() => null);
+          const hoverStyles = await page.evaluate((sel, props) => {
+            const el = document.querySelector(sel);
+            if (!el) return null;
+            const c = getComputedStyle(el);
+            const o = {};
+            props.forEach((p) => { o[p] = c.getPropertyValue(p); });
+            return o;
+          }, selector, HOVER_STYLE_PROPS);
+          entries.push({ selector, default: defaultStyles, hover: hoverStyles || defaultStyles });
+        } catch (err) {
+          // Skip this selector
+        }
+      }
+      const hoverPath = path.join(designExtractDir, 'hover-styles.json');
+      fs.writeFileSync(hoverPath, JSON.stringify({ entries }, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'hover-styles', filePath: hoverPath });
+      console.error(`✅ Design extract: hover-styles (${entries.length})`);
+    } catch (e) {
+      console.error(`⚠️  Design extract hover-styles failed: ${e.message}`);
+    }
+
+    try {
+      const cardsContainerSelector = '.p-home__about ul.c-card-list';
+      const cardsComputed = await getComputedStylesForContainer(page, cardsContainerSelector);
+      const cardsPath = path.join(designExtractDir, 'cards-computed-styles.json');
+      fs.writeFileSync(cardsPath, JSON.stringify(cardsComputed, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'cards-computed-styles', filePath: cardsPath });
+      const count = cardsComputed.entries ? cardsComputed.entries.length : 0;
+      console.error(`✅ Design extract: cards-computed-styles (${cardsComputed.containerFound ? count : 0} entries)`);
+    } catch (e) {
+      console.error(`⚠️  Design extract cards-computed-styles failed: ${e.message}`);
+    }
+
     // Disable image capture (images already captured)
     captureState.disable();
 
@@ -494,7 +1000,27 @@ async function analyzeWebpage(url, outputDir) {
       styles: {
         dirPath: stylesDir,
         count: stylesSaved.length,
-        files: stylesSaved
+        files: stylesSaved,
+        inlineStylesPath: inlineStylesContent ? inlineStylesPath : null
+      },
+      scripts: {
+        dirPath: scriptsDir,
+        count: scriptsSaved.length,
+        files: scriptsSaved
+      },
+      fonts: {
+        dirPath: fontsDir,
+        count: fontsSaved.length,
+        files: fontsSaved
+      },
+      svgs: {
+        dirPath: svgsDir,
+        count: svgsSaved.length,
+        files: svgsSaved
+      },
+      designExtract: {
+        dirPath: designExtractDir,
+        files: designExtractFiles
       }
     };
 

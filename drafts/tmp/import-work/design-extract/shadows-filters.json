@@ -1,0 +1,30 @@
+{
+  "boxShadows": [
+    "inset 0 0 0 max(1px,var(--rem) * 1 * 1px * .1) currentColor}.c-button small:hover{color:#6c6c6c!important}}.c-button-list{--margin-top-desktop:4rem",
+    "0 5px 8px 0 rgba(0,0,0,.2),0 7px 20px 0 rgba(0,0,0,.17)",
+    "var(--f-button-shadow)",
+    "var(--f-toolbar-shadow, none)",
+    "var(--f-thumb-hover-shadow, var(--f-thumb-shadow))}.f-thumbs__slide button{all:unset",
+    "var(--f-thumb-shadow)}.f-thumbs__slide button:focus-within{opacity:var(--f-thumb-focus-opacity, 1)",
+    "var(--f-thumb-focus-shadow, var(--f-thumb-shadow))}.f-thumbs__slide:active{opacity:var(--f-thumb-active-opacity, 1)",
+    "var(--f-thumb-active-shadow, var(--f-thumb-shadow))}.f-thumbs__slide.is-selected{z-index:2}.f-thumbs__slide.is-selected button{opacity:var(--f-thumb-selected-opacity, 1)",
+    "var(--f-thumb-selected-shadow, var(--f-thumb-shadow))}.f-thumbs__slide img{display:block",
+    "none",
+    "var(--f-thumb-focus-shadow, none)}.f-thumbs.is-modern{--f-transition-duration: .25s",
+    "none}#onetrust-banner-sdk img,#onetrust-pc-sdk img,#ot-sdk-cookie-policy img,#ot-sync-ntfy img{overflow:hidden !important}#onetrust-banner-sdk label:before,#onetrust-banner-sdk label:after,#onetrust-banner-sdk .checkbox:after,#onetrust-banner-sdk .checkbox:before,#onetrust-pc-sdk label:before,#onetrust-pc-sdk label:after,#onetrust-pc-sdk .checkbox:after,#onetrust-pc-sdk .checkbox:before,#ot-sdk-cookie-policy label:before,#ot-sdk-cookie-policy label:after,#ot-sdk-cookie-policy .checkbox:after,#ot-sdk-cookie-policy .checkbox:before,#ot-sync-ntfy label:before,#ot-sync-ntfy label:after,#ot-sync-ntfy .checkbox:after,#ot-sync-ntfy .checkbox:before{content:\"\"",
+    "0 0 18px rgba(0,0,0,.2)}#onetrust-banner-sdk.otFlat{position:fixed",
+    "0px 2px 10px -3px #999",
+    "0px 2px 10px -3px #999}#onetrust-pc-sdk.otPcCenter[dir=rtl]{right:0",
+    "0px 0px 12px 2px #c7c5c7",
+    "0px 0px 12px 2px #c7c5c7}#onetrust-pc-sdk .ot-fltr-scrlcnt{overflow-y:auto",
+    "-3px -3px 5px -2px #c7c5c7",
+    "-3px -3px 5px -2px #c7c5c7}#onetrust-pc-sdk .ot-fltr-btns{margin-left:15px}#onetrust-pc-sdk #filter-apply-handler{margin-right:15px}#onetrust-pc-sdk .ot-fltr-opt{margin-bottom:5px"
+  ],
+  "filters": [
+    "none",
+    "var(--f-button-backdrop-filter)",
+    "var(--f-button-svg-filter)",
+    "var(--f-toolbar-backdrop-filter)",
+    "drop-shadow(1px 1px 1px rgba(24, 24, 27, .01)), drop-shadow(1px 2px 1px rgba(24, 24, 27, .05))"
+  ]
+}

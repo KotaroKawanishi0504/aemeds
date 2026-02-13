@@ -1,0 +1,200 @@
+{
+  "breakpoints": [
+    {
+      "condition": "prefers-reduced-motion:reduce",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "any-hover:hover",
+      "source": "01-common.min.css"
+    },
+    {
+      "condition": "hover: hover",
+      "source": "04-fancybox.css"
+    },
+    {
+      "condition": "min-width: 400px",
+      "source": "inline-styles.css"
+    },
+    {
+      "condition": "min-width: 550px",
+      "source": "inline-styles.css"
+    },
+    {
+      "condition": "min-width: 550px",
+      "source": "inline-styles.css"
+    },
+    {
+      "condition": "min-width: 768px",
+      "source": "inline-styles.css"
+    }
+  ]
+}

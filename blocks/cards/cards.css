@@ -9,8 +9,8 @@ main .cards > ul {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
+  gap: var(--card-list-gap, 24px);
 }
 
 .cards > ul > li,
@@ -24,9 +24,12 @@ main .cards > ul > li {
 /* 本家 01-common.min.css: .c-icon-link__icon = aspect-ratio:1; color:#e60012; display:grid; position:absolute; left:0; margin-block で中央 */
 .cards .cards-card-body,
 main .cards .cards-card-body {
-  margin: 16px;
+  margin: var(--card-body-margin, 16px);
   position: relative;
   padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
+  font-size: var(--card-body-font-size, 1rem);
+  font-weight: var(--card-body-font-weight, 400);
+  line-height: var(--card-body-line-height, 1.5);
 }
 
 .cards .cards-card-body-icon,
@@ -97,8 +100,8 @@ main .cards-wrapper > ul {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
+  gap: var(--card-list-gap, 24px);
 }
 
 .cards-wrapper > ul > li,
@@ -111,9 +114,12 @@ main .cards-wrapper > ul > li {
 
 .cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
-  margin: 16px;
+  margin: var(--card-body-margin, 16px);
   position: relative;
   padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
+  font-size: var(--card-body-font-size, 1rem);
+  font-weight: var(--card-body-font-weight, 400);
+  line-height: var(--card-body-line-height, 1.5);
 }
 
 .cards-wrapper .cards-card-body-icon,
@@ -175,8 +181,8 @@ main .cards-wrapper.cards-wrapper > div > ul {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
+  gap: var(--card-list-gap, 24px);
 }
 
 .cards-wrapper.cards-wrapper > div > ul > li,
@@ -219,9 +225,12 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
 
 .cards-wrapper.cards-wrapper > div .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
-  margin: 16px;
+  margin: var(--card-body-margin, 16px);
   position: relative;
   padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
+  font-size: var(--card-body-font-size, 1rem);
+  font-weight: var(--card-body-font-weight, 400);
+  line-height: var(--card-body-line-height, 1.5);
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon,
@@ -252,8 +261,8 @@ main .cards-wrapper > div > ul {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
+  gap: var(--card-list-gap, 24px);
 }
 
 .cards-wrapper > div > ul > li,
@@ -279,8 +288,8 @@ main .cards-wrapper .cards > ul {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
+  gap: var(--card-list-gap, 24px);
 }
 
 .cards-wrapper .cards > ul > li,
@@ -293,9 +302,12 @@ main .cards-wrapper .cards > ul > li {
 
 .cards-wrapper .cards .cards-card-body,
 main .cards-wrapper .cards .cards-card-body {
-  margin: 16px;
+  margin: var(--card-body-margin, 16px);
   position: relative;
   padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
+  font-size: var(--card-body-font-size, 1rem);
+  font-weight: var(--card-body-font-weight, 400);
+  line-height: var(--card-body-line-height, 1.5);
 }
 
 .cards-wrapper .cards .cards-card-body-icon,

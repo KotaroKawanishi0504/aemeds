@@ -26,13 +26,23 @@
   --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
   --heading-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
 
-  /* section/block overrides (analysis §4, §6). 本家 https://www.marubeni.com/jp/ のカードに合わせる */
-  --card-border-radius: 8px;
-  --card-border-color: rgb(0 0 0 / 6%);
-  --card-box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+  /* section/block overrides. 本家 .p-home__about ul.c-card-list (cards-computed-styles.json) に合わせる */
+  --card-border-radius: 0;
+  --card-border-color: transparent;
+  --card-box-shadow: none;
+  --card-background: transparent;
 
-  /* 本家は画像下テキスト部分を白にしていない。カード全体を --light-color にするとセクションと調和 */
-  --card-background: var(--light-color);
+  /* Cards list: gap 56px 40px, item min 242px, ul margin-top 48px (root 10px → rem) */
+  --card-list-gap: 5.6rem 4rem;
+  --card-list-item-min-width: 242px;
+  --card-list-margin-top: 4.8rem;
+  /* Card body: margin-top 24px, font 18px/500, line-height 27px */
+  --card-body-margin: 2.4rem 0 0 0;
+  --card-body-font-size: 1.8rem;
+  --card-body-font-weight: 500;
+  --card-body-line-height: 2.7rem;
+  /* 本家ラベル色 rgb(40,40,40) */
+  --card-text-color: #282828;
 }
 
 @media screen and (width < 900px) {
@@ -46,19 +56,31 @@
 
 /* Cards block: main scoped + fallback when no main (AEM Author canvas). */
 
+/* List container: margin-top from cards-computed-styles (ul margin-top 48px) */
+.cards > ul,
+main .cards > ul,
+.cards-wrapper > ul,
+main .cards-wrapper > ul,
+.cards-wrapper.cards-wrapper > div > ul,
+main .cards-wrapper.cards-wrapper > div > ul,
+.cards-wrapper .cards > ul,
+main .cards-wrapper .cards > ul {
+  margin-top: var(--card-list-margin-top);
+}
+
 /* .cards (local/preview) */
 .cards > ul > li,
 main .cards > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
   box-shadow: var(--card-box-shadow);
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
 
 .cards .cards-card-body,
 main .cards .cards-card-body {
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
 
@@ -68,7 +90,7 @@ main .cards-wrapper.cards-wrapper > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
   box-shadow: var(--card-box-shadow);
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
 
@@ -77,19 +99,19 @@ main .cards-wrapper.cards-wrapper > div > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
   box-shadow: var(--card-box-shadow);
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
 
 .cards-wrapper.cards-wrapper .cards-card-body,
 main .cards-wrapper.cards-wrapper .cards-card-body {
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
 
@@ -99,12 +121,12 @@ main .cards-wrapper.cards-wrapper .cards > ul > li {
   border-radius: var(--card-border-radius);
   border-color: var(--card-border-color);
   box-shadow: var(--card-box-shadow);
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
 
 .cards-wrapper.cards-wrapper .cards .cards-card-body,
 main .cards-wrapper.cards-wrapper .cards .cards-card-body {
-  color: var(--text-color);
+  color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
 }
