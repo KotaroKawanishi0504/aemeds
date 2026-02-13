@@ -36,11 +36,13 @@
   --card-list-gap: 5.6rem 4rem;
   --card-list-item-min-width: 242px;
   --card-list-margin-top: 4.8rem;
+
   /* Card body: margin-top 24px, font 18px/500, line-height 27px */
   --card-body-margin: 2.4rem 0 0 0;
   --card-body-font-size: 1.8rem;
   --card-body-font-weight: 500;
   --card-body-line-height: 2.7rem;
+
   /* 本家ラベル色 rgb(40,40,40) */
   --card-text-color: #282828;
 }
