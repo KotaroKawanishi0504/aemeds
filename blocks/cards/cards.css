@@ -55,6 +55,15 @@ main .cards .cards-card-body-icon .cards-card-body-icon-svg {
   display: block;
 }
 
+/* Icon tokens: circle stroke-width, arrow fill (apply to all card icon SVGs) */
+.cards-card-body-icon-svg circle {
+  stroke-width: var(--card-icon-stroke-width, 1.5);
+}
+
+.cards-card-body-icon-svg path.cards-card-body-icon-arrow {
+  fill: var(--card-icon-arrow-color, #fff);
+}
+
 .cards .cards-card-image,
 main .cards .cards-card-image {
   line-height: 0;

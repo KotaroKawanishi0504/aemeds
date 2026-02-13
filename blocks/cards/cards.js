@@ -1,15 +1,18 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-/** Card body icon: from scraped 01-common.min.css .c-icon-link__icon. */
-/** Circle: fill transparent, stroke #e60012 (original: stroke currentColor). Arrow: white fill. */
+/** Card body icon: same asset as reference (circle r=12), stroke/arrow from CSS vars. */
 function createCardBodyIconSVG() {
+  const r = Number(
+    getComputedStyle(document.documentElement).getPropertyValue('--card-icon-circle-r')?.trim(),
+    10
+  ) || 12;
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('class', 'cards-card-body-icon-svg');
-  svg.innerHTML = '<circle cx="12" cy="12" r="10" fill="none" stroke="#e60012" stroke-width="1.5"/>'
-    + '<path d="M10 6 L10 18 L18 12 Z" fill="#fff"/>';
+  svg.innerHTML = `<circle cx="12" cy="12" r="${r}" fill="none" stroke="currentColor"/>`
+    + '<path class="cards-card-body-icon-arrow" d="M10 6 L10 18 L18 12 Z"/>';
   return svg;
 }
 

@@ -5,6 +5,15 @@
  * See building-blocks Step 4.
  */
 
+/* Same asset as reference: Ben icon font (from scrape fonts/01-ben.woff) */
+@font-face {
+  font-display: block;
+  font-family: Ben;
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/ben.woff') format('woff');
+}
+
 :root {
   /* colors – Marubeni brand (analysis §3) */
   --background-color: #fff;
@@ -19,8 +28,11 @@
 
   /* Cards icon: 01-common.min.css .c-icon-link__icon. 円は stroke #e60012 fill なし、矢印は白。size 2.6rem≒26px */
   --card-icon-color: #e60012;
+  --card-icon-arrow-color: #fff;
   --card-icon-size: 2.6rem;
   --card-icon-gap: 1rem;
+  --card-icon-stroke-width: 1.5;
+  --card-icon-circle-r: 12;
 
   /* fonts – corporate JP (analysis §2) */
   --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;

@@ -662,6 +662,63 @@ const BLOCK_COMPUTED_STYLE_PROPS = [
  * Get computed styles for all elements inside a container. Dedupes by signature (tag + class).
  * Returns array of { signature, tag, className, styles }.
  */
+/**
+ * Get icon-specific computed data for the first card icon in a container (e.g. .p-home__about ul.c-card-list).
+ * Returns computed style for .c-icon-link__icon and rect/svg metrics for its first child.
+ */
+async function getCardsIconComputed(page, containerSelector) {
+  return page.evaluate(({ selector }) => {
+    const container = document.querySelector(selector);
+    if (!container) return { containerFound: false };
+    const icon = container.querySelector('.c-icon-link__icon');
+    if (!icon) return { containerFound: true, iconFound: false };
+    const cs = getComputedStyle(icon);
+    const iconStyles = {
+      width: cs.width,
+      height: cs.height,
+      color: cs.color,
+      margin: cs.margin,
+      marginTop: cs.marginTop,
+      padding: cs.padding,
+      display: cs.display,
+      position: cs.position
+    };
+    const child = icon.firstElementChild;
+    let childData = null;
+    if (child) {
+      const rect = child.getBoundingClientRect();
+      childData = {
+        tagName: child.tagName,
+        width: rect.width,
+        height: rect.height,
+        src: child.tagName === 'IMG' && child.src ? child.src.slice(0, 120) : undefined
+      };
+      if (child.tagName === 'svg' || child.namespaceURI?.includes('svg')) {
+        try {
+          const circle = child.querySelector('circle');
+          if (circle) {
+            childData.circle = {
+              r: circle.getAttribute('r'),
+              cx: circle.getAttribute('cx'),
+              cy: circle.getAttribute('cy'),
+              stroke: circle.getAttribute('stroke') || cs.color,
+              strokeWidth: circle.getAttribute('stroke-width') || getComputedStyle(circle).strokeWidth
+            };
+          }
+        } catch (e) {
+          childData.svgError = String(e.message);
+        }
+      }
+    }
+    return {
+      containerFound: true,
+      iconFound: true,
+      containerSelector: selector,
+      icon: { styles: iconStyles, child: childData }
+    };
+  }, { selector: containerSelector });
+}
+
 async function getComputedStylesForContainer(page, containerSelector, props = BLOCK_COMPUTED_STYLE_PROPS) {
   return page.evaluate(({ selector, styleProps }) => {
     const container = document.querySelector(selector);
@@ -951,6 +1008,17 @@ async function analyzeWebpage(url, outputDir) {
       console.error(`✅ Design extract: cards-computed-styles (${cardsComputed.containerFound ? count : 0} entries)`);
     } catch (e) {
       console.error(`⚠️  Design extract cards-computed-styles failed: ${e.message}`);
+    }
+
+    try {
+      const cardsIconSelector = '.p-home__about ul.c-card-list';
+      const cardsIconComputed = await getCardsIconComputed(page, cardsIconSelector);
+      const cardsIconPath = path.join(designExtractDir, 'cards-icon-computed.json');
+      fs.writeFileSync(cardsIconPath, JSON.stringify(cardsIconComputed, null, 2), 'utf-8');
+      designExtractFiles.push({ name: 'cards-icon-computed', filePath: cardsIconPath });
+      console.error(`✅ Design extract: cards-icon-computed (${cardsIconComputed.iconFound ? 'ok' : 'no icon'})`);
+    } catch (e) {
+      console.error(`⚠️  Design extract cards-icon-computed failed: ${e.message}`);
     }
 
     // Disable image capture (images already captured)
