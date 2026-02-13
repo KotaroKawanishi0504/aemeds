@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Run scrape-webpage (analyze-webpage.js) for Marubeni TOP.
- * Output: drafts/tmp/import-work (metadata.json, cleaned.html, screenshot.png, images/)
+ * Output: drafts/tmp/import-work (metadata.json, cleaned.html, screenshot.png, images/, styles/)
  *
  * Prerequisites (one-time):
  *   cd .cursor/skills/scrape-webpage/scripts

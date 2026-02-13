@@ -17,10 +17,10 @@
   /* 本家のカード: テキストホバーで赤 (analysis §3 Accent #c41230) */
   --card-text-hover-color: #c41230;
 
-  /* Cards icon: 円は fill #e60012、矢印は fill 白。カード文脈では 28px（analysis Block-by-block / Cards icon spec） */
+  /* Cards icon: 01-common.min.css .c-icon-link__icon. 円は stroke #e60012 fill なし、矢印は白。size 2.6rem≒26px */
   --card-icon-color: #e60012;
-  --card-icon-size: 28px;
-  --card-icon-gap: 8px;
+  --card-icon-size: 2.6rem;
+  --card-icon-gap: 1rem;
 
   /* fonts – corporate JP (analysis §2) */
   --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
@@ -33,6 +33,13 @@
 
   /* 本家は画像下テキスト部分を白にしていない。カード全体を --light-color にするとセクションと調和 */
   --card-background: var(--light-color);
+}
+
+@media screen and (width < 900px) {
+  :root {
+    --card-icon-size: 2.4rem;
+    --card-icon-gap: 0.8rem;
+  }
 }
 
 /* stylelint-disable no-descending-specificity -- main + fallback selectors for Author */

@@ -21,12 +21,12 @@ main .cards > ul > li {
   box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
-/* 本家と同様: テキスト前に赤い円＋矢印アイコン。本家は i.c-icon-link__icon で position:absolute, 48px, rgb(230,0,18), top:50% translateY(-50%) */
+/* 本家 01-common.min.css: .c-icon-link__icon = aspect-ratio:1; color:#e60012; display:grid; position:absolute; left:0; margin-block で中央 */
 .cards .cards-card-body,
 main .cards .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
 }
 
 .cards .cards-card-body-icon,
@@ -35,11 +35,12 @@ main .cards .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 28px);
-  height: var(--card-icon-size, 28px);
+  width: var(--card-icon-size, 2.6rem);
+  height: var(--card-icon-size, 2.6rem);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
+  line-height: 0;
   color: var(--card-icon-color, #e60012);
   transition: color 0.2s ease;
 }
@@ -112,7 +113,7 @@ main .cards-wrapper > ul > li {
 main .cards-wrapper .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
 }
 
 .cards-wrapper .cards-card-body-icon,
@@ -121,8 +122,8 @@ main .cards-wrapper .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 28px);
-  height: var(--card-icon-size, 28px);
+  width: var(--card-icon-size, 2.6rem);
+  height: var(--card-icon-size, 2.6rem);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
@@ -220,7 +221,7 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon,
@@ -229,8 +230,8 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 28px);
-  height: var(--card-icon-size, 28px);
+  width: var(--card-icon-size, 2.6rem);
+  height: var(--card-icon-size, 2.6rem);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
@@ -294,7 +295,7 @@ main .cards-wrapper .cards > ul > li {
 main .cards-wrapper .cards .cards-card-body {
   margin: 16px;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 28px) + var(--card-icon-gap, 8px));
+  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
 }
 
 .cards-wrapper .cards .cards-card-body-icon,
@@ -303,8 +304,8 @@ main .cards-wrapper .cards .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 28px);
-  height: var(--card-icon-size, 28px);
+  width: var(--card-icon-size, 2.6rem);
+  height: var(--card-icon-size, 2.6rem);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;

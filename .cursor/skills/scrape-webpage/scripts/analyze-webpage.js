@@ -323,6 +323,72 @@ async function extractMetadata(page) {
 }
 
 /**
+ * Get all stylesheet URLs from the page (link[rel="stylesheet"]).
+ * Returns absolute URLs.
+ */
+async function getStylesheetUrls(page) {
+  return page.evaluate(() => {
+    return Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+      .map((link) => link.href)
+      .filter(Boolean);
+  });
+}
+
+/**
+ * Fetch each stylesheet URL and save to outputDir/styles/ as 01-<basename>, 02-<basename>, ...
+ * Uses the page's request context so same-origin and cookies apply.
+ */
+async function fetchAndSaveStylesheets(page, urls, outputDir) {
+  const stylesDir = path.join(outputDir, 'styles');
+  if (!fs.existsSync(stylesDir)) {
+    fs.mkdirSync(stylesDir, { recursive: true });
+  }
+
+  const saved = [];
+  const seenBasenames = new Set();
+
+  for (let i = 0; i < urls.length; i += 1) {
+    const cssUrl = urls[i];
+    let basename;
+    try {
+      const u = new URL(cssUrl);
+      basename = path.basename(u.pathname) || 'stylesheet.css';
+    } catch {
+      basename = `stylesheet-${i + 1}.css`;
+    }
+    basename = basename.replace(/[^a-zA-Z0-9._-]/g, '_');
+    if (!basename.endsWith('.css')) {
+      basename += '.css';
+    }
+    if (seenBasenames.has(basename)) {
+      const ext = path.extname(basename);
+      const base = basename.slice(0, -ext.length);
+      basename = `${base}-${i + 1}${ext}`;
+    }
+    seenBasenames.add(basename);
+
+    const prefix = String(i + 1).padStart(2, '0');
+    const filename = `${prefix}-${basename}`;
+    const filePath = path.join(stylesDir, filename);
+
+    try {
+      const response = await page.request.get(cssUrl);
+      if (!response.ok()) {
+        console.error(`⚠️  Stylesheet ${cssUrl} returned ${response.status()}`);
+        continue;
+      }
+      const body = await response.body();
+      fs.writeFileSync(filePath, body, 'utf-8');
+      saved.push({ url: cssUrl, filePath });
+    } catch (err) {
+      console.error(`⚠️  Failed to fetch stylesheet ${cssUrl}: ${err.message}`);
+    }
+  }
+
+  return saved;
+}
+
+/**
  * Main analysis function
  */
 async function analyzeWebpage(url, outputDir) {
@@ -374,6 +440,13 @@ async function analyzeWebpage(url, outputDir) {
     console.error('Extracting metadata...');
     const metadata = await extractMetadata(page);
 
+    // Fetch and save stylesheets (method 1: collect link[rel="stylesheet"] URLs, then fetch each)
+    console.error('Fetching stylesheets...');
+    const stylesheetUrls = await getStylesheetUrls(page);
+    const stylesDir = path.join(outputDir, 'styles');
+    const stylesSaved = await fetchAndSaveStylesheets(page, stylesheetUrls, outputDir);
+    console.error(`✅ Stylesheets: ${stylesSaved.length} saved to ${stylesDir}`);
+
     // Disable image capture (images already captured)
     captureState.disable();
 
@@ -417,6 +490,11 @@ async function analyzeWebpage(url, outputDir) {
         count: captureState.imageMap.size,
         mapping: Object.fromEntries(captureState.imageMap),
         stats: captureState.stats
+      },
+      styles: {
+        dirPath: stylesDir,
+        count: stylesSaved.length,
+        files: stylesSaved
       }
     };
 
@@ -492,4 +570,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export { analyzeWebpage, scrollToTriggerLazyLoad, extractCleanedHTML, extractMetadata };
+export {
+  analyzeWebpage,
+  scrollToTriggerLazyLoad,
+  extractCleanedHTML,
+  extractMetadata,
+  getStylesheetUrls,
+  fetchAndSaveStylesheets
+};
