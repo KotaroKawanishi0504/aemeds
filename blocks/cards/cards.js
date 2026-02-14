@@ -76,17 +76,23 @@ function getHrefFromLinkCell(cell) {
 }
 
 /**
- * Whether the card link should open in a new window (from 4th column or data attr).
- * @param {Element} cell - optional 4th cell (openInNewWindow)
- * @param {Element} row - card row (for data-open-in-new-window)
+ * Whether the card link should open in a new window (checkbox on = true).
+ * Supports: 4th cell input[type=checkbox]:checked, data-openinnewwindow, or legacy text (x/yes).
+ * @param {Element} cell - optional 4th cell (openInNewWindow checkbox)
+ * @param {Element} row - card row (for data-openinnewwindow)
  * @returns {boolean}
  */
 function isOpenInNewWindow(cell, row) {
-  const fromRow = row?.dataset?.openInNewWindow?.trim().toLowerCase();
-  if (fromRow === 'true' || fromRow === '1' || fromRow === 'x' || fromRow === 'yes') return true;
-  if (!cell) return false;
-  const t = cell.textContent?.trim().toLowerCase() || '';
-  return t === 'x' || t === 'yes' || t === 'true' || t === '1' || t === '○';
+  const fromRow = (row?.dataset?.openinnewwindow ?? row?.dataset?.openInNewWindow ?? '').trim().toLowerCase();
+  if (fromRow === 'true' || fromRow === '1') return true;
+  if (fromRow === 'false' || fromRow === '0') return false;
+  if (cell) {
+    const checked = cell.querySelector('input[type="checkbox"]:checked');
+    if (checked) return true;
+    const t = cell.textContent?.trim().toLowerCase() || '';
+    if (t === 'x' || t === 'yes' || t === 'true' || t === '1' || t === '○') return true;
+  }
+  return false;
 }
 
 export default function decorate(block) {

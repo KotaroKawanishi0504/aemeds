@@ -181,11 +181,10 @@
         "label": "Link"
       },
       {
-        "component": "text",
-        "valueType": "string",
+        "component": "boolean",
         "name": "openInNewWindow",
         "label": "Open in new window",
-        "value": ""
+        "valueType": "boolean"
       }
     ]
   },
