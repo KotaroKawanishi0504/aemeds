@@ -166,6 +166,22 @@ main .cards .cards-card-body a {
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
+/* AEM richtext: a 直下の div/p の margin をリセットしインライン化してアイコンと縦揃え */
+.cards .cards-card-body a > *,
+main .cards .cards-card-body a > *,
+.cards-wrapper .cards-card-body a > *,
+.cards-wrapper.cards-wrapper > div .cards-card-body a > *,
+.cards-wrapper .cards .cards-card-body a > *,
+main .cards-wrapper .cards-card-body a > *,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a > *,
+main .cards-wrapper .cards .cards-card-body a > * {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  display: inline;
+  vertical-align: middle;
+}
+
 .cards > ul > li:hover .cards-card-body,
 .cards > ul > li:hover .cards-card-body a,
 main .cards > ul > li:hover .cards-card-body,
