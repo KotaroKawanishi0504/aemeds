@@ -123,6 +123,152 @@ main .cards > ul {
   }
 }
 
+/* AEM DOM: .cards with direct div children (no ul). Same breakpoints and container queries. */
+.cards:not(:has(> ul)),
+main .cards:not(:has(> ul)) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
+  gap: var(--card-list-gap, 24px);
+  margin-top: var(--card-list-margin-top);
+}
+
+@media (width < 600px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width >= 600px) and (width < 900px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--card-list-gap, 56px 40px);
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}
+
+@container cards (max-width: 599px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container cards (min-width: 600px) and (max-width: 899px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container cards (min-width: 900px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--card-list-gap, 56px 40px);
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* AEM card item: .cards > div (image, text, link, optional 4th cell) */
+.cards:not(:has(> ul)) > div,
+main .cards:not(:has(> ul)) > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
+  border-radius: var(--card-border-radius, 0);
+  background-color: var(--card-background, var(--background-color));
+  box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
+}
+
+.cards:not(:has(> ul)) > div > div:first-child,
+main .cards:not(:has(> ul)) > div > div:first-child {
+  flex: 0 0 auto;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.cards:not(:has(> ul)) > div > div:first-child img,
+main .cards:not(:has(> ul)) > div > div:first-child img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+.cards:not(:has(> ul)) > div > div:nth-child(2),
+main .cards:not(:has(> ul)) > div > div:nth-child(2) {
+  flex: 0 0 auto;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  position: relative;
+  font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
+  font-weight: var(--card-body-font-weight, 400);
+  line-height: var(--card-body-line-height, 1.5);
+  color: var(--card-text-color, #282828);
+}
+
+.cards:not(:has(> ul)) > div > div:nth-child(2)::before,
+main .cards:not(:has(> ul)) > div > div:nth-child(2)::before {
+  content: "\e902";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  font-family: Ben, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(var(--rem, 10) * 1 * 1px);
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  color: var(--card-icon-arrow-color, #fff);
+  background-color: var(--card-icon-color, #e60012);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.cards:not(:has(> ul)) > div > div:nth-child(3) a,
+main .cards:not(:has(> ul)) > div > div:nth-child(3) a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.25em;
+}
+
+.cards:not(:has(> ul)) > div:hover > div:nth-child(2),
+main .cards:not(:has(> ul)) > div:hover > div:nth-child(2) {
+  color: var(--card-text-hover-color, #e60012);
+}
+
+.cards:not(:has(> ul)) > div > div:nth-child(3) a:hover,
+main .cards:not(:has(> ul)) > div > div:nth-child(3) a:hover {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.cards:not(:has(> ul)) > div > div:nth-child(4),
+main .cards:not(:has(> ul)) > div > div:nth-child(4) {
+  display: none;
+}
+
 .cards > ul > li,
 main .cards > ul > li {
   display: flex;
