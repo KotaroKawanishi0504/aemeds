@@ -5,6 +5,10 @@
  * See building-blocks Step 4.
  */
 
+/* 本家 02-font.min.css と同様: YakuhanJP + Google Fonts (Inter, Noto Sans JP) */
+@import url("https://cdn.jsdelivr.net/npm/yakuhanjp@4.1.1/dist/css/yakuhanjp.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap");
+
 /* 本家 02-font.min.css の Ben アイコンフォント（矢印 \e902）。ローカルが無い場合は本家 CDN を使用 */
 @font-face {
   font-display: block;
@@ -43,9 +47,9 @@
   --card-icon-circle-c: 75.398;
   --card-body-line-height: 1.5;
 
-  /* fonts – corporate JP (analysis §2) */
-  --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
-  --heading-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
+  /* fonts – 本家 Computed と同一 (02-font.min.css + 01-common.min.css) */
+  --body-font-family: inter, yakuhanjp, "Noto Sans JP", sans-serif;
+  --heading-font-family: inter, yakuhanjp, "Noto Sans JP", sans-serif;
 
   /* section/block overrides. 本家 .p-home__about ul.c-card-list (cards-computed-styles.json) に合わせる */
   --card-border-radius: 0;
