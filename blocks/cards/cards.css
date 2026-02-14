@@ -182,6 +182,30 @@ main .cards-wrapper .cards .cards-card-body a > * {
   vertical-align: middle;
 }
 
+/* a 内のネストした p/div もリセット（a > div > p のとき p に margin/block が残るのを防ぐ） */
+.cards .cards-card-body a p,
+.cards .cards-card-body a div,
+main .cards .cards-card-body a p,
+main .cards .cards-card-body a div,
+.cards-wrapper .cards-card-body a p,
+.cards-wrapper .cards-card-body a div,
+.cards-wrapper.cards-wrapper > div .cards-card-body a p,
+.cards-wrapper.cards-wrapper > div .cards-card-body a div,
+.cards-wrapper .cards .cards-card-body a p,
+.cards-wrapper .cards .cards-card-body a div,
+main .cards-wrapper .cards-card-body a p,
+main .cards-wrapper .cards-card-body a div,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a p,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a div,
+main .cards-wrapper .cards .cards-card-body a p,
+main .cards-wrapper .cards .cards-card-body a div {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: inline;
+  vertical-align: middle;
+}
+
 .cards > ul > li:hover .cards-card-body,
 .cards > ul > li:hover .cards-card-body a,
 main .cards > ul > li:hover .cards-card-body,
