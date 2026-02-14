@@ -29,19 +29,35 @@ function createCardBodyIconSVG() {
  * Ensures the card body has a single link wrapper for the label so block CSS applies.
  * If content is already an <a>, leave it. If not (e.g. AEM richtext div/p), wrap in <a>.
  * @param {Element} body - .cards-card-body element (icon already prepended)
+ * @param {string} [hrefOverride] - Optional href (e.g. from card link field or 3rd column)
  */
-function ensureBodyLink(body) {
+function ensureBodyLink(body, hrefOverride) {
   const icon = body.querySelector('.cards-card-body-icon');
   const rest = [...body.children].filter((el) => el !== icon);
   if (rest.length === 0) return;
   const first = rest[0];
   if (first.tagName === 'A' && first.getAttribute('href')) return;
   const existingLink = body.querySelector('a[href]');
-  const href = existingLink?.getAttribute('href')?.trim() || '#';
+  const href = (typeof hrefOverride === 'string' && hrefOverride.trim()) ? hrefOverride.trim()
+    : existingLink?.getAttribute('href')?.trim() || '#';
   const a = document.createElement('a');
   a.setAttribute('href', href);
   rest.forEach((el) => a.append(el));
   body.append(a);
+}
+
+/**
+ * Get href from a cell that may contain the link field (AEM or 3rd column).
+ * @param {Element} cell - div that may contain <a href="..."> or link URL text
+ * @returns {string} href or empty string
+ */
+function getHrefFromLinkCell(cell) {
+  if (!cell) return '';
+  const a = cell.querySelector('a[href]');
+  if (a) return a.getAttribute('href')?.trim() || '';
+  const text = cell.textContent?.trim() || '';
+  if (text && (text.startsWith('/') || text.startsWith('http://') || text.startsWith('https://'))) return text;
+  return '';
 }
 
 export default function decorate(block) {
@@ -50,7 +66,13 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     moveInstrumentation(row, li);
-    while (row.firstElementChild) li.append(row.firstElementChild);
+    const cells = [...row.children];
+    const linkCell = cells.length >= 3 ? cells[2] : null;
+    const rowHref = getHrefFromLinkCell(linkCell) || row.dataset.link || '';
+    cells.forEach((cell, i) => {
+      if (i === 2 && linkCell) return;
+      li.append(cell);
+    });
     [...li.children].forEach((div) => {
       const isImageCell = div.querySelector('picture') || div.querySelector('img');
       if (isImageCell) {
@@ -61,7 +83,7 @@ export default function decorate(block) {
         icon.className = 'cards-card-body-icon';
         icon.append(createCardBodyIconSVG());
         div.prepend(icon);
-        ensureBodyLink(div);
+        ensureBodyLink(div, rowHref);
       }
     });
     ul.append(li);
