@@ -6,13 +6,12 @@
 
 ### 1. **cards.css が AEM プレビューに読み込まれていない（最有力）**
 
-- **head.html には `styles.css` と `marubeni-theme.css` しかない。**
-- **blocks/cards/cards.css** は head に含まれておらず、**aem.js の `loadBlock()` が実行されたときだけ** 動的に `loadCSS(.../blocks/cards/cards.css)` で読み込まれる。
+- **EDS 標準:** block CSS は head に載せず、**aem.js の `loadBlock()` が実行されたときだけ** 動的に `loadCSS(.../blocks/cards/cards.css)` で読み込む。
+- **head.html** には `styles.css` と `marubeni-theme.css` のみ（block CSS は含めない）。
 - AEM Author のプレビューでは次のどれかで **cards.css が一度も読み込まれていない** 可能性が高いです。
-  - プレビュー用 document（iframe など）で aem.js が動いていない、または別バンドルになっている
-  - `loadSection` → `loadBlock` が実行される前に表示が固定されている
-  - DOM が `div.section` / `div.block` 構造になっておらず、`loadBlock(blocks[i])` が Cards に対して呼ばれていない
-  - `window.hlx.codeBasePath` が空や別パスになっており、`/blocks/cards/cards.css` の URL が 404 になっている
+  - **&lt;main&gt; が無く** `loadSections(main)` が実行されず、従来は `loadBlock` が呼ばれていなかった（本リポジトリでは main が無いときに **loadOrphanBlocks** で `div.cards` を検出し loadBlock するフォールバックを追加済み）。
+  - プレビュー用 document で scripts.js / aem.js が動いていない、または別バンドルになっている
+  - `window.hlx.codeBasePath` が空や別パスになっており、`blocks/cards/cards.css` の URL が **404** になっている
 
 **結果:** アイコン縦揃え・ホバー下線は **すべて cards.css 側のルール** のため、cards.css が読まれていなければ **一切反映されない**。
 
@@ -21,7 +20,7 @@
 ### 2. プレビューが iframe で、その document に私たちの CSS が無い
 
 - Author の「プレビュー」が **iframe 内の別 document** の場合、親ページではなく **iframe の中の head** に link が入る。
-- 配信や Code Sync の設定で、**プレビュー用 HTML** の head に `head.html` の内容（および block CSS）が入っていないと、iframe 内には cards.css も marubeni-theme.css も存在しない。
+- 配信や Code Sync の設定で、**プレビュー用 HTML** の head に `head.html` の内容が入っておらず、かつ scripts が動いていないと、iframe 内では loadBlock も動かず cards.css が読み込まれない。
 
 ---
 
@@ -73,7 +72,7 @@ Array.from($0.ownerDocument.styleSheets).map(s => s.href).filter(Boolean)
 
 - **`cards.css` または `blocks/cards/cards.css` に相当する URL が一覧に無い**  
   → **原因: この document に cards.css が読み込まれていない。**  
-  → 対処: 下記「推奨対処」のとおり **head.html に cards.css を追加** する。
+  → 対処: 下記「推奨対処」のとおり **loadBlock が動く条件**（main または orphan フォールバック、codeBasePath・配信）を確認する。
 
 ### Step 4: codeBasePath と cards.css のリクエスト
 
@@ -100,29 +99,26 @@ window.hlx && window.hlx.codeBasePath
 
 ---
 
-## 推奨対処
+## 推奨対処（EDS 標準: block CSS は loadBlock のみ）
 
-### 対処 A: head.html に cards.css を追加（推奨）
+### 対処 A: loadBlock が動くようにする（本リポジトリでの対応済み）
 
-**cards.css を head から常に読み込む**ようにすると、aem.js の `loadBlock()` が動かなくても、プレビュー用 HTML で head が正しく使われていればスタイルが当たります。
-
-- **変更:** `head.html` に  
-  `<link rel="stylesheet" href="/blocks/cards/cards.css"/>`  
-  を追加する（**本リポジトリでは追加済み**。Code Sync の対象に含めて push する）。
-- **注意:** 配信のベース URL がルートでない場合（例: プレビューが `https://.../content/marubeni/...` で静的ファイルが `https://.../content/marubeni/blocks/...` にある場合）は、href をそのパスに合わせる必要がある場合があります。その場合は fstab や AEM のプレビュー設定・metadata でベースパスを確認してください。
+- **main が無い環境:** `scripts/scripts.js` で **loadOrphanBlocks(doc)** を実行し、DOM 上の `div.cards` 等を検出して `decorateBlock` + `loadBlock` を呼ぶ。これで block CSS が EDS 標準どおり動的に読み込まれる。
+- **codeBasePath:** `loadBlock` は `window.hlx.codeBasePath` で CSS/JS の URL を組み立てる。AEM でスクリプトの読み込み元が違うと codeBasePath が空や別パスになり、**blocks/cards/cards.css が 404** になる。DevTools の Console で `window.hlx?.codeBasePath` を確認し、Network で `cards.css` のリクエスト URL とステータスを確認する。
+- まだスタイルが当たらない場合は、**配信・Code Sync** で codeBasePath から正しく `blocks/cards/cards.css` が 200 で返るようにする。
 
 ### 対処 B: 配信・プレビュー設定の確認
 
-- Code Sync で **head.html** が AEM に反映されているか。
-- プレビュー用 HTML が **head.html を参照しているか**（body フラグメントだけ返していないか）。
-- プレビューが iframe の場合、**iframe 内の document** の head に上記 link が含まれるようにする。
+- Code Sync で **scripts/scripts.js** と **head.html**（styles.css, marubeni-theme.css）が AEM に反映されているか。
+- プレビュー用 HTML が **head + body の full page** を返しているか（body フラグメントだけだとスクリプトが動かない）。
+- プレビューが iframe の場合、**iframe 内の document** で scripts.js が実行され、loadOrphanBlocks または loadSections が動いているか確認する。
 
 ### 対処 C: DevTools で原因の切り分け
 
 - 上記 Step 1〜5 の結果をメモし、  
-  - cards.css が読み込まれているか  
-  - セレクタがマッチしているか  
-  - 他スタイルで上書きされていないか  
+  - cards.css が読み込まれているか（Step 3）  
+  - codeBasePath と cards.css のリクエスト URL/ステータス（Step 4）  
+  - セレクタがマッチしているか、他スタイルで上書きされていないか  
   を確認する。  
   「読み込まれていない」が解消されれば、多くの場合は見た目が直ります。
 
@@ -132,8 +128,8 @@ window.hlx && window.hlx.codeBasePath
 
 | 確認結果 | 想定原因 | 対処 |
 |----------|----------|------|
-| styleSheets に cards.css が無い | **cards.css がプレビュー用 document に読み込まれていない** | head.html に cards.css を追加（対処 A）。配信・Code Sync を確認。 |
-| DOM のマッチ数が 0 | 別コンポーネント or 別構造 | Universal Editor で Cards ブロックを確認。 |
+| styleSheets に cards.css が無い | **loadBlock が実行されていない、または codeBasePath で 404** | loadOrphanBlocks が動くか・main の有無を確認。codeBasePath と配信 URL を確認（対処 A・B）。 |
+| DOM のマッチ数が 0 | 別コンポーネント or 別構造 | Universal Editor で Cards ブロックを確認。`div.cards` が存在するか確認。 |
 | cards.css はあるがスタイルが付かない | 詳細度・読み込み順で上書き | 既に !important 済み。cards.css の読み込み順を確認。 |
 
-まず **Step 3**（プレビュー内要素の `ownerDocument.styleSheets`）で **cards.css の有無** を確認することを推奨します。
+まず **Step 3**（プレビュー内要素の `ownerDocument.styleSheets`）で **cards.css の有無** を、**Step 4** で **codeBasePath と cards.css のリクエスト URL/ステータス** を確認することを推奨します。

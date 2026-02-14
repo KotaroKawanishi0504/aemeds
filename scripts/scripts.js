@@ -1,12 +1,14 @@
 import {
   loadHeader,
   loadFooter,
+  decorateBlock,
   decorateButtons,
   decorateIcons,
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
   waitForFirstImage,
+  loadBlock,
   loadSection,
   loadSections,
   loadCSS,
@@ -97,6 +99,8 @@ async function loadEager(doc) {
     decorateMain(main);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
+  } else {
+    document.body.classList.add('appear');
   }
 
   try {
@@ -110,6 +114,29 @@ async function loadEager(doc) {
 }
 
 /**
+ * Block names that may appear in the DOM without the standard section structure
+ * (e.g. AEM Author when main is missing). Each gets decorateBlock + loadBlock
+ * so block CSS/JS load via EDS loadBlock().
+ */
+const ORPHAN_BLOCK_NAMES = ['cards'];
+
+/**
+ * Loads blocks that exist in the DOM but were not decorated via decorateBlocks(main)
+ * (e.g. when main is missing). Ensures block CSS is loaded via loadBlock().
+ * @param {Document} doc The document
+ */
+async function loadOrphanBlocks(doc) {
+  const promises = ORPHAN_BLOCK_NAMES.flatMap((blockName) => {
+    const candidates = doc.querySelectorAll(`div.${blockName}:not(.block)`);
+    return [...candidates].map((el) => {
+      decorateBlock(el);
+      return loadBlock(el);
+    });
+  });
+  await Promise.all(promises);
+}
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -117,7 +144,11 @@ async function loadLazy(doc) {
   loadHeader(doc.querySelector('header'));
 
   const main = doc.querySelector('main');
-  await loadSections(main);
+  if (main) {
+    await loadSections(main);
+  } else {
+    await loadOrphanBlocks(doc);
+  }
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
