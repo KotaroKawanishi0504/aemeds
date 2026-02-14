@@ -22,36 +22,6 @@ const VIEWPORTS = [
   { width: 375, height: 812, label: 'mobile' },
 ];
 
-function pickStyles(computed) {
-  return {
-    width: computed.width,
-    maxWidth: computed.maxWidth,
-    paddingLeft: computed.paddingLeft,
-    paddingRight: computed.paddingRight,
-    paddingTop: computed.paddingTop,
-    paddingBottom: computed.paddingBottom,
-    marginLeft: computed.marginLeft,
-    marginRight: computed.marginRight,
-    marginTop: computed.marginTop,
-    marginBottom: computed.marginBottom,
-    gap: computed.gap,
-    columnGap: computed.columnGap,
-    rowGap: computed.rowGap,
-    display: computed.display,
-    gridTemplateColumns: computed.gridTemplateColumns,
-    boxSizing: computed.boxSizing,
-  };
-}
-
-function pickRect(rect) {
-  return {
-    width: rect.width,
-    height: rect.height,
-    top: rect.top,
-    left: rect.left,
-  };
-}
-
 async function collectAtViewport(page, viewport) {
   await page.setViewportSize({ width: viewport.width, height: viewport.height });
   await page.waitForTimeout(500);
