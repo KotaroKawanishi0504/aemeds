@@ -23,6 +23,39 @@ main .cards > ul > li {
   box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
+/* カード全体が1本のリンクのとき: 画像・アイコン・テキストすべてクリック可能 */
+.cards > ul > li > a.cards-card-link,
+main .cards > ul > li > a.cards-card-link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cards > ul > li > a.cards-card-link .cards-card-body,
+main .cards > ul > li > a.cards-card-link .cards-card-body {
+  color: #282828;
+  color: var(--card-text-color, #282828);
+}
+
+.cards > ul > li > a.cards-card-link .cards-card-body > *:not(.cards-card-body-icon),
+main .cards > ul > li > a.cards-card-link .cards-card-body > *:not(.cards-card-body-icon) {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  vertical-align: middle;
+}
+
+.cards > ul > li:hover > a.cards-card-link .cards-card-body,
+main .cards > ul > li:hover > a.cards-card-link .cards-card-body {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 /* 本家: 画像の下に本文（赤丸矢印＋ラベル）。方法B: calc(var(--rem)*...) で 18px/27px/24px/36px を算出 */
 .cards .cards-card-body,
 main .cards .cards-card-body {
@@ -257,6 +290,29 @@ main .cards-wrapper > ul > li {
   border-radius: var(--card-border-radius, 0);
   background-color: var(--card-background, var(--background-color));
   box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
+}
+
+.cards-wrapper > ul > li > a.cards-card-link,
+main .cards-wrapper > ul > li > a.cards-card-link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cards-wrapper > ul > li > a.cards-card-link .cards-card-body,
+main .cards-wrapper > ul > li > a.cards-card-link .cards-card-body {
+  color: var(--card-text-color, #282828);
+}
+
+.cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body,
+main .cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .cards-wrapper .cards-card-body,

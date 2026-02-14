@@ -26,6 +26,21 @@ function createCardBodyIconSVG() {
 }
 
 /**
+ * Ensures the card body has only icon + content (no inner <a>).
+ * Used when the whole card is wrapped in one link.
+ * @param {Element} body - .cards-card-body element (icon already prepended)
+ */
+function ensureBodyContentOnly(body) {
+  const icon = body.querySelector('.cards-card-body-icon');
+  const rest = [...body.children].filter((el) => el !== icon);
+  const existingLink = body.querySelector('a[href]');
+  if (existingLink && rest.length === 1 && rest[0] === existingLink) {
+    while (existingLink.firstChild) body.insertBefore(existingLink.firstChild, existingLink);
+    existingLink.remove();
+  }
+}
+
+/**
  * Ensures the card body has a single link wrapper for the label so block CSS applies.
  * If content is already an <a>, leave it. If not (e.g. AEM richtext div/p), wrap in <a>.
  * @param {Element} body - .cards-card-body element (icon already prepended)
@@ -73,6 +88,7 @@ export default function decorate(block) {
       if (i === 2 && linkCell) return;
       li.append(cell);
     });
+    const hasCardLink = typeof rowHref === 'string' && rowHref.trim() && rowHref !== '#';
     [...li.children].forEach((div) => {
       const isImageCell = div.querySelector('picture') || div.querySelector('img');
       if (isImageCell) {
@@ -83,9 +99,20 @@ export default function decorate(block) {
         icon.className = 'cards-card-body-icon';
         icon.append(createCardBodyIconSVG());
         div.prepend(icon);
-        ensureBodyLink(div, rowHref);
+        if (hasCardLink) {
+          ensureBodyContentOnly(div);
+        } else {
+          ensureBodyLink(div, rowHref);
+        }
       }
     });
+    if (hasCardLink && li.children.length) {
+      const a = document.createElement('a');
+      a.className = 'cards-card-link';
+      a.setAttribute('href', rowHref.trim());
+      while (li.firstChild) a.appendChild(li.firstChild);
+      li.appendChild(a);
+    }
     ul.append(li);
   });
   ul.querySelectorAll('picture > img').forEach((img) => {
