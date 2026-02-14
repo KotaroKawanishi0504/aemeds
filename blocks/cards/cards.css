@@ -40,41 +40,7 @@ main .cards > ul {
   }
 }
 
-@media (width >= 600px) and (width < 900px) {
-  .cards > ul,
-  main .cards > ul,
-  .cards-wrapper > ul,
-  main .cards-wrapper > ul,
-  .cards-wrapper.cards-wrapper > div > ul,
-  main .cards-wrapper.cards-wrapper > div > ul,
-  .cards-wrapper > div > ul,
-  main .cards-wrapper > div > ul,
-  .cards-wrapper .cards > ul,
-  main .cards-wrapper .cards > ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* 本家: セクション幅に合わせ 4 列 (1088px 時 242px/列、1344px 時 306px/列) */
-@media (width >= 900px) {
-  .cards > ul,
-  main .cards > ul,
-  .cards-wrapper > ul,
-  main .cards-wrapper > ul,
-  .cards-wrapper.cards-wrapper > div > ul,
-  main .cards-wrapper.cards-wrapper > div > ul,
-  .cards-wrapper > div > ul,
-  main .cards-wrapper > div > ul,
-  .cards-wrapper .cards > ul,
-  main .cards-wrapper .cards > ul {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--card-list-gap, 56px 40px);
-    max-width: 100%;
-    margin-inline: 0;
-  }
-}
-
-/* Container queries: column count by block width (overrides @media when e.g. AEM Author iframe is narrow). */
+/* Container queries: column count by block width (narrow container → 1 col). */
 @container cards (max-width: 599px) {
   .cards > ul,
   main .cards > ul,
@@ -106,6 +72,41 @@ main .cards > ul {
 }
 
 @container cards (min-width: 900px) {
+  .cards > ul,
+  main .cards > ul,
+  .cards-wrapper > ul,
+  main .cards-wrapper > ul,
+  .cards-wrapper.cards-wrapper > div > ul,
+  main .cards-wrapper.cards-wrapper > div > ul,
+  .cards-wrapper > div > ul,
+  main .cards-wrapper > div > ul,
+  .cards-wrapper .cards > ul,
+  main .cards-wrapper .cards > ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--card-list-gap, 56px 40px);
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* Viewport-based columns after @container so viewport wins when both match (e.g. 620px viewport, 572px container → 2 col). */
+@media (width >= 600px) and (width < 900px) {
+  .cards > ul,
+  main .cards > ul,
+  .cards-wrapper > ul,
+  main .cards-wrapper > ul,
+  .cards-wrapper.cards-wrapper > div > ul,
+  main .cards-wrapper.cards-wrapper > div > ul,
+  .cards-wrapper > div > ul,
+  main .cards-wrapper > div > ul,
+  .cards-wrapper .cards > ul,
+  main .cards-wrapper .cards > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 本家: セクション幅に合わせ 4 列 (1088px 時 242px/列、1344px 時 306px/列) */
+@media (width >= 900px) {
   .cards > ul,
   main .cards > ul,
   .cards-wrapper > ul,
@@ -142,23 +143,6 @@ main .cards:not(:has(> ul)) {
   }
 }
 
-@media (width >= 600px) and (width < 900px) {
-  .cards:not(:has(> ul)),
-  main .cards:not(:has(> ul)) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width >= 900px) {
-  .cards:not(:has(> ul)),
-  main .cards:not(:has(> ul)) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--card-list-gap, 56px 40px);
-    max-width: 100%;
-    margin-inline: 0;
-  }
-}
-
 @container cards (max-width: 599px) {
   .cards:not(:has(> ul)),
   main .cards:not(:has(> ul)) {
@@ -174,6 +158,23 @@ main .cards:not(:has(> ul)) {
 }
 
 @container cards (min-width: 900px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--card-list-gap, 56px 40px);
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}
+
+@media (width >= 600px) and (width < 900px) {
+  .cards:not(:has(> ul)),
+  main .cards:not(:has(> ul)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
   .cards:not(:has(> ul)),
   main .cards:not(:has(> ul)) {
     grid-template-columns: repeat(4, 1fr);
