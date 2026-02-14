@@ -29,6 +29,7 @@ main .cards .cards-card-body {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -145,10 +146,12 @@ main .cards > ul > li:hover .cards-card-image img {
   transform: scale(1.05);
 }
 
-/* ラベル: 通常時は #282828（ホバー時のみ赤）。オリジナルに合わせる */
+/* ラベル: 通常時は #282828（ホバー時のみ赤）。inline-flex + align-items:center でアイコンと縦揃え */
 .cards .cards-card-body a,
 main .cards .cards-card-body a {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   color: #282828;
   color: var(--card-text-color, #282828);
   text-decoration: none;
@@ -221,6 +224,7 @@ main .cards-wrapper .cards-card-body {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -301,6 +305,18 @@ main .cards-wrapper .cards-card-image {
 .cards-wrapper > ul > li:hover .cards-card-image img,
 main .cards-wrapper > ul > li:hover .cards-card-image img {
   transform: scale(1.05);
+}
+
+/* wrapper: アイコンとテキスト縦揃え（base と同じ inline-flex + min-height） */
+.cards-wrapper .cards-card-body a,
+.cards-wrapper.cards-wrapper > div .cards-card-body a,
+.cards-wrapper .cards .cards-card-body a,
+main .cards-wrapper .cards-card-body a,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a,
+main .cards-wrapper .cards .cards-card-body a {
+  display: inline-flex;
+  align-items: center;
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
 }
 
 .cards-wrapper > ul > li:hover .cards-card-body,
@@ -410,6 +426,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -535,6 +552,7 @@ main .cards-wrapper .cards .cards-card-body {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -616,4 +634,31 @@ main .cards-wrapper .cards > ul > li img {
   height: auto;
   display: block;
   vertical-align: middle;
+}
+
+/* AEM Author 上で他スタイルに負けないようホバー下線・色を強制 */
+.cards .cards-card-body a:hover,
+.cards-wrapper .cards-card-body a:hover,
+.cards-wrapper.cards-wrapper > div .cards-card-body a:hover,
+.cards-wrapper .cards .cards-card-body a:hover,
+main .cards .cards-card-body a:hover,
+main .cards-wrapper .cards-card-body a:hover,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a:hover,
+main .cards-wrapper .cards .cards-card-body a:hover {
+  color: var(--card-text-hover-color, #e60012) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--card-text-hover-color, #e60012) !important;
+  text-underline-offset: 0.15em;
+}
+
+.cards-wrapper > ul > li:hover .cards-card-body a,
+.cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a,
+.cards-wrapper .cards > ul > li:hover .cards-card-body a,
+main .cards-wrapper > ul > li:hover .cards-card-body a,
+main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a,
+main .cards-wrapper .cards > ul > li:hover .cards-card-body a {
+  color: var(--card-text-hover-color, #e60012) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--card-text-hover-color, #e60012) !important;
+  text-underline-offset: 0.15em;
 }
