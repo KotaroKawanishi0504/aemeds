@@ -1,6 +1,12 @@
 # AEM EDS blocks
 
-When asked to align blocks or styles with the reference site (e.g. Marubeni TOP):
+When asked to align blocks or styles with the reference site (e.g. Marubeni TOP), **use the design-alignment skill** so that collection, reuse of original assets, and verification are done in order. Do not guess layout or font values; collect from the reference first.
+
+**Skill to use:** `.cursor/skills/design-alignment` (design-alignment skill)
+- Follow its workflow: Collect (collectable information) → Reuse (original CSS/SVG/fonts) → Verify (numeric and screenshot comparison).
+- See `resources/collectable-information.md`, `resources/reuse-original-assets.md`, `resources/accuracy-without-live-compare.md` for detailed checklists.
+
+When applying the workflow in this project:
 1. Read the reference: `drafts/tmp/import-work/cleaned.html` (relevant section) and `drafts/tmp/marubeni-style-analysis.md` (including any "icon spec" or block-by-block structure).
 2. For blocks with icons: use the documented icon spec (fill vs stroke, exact colors, size in component context). If missing, capture from the reference before implementing.
 3. Compare with the implementation using the 7-aspect design parity checklist and list gaps.
