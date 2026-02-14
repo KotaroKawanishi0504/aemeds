@@ -27,6 +27,8 @@ main .cards > ul > li {
 .cards .cards-card-body,
 main .cards .cards-card-body {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -175,6 +177,15 @@ main .cards > ul > li:hover .cards-card-body a {
   text-underline-offset: 0.15em;
 }
 
+/* AEM Author 用: リンク直接ホバーでも下線を表示（li:hover が効かない DOM 対策） */
+.cards .cards-card-body a:hover,
+main .cards .cards-card-body a:hover {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
+}
+
 /* 本家 https://www.marubeni.com/jp/ に合わせ、画像はアスペクト比を強制しない */
 .cards > ul > li img,
 main .cards > ul > li img {
@@ -208,6 +219,8 @@ main .cards-wrapper > ul > li {
 .cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -304,6 +317,14 @@ main .cards-wrapper > ul > li:hover .cards-card-body a {
   text-underline-offset: 0.15em;
 }
 
+.cards-wrapper .cards-card-body a:hover,
+main .cards-wrapper .cards-card-body a:hover {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
+}
+
 .cards-wrapper > ul > li .cards-card-image img,
 main .cards-wrapper > ul > li .cards-card-image img {
   transition: transform 0.35s ease;
@@ -376,9 +397,19 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
   text-underline-offset: 0.15em;
 }
 
+.cards-wrapper.cards-wrapper > div .cards-card-body a:hover,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a:hover {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
+}
+
 .cards-wrapper.cards-wrapper > div .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -502,6 +533,8 @@ main .cards-wrapper .cards > ul > li {
 .cards-wrapper .cards .cards-card-body,
 main .cards-wrapper .cards .cards-card-body {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
@@ -564,6 +597,14 @@ main .cards-wrapper .cards > ul > li:hover .cards-card-body a {
 
 .cards-wrapper .cards > ul > li:hover .cards-card-body a,
 main .cards-wrapper .cards > ul > li:hover .cards-card-body a {
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
+}
+
+.cards-wrapper .cards .cards-card-body a:hover,
+main .cards-wrapper .cards .cards-card-body a:hover {
+  color: var(--card-text-hover-color, #e60012);
   text-decoration: underline;
   text-decoration-color: var(--card-text-hover-color, #e60012);
   text-underline-offset: 0.15em;
