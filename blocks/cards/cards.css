@@ -759,14 +759,13 @@ main .cards-wrapper > ul > li img {
   vertical-align: middle;
 }
 
-/* .cards-wrapper > div > ul (Author: wrapper 直下に div). 詳細度を上げて lazy-styles 等より優先 */
+/* .cards-wrapper > div > ul (Author: wrapper 直下に div). 列数は @media / @container に任せる（ここで指定すると上書きされる） */
 .cards-wrapper.cards-wrapper > div > ul,
 main .cards-wrapper.cards-wrapper > div > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
   gap: var(--card-list-gap, 24px);
 }
 
@@ -902,14 +901,13 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body-icon .c
   transition-delay: 0.3s;
 }
 
-/* 従来セレクタも維持（詳細度が足りない環境用） */
+/* 従来セレクタも維持（詳細度が足りない環境用）。列数は @media / @container に任せる */
 .cards-wrapper > div > ul,
 main .cards-wrapper > div > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
   gap: var(--card-list-gap, 24px);
 }
 
@@ -931,14 +929,13 @@ main .cards-wrapper > div > ul > li img {
   vertical-align: middle;
 }
 
-/* .cards inside .cards-wrapper; fallback when no main */
+/* .cards inside .cards-wrapper; fallback when no main。列数は @media / @container に任せる */
 .cards-wrapper .cards > ul,
 main .cards-wrapper .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--card-list-item-min-width, 257px), 1fr));
   gap: var(--card-list-gap, 24px);
 }
 
