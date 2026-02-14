@@ -169,11 +169,11 @@
         "multi": false
       },
       {
-        "component": "richtext",
+        "component": "text",
+        "valueType": "string",
         "name": "text",
-        "value": "",
         "label": "Text",
-        "valueType": "string"
+        "value": ""
       },
       {
         "component": "aem-content",
