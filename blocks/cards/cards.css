@@ -30,8 +30,19 @@ main .cards > ul {
 
 @media (width >= 900px) {
   .cards > ul,
-  main .cards > ul {
-    grid-template-columns: repeat(4, 1fr);
+  main .cards > ul,
+  .cards-wrapper > ul,
+  main .cards-wrapper > ul,
+  .cards-wrapper.cards-wrapper > div > ul,
+  main .cards-wrapper.cards-wrapper > div > ul,
+  .cards-wrapper > div > ul,
+  main .cards-wrapper > div > ul,
+  .cards-wrapper .cards > ul,
+  main .cards-wrapper .cards > ul {
+    grid-template-columns: repeat(4, var(--card-list-column-width, 242px));
+    gap: var(--card-list-gap, 56px 40px);
+    max-width: var(--card-list-desktop-width, 1088px);
+    margin-inline: auto;
   }
 }
 
@@ -344,13 +355,6 @@ main .cards-wrapper > ul {
   .cards-wrapper > ul,
   main .cards-wrapper > ul {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width >= 900px) {
-  .cards-wrapper > ul,
-  main .cards-wrapper > ul {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
 

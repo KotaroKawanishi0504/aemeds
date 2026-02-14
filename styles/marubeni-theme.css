@@ -16,6 +16,9 @@
 }
 
 :root {
+  /* layout – 本家ヘッダーと同一 (max 1264px → セクション内幅 1200px、カード 1088px 中央) */
+  --max-content-width: 1264px;
+
   /* colors – Marubeni brand (analysis §3) */
   --background-color: #fff;
   --light-color: #f5f5f5;
@@ -49,9 +52,11 @@
   --card-box-shadow: none;
   --card-background: transparent;
 
-  /* Cards list: gap 56px 40px, item min 242px, ul margin-top 48px (root 10px → rem) */
-  --card-list-gap: 5.6rem 4rem;
+  /* Cards list: 本家 ul.c-card-list と同じ (gap 56px 40px, カード幅 242px, 4列時 1088px) */
+  --card-list-gap: 56px 40px;
   --card-list-item-min-width: 242px;
+  --card-list-desktop-width: 1088px;
+  --card-list-column-width: 242px;
   --card-list-margin-top: 4.8rem;
 
   /* Card body: font-weight のみ。font-size/line-height/margin は cards.css で calc(var(--rem)*...) にて算出 */
