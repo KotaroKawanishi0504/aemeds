@@ -61,6 +61,7 @@
   --card-text-color: #282828;
 }
 
+/* Breakpoint 900px: matches original site (01-common.min.css .c-icon-link). */
 @media screen and (width < 900px) {
   :root {
     /* 本家 .c-icon-link モバイル: --icon-size: 2.4, --font-size: 1.6 */

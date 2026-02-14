@@ -38,6 +38,10 @@
 
   /* nav height */
   --nav-height: 64px;
+
+  /* layout – content width and section padding (Marubeni original: 1200px, 24px mobile) */
+  --max-content-width: 1200px;
+  --inline-section-padding: 24px;
 }
 
 /* fallback fonts */
@@ -55,6 +59,9 @@
 
 @media (width >= 900px) {
   :root {
+    /* section padding desktop (Marubeni original) */
+    --inline-section-padding: 32px;
+
     /* body sizes */
     --body-font-size-m: 18px;
     --body-font-size-s: 16px;
@@ -233,19 +240,13 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--max-content-width);
   margin: auto;
-  padding: 0 24px;
+  padding: 0 var(--inline-section-padding);
 }
 
 main > .section:first-of-type {
   margin-top: 0;
-}
-
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
-  }
 }
 
 /* section metadata */
