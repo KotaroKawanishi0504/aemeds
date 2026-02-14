@@ -70,6 +70,21 @@ main .cards > ul > li:hover > a.cards-card-link .cards-card-body {
   text-underline-offset: 0.15em;
 }
 
+/* 別ウィンドウ表示時: テキスト横にアイコン（本家 :is([data-target],[target]) [data-link-label]::after と同じ Ben \e901） */
+.cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
+main .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after {
+  color: #e60012;
+  color: var(--card-icon-color, #e60012);
+  display: inline-block;
+  font-size: calc(var(--rem, 10) * 1.2 * 1px);
+  margin-left: calc(var(--rem, 10) * 0.4 * 1px);
+  content: "\e901";
+  font-family: Ben, sans-serif !important;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+}
+
 /* 本家: 画像の下に本文（赤丸矢印＋ラベル）。方法B: calc(var(--rem)*...) で 18px/27px/24px/36px を算出 */
 .cards .cards-card-body,
 main .cards .cards-card-body {
@@ -327,6 +342,19 @@ main .cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body {
   color: var(--card-text-hover-color, #e60012);
   text-decoration: underline;
   text-underline-offset: 0.15em;
+}
+
+.cards-wrapper > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
+main .cards-wrapper > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after {
+  color: var(--card-icon-color, #e60012);
+  display: inline-block;
+  font-size: calc(var(--rem, 10) * 1.2 * 1px);
+  margin-left: calc(var(--rem, 10) * 0.4 * 1px);
+  content: "\e901";
+  font-family: Ben, sans-serif !important;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
 }
 
 .cards-wrapper > ul > li > a.cards-card-link .cards-card-body p,

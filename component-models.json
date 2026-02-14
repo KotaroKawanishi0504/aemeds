@@ -179,6 +179,13 @@
         "component": "aem-content",
         "name": "link",
         "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "openInNewWindow",
+        "label": "Open in new window",
+        "value": ""
       }
     ]
   },

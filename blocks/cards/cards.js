@@ -75,6 +75,20 @@ function getHrefFromLinkCell(cell) {
   return '';
 }
 
+/**
+ * Whether the card link should open in a new window (from 4th column or data attr).
+ * @param {Element} cell - optional 4th cell (openInNewWindow)
+ * @param {Element} row - card row (for data-open-in-new-window)
+ * @returns {boolean}
+ */
+function isOpenInNewWindow(cell, row) {
+  const fromRow = row?.dataset?.openInNewWindow?.trim().toLowerCase();
+  if (fromRow === 'true' || fromRow === '1' || fromRow === 'x' || fromRow === 'yes') return true;
+  if (!cell) return false;
+  const t = cell.textContent?.trim().toLowerCase() || '';
+  return t === 'x' || t === 'yes' || t === 'true' || t === '1' || t === '○';
+}
+
 export default function decorate(block) {
   /* change to ul, li */
   const ul = document.createElement('ul');
@@ -83,9 +97,11 @@ export default function decorate(block) {
     moveInstrumentation(row, li);
     const cells = [...row.children];
     const linkCell = cells.length >= 3 ? cells[2] : null;
+    const openInNewWindowCell = cells.length >= 4 ? cells[3] : null;
     const rowHref = getHrefFromLinkCell(linkCell) || row.dataset.link || '';
+    const openInNewWindow = isOpenInNewWindow(openInNewWindowCell, row);
     cells.forEach((cell, i) => {
-      if (i === 2 && linkCell) return;
+      if ((i === 2 && linkCell) || (i === 3 && openInNewWindowCell)) return;
       li.append(cell);
     });
     const hasCardLink = typeof rowHref === 'string' && rowHref.trim() && rowHref !== '#';
@@ -101,6 +117,8 @@ export default function decorate(block) {
         div.prepend(icon);
         if (hasCardLink) {
           ensureBodyContentOnly(div);
+          const labelEl = div.querySelector(':scope > *:not(.cards-card-body-icon)');
+          if (labelEl) labelEl.setAttribute('data-link-label', '');
         } else {
           ensureBodyLink(div, rowHref);
         }
@@ -110,6 +128,10 @@ export default function decorate(block) {
       const a = document.createElement('a');
       a.className = 'cards-card-link';
       a.setAttribute('href', rowHref.trim());
+      if (openInNewWindow) {
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
+      }
       while (li.firstChild) a.appendChild(li.firstChild);
       li.appendChild(a);
     }
