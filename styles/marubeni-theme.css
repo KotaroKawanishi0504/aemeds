@@ -15,9 +15,10 @@
        url('https://www.marubeni.com/common/fonts/ben.woff?v=20250919') format('woff');
 }
 
+/* layout: layout-collect-marubeni.json に基づく。1920px 時 main 1344px / 左右 288px、1280px 時 main 1088px / 左右 96px */
 :root {
-  /* layout – 本家ヘッダーと同一 (max 1264px → セクション内幅 1200px、カード 1088px 中央) */
-  --max-content-width: 1264px;
+  --max-content-width: 1088px;
+  --inline-section-padding: 24px;
 
   /* colors – Marubeni brand (analysis §3) */
   --background-color: #fff;
@@ -52,11 +53,9 @@
   --card-box-shadow: none;
   --card-background: transparent;
 
-  /* Cards list: 本家 ul.c-card-list と同じ (gap 56px 40px, カード幅 242px, 4列時 1088px) */
+  /* Cards list: 本家 ul.c-card-list (gap 56px 40px)。幅はセクションに合わせ 1088/1344 で 4×242/306 */
   --card-list-gap: 56px 40px;
   --card-list-item-min-width: 242px;
-  --card-list-desktop-width: 1088px;
-  --card-list-column-width: 242px;
   --card-list-margin-top: 4.8rem;
 
   /* Card body: font-weight のみ。font-size/line-height/margin は cards.css で calc(var(--rem)*...) にて算出 */
@@ -64,6 +63,21 @@
 
   /* 本家ラベル色 rgb(40,40,40) */
   --card-text-color: #282828;
+}
+
+/* 本家: 900px 以上でセクション幅 1088px、左右は margin:auto で 96px (1280 時) */
+@media screen and (width >= 900px) {
+  :root {
+    --max-content-width: 1088px;
+    --inline-section-padding: 0;
+  }
+}
+
+/* 本家: 1920px 以上でセクション幅 1344px、左右 288px */
+@media screen and (width >= 1920px) {
+  :root {
+    --max-content-width: 1344px;
+  }
 }
 
 /* Breakpoint 900px: matches original site (01-common.min.css .c-icon-link). */

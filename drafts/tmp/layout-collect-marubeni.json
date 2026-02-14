@@ -1,0 +1,733 @@
+{
+  "url": "https://www.marubeni.com/jp/",
+  "selector": ".p-home__about ul.c-card-list",
+  "collectedAt": "2026-02-14T13:13:19.688Z",
+  "viewports": [
+    {
+      "viewport": "desktop",
+      "viewportSize": {
+        "width": 1920,
+        "height": 1080
+      },
+      "viewportWidth": 1920,
+      "viewportHeight": 1080,
+      "cardList": {
+        "styles": {
+          "width": "1344px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "48px",
+          "marginBottom": "0px",
+          "gap": "56px 40px",
+          "columnGap": "40px",
+          "rowGap": "56px",
+          "display": "grid",
+          "gridTemplateColumns": "306px 306px 306px 306px",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 1344,
+          "height": 431,
+          "top": 598.984375,
+          "left": 277.5
+        },
+        "childCount": 4
+      },
+      "firstCard": {
+        "styles": {
+          "width": "306px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "gap": "normal",
+          "columnGap": "normal",
+          "rowGap": "normal",
+          "display": "list-item",
+          "gridTemplateColumns": "none",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 306,
+          "height": 431,
+          "top": 598.984375,
+          "left": 277.5
+        }
+      },
+      "ancestors": [
+        {
+          "tag": "div",
+          "class": "p-home__about",
+          "id": "",
+          "styles": {
+            "width": "1920px",
+            "maxWidth": "none",
+            "paddingLeft": "288px",
+            "paddingRight": "288px",
+            "marginLeft": "-288px",
+            "marginRight": "-288px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 1920,
+            "height": 719,
+            "left": -10.5
+          }
+        },
+        {
+          "tag": "main",
+          "class": "l-main",
+          "id": "main",
+          "styles": {
+            "width": "1344px",
+            "maxWidth": "none",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 1344,
+            "height": 3905.203125,
+            "left": 277.5
+          }
+        },
+        {
+          "tag": "div",
+          "class": "l-content",
+          "id": "",
+          "styles": {
+            "width": "1920px",
+            "maxWidth": "none",
+            "paddingLeft": "288px",
+            "paddingRight": "288px",
+            "marginLeft": "-10.5px",
+            "marginRight": "-10.5px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 1920,
+            "height": 4001.203125,
+            "left": -10.5
+          }
+        }
+      ]
+    },
+    {
+      "viewport": "laptop",
+      "viewportSize": {
+        "width": 1280,
+        "height": 800
+      },
+      "viewportWidth": 1280,
+      "viewportHeight": 800,
+      "cardList": {
+        "styles": {
+          "width": "1088px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "48px",
+          "marginBottom": "0px",
+          "gap": "56px 40px",
+          "columnGap": "40px",
+          "rowGap": "56px",
+          "display": "grid",
+          "gridTemplateColumns": "242px 242px 242px 242px",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 1088,
+          "height": 351.515625,
+          "top": 250.5,
+          "left": 85.5
+        },
+        "childCount": 4
+      },
+      "firstCard": {
+        "styles": {
+          "width": "242px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "gap": "normal",
+          "columnGap": "normal",
+          "rowGap": "normal",
+          "display": "list-item",
+          "gridTemplateColumns": "none",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 242,
+          "height": 351.515625,
+          "top": 250.5,
+          "left": 85.5
+        }
+      },
+      "ancestors": [
+        {
+          "tag": "div",
+          "class": "p-home__about",
+          "id": "",
+          "styles": {
+            "width": "1280px",
+            "maxWidth": "none",
+            "paddingLeft": "96px",
+            "paddingRight": "96px",
+            "marginLeft": "-96px",
+            "marginRight": "-96px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 1280,
+            "height": 639.515625,
+            "left": -10.5
+          }
+        },
+        {
+          "tag": "main",
+          "class": "l-main",
+          "id": "main",
+          "styles": {
+            "width": "1088px",
+            "maxWidth": "none",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 1088,
+            "height": 3440.484375,
+            "left": 85.5
+          }
+        },
+        {
+          "tag": "div",
+          "class": "l-content",
+          "id": "",
+          "styles": {
+            "width": "1280px",
+            "maxWidth": "none",
+            "paddingLeft": "96px",
+            "paddingRight": "96px",
+            "marginLeft": "-10.5px",
+            "marginRight": "-10.5px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 1280,
+            "height": 3536.484375,
+            "left": -10.5
+          }
+        }
+      ]
+    },
+    {
+      "viewport": "breakpoint_900",
+      "viewportSize": {
+        "width": 900,
+        "height": 800
+      },
+      "viewportWidth": 900,
+      "viewportHeight": 800,
+      "cardList": {
+        "styles": {
+          "width": "765px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "33.75px",
+          "marginBottom": "0px",
+          "gap": "39.375px 28.125px",
+          "columnGap": "28.125px",
+          "rowGap": "39.375px",
+          "display": "grid",
+          "gridTemplateColumns": "170.156px 170.156px 170.156px 170.156px",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 765,
+          "height": 247.15625,
+          "top": -499.5625,
+          "left": 57
+        },
+        "childCount": 4
+      },
+      "firstCard": {
+        "styles": {
+          "width": "170.156px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "gap": "normal",
+          "columnGap": "normal",
+          "rowGap": "normal",
+          "display": "list-item",
+          "gridTemplateColumns": "none",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 170.15625,
+          "height": 247.15625,
+          "top": -499.5625,
+          "left": 57
+        }
+      },
+      "ancestors": [
+        {
+          "tag": "div",
+          "class": "p-home__about",
+          "id": "",
+          "styles": {
+            "width": "900px",
+            "maxWidth": "none",
+            "paddingLeft": "67.5px",
+            "paddingRight": "67.5px",
+            "marginLeft": "-67.5px",
+            "marginRight": "-67.5px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 900,
+            "height": 449.65625,
+            "left": -10.5
+          }
+        },
+        {
+          "tag": "main",
+          "class": "l-main",
+          "id": "main",
+          "styles": {
+            "width": "765px",
+            "maxWidth": "none",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 765,
+            "height": 2419.984375,
+            "left": 57
+          }
+        },
+        {
+          "tag": "div",
+          "class": "l-content",
+          "id": "",
+          "styles": {
+            "width": "900px",
+            "maxWidth": "none",
+            "paddingLeft": "67.5px",
+            "paddingRight": "67.5px",
+            "marginLeft": "-10.5px",
+            "marginRight": "-10.5px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 900,
+            "height": 2487.484375,
+            "left": -10.5
+          }
+        }
+      ]
+    },
+    {
+      "viewport": "below_900",
+      "viewportSize": {
+        "width": 899,
+        "height": 800
+      },
+      "viewportWidth": 899,
+      "viewportHeight": 800,
+      "cardList": {
+        "styles": {
+          "width": "807.5px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "73.201px",
+          "marginBottom": "0px",
+          "gap": "73.201px 36.6005px",
+          "columnGap": "36.6005px",
+          "rowGap": "73.201px",
+          "display": "grid",
+          "gridTemplateColumns": "385.453px 385.453px",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 807.5,
+          "height": 1268.359375,
+          "top": 3519.0625,
+          "left": 35.25
+        },
+        "childCount": 4
+      },
+      "firstCard": {
+        "styles": {
+          "width": "385.453px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "gap": "normal",
+          "columnGap": "normal",
+          "rowGap": "normal",
+          "display": "list-item",
+          "gridTemplateColumns": "none",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 385.453125,
+          "height": 570.140625,
+          "top": 3519.0625,
+          "left": 35.25
+        }
+      },
+      "ancestors": [
+        {
+          "tag": "div",
+          "class": "p-home__about",
+          "id": "",
+          "styles": {
+            "width": "899px",
+            "maxWidth": "none",
+            "paddingLeft": "45.7506px",
+            "paddingRight": "45.7506px",
+            "marginLeft": "-45.75px",
+            "marginRight": "-45.75px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 899,
+            "height": 1789.90625,
+            "left": -10.5
+          }
+        },
+        {
+          "tag": "main",
+          "class": "l-main",
+          "id": "main",
+          "styles": {
+            "width": "807.5px",
+            "maxWidth": "none",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 807.5,
+            "height": 9254.484375,
+            "left": 35.25
+          }
+        },
+        {
+          "tag": "div",
+          "class": "l-content",
+          "id": "",
+          "styles": {
+            "width": "899px",
+            "maxWidth": "none",
+            "paddingLeft": "45.7506px",
+            "paddingRight": "45.7506px",
+            "marginLeft": "-10.5px",
+            "marginRight": "-10.5px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 899,
+            "height": 9437.484375,
+            "left": -10.5
+          }
+        }
+      ]
+    },
+    {
+      "viewport": "breakpoint_600",
+      "viewportSize": {
+        "width": 600,
+        "height": 900
+      },
+      "viewportWidth": 600,
+      "viewportHeight": 900,
+      "cardList": {
+        "styles": {
+          "width": "538.938px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "48.855px",
+          "marginBottom": "0px",
+          "gap": "48.855px 24.4275px",
+          "columnGap": "24.4275px",
+          "rowGap": "48.855px",
+          "display": "grid",
+          "gridTemplateColumns": "257.25px 257.266px",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 538.9375,
+          "height": 846.484375,
+          "top": 1682.0625,
+          "left": 20.03125
+        },
+        "childCount": 4
+      },
+      "firstCard": {
+        "styles": {
+          "width": "257.25px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "gap": "normal",
+          "columnGap": "normal",
+          "rowGap": "normal",
+          "display": "list-item",
+          "gridTemplateColumns": "none",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 257.25,
+          "height": 380.5,
+          "top": 1682.0625,
+          "left": 20.03125
+        }
+      },
+      "ancestors": [
+        {
+          "tag": "div",
+          "class": "p-home__about",
+          "id": "",
+          "styles": {
+            "width": "600px",
+            "maxWidth": "none",
+            "paddingLeft": "30.5344px",
+            "paddingRight": "30.5344px",
+            "marginLeft": "-30.5312px",
+            "marginRight": "-30.5312px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 600,
+            "height": 1194.53125,
+            "left": -10.5
+          }
+        },
+        {
+          "tag": "main",
+          "class": "l-main",
+          "id": "main",
+          "styles": {
+            "width": "538.938px",
+            "maxWidth": "none",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 538.9375,
+            "height": 6217.484375,
+            "left": 20.03125
+          }
+        },
+        {
+          "tag": "div",
+          "class": "l-content",
+          "id": "",
+          "styles": {
+            "width": "600px",
+            "maxWidth": "none",
+            "paddingLeft": "30.5344px",
+            "paddingRight": "30.5344px",
+            "marginLeft": "-10.5px",
+            "marginRight": "-10.5px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 600,
+            "height": 6339.609375,
+            "left": -10.5
+          }
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "viewportSize": {
+        "width": 375,
+        "height": 812
+      },
+      "viewportWidth": 375,
+      "viewportHeight": 812,
+      "cardList": {
+        "styles": {
+          "width": "336.844px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "30.5344px",
+          "marginBottom": "0px",
+          "gap": "30.5344px 15.2672px",
+          "columnGap": "15.2672px",
+          "rowGap": "30.5344px",
+          "display": "grid",
+          "gridTemplateColumns": "160.781px 160.797px",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 336.84375,
+          "height": 529.0625,
+          "top": 252.9375,
+          "left": 8.578125
+        },
+        "childCount": 4
+      },
+      "firstCard": {
+        "styles": {
+          "width": "160.781px",
+          "maxWidth": "none",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "marginLeft": "0px",
+          "marginRight": "0px",
+          "marginTop": "0px",
+          "marginBottom": "0px",
+          "gap": "normal",
+          "columnGap": "normal",
+          "rowGap": "normal",
+          "display": "list-item",
+          "gridTemplateColumns": "none",
+          "boxSizing": "border-box"
+        },
+        "rect": {
+          "width": 160.78125,
+          "height": 237.8125,
+          "top": 252.9375,
+          "left": 8.578125
+        }
+      },
+      "ancestors": [
+        {
+          "tag": "div",
+          "class": "p-home__about",
+          "id": "",
+          "styles": {
+            "width": "375px",
+            "maxWidth": "none",
+            "paddingLeft": "19.084px",
+            "paddingRight": "19.084px",
+            "marginLeft": "-19.0781px",
+            "marginRight": "-19.0781px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 375,
+            "height": 746.609375,
+            "left": -10.5
+          }
+        },
+        {
+          "tag": "main",
+          "class": "l-main",
+          "id": "main",
+          "styles": {
+            "width": "336.844px",
+            "maxWidth": "none",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 336.84375,
+            "height": 3886.828125,
+            "left": 8.578125
+          }
+        },
+        {
+          "tag": "div",
+          "class": "l-content",
+          "id": "",
+          "styles": {
+            "width": "375px",
+            "maxWidth": "none",
+            "paddingLeft": "19.084px",
+            "paddingRight": "19.084px",
+            "marginLeft": "-10.5px",
+            "marginRight": "-10.5px",
+            "boxSizing": "border-box"
+          },
+          "rect": {
+            "width": 375,
+            "height": 3963.15625,
+            "left": -10.5
+          }
+        }
+      ]
+    }
+  ]
+}
