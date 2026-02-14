@@ -1,18 +1,27 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-/** Card body icon: same asset as reference (circle r=12), stroke/arrow from CSS vars. */
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+/** Card body icon: 円のみ SVG（本家 .c-icon-link__icon 同様）. 矢印は CSS ::before (Ben \e902) で表示。 */
 function createCardBodyIconSVG() {
   const r = Number(
     getComputedStyle(document.documentElement).getPropertyValue('--card-icon-circle-r')?.trim(),
     10,
   ) || 12;
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const svg = document.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('class', 'cards-card-body-icon-svg');
-  svg.innerHTML = `<circle cx="12" cy="12" r="${r}" fill="none" stroke="currentColor"/>`
-    + '<path class="cards-card-body-icon-arrow" d="M10 6 L10 18 L18 12 Z"/>';
+
+  const circle = document.createElementNS(SVG_NS, 'circle');
+  circle.setAttribute('cx', '12');
+  circle.setAttribute('cy', '12');
+  circle.setAttribute('r', String(r));
+  circle.setAttribute('fill', 'none');
+  circle.setAttribute('stroke', 'currentColor');
+  svg.appendChild(circle);
+
   return svg;
 }
 
@@ -24,7 +33,8 @@ export default function decorate(block) {
     moveInstrumentation(row, li);
     while (row.firstElementChild) li.append(row.firstElementChild);
     [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) {
+      const isImageCell = div.querySelector('picture') || div.querySelector('img');
+      if (isImageCell) {
         div.className = 'cards-card-image';
       } else {
         div.className = 'cards-card-body';

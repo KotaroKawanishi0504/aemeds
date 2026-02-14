@@ -15,21 +15,45 @@ main .cards > ul {
 
 .cards > ul > li,
 main .cards > ul > li {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
   background-color: var(--card-background, var(--background-color));
   box-shadow: var(--card-box-shadow, 0 2px 12px rgb(0 0 0 / 8%));
 }
 
-/* 本家 01-common.min.css: .c-icon-link__icon = aspect-ratio:1; color:#e60012; display:grid; position:absolute; left:0; margin-block で中央 */
+/* 本家: 画像の下に本文（赤丸矢印＋ラベル）。方法B: calc(var(--rem)*...) で 18px/27px/24px/36px を算出 */
 .cards .cards-card-body,
 main .cards .cards-card-body {
-  margin: var(--card-body-margin, 16px);
+  flex: 0 0 auto;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
-  font-size: var(--card-body-font-size, 1rem);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);
+  background-color: var(--card-background, var(--background-color));
+}
+
+/* 本家 01-common.min.css の c-icon-link-animation: ホバーで一度消えて時計回りに円が描かれる */
+@keyframes c-icon-link-animation {
+  0% {
+    opacity: 1;
+    stroke-dasharray: var(--c) var(--c);
+  }
+  9% {
+    opacity: 0;
+    stroke-dasharray: var(--c) var(--c);
+  }
+  10% {
+    opacity: 0;
+    stroke-dasharray: 0 var(--c);
+  }
+  100% {
+    opacity: 1;
+    stroke-dasharray: var(--c) var(--c);
+  }
 }
 
 .cards .cards-card-body-icon,
@@ -38,14 +62,37 @@ main .cards .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 2.6rem);
-  height: var(--card-icon-size, 2.6rem);
+  width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
   line-height: 0;
   color: var(--card-icon-color, #e60012);
   transition: color 0.2s ease;
+  z-index: 1;
+  overflow: visible;
+  --c: var(--card-icon-circle-c, 75.398);
+}
+
+/* 矢印: 本家 .c-icon-link__icon::before — Ben \e902, font-size calc(var(--rem)*1px) */
+.cards .cards-card-body-icon::before,
+main .cards .cards-card-body-icon::before {
+  content: "\e902";
+  font-family: Ben, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(var(--rem, 10) * 1 * 1px);
+  line-height: 1;
+  text-align: center;
+  color: var(--card-icon-arrow-color, #fff);
+  grid-area: 1 / 1;
+  align-self: center;
+  justify-self: center;
+  scale: 0.99;
+  pointer-events: none;
 }
 
 .cards .cards-card-body-icon .cards-card-body-icon-svg,
@@ -53,19 +100,31 @@ main .cards .cards-card-body-icon .cards-card-body-icon-svg {
   width: 100%;
   height: 100%;
   display: block;
+  overflow: visible;
+  grid-area: 1 / 1;
+  aspect-ratio: 1;
 }
 
-/* Icon tokens: circle stroke-width, arrow fill (apply to all card icon SVGs) */
-.cards-card-body-icon-svg circle {
-  stroke-width: var(--card-icon-stroke-width, 1.5);
+/* 本家 .c-icon-link__icon circle: stroke-dasharray でアニメーション */
+.cards .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards .cards-card-body-icon .cards-card-body-icon-svg circle {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-dasharray: var(--c);
+  stroke-width: 1;
+  transition: stroke-width 0.3s ease;
 }
 
-.cards-card-body-icon-svg path.cards-card-body-icon-arrow {
-  fill: var(--card-icon-arrow-color, #fff);
+.cards > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle {
+  animation: 0.45s ease-in-out forwards c-icon-link-animation;
+  stroke-width: 2;
+  transition-delay: 0.3s;
 }
 
 .cards .cards-card-image,
 main .cards .cards-card-image {
+  flex: 0 0 auto;
   line-height: 0;
   overflow: hidden;
 }
@@ -81,16 +140,36 @@ main .cards > ul > li:hover .cards-card-image img {
   transform: scale(1.05);
 }
 
+/* ラベル: 通常時は #282828（ホバー時のみ赤）。オリジナルに合わせる */
 .cards .cards-card-body a,
 main .cards .cards-card-body a {
-  transition: color 0.2s ease;
+  display: inline;
+  color: #282828;
+  color: var(--card-text-color, #282828);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  font-weight: inherit;
+  white-space: normal;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .cards > ul > li:hover .cards-card-body,
 .cards > ul > li:hover .cards-card-body a,
 main .cards > ul > li:hover .cards-card-body,
 main .cards > ul > li:hover .cards-card-body a {
-  color: var(--card-text-hover-color, #c41230);
+  color: var(--card-text-hover-color, #e60012);
+}
+
+.cards > ul > li:hover .cards-card-body a,
+main .cards > ul > li:hover .cards-card-body a {
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
 }
 
 /* 本家 https://www.marubeni.com/jp/ に合わせ、画像はアスペクト比を強制しない */
@@ -115,6 +194,8 @@ main .cards-wrapper > ul {
 
 .cards-wrapper > ul > li,
 main .cards-wrapper > ul > li {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
   background-color: var(--card-background, var(--background-color));
@@ -123,12 +204,14 @@ main .cards-wrapper > ul > li {
 
 .cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
-  margin: var(--card-body-margin, 16px);
+  flex: 0 0 auto;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
-  font-size: var(--card-body-font-size, 1rem);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);
+  background-color: var(--card-background, var(--background-color));
 }
 
 .cards-wrapper .cards-card-body-icon,
@@ -137,12 +220,34 @@ main .cards-wrapper .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 2.6rem);
-  height: var(--card-icon-size, 2.6rem);
+  width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
+  line-height: 0;
   color: var(--card-icon-color, #e60012);
+  z-index: 1;
+  --c: var(--card-icon-circle-c, 75.398);
+}
+
+.cards-wrapper .cards-card-body-icon::before,
+main .cards-wrapper .cards-card-body-icon::before {
+  content: "\e902";
+  font-family: Ben, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(var(--rem, 10) * 1 * 1px);
+  line-height: 1;
+  text-align: center;
+  color: var(--card-icon-arrow-color, #fff);
+  grid-area: 1 / 1;
+  align-self: center;
+  justify-self: center;
+  scale: 0.99;
+  pointer-events: none;
 }
 
 .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg,
@@ -150,10 +255,29 @@ main .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg {
   width: 100%;
   height: 100%;
   display: block;
+  grid-area: 1 / 1;
+  aspect-ratio: 1;
+}
+
+.cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg circle {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-dasharray: var(--c);
+  stroke-width: 1;
+  transition: stroke-width 0.3s ease;
+}
+
+.cards-wrapper > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards-wrapper > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle {
+  animation: 0.45s ease-in-out forwards c-icon-link-animation;
+  stroke-width: 2;
+  transition-delay: 0.3s;
 }
 
 .cards-wrapper .cards-card-image,
 main .cards-wrapper .cards-card-image {
+  flex: 0 0 auto;
   line-height: 0;
   overflow: hidden;
 }
@@ -167,7 +291,14 @@ main .cards-wrapper > ul > li:hover .cards-card-image img {
 .cards-wrapper > ul > li:hover .cards-card-body a,
 main .cards-wrapper > ul > li:hover .cards-card-body,
 main .cards-wrapper > ul > li:hover .cards-card-body a {
-  color: var(--card-text-hover-color, #c41230);
+  color: var(--card-text-hover-color, #e60012);
+}
+
+.cards-wrapper > ul > li:hover .cards-card-body a,
+main .cards-wrapper > ul > li:hover .cards-card-body a {
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
 }
 
 .cards-wrapper > ul > li .cards-card-image img,
@@ -196,6 +327,8 @@ main .cards-wrapper.cards-wrapper > div > ul {
 
 .cards-wrapper.cards-wrapper > div > ul > li,
 main .cards-wrapper.cards-wrapper > div > ul > li {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
   background-color: var(--card-background, var(--background-color));
@@ -212,6 +345,7 @@ main .cards-wrapper.cards-wrapper > div > ul > li img {
 
 .cards-wrapper.cards-wrapper > div > ul > li .cards-card-image,
 main .cards-wrapper.cards-wrapper > div > ul > li .cards-card-image {
+  flex: 0 0 auto;
   overflow: hidden;
 }
 
@@ -229,17 +363,26 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-image img {
 .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a,
 main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body,
 main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
-  color: var(--card-text-hover-color, #c41230);
+  color: var(--card-text-hover-color, #e60012);
+}
+
+.cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a,
+main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
-  margin: var(--card-body-margin, 16px);
+  flex: 0 0 auto;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
-  font-size: var(--card-body-font-size, 1rem);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);
+  background-color: var(--card-background, var(--background-color));
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon,
@@ -248,12 +391,34 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 2.6rem);
-  height: var(--card-icon-size, 2.6rem);
+  width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
+  line-height: 0;
   color: var(--card-icon-color, #e60012);
+  z-index: 1;
+  --c: var(--card-icon-circle-c, 75.398);
+}
+
+.cards-wrapper.cards-wrapper > div .cards-card-body-icon::before,
+main .cards-wrapper.cards-wrapper > div .cards-card-body-icon::before {
+  content: "\e902";
+  font-family: Ben, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(var(--rem, 10) * 1 * 1px);
+  line-height: 1;
+  text-align: center;
+  color: var(--card-icon-arrow-color, #fff);
+  grid-area: 1 / 1;
+  align-self: center;
+  justify-self: center;
+  scale: 0.99;
+  pointer-events: none;
 }
 
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg,
@@ -261,6 +426,24 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-i
   width: 100%;
   height: 100%;
   display: block;
+  grid-area: 1 / 1;
+  aspect-ratio: 1;
+}
+
+.cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg circle {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-dasharray: var(--c);
+  stroke-width: 1;
+  transition: stroke-width 0.3s ease;
+}
+
+.cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle {
+  animation: 0.45s ease-in-out forwards c-icon-link-animation;
+  stroke-width: 2;
+  transition-delay: 0.3s;
 }
 
 /* 従来セレクタも維持（詳細度が足りない環境用） */
@@ -276,6 +459,8 @@ main .cards-wrapper > div > ul {
 
 .cards-wrapper > div > ul > li,
 main .cards-wrapper > div > ul > li {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
   background-color: var(--card-background, var(--background-color));
@@ -303,6 +488,8 @@ main .cards-wrapper .cards > ul {
 
 .cards-wrapper .cards > ul > li,
 main .cards-wrapper .cards > ul > li {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--card-border-color, rgb(0 0 0 / 6%));
   border-radius: var(--card-border-radius, 0);
   background-color: var(--card-background, var(--background-color));
@@ -311,12 +498,14 @@ main .cards-wrapper .cards > ul > li {
 
 .cards-wrapper .cards .cards-card-body,
 main .cards-wrapper .cards .cards-card-body {
-  margin: var(--card-body-margin, 16px);
+  flex: 0 0 auto;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
   position: relative;
-  padding-left: calc(var(--card-icon-size, 2.6rem) + var(--card-icon-gap, 1rem));
-  font-size: var(--card-body-font-size, 1rem);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);
+  background-color: var(--card-background, var(--background-color));
 }
 
 .cards-wrapper .cards .cards-card-body-icon,
@@ -325,12 +514,17 @@ main .cards-wrapper .cards .cards-card-body-icon {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--card-icon-size, 2.6rem);
-  height: var(--card-icon-size, 2.6rem);
+  width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
+  line-height: 0;
   color: var(--card-icon-color, #e60012);
+  z-index: 1;
+  --c: var(--card-icon-circle-c, 75.398);
 }
 
 .cards-wrapper .cards .cards-card-body-icon .cards-card-body-icon-svg,
@@ -342,6 +536,7 @@ main .cards-wrapper .cards .cards-card-body-icon .cards-card-body-icon-svg {
 
 .cards-wrapper .cards .cards-card-image,
 main .cards-wrapper .cards .cards-card-image {
+  flex: 0 0 auto;
   line-height: 0;
   overflow: hidden;
 }
@@ -360,7 +555,14 @@ main .cards-wrapper .cards > ul > li:hover .cards-card-image img {
 .cards-wrapper .cards > ul > li:hover .cards-card-body a,
 main .cards-wrapper .cards > ul > li:hover .cards-card-body,
 main .cards-wrapper .cards > ul > li:hover .cards-card-body a {
-  color: var(--card-text-hover-color, #c41230);
+  color: var(--card-text-hover-color, #e60012);
+}
+
+.cards-wrapper .cards > ul > li:hover .cards-card-body a,
+main .cards-wrapper .cards > ul > li:hover .cards-card-body a {
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
 }
 
 .cards-wrapper .cards > ul > li img,

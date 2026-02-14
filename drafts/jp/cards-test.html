@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cards block – デザイン確認用</title>
+  <link rel="stylesheet" href="../../styles/styles.css">
+  <link rel="stylesheet" href="../../styles/marubeni-theme.css">
+  <link rel="stylesheet" href="../../blocks/cards/cards.css">
+  <style>
+    main .cards { min-width: min(100%, 900px); }
+  </style>
+</head>
+<body class="appear">
+  <main>
+    <h1>Cards block 単体テスト</h1>
+    <p id="cards-hint">必ず <strong>http://localhost:3001/drafts/jp/cards-test.html</strong> で開いてください（file:// では動きません）。</p>
+    <p>仕様: <a href="../../docs/cards-icon-spec.md">docs/cards-icon-spec.md</a>。1 行 = 画像セル + 本文セル（赤丸矢印 + ラベル）。</p>
+    <div class="cards">
+      <div>
+        <div><img src="./images/37508d867361cbfe90c440abeb2c5858.jpg" alt=""></div>
+        <div><a href="/jp/company/">会社情報</a></div>
+      </div>
+      <div>
+        <div><img src="./images/4b4ecc73e50e535cdf986bbc8bcade2b.jpg" alt=""></div>
+        <div><a href="/jp/business/">事業紹介</a></div>
+      </div>
+      <div>
+        <div><img src="./images/b631e0a8a558f86ee9b8249c6674256e.jpg" alt=""></div>
+        <div><a href="/jp/ir/">IR投資家情報</a></div>
+      </div>
+    </div>
+  </main>
+  <script>
+    (function() {
+      var block = document.querySelector('.cards');
+      if (!block) return;
+      function createIcon() {
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('class', 'cards-card-body-icon-svg');
+        var circle = document.createElementNS(NS, 'circle');
+        circle.setAttribute('cx', '12');
+        circle.setAttribute('cy', '12');
+        circle.setAttribute('r', '12');
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', 'currentColor');
+        svg.appendChild(circle);
+        return svg;
+      }
+      var ul = document.createElement('ul');
+      Array.prototype.forEach.call(block.children, function(row) {
+        var li = document.createElement('li');
+        while (row.firstElementChild) li.appendChild(row.firstElementChild);
+        Array.prototype.forEach.call(li.children, function(div) {
+          if (div.querySelector('picture') || div.querySelector('img')) {
+            div.className = 'cards-card-image';
+          } else {
+            div.className = 'cards-card-body';
+            var icon = document.createElement('span');
+            icon.className = 'cards-card-body-icon';
+            icon.appendChild(createIcon());
+            div.insertBefore(icon, div.firstChild);
+          }
+        });
+        ul.appendChild(li);
+      });
+      block.innerHTML = '';
+      block.appendChild(ul);
+      var hint = document.getElementById('cards-hint');
+      if (hint) hint.textContent = 'デコレータ実行済み。カードは横並び・画像の下に白い帯＋赤丸矢印＋ラベル。';
+    })();
+  </script>
+</body>
+</html>

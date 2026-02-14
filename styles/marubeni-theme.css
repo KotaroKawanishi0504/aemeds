@@ -5,13 +5,14 @@
  * See building-blocks Step 4.
  */
 
-/* Same asset as reference: Ben icon font (from scrape fonts/01-ben.woff) */
+/* 本家 02-font.min.css の Ben アイコンフォント（矢印 \e902）。ローカルが無い場合は本家 CDN を使用 */
 @font-face {
   font-display: block;
   font-family: Ben;
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/ben.woff') format('woff');
+  src: url('./fonts/ben.woff') format('woff'),
+       url('https://www.marubeni.com/common/fonts/ben.woff?v=20250919') format('woff');
 }
 
 :root {
@@ -23,16 +24,19 @@
   --link-color: #0066a1;
   --link-hover-color: #004d7a;
 
-  /* 本家のカード: テキストホバーで赤 (analysis §3 Accent #c41230) */
-  --card-text-hover-color: #c41230;
+  /* 本家 01-common.min.css の a:hover .c-icon-link__label をそのまま使用 */
+  --card-text-hover-color: #e60012;
 
-  /* Cards icon: 01-common.min.css .c-icon-link__icon. 円は stroke #e60012 fill なし、矢印は白。size 2.6rem≒26px */
+  /* Cards icon: 円・矢印とも #e60012 */
   --card-icon-color: #e60012;
-  --card-icon-arrow-color: #fff;
-  --card-icon-size: 2.6rem;
-  --card-icon-gap: 1rem;
+  --card-icon-arrow-color: #e60012;
+  /* 方法B: 本家 01-common.min.css と同じ倍率（--rem との calc で px 算出）。desktop: 2.6→26px, 1.8→18px */
+  --card-icon-size: 2.6;
+  --card-font-size: 1.8;
   --card-icon-stroke-width: 1.5;
   --card-icon-circle-r: 12;
+  --card-icon-circle-c: 75.398;
+  --card-body-line-height: 1.5;
 
   /* fonts – corporate JP (analysis §2) */
   --body-font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", meiryo, sans-serif;
@@ -49,11 +53,8 @@
   --card-list-item-min-width: 242px;
   --card-list-margin-top: 4.8rem;
 
-  /* Card body: margin-top 24px, font 18px/500, line-height 27px */
-  --card-body-margin: 2.4rem 0 0 0;
-  --card-body-font-size: 1.8rem;
+  /* Card body: font-weight のみ。font-size/line-height/margin は cards.css で calc(var(--rem)*...) にて算出 */
   --card-body-font-weight: 500;
-  --card-body-line-height: 2.7rem;
 
   /* 本家ラベル色 rgb(40,40,40) */
   --card-text-color: #282828;
@@ -61,14 +62,25 @@
 
 @media screen and (width < 900px) {
   :root {
-    --card-icon-size: 2.4rem;
-    --card-icon-gap: 0.8rem;
+    /* 本家 .c-icon-link モバイル: --icon-size: 2.4, --font-size: 1.6 */
+    --card-icon-size: 2.4;
+    --card-font-size: 1.6;
   }
 }
 
 /* stylelint-disable no-descending-specificity -- main + fallback selectors for Author */
 
 /* Cards block: main scoped + fallback when no main (AEM Author canvas). */
+
+/* 方法B: 本家と同じ基準単位。カード内の calc(var(--rem)*...) は 10px ベースで 18px/26px 等を算出 */
+.cards,
+main .cards,
+.cards-wrapper,
+main .cards-wrapper,
+.cards-wrapper.cards-wrapper > div,
+main .cards-wrapper.cards-wrapper > div {
+  --rem: 10;
+}
 
 /* List container: margin-top from cards-computed-styles (ul margin-top 48px) */
 .cards > ul,
@@ -98,6 +110,12 @@ main .cards .cards-card-body {
   font-family: var(--body-font-family);
 }
 
+.cards .cards-card-body a,
+main .cards .cards-card-body a {
+  color: var(--card-text-color, #282828);
+  text-decoration: none;
+}
+
 /* Platform .cards-wrapper (AEM Author). Higher specificity to win over lazy-styles / AEM lib. */
 .cards-wrapper.cards-wrapper > ul > li,
 main .cards-wrapper.cards-wrapper > ul > li {
@@ -123,10 +141,22 @@ main .cards-wrapper.cards-wrapper .cards-card-body {
   font-family: var(--body-font-family);
 }
 
+.cards-wrapper.cards-wrapper .cards-card-body a,
+main .cards-wrapper.cards-wrapper .cards-card-body a {
+  color: var(--card-text-color, #282828);
+  text-decoration: none;
+}
+
 .cards-wrapper.cards-wrapper > div .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
   color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
+}
+
+.cards-wrapper.cards-wrapper > div .cards-card-body a,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a {
+  color: var(--card-text-color, #282828);
+  text-decoration: none;
 }
 
 /* .cards inside .cards-wrapper */
@@ -143,4 +173,10 @@ main .cards-wrapper.cards-wrapper .cards > ul > li {
 main .cards-wrapper.cards-wrapper .cards .cards-card-body {
   color: var(--card-text-color, var(--text-color));
   font-family: var(--body-font-family);
+}
+
+.cards-wrapper.cards-wrapper .cards .cards-card-body a,
+main .cards-wrapper.cards-wrapper .cards .cards-card-body a {
+  color: var(--card-text-color, #282828);
+  text-decoration: none;
 }
