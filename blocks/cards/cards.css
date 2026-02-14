@@ -27,7 +27,7 @@ main .cards > ul > li {
 .cards .cards-card-body,
 main .cards .cards-card-body {
   flex: 0 0 auto;
-  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
@@ -42,14 +42,17 @@ main .cards .cards-card-body {
     opacity: 1;
     stroke-dasharray: var(--c) var(--c);
   }
+
   9% {
     opacity: 0;
     stroke-dasharray: var(--c) var(--c);
   }
+
   10% {
     opacity: 0;
     stroke-dasharray: 0 var(--c);
   }
+
   100% {
     opacity: 1;
     stroke-dasharray: var(--c) var(--c);
@@ -74,6 +77,7 @@ main .cards .cards-card-body-icon {
   transition: color 0.2s ease;
   z-index: 1;
   overflow: visible;
+
   --c: var(--card-icon-circle-c, 75.398);
 }
 
@@ -89,8 +93,7 @@ main .cards .cards-card-body-icon::before {
   text-align: center;
   color: var(--card-icon-arrow-color, #fff);
   grid-area: 1 / 1;
-  align-self: center;
-  justify-self: center;
+  place-self: center;
   scale: 0.99;
   pointer-events: none;
 }
@@ -109,7 +112,7 @@ main .cards .cards-card-body-icon .cards-card-body-icon-svg {
 .cards .cards-card-body-icon .cards-card-body-icon-svg circle,
 main .cards .cards-card-body-icon .cards-card-body-icon-svg circle {
   fill: transparent;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-dasharray: var(--c);
   stroke-width: 1;
   transition: stroke-width 0.3s ease;
@@ -205,7 +208,7 @@ main .cards-wrapper > ul > li {
 .cards-wrapper .cards-card-body,
 main .cards-wrapper .cards-card-body {
   flex: 0 0 auto;
-  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
@@ -230,6 +233,7 @@ main .cards-wrapper .cards-card-body-icon {
   line-height: 0;
   color: var(--card-icon-color, #e60012);
   z-index: 1;
+
   --c: var(--card-icon-circle-c, 75.398);
 }
 
@@ -244,8 +248,7 @@ main .cards-wrapper .cards-card-body-icon::before {
   text-align: center;
   color: var(--card-icon-arrow-color, #fff);
   grid-area: 1 / 1;
-  align-self: center;
-  justify-self: center;
+  place-self: center;
   scale: 0.99;
   pointer-events: none;
 }
@@ -262,7 +265,7 @@ main .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg {
 .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg circle,
 main .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg circle {
   fill: transparent;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-dasharray: var(--c);
   stroke-width: 1;
   transition: stroke-width 0.3s ease;
@@ -376,7 +379,7 @@ main .cards-wrapper.cards-wrapper > div > ul > li:hover .cards-card-body a {
 .cards-wrapper.cards-wrapper > div .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards-card-body {
   flex: 0 0 auto;
-  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
@@ -401,6 +404,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon {
   line-height: 0;
   color: var(--card-icon-color, #e60012);
   z-index: 1;
+
   --c: var(--card-icon-circle-c, 75.398);
 }
 
@@ -415,8 +419,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon::before {
   text-align: center;
   color: var(--card-icon-arrow-color, #fff);
   grid-area: 1 / 1;
-  align-self: center;
-  justify-self: center;
+  place-self: center;
   scale: 0.99;
   pointer-events: none;
 }
@@ -433,7 +436,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-i
 .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg circle,
 main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg circle {
   fill: transparent;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-dasharray: var(--c);
   stroke-width: 1;
   transition: stroke-width 0.3s ease;
@@ -499,7 +502,7 @@ main .cards-wrapper .cards > ul > li {
 .cards-wrapper .cards .cards-card-body,
 main .cards-wrapper .cards .cards-card-body {
   flex: 0 0 auto;
-  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0 0;
+  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
@@ -524,6 +527,7 @@ main .cards-wrapper .cards .cards-card-body-icon {
   line-height: 0;
   color: var(--card-icon-color, #e60012);
   z-index: 1;
+
   --c: var(--card-icon-circle-c, 75.398);
 }
 

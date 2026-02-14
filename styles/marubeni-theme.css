@@ -30,6 +30,7 @@
   /* Cards icon: 円・矢印とも #e60012 */
   --card-icon-color: #e60012;
   --card-icon-arrow-color: #e60012;
+
   /* 方法B: 本家 01-common.min.css と同じ倍率（--rem との calc で px 算出）。desktop: 2.6→26px, 1.8→18px */
   --card-icon-size: 2.6;
   --card-font-size: 1.8;
