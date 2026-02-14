@@ -2,6 +2,17 @@
 
 /* Block scoping: main .{block-name}. Fallback without main for AEM Author (canvas may omit main). */
 
+/* Container context so column count follows block width (AEM Author iframe is narrow viewport). */
+.cards,
+main .cards,
+.cards-wrapper,
+main .cards-wrapper,
+.cards-wrapper > div,
+main .cards-wrapper > div {
+  container-type: inline-size;
+  container-name: cards;
+}
+
 /* .cards (local/preview); fallback when no main */
 .cards > ul,
 main .cards > ul {
@@ -46,6 +57,55 @@ main .cards > ul {
 
 /* 本家: セクション幅に合わせ 4 列 (1088px 時 242px/列、1344px 時 306px/列) */
 @media (width >= 900px) {
+  .cards > ul,
+  main .cards > ul,
+  .cards-wrapper > ul,
+  main .cards-wrapper > ul,
+  .cards-wrapper.cards-wrapper > div > ul,
+  main .cards-wrapper.cards-wrapper > div > ul,
+  .cards-wrapper > div > ul,
+  main .cards-wrapper > div > ul,
+  .cards-wrapper .cards > ul,
+  main .cards-wrapper .cards > ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--card-list-gap, 56px 40px);
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* Container queries: column count by block width (overrides @media when e.g. AEM Author iframe is narrow). */
+@container cards (max-width: 599px) {
+  .cards > ul,
+  main .cards > ul,
+  .cards-wrapper > ul,
+  main .cards-wrapper > ul,
+  .cards-wrapper.cards-wrapper > div > ul,
+  main .cards-wrapper.cards-wrapper > div > ul,
+  .cards-wrapper > div > ul,
+  main .cards-wrapper > div > ul,
+  .cards-wrapper .cards > ul,
+  main .cards-wrapper .cards > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container cards (min-width: 600px) and (max-width: 899px) {
+  .cards > ul,
+  main .cards > ul,
+  .cards-wrapper > ul,
+  main .cards-wrapper > ul,
+  .cards-wrapper.cards-wrapper > div > ul,
+  main .cards-wrapper.cards-wrapper > div > ul,
+  .cards-wrapper > div > ul,
+  main .cards-wrapper > div > ul,
+  .cards-wrapper .cards > ul,
+  main .cards-wrapper .cards > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container cards (min-width: 900px) {
   .cards > ul,
   main .cards > ul,
   .cards-wrapper > ul,
