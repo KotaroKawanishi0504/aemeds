@@ -15,7 +15,7 @@
        url('https://www.marubeni.com/common/fonts/ben.woff?v=20250919') format('woff');
 }
 
-/* layout: layout-collect-marubeni.json に基づく。1920px 時 main 1344px / 左右 288px、1280px 時 main 1088px / 左右 96px */
+/* layout: 本家と同様に fluid。1280 で 1088px、1387 で 1195px、1536+ で 1344px (min(1344px, 100vw - 192px)) */
 :root {
   --max-content-width: 1088px;
   --inline-section-padding: 24px;
@@ -53,7 +53,7 @@
   --card-box-shadow: none;
   --card-background: transparent;
 
-  /* Cards list: 本家 ul.c-card-list (gap 56px 40px)。幅はセクションに合わせ 1088/1344 で 4×242/306 */
+  /* Cards list: 本家 ul.c-card-list (gap 56px 40px)。幅はセクションに合わせ fluid で 4 列 */
   --card-list-gap: 56px 40px;
   --card-list-item-min-width: 242px;
   --card-list-margin-top: 4.8rem;
@@ -65,18 +65,11 @@
   --card-text-color: #282828;
 }
 
-/* 本家: 900px 以上でセクション幅 1088px、左右は margin:auto で 96px (1280 時) */
+/* 本家: 900px 以上で fluid 幅 min(1344px, 100vw - 192px)、左右は margin:auto */
 @media screen and (width >= 900px) {
   :root {
-    --max-content-width: 1088px;
+    --max-content-width: min(1344px, calc(100vw - 192px));
     --inline-section-padding: 0;
-  }
-}
-
-/* 本家: 1920px 以上でセクション幅 1344px、左右 288px */
-@media screen and (width >= 1920px) {
-  :root {
-    --max-content-width: 1344px;
   }
 }
 
