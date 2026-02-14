@@ -45,6 +45,20 @@ main .cards > ul > li > a.cards-card-link .cards-card-body {
 main .cards > ul > li > a.cards-card-link .cards-card-body > *:not(.cards-card-body-icon) {
   margin: 0;
   padding: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  vertical-align: middle;
+}
+
+/* リンク付きカード: body 内の p/div の margin をリセットし、他カードと高さ・位置を揃える */
+.cards > ul > li > a.cards-card-link .cards-card-body p,
+.cards > ul > li > a.cards-card-link .cards-card-body div,
+main .cards > ul > li > a.cards-card-link .cards-card-body p,
+main .cards > ul > li > a.cards-card-link .cards-card-body div {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
   display: inline;
   vertical-align: middle;
 }
@@ -313,6 +327,17 @@ main .cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body {
   color: var(--card-text-hover-color, #e60012);
   text-decoration: underline;
   text-underline-offset: 0.15em;
+}
+
+.cards-wrapper > ul > li > a.cards-card-link .cards-card-body p,
+.cards-wrapper > ul > li > a.cards-card-link .cards-card-body div,
+main .cards-wrapper > ul > li > a.cards-card-link .cards-card-body p,
+main .cards-wrapper > ul > li > a.cards-card-link .cards-card-body div {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  display: inline;
+  vertical-align: middle;
 }
 
 .cards-wrapper .cards-card-body,
