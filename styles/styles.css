@@ -267,3 +267,13 @@ main .section.background-common {
   margin: 0;
   padding: 80px 0;
 }
+
+/* Section: 背景（デスクトップ）（DAM: marubeni/common/background-01-desktop.jpg） */
+main .section.background-01-desktop {
+  background-image: url('/content/dam/marubeni/common/background-01-desktop.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 80px 0;
+}

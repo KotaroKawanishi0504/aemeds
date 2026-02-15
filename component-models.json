@@ -140,6 +140,10 @@
           {
             "name": "背景（共通画像）",
             "value": "background-common"
+          },
+          {
+            "name": "背景（デスクトップ）",
+            "value": "background-01-desktop"
           }
         ]
       }
