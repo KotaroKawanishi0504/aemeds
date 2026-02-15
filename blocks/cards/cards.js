@@ -146,7 +146,8 @@ export default function decorate(block) {
   const { columns, textSize, showArrow } = readConfigFromRows(block);
   applyBlockClasses(block, columns, textSize, showArrow);
 
-  const cardRows = [...block.querySelectorAll(':scope > div')];
+  const allRows = [...block.querySelectorAll(':scope > div')];
+  const cardRows = allRows.filter((row) => row.children.length >= 2);
   const ul = document.createElement('ul');
   cardRows.forEach((row) => {
     const li = document.createElement('li');
