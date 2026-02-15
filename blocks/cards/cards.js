@@ -148,8 +148,11 @@ export default function decorate(block) {
       li.append(cell);
     });
     const hasCardLink = typeof rowHref === 'string' && rowHref.trim() && rowHref !== '#';
-    [...li.children].forEach((div) => {
-      const isImageCell = div.querySelector('picture') || div.querySelector('img');
+    const childList = [...li.children];
+    childList.forEach((div, idx) => {
+      const isFirstCell = idx === 0;
+      const hasMultipleCells = childList.length >= 2;
+      const isImageCell = hasMultipleCells && isFirstCell;
       if (isImageCell) {
         div.className = 'cards-card-image';
       } else {
