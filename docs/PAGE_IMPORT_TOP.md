@@ -48,7 +48,10 @@
 
 **確実にプレビューする方法（推奨）:** `aem up --html-folder` が 404 になる環境では、**静的サーバー**でプレビューしてください。
 
-1. **aemeds フォルダで**次を実行する。
+1. 次のいずれかで実行する。
+   - **aemeds フォルダで実行（推奨）:** ターミナルのカレントを `aemeds` にしてから `npm run preview:import`。  
+     （ワークスペース直下 `eds` で実行すると `package.json` がないためエラーになります。）
+   - **ワークスペース直下（eds）から実行:** ルートに `package.json` がある場合は `npm run preview:import` で aemeds のプレビューを起動します。
 
    ```bash
    cd aemeds
@@ -71,6 +74,9 @@
    - ヒーロー・カード・お知らせバナー・社長メッセージ・丸紅について・最新情報（タブ＋ニュースリスト）・バナーが表示されること。
    - 画像が読み込まれること（`./images/` は `jp/images/` を参照）。
    - スタイルは [styles/marubeni-theme.css](styles/marubeni-theme.css) が [head.html](head.html) で読み込まれているため、丸紅テーマが適用される。
+
+4. **デザインギャップ確認（任意）**  
+   参照サイトとプレビューのカードをスクリーンショット比較する手順は [DESIGN_ALIGNMENT.md](../DESIGN_ALIGNMENT.md) の「デザインギャップ確認（スクリーンショット比較）」を参照。`node scripts/compare-cards-screenshots.js` で `drafts/tmp/screenshot-compare/` に reference / aem / diff を出力できる。
 
 ## 5. コードを Git にコミットし、Author でスタイル確認
 

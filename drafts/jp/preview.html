@@ -154,5 +154,9 @@
   </div>
 </div>
   </main>
+  <script type="module">
+    import decorate from '../../blocks/cards/cards.js';
+    document.querySelectorAll('.cards').forEach((block) => decorate(block));
+  </script>
 </body>
 </html>

@@ -17,7 +17,8 @@
 - **Circle:** `fill:transparent`, `stroke:currentColor` (#e60012), `stroke-width:1`。円は**線（ストローク）**で赤、塗りなし。  
 - **Arrow:** 本家は `::before` で `content:"\e902"` + `font-family:Ben`（アイコンフォント）。再現では SVG `path` で白 fill の右向き三角。  
 - **Size:** `.c-icon-link:not(.-size-l,.-size-s)` で `--icon-size:2.6` (>=900px), `2.4` (<900px) in rem。`width: calc(var(--rem)*var(--icon-size)*1px)`。  
-- **Layout:** `.c-icon-link__icon` は `position:absolute; left:0; display:grid; aspect-ratio:1; margin-block` で垂直中央。`padding-left` でテキスト用余白。
+- **Layout:** `.c-icon-link__icon` は `position:absolute; left:0; display:grid; aspect-ratio:1; margin-block` で垂直中央。`padding-left` でテキスト用余白。  
+詳細は `docs/cards-icon-spec.md` を参照。
 
 ---
 

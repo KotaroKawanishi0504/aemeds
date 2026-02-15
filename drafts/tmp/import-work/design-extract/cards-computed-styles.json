@@ -306,7 +306,7 @@
     {
       "signature": "svg",
       "tag": "svg",
-      "className": {},
+      "className": "",
       "styles": {
         "color": "rgb(230, 0, 18)",
         "font-size": "18px",
@@ -349,7 +349,7 @@
     {
       "signature": "circle",
       "tag": "circle",
-      "className": {},
+      "className": "",
       "styles": {
         "color": "rgb(230, 0, 18)",
         "font-size": "18px",

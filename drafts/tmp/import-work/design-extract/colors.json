@@ -110,7 +110,9 @@
     "#f6f6f4",
     "#d7d7d7",
     "#eee",
-    "#e4e4e4"
+    "#e4e4e4",
+    "rgba(0,0,0,.35)",
+    "#6aaae4"
   ],
   "sources": "from CSS declarations"
 }

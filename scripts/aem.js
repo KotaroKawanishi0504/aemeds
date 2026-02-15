@@ -430,6 +430,7 @@ function wrapTextNodes(block) {
  */
 function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
+    if (a.closest('.cards')) return; /* Cards block: ラベルはテキスト表示のため button にしない */
     a.title = a.title || a.textContent;
     if (a.href !== a.textContent) {
       const up = a.parentElement;

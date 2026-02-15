@@ -18,7 +18,9 @@
     "0px 0px 12px 2px #c7c5c7",
     "0px 0px 12px 2px #c7c5c7}#onetrust-pc-sdk .ot-fltr-scrlcnt{overflow-y:auto",
     "-3px -3px 5px -2px #c7c5c7",
-    "-3px -3px 5px -2px #c7c5c7}#onetrust-pc-sdk .ot-fltr-btns{margin-left:15px}#onetrust-pc-sdk #filter-apply-handler{margin-right:15px}#onetrust-pc-sdk .ot-fltr-opt{margin-bottom:5px"
+    "-3px -3px 5px -2px #c7c5c7}#onetrust-pc-sdk .ot-fltr-btns{margin-left:15px}#onetrust-pc-sdk #filter-apply-handler{margin-right:15px}#onetrust-pc-sdk .ot-fltr-opt{margin-bottom:5px",
+    "0 1em 2em -0.5em rgba(0,0,0,.35)",
+    "0 4px 8px 0 rgba(0,0,0,.2)"
   ],
   "filters": [
     "none",

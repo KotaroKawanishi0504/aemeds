@@ -87,6 +87,18 @@
     {
       "name": "onetrust-fade-in",
       "content": "0%{opacity:0}100%{opacity:1}"
+    },
+    {
+      "name": "slide-down-custom",
+      "content": "0% {\n                bottom: 720px !important;\n            }\n            100% {\n                bottom: 0px;\n            }"
+    },
+    {
+      "name": "otFloatingBtnIntro",
+      "content": "0%{opacity:0;left:-75px}100%{opacity:1;left:1%}"
+    },
+    {
+      "name": "otFloatingBtnImageIntro",
+      "content": "0%{opacity:0;transform:scale(0) rotate(-270deg)}100%{opacity:100%;transform:scale(0.95) rotate(0deg)}"
     }
   ]
 }
