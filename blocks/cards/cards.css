@@ -24,39 +24,8 @@ main .cards > ul {
   gap: var(--card-list-gap, 24px);
 }
 
-/* Responsive columns (Marubeni original: narrow 1 col, tablet 2, desktop 4). */
-@media (width < 600px) {
-  .cards > ul,
-  main .cards > ul,
-  .cards-wrapper > ul,
-  main .cards-wrapper > ul,
-  .cards-wrapper.cards-wrapper > div > ul,
-  main .cards-wrapper.cards-wrapper > div > ul,
-  .cards-wrapper > div > ul,
-  main .cards-wrapper > div > ul,
-  .cards-wrapper .cards > ul,
-  main .cards-wrapper .cards > ul {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Container queries: column count by block width (narrow container → 1 col). */
-@container cards (max-width: 599px) {
-  .cards > ul,
-  main .cards > ul,
-  .cards-wrapper > ul,
-  main .cards-wrapper > ul,
-  .cards-wrapper.cards-wrapper > div > ul,
-  main .cards-wrapper.cards-wrapper > div > ul,
-  .cards-wrapper > div > ul,
-  main .cards-wrapper > div > ul,
-  .cards-wrapper .cards > ul,
-  main .cards-wrapper .cards > ul {
-    grid-template-columns: 1fr;
-  }
-}
-
-@container cards (min-width: 600px) and (max-width: 899px) {
+/* Responsive columns: always 2 col below 900px, 4 col at 900px+ (no 1-col breakpoint). */
+@container cards (max-width: 899px) {
   .cards > ul,
   main .cards > ul,
   .cards-wrapper > ul,
@@ -89,8 +58,8 @@ main .cards > ul {
   }
 }
 
-/* Viewport-based columns after @container so viewport wins when both match (e.g. 620px viewport, 572px container → 2 col). */
-@media (width >= 600px) and (width < 900px) {
+/* Viewport-based columns: 2 col below 900px, 4 col at 900px+. */
+@media (width < 900px) {
   .cards > ul,
   main .cards > ul,
   .cards-wrapper > ul,
@@ -136,21 +105,7 @@ main .cards:not(:has(> ul)) {
   margin-top: var(--card-list-margin-top);
 }
 
-@media (width < 600px) {
-  .cards:not(:has(> ul)),
-  main .cards:not(:has(> ul)) {
-    grid-template-columns: 1fr;
-  }
-}
-
-@container cards (max-width: 599px) {
-  .cards:not(:has(> ul)),
-  main .cards:not(:has(> ul)) {
-    grid-template-columns: 1fr;
-  }
-}
-
-@container cards (min-width: 600px) and (max-width: 899px) {
+@container cards (max-width: 899px) {
   .cards:not(:has(> ul)),
   main .cards:not(:has(> ul)) {
     grid-template-columns: repeat(2, 1fr);
@@ -167,7 +122,7 @@ main .cards:not(:has(> ul)) {
   }
 }
 
-@media (width >= 600px) and (width < 900px) {
+@media (width < 900px) {
   .cards:not(:has(> ul)),
   main .cards:not(:has(> ul)) {
     grid-template-columns: repeat(2, 1fr);
