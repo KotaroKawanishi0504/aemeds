@@ -148,7 +148,25 @@ export default async function decorate(block) {
     const linkEl = document.createElement('a');
     linkEl.href = linkUrl;
     linkEl.className = 'hero-video-link';
-    linkEl.textContent = decodeLinkLabel(linkLabel);
+    const iconWrap = document.createElement('span');
+    iconWrap.className = 'hero-video-link-icon';
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('class', 'hero-video-link-icon-svg');
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', '12');
+    circle.setAttribute('cy', '12');
+    circle.setAttribute('r', '12');
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', 'currentColor');
+    svg.appendChild(circle);
+    iconWrap.appendChild(svg);
+    linkEl.appendChild(iconWrap);
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'hero-video-link-label';
+    labelSpan.textContent = decodeLinkLabel(linkLabel);
+    linkEl.appendChild(labelSpan);
     block.append(linkEl);
   }
 }

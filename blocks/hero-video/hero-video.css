@@ -73,12 +73,13 @@ main .hero-video-poster img {
   }
 }
 
-/* Link overlay (Marubeni-style label) */
+/* Link overlay: bottom-right, icon + label (original .p-home__hero-link: color inherit, not red) */
 .hero-video-link,
 main .hero-video-link {
   position: absolute;
-  left: 0;
+  right: 0;
   bottom: 0;
+  left: auto;
   z-index: 1;
   display: inline-flex;
   align-items: center;
@@ -96,6 +97,94 @@ main .hero-video-link {
 main .hero-video-link:hover {
   color: #fff;
   text-decoration: underline;
+}
+
+/* Icon: same structure as cards, but color inherit (white on hero, not red) */
+.hero-video-link-icon,
+main .hero-video-link-icon {
+  display: grid;
+  place-items: center;
+  width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
+  aspect-ratio: 1 / 1;
+  line-height: 0;
+  color: inherit;
+  flex-shrink: 0;
+  overflow: visible;
+
+  --c: var(--card-icon-circle-c, 75.398);
+}
+
+.hero-video-link-icon::before,
+main .hero-video-link-icon::before {
+  content: "\e902";
+  font-family: Ben, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(var(--rem, 10) * 1 * 1px);
+  line-height: 1;
+  text-align: center;
+  color: inherit;
+  grid-area: 1 / 1;
+  place-self: center;
+  scale: 0.99;
+  pointer-events: none;
+}
+
+.hero-video-link-icon-svg,
+main .hero-video-link-icon-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  grid-area: 1 / 1;
+  aspect-ratio: 1;
+}
+
+.hero-video-link-icon .hero-video-link-icon-svg circle,
+main .hero-video-link-icon .hero-video-link-icon-svg circle {
+  fill: transparent;
+  stroke: currentcolor;
+  stroke-dasharray: var(--c);
+  stroke-width: 1;
+  transition: stroke-width 0.3s ease;
+}
+
+/* Hover: same animation as cards (c-icon-link-animation) */
+@keyframes hero-video-icon-link-animation {
+  0% {
+    opacity: 1;
+    stroke-dasharray: var(--c) var(--c);
+  }
+
+  9% {
+    opacity: 0;
+    stroke-dasharray: var(--c) var(--c);
+  }
+
+  10% {
+    opacity: 0;
+    stroke-dasharray: 0 var(--c);
+  }
+
+  100% {
+    opacity: 1;
+    stroke-dasharray: var(--c) var(--c);
+  }
+}
+
+.hero-video-link:hover .hero-video-link-icon .hero-video-link-icon-svg circle,
+main .hero-video-link:hover .hero-video-link-icon .hero-video-link-icon-svg circle {
+  animation: 0.45s ease-in-out forwards hero-video-icon-link-animation;
+  stroke-width: 2;
+  transition-delay: 0.3s;
+}
+
+.hero-video-link-label,
+main .hero-video-link-label {
+  color: inherit;
 }
 
 @media (width >= 900px) {
