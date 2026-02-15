@@ -157,10 +157,12 @@ export default function decorate(block) {
         div.className = 'cards-card-image';
       } else {
         div.className = 'cards-card-body';
-        const icon = document.createElement('span');
-        icon.className = 'cards-card-body-icon';
-        icon.append(createCardBodyIconSVG());
-        div.prepend(icon);
+        if (!div.querySelector('.cards-card-body-icon')) {
+          const icon = document.createElement('span');
+          icon.className = 'cards-card-body-icon';
+          icon.append(createCardBodyIconSVG());
+          div.prepend(icon);
+        }
         if (hasCardLink) {
           ensureBodyContentOnly(div);
           const labelEl = div.querySelector(':scope > *:not(.cards-card-body-icon)');
