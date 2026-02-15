@@ -1,0 +1,101 @@
+/* Hero Video: full-width block, video ≥900px, poster <900px, optional link overlay */
+
+.hero-video,
+main .hero-video {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+.hero-video-media,
+main .hero-video-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Video: visible from 900px */
+.hero-video-video,
+main .hero-video-video {
+  display: none;
+  width: 100%;
+}
+
+.hero-video-video video,
+main .hero-video-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+@media (width >= 900px) {
+  .hero-video-video,
+  main .hero-video-video {
+    display: block;
+  }
+
+  .hero-video-poster,
+  main .hero-video-poster {
+    display: none;
+  }
+}
+
+/* Poster: visible below 900px */
+.hero-video-poster,
+main .hero-video-poster {
+  display: block;
+  width: 100%;
+}
+
+.hero-video-poster picture,
+main .hero-video-poster picture,
+.hero-video-poster img,
+main .hero-video-poster img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+@media (width < 900px) {
+  .hero-video-video,
+  main .hero-video-video {
+    display: none;
+  }
+}
+
+/* Link overlay (Marubeni-style label) */
+.hero-video-link,
+main .hero-video-link {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 24px;
+  padding: 0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 50%);
+}
+
+.hero-video-link:hover,
+main .hero-video-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .hero-video-link,
+  main .hero-video-link {
+    margin: 32px;
+    font-size: 16px;
+  }
+}

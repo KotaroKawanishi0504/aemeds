@@ -144,6 +144,10 @@
           {
             "name": "背景（デスクトップ）",
             "value": "background-01-desktop"
+          },
+          {
+            "name": "ワイド（全幅）",
+            "value": "wide"
           }
         ]
       }
@@ -380,6 +384,39 @@
         "component": "aem-content",
         "name": "reference",
         "label": "Reference"
+      }
+    ]
+  },
+  {
+    "id": "hero-video",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video (900px+)",
+        "multi": false
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "poster",
+        "label": "Poster image (<900px)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link URL",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkLabel",
+        "label": "Link label",
+        "value": ""
       }
     ]
   },

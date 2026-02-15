@@ -277,3 +277,11 @@ main .section.background-01-desktop {
   margin: 0;
   padding: 80px 0;
 }
+
+/* Section: ワイド（全幅）— コンテンツ幅制限なしで左右いっぱい */
+main .section.wide > div {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
