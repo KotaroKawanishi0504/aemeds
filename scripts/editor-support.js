@@ -11,6 +11,10 @@ import {
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
 
+/** Queue for UE content events so applyChanges runs one at a time and avoids duplicate blocks. */
+const aueUpdateQueue = [];
+let aueUpdateProcessing = false;
+
 async function applyChanges(event) {
   // redecorate default content and blocks on patches (in the properties rail)
   const { detail } = event;
@@ -93,6 +97,25 @@ async function applyChanges(event) {
   return false;
 }
 
+async function processAueUpdateQueue() {
+  if (aueUpdateProcessing || aueUpdateQueue.length === 0) return;
+  aueUpdateProcessing = true;
+  const payload = aueUpdateQueue.shift();
+  const eventLike = { detail: payload };
+  try {
+    const applied = await applyChanges(eventLike);
+    if (!applied) {
+      window.location.reload();
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('UE applyChanges failed', err);
+  } finally {
+    aueUpdateProcessing = false;
+    if (aueUpdateQueue.length > 0) processAueUpdateQueue();
+  }
+}
+
 function attachEventListners(main) {
   [
     'aue:content-patch',
@@ -101,10 +124,17 @@ function attachEventListners(main) {
     'aue:content-move',
     'aue:content-remove',
     'aue:content-copy',
-  ].forEach((eventType) => main?.addEventListener(eventType, async (event) => {
+  ].forEach((eventType) => main?.addEventListener(eventType, (event) => {
     event.stopPropagation();
-    const applied = await applyChanges(event);
-    if (!applied) window.location.reload();
+    let payload;
+    try {
+      payload = JSON.parse(JSON.stringify(event.detail));
+    } catch (e) {
+      payload = event.detail;
+    }
+    if (!payload?.response?.updates?.length) return;
+    aueUpdateQueue.push(payload);
+    processAueUpdateQueue();
   }));
 }
 
