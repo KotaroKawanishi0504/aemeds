@@ -124,7 +124,13 @@ export default function decorate(block) {
         if (hasCardLink) {
           ensureBodyContentOnly(div);
           const labelEl = div.querySelector(':scope > *:not(.cards-card-body-icon)');
-          if (labelEl) labelEl.setAttribute('data-link-label', '');
+          if (labelEl) {
+            labelEl.setAttribute('data-link-label', '');
+            const labelText = document.createElement('span');
+            labelText.className = 'cards-card-body-label-text';
+            while (labelEl.firstChild) labelText.appendChild(labelEl.firstChild);
+            labelEl.appendChild(labelText);
+          }
         } else {
           ensureBodyLink(div, rowHref);
         }

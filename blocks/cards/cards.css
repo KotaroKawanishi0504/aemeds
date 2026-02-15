@@ -278,8 +278,13 @@ main .cards > ul > li > a.cards-card-link .cards-card-body div {
 .cards > ul > li:hover > a.cards-card-link .cards-card-body,
 main .cards > ul > li:hover > a.cards-card-link .cards-card-body {
   color: var(--card-text-hover-color, #e60012);
+}
+
+.cards > ul > li:hover > a.cards-card-link .cards-card-body [data-link-label] > .cards-card-body-label-text,
+main .cards > ul > li:hover > a.cards-card-link .cards-card-body [data-link-label] > .cards-card-body-label-text {
   text-decoration: underline;
   text-underline-offset: 0.15em;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
 }
 
 /* 別ウィンドウ表示時: テキスト横にアイコン（本家 :is([data-target],[target]) [data-link-label]::after と同じ Ben \e901）。ホバー時もアイコン下には下線を出さない。 */
@@ -553,8 +558,13 @@ main .cards-wrapper > ul > li > a.cards-card-link .cards-card-body {
 .cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body,
 main .cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body {
   color: var(--card-text-hover-color, #e60012);
+}
+
+.cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body [data-link-label] > .cards-card-body-label-text,
+main .cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body [data-link-label] > .cards-card-body-label-text {
   text-decoration: underline;
   text-underline-offset: 0.15em;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
 }
 
 .cards-wrapper > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
