@@ -74,7 +74,15 @@ main .cards-carousel-link {
 
 .cards-carousel-link:hover,
 main .cards-carousel-link:hover {
-  text-decoration: none;
+  color: var(--card-text-hover-color, #e60012);
+}
+
+.cards-carousel-link:hover .cards-carousel-title,
+main .cards-carousel-link:hover .cards-carousel-title {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
 }
 
 /* Image area: same as Cards — no fixed aspect, image natural size to avoid crop */
@@ -101,6 +109,12 @@ main .cards-carousel-image img {
   height: auto;
   display: block;
   vertical-align: middle;
+  transition: transform 0.35s ease;
+}
+
+.cards-carousel-item:hover .cards-carousel-image img,
+main .cards-carousel-item:hover .cards-carousel-image img {
+  transform: scale(1.05);
 }
 
 /* Title below image */
@@ -112,6 +126,15 @@ main .cards-carousel-title {
   font-weight: 500;
   line-height: 1.4;
   color: #282828;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.cards-carousel-item:hover .cards-carousel-title,
+main .cards-carousel-item:hover .cards-carousel-title {
+  color: var(--card-text-hover-color, #e60012);
+  text-decoration: underline;
+  text-decoration-color: var(--card-text-hover-color, #e60012);
+  text-underline-offset: 0.15em;
 }
 
 /* Pagination: visible only in carousel mode */
