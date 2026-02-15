@@ -1,7 +1,11 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { getHrefFromLinkCell, isOpenInNewWindow } from '../../scripts/card-utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+/** Breakpoint (px): must match media queries in cards-carousel.css (900px). */
 const BREAKPOINT_PX = 900;
+/** Gap (px) between carousel items; match CSS --card-list-gap default (24px). */
+const PAGINATION_GAP_PX = 24;
 const LIST_CLASS = 'cards-carousel-list';
 const ITEM_CLASS = 'cards-carousel-item';
 const LINK_CLASS = 'cards-carousel-link';
@@ -12,32 +16,19 @@ const PAGINATION_BULLET_CLASS = 'cards-carousel-pagination-bullet';
 const MODE_CAROUSEL = 'cards-carousel-mode-carousel';
 const MODE_GRID = 'cards-carousel-mode-grid';
 
-function getHrefFromLinkCell(cell) {
-  if (!cell) return '';
-  const a = cell.querySelector('a[href]');
-  if (a) return a.getAttribute('href')?.trim() || '';
-  const text = cell.textContent?.trim() || '';
-  if (text && (text.startsWith('/') || text.startsWith('http://') || text.startsWith('https://'))) return text;
-  return '';
-}
-
-function isOpenInNewWindow(cell, row) {
-  const fromRow = (row?.dataset?.openinnewwindow ?? row?.dataset?.openInNewWindow ?? '').trim().toLowerCase();
-  if (fromRow === 'true' || fromRow === '1') return true;
-  if (fromRow === 'false' || fromRow === '0') return false;
-  if (cell) {
-    const checked = cell.querySelector('input[type="checkbox"]:checked');
-    if (checked) return true;
-    const t = cell.textContent?.trim().toLowerCase() || '';
-    if (t === 'x' || t === 'yes' || t === 'true' || t === '1' || t === '○') return true;
-  }
-  return false;
-}
-
+/**
+ * @returns {boolean} true when viewport is below breakpoint (carousel mode)
+ */
 function isCarouselView() {
   return window.innerWidth < BREAKPOINT_PX;
 }
 
+/**
+ * Updates pagination bullets to reflect current scroll position.
+ * @param {Element} block - block element
+ * @param {Element} list - .cards-carousel-list
+ * @param {Element} pagination - .cards-carousel-pagination
+ */
 function updatePagination(block, list, pagination) {
   if (!list || !pagination) return;
   const items = [...list.querySelectorAll(`.${ITEM_CLASS}`)];
@@ -45,9 +36,8 @@ function updatePagination(block, list, pagination) {
   const { scrollLeft } = list;
   const [firstItem] = items;
   const itemWidth = firstItem?.offsetWidth ?? 0;
-  const gap = 16;
-  const totalWidth = itemWidth + gap;
-  let slideIndex = Math.round(scrollLeft / totalWidth);
+  const totalWidth = itemWidth + PAGINATION_GAP_PX;
+  let slideIndex = totalWidth > 0 ? Math.round(scrollLeft / totalWidth) : 0;
   slideIndex = Math.max(0, Math.min(slideIndex, items.length - 1));
   pagination.querySelectorAll(`.${PAGINATION_BULLET_CLASS}`).forEach((bullet, i) => {
     bullet.classList.toggle('active', i === slideIndex);
@@ -55,6 +45,11 @@ function updatePagination(block, list, pagination) {
   });
 }
 
+/**
+ * Scrolls the list so the item at index is in view.
+ * @param {Element} list - .cards-carousel-list
+ * @param {number} index - item index
+ */
 function goToSlide(list, index) {
   const items = [...list.querySelectorAll(`.${ITEM_CLASS}`)];
   if (index < 0 || index >= items.length) return;
@@ -64,6 +59,12 @@ function goToSlide(list, index) {
   }
 }
 
+/**
+ * Switches block to carousel mode: horizontal scroll + pagination.
+ * @param {Element} block - block element
+ * @param {Element} list - .cards-carousel-list
+ * @param {Element} pagination - .cards-carousel-pagination
+ */
 function setupCarouselMode(block, list, pagination) {
   block.classList.remove(MODE_GRID);
   block.classList.add(MODE_CAROUSEL);
@@ -85,6 +86,11 @@ function setupCarouselMode(block, list, pagination) {
   });
 }
 
+/**
+ * Switches block to grid mode: 3-column grid, pagination hidden.
+ * @param {Element} block - block element
+ * @param {Element} pagination - .cards-carousel-pagination
+ */
 function setupGridMode(block, pagination) {
   block.classList.remove(MODE_CAROUSEL);
   block.classList.add(MODE_GRID);
@@ -97,6 +103,10 @@ function setupGridMode(block, pagination) {
   }
 }
 
+/**
+ * Applies carousel or grid mode based on viewport width.
+ * @param {Element} block - block element
+ */
 function applyMode(block) {
   const list = block.querySelector(`.${LIST_CLASS}`);
   const pagination = block.querySelector(`.${PAGINATION_CLASS}`);
@@ -107,6 +117,11 @@ function applyMode(block) {
   }
 }
 
+/**
+ * Decorates the block: supports both class="card-carousel" (AEM alias) and class="cards-carousel".
+ * Adds canonical class so CSS applies; builds list + pagination and applies grid/carousel mode.
+ * @param {Element} block - block element
+ */
 export default function decorate(block) {
   if (block.classList.contains('card-carousel') && !block.classList.contains('cards-carousel')) {
     block.classList.add('cards-carousel');
@@ -189,15 +204,5 @@ export default function decorate(block) {
   applyMode(block);
 
   const mq = window.matchMedia(`(max-width: ${BREAKPOINT_PX - 1}px)`);
-  const onResize = () => applyMode(block);
-  mq.addEventListener('change', onResize);
-  window.addEventListener('resize', onResize);
-  block.cardsCarouselCleanup = () => {
-    mq.removeEventListener('change', onResize);
-    window.removeEventListener('resize', onResize);
-    if (block.cardsCarouselScrollHandler) {
-      const listEl = block.querySelector(`.${LIST_CLASS}`);
-      if (listEl) listEl.removeEventListener('scroll', block.cardsCarouselScrollHandler);
-    }
-  };
+  mq.addEventListener('change', () => applyMode(block));
 }

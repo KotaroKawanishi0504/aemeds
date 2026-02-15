@@ -605,6 +605,9 @@ async function loadBlock(block) {
   return block;
 }
 
+/** Map AEM/sheet block class names to canonical block name (script/CSS path). */
+const BLOCK_ALIASES = { 'card-carousel': 'cards-carousel' };
+
 /**
  * Decorates a block.
  * @param {Element} block The block element
@@ -613,7 +616,7 @@ function decorateBlock(block) {
   const shortBlockName = block.classList[0];
   if (shortBlockName && !block.dataset.blockStatus) {
     block.classList.add('block');
-    const blockName = shortBlockName === 'card-carousel' ? 'cards-carousel' : shortBlockName;
+    const blockName = BLOCK_ALIASES[shortBlockName] ?? shortBlockName;
     block.dataset.blockName = blockName;
     block.dataset.blockStatus = 'initialized';
     wrapTextNodes(block);
