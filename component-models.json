@@ -184,34 +184,39 @@
       },
       {
         "component": "select",
-        "name": "style",
-        "label": "Style",
+        "name": "textSize",
+        "label": "Text Size",
         "valueType": "string",
-        "value": "",
+        "value": "m",
         "options": [
           {
-            "name": "Standard (arrow, M)",
-            "value": ""
+            "name": "Small",
+            "value": "s"
           },
           {
-            "name": "No arrow, M",
-            "value": "cards-no-arrow"
+            "name": "Medium",
+            "value": "m"
           },
           {
-            "name": "Arrow, Small text",
-            "value": "cards-text-s"
+            "name": "Large",
+            "value": "l"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "arrow",
+        "label": "Arrow",
+        "valueType": "string",
+        "value": "true",
+        "options": [
+          {
+            "name": "Show",
+            "value": "true"
           },
           {
-            "name": "Arrow, Large text",
-            "value": "cards-text-l"
-          },
-          {
-            "name": "No arrow, Small text",
-            "value": "cards-no-arrow cards-text-s"
-          },
-          {
-            "name": "No arrow, Large text",
-            "value": "cards-no-arrow cards-text-l"
+            "name": "Hide",
+            "value": "false"
           }
         ]
       }

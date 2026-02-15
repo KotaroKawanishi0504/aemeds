@@ -4,15 +4,17 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /**
- * Read config from first 1-cell rows (Columns, Style). Like ak-eds: two fields, two rows.
+ * Read config from first 1-cell rows: Columns, Text Size, Arrow (3 rows).
  * Removes those rows so only card rows remain.
+ * Supports legacy 2-row (Columns + Style) and parses Style into textSize + showArrow.
  * @param {Element} block - .cards block
- * @returns {{ columns: string, styleClasses: string[] }}
+ * @returns {{ columns: string, textSize: string, showArrow: boolean }}
  */
 function readConfigFromRows(block) {
   const rows = [...block.querySelectorAll(':scope > div')];
   let columns = '4';
-  const styleClasses = [];
+  let textSize = 'm';
+  let showArrow = true;
 
   if (rows.length > 0 && rows[0].children.length === 1) {
     const colVal = rows[0].firstElementChild?.textContent?.trim() || '';
@@ -20,21 +22,32 @@ function readConfigFromRows(block) {
     rows[0].remove();
   }
   if (rows.length > 1 && rows[1].children.length === 1) {
-    const styleVal = rows[1].firstElementChild?.textContent?.trim() || '';
-    if (styleVal) styleVal.split(/\s+/).forEach((c) => { if (c) styleClasses.push(c); });
-    rows[1].remove();
+    const row1Val = rows[1].firstElementChild?.textContent?.trim() || '';
+    if (['s', 'm', 'l'].includes(row1Val)) {
+      textSize = row1Val;
+      rows[1].remove();
+      if (rows.length > 2 && rows[2].children.length === 1) {
+        const row2Val = (rows[2].firstElementChild?.textContent?.trim() || '').toLowerCase();
+        showArrow = row2Val !== 'false' && row2Val !== '0' && row2Val !== 'hide';
+        rows[2].remove();
+      }
+    } else {
+      const styleClasses = row1Val ? row1Val.split(/\s+/).filter(Boolean) : [];
+      if (styleClasses.includes('cards-no-arrow')) showArrow = false;
+      if (styleClasses.includes('cards-text-s')) textSize = 's';
+      else if (styleClasses.includes('cards-text-l')) textSize = 'l';
+      rows[1].remove();
+    }
   }
 
-  return { columns, styleClasses };
+  return { columns, textSize, showArrow };
 }
 
-function applyBlockClasses(block, columns, styleClasses) {
+function applyBlockClasses(block, columns, textSize, showArrow) {
   block.classList.add(`cards-cols-${columns}`);
-  styleClasses.forEach((c) => block.classList.add(c));
-  const hasTextSize = block.classList.contains('cards-text-s')
-    || block.classList.contains('cards-text-m')
-    || block.classList.contains('cards-text-l');
-  if (!hasTextSize) block.classList.add('cards-text-m');
+  const textClassMap = { s: 'cards-text-s', m: 'cards-text-m', l: 'cards-text-l' };
+  block.classList.add(textClassMap[textSize] || 'cards-text-m');
+  if (!showArrow) block.classList.add('cards-no-arrow');
 }
 
 /** Card body icon: 円のみ SVG（本家 .c-icon-link__icon 同様）. 矢印は CSS ::before (Ben \e902) で表示。 */
@@ -130,8 +143,8 @@ function isOpenInNewWindow(cell, row) {
 }
 
 export default function decorate(block) {
-  const { columns, styleClasses } = readConfigFromRows(block);
-  applyBlockClasses(block, columns, styleClasses);
+  const { columns, textSize, showArrow } = readConfigFromRows(block);
+  applyBlockClasses(block, columns, textSize, showArrow);
 
   const cardRows = [...block.querySelectorAll(':scope > div')];
   const ul = document.createElement('ul');
