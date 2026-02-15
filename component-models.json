@@ -159,7 +159,7 @@
     ]
   },
   {
-    "id": "cards",
+    "id": "cards-container",
     "fields": [
       {
         "component": "text",
