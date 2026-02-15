@@ -282,7 +282,7 @@ main .cards > ul > li:hover > a.cards-card-link .cards-card-body {
   text-underline-offset: 0.15em;
 }
 
-/* 別ウィンドウ表示時: テキスト横にアイコン（本家 :is([data-target],[target]) [data-link-label]::after と同じ Ben \e901） */
+/* 別ウィンドウ表示時: テキスト横にアイコン（本家 :is([data-target],[target]) [data-link-label]::after と同じ Ben \e901）。ホバー時もアイコン下には下線を出さない。 */
 .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
 main .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after {
   color: #e60012;
@@ -295,6 +295,7 @@ main .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::af
   font-style: normal;
   font-weight: 400;
   text-align: center;
+  text-decoration: none;
 }
 
 /* 本家: 画像の下に本文（赤丸矢印＋ラベル）。方法B: calc(var(--rem)*...) で 18px/27px/24px/36px を算出 */
@@ -567,6 +568,7 @@ main .cards-wrapper > ul > li > a.cards-card-link[target="_blank"] [data-link-la
   font-style: normal;
   font-weight: 400;
   text-align: center;
+  text-decoration: none;
 }
 
 .cards-wrapper > ul > li > a.cards-card-link .cards-card-body p,
