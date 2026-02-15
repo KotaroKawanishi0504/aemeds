@@ -93,6 +93,47 @@ main .cards > ul {
   }
 }
 
+/* Block dialog: column count (3/4/5) at 900px+. Default above is 4. */
+@media (width >= 900px) {
+  .cards.cards-cols-3 > ul,
+  main .cards.cards-cols-3 > ul,
+  .cards-wrapper .cards.cards-cols-3 > ul,
+  main .cards-wrapper .cards.cards-cols-3 > ul,
+  .cards-wrapper.cards-wrapper > div .cards.cards-cols-3 > ul,
+  main .cards-wrapper.cards-wrapper > div .cards.cards-cols-3 > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cards.cards-cols-5 > ul,
+  main .cards.cards-cols-5 > ul,
+  .cards-wrapper .cards.cards-cols-5 > ul,
+  main .cards-wrapper .cards.cards-cols-5 > ul,
+  .cards-wrapper.cards-wrapper > div .cards.cards-cols-5 > ul,
+  main .cards-wrapper.cards-wrapper > div .cards.cards-cols-5 > ul {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@container cards (min-width: 900px) {
+  .cards.cards-cols-3 > ul,
+  main .cards.cards-cols-3 > ul,
+  .cards-wrapper .cards.cards-cols-3 > ul,
+  main .cards-wrapper .cards.cards-cols-3 > ul,
+  .cards-wrapper.cards-wrapper > div .cards.cards-cols-3 > ul,
+  main .cards-wrapper.cards-wrapper > div .cards.cards-cols-3 > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cards.cards-cols-5 > ul,
+  main .cards.cards-cols-5 > ul,
+  .cards-wrapper .cards.cards-cols-5 > ul,
+  main .cards-wrapper .cards.cards-cols-5 > ul,
+  .cards-wrapper.cards-wrapper > div .cards.cards-cols-5 > ul,
+  main .cards-wrapper.cards-wrapper > div .cards.cards-cols-5 > ul {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 /* AEM DOM: .cards with direct div children (no ul). Same breakpoints and container queries. */
 .cards:not(:has(> ul)),
 main .cards:not(:has(> ul)) {
@@ -319,6 +360,25 @@ main .cards .cards-card-body {
   background-color: var(--card-background, var(--background-color));
 }
 
+/* Block dialog: text size (s/m/l). Default above uses --card-font-size 1.8 */
+.cards.cards-text-s .cards-card-body,
+main .cards.cards-text-s .cards-card-body,
+.cards-wrapper .cards.cards-text-s .cards-card-body,
+main .cards-wrapper .cards.cards-text-s .cards-card-body,
+.cards-wrapper.cards-wrapper > div .cards.cards-text-s .cards-card-body,
+main .cards-wrapper.cards-wrapper > div .cards.cards-text-s .cards-card-body {
+  --card-font-size: 1.4;
+}
+
+.cards.cards-text-l .cards-card-body,
+main .cards.cards-text-l .cards-card-body,
+.cards-wrapper .cards.cards-text-l .cards-card-body,
+main .cards-wrapper .cards.cards-text-l .cards-card-body,
+.cards-wrapper.cards-wrapper > div .cards.cards-text-l .cards-card-body,
+main .cards-wrapper.cards-wrapper > div .cards.cards-text-l .cards-card-body {
+  --card-font-size: 2.2;
+}
+
 /* 本家 01-common.min.css の c-icon-link-animation: ホバーで一度消えて時計回りに円が描かれる */
 @keyframes c-icon-link-animation {
   0% {
@@ -362,6 +422,24 @@ main .cards .cards-card-body-icon {
   overflow: visible;
 
   --c: var(--card-icon-circle-c, 75.398);
+}
+
+/* Block dialog: hide arrow icon when "Show arrow" = No */
+.cards.cards-no-arrow .cards-card-body-icon,
+main .cards.cards-no-arrow .cards-card-body-icon,
+.cards-wrapper .cards.cards-no-arrow .cards-card-body-icon,
+main .cards-wrapper .cards.cards-no-arrow .cards-card-body-icon,
+.cards-wrapper.cards-wrapper > div .cards.cards-no-arrow .cards-card-body-icon,
+main .cards-wrapper.cards-wrapper > div .cards.cards-no-arrow .cards-card-body-icon {
+  display: none;
+}
+
+.cards.cards-no-arrow .cards-card-body,
+main .cards.cards-no-arrow .cards-card-body,
+.cards-wrapper .cards.cards-no-arrow .cards-card-body,
+main .cards-wrapper .cards.cards-no-arrow .cards-card-body,
+.cards-wrapper.cards-wrapper > div .cards.cards-no-arrow .cards-card-body {
+  padding-left: 0;
 }
 
 /* 矢印: 本家 .c-icon-link__icon::before — Ben \e902, font-size calc(var(--rem)*1px) */

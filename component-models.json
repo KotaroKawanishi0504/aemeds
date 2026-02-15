@@ -159,6 +159,32 @@
     ]
   },
   {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "columns",
+        "label": "Columns",
+        "value": "4"
+      },
+      {
+        "component": "boolean",
+        "name": "showArrow",
+        "label": "Show arrow icon",
+        "valueType": "boolean",
+        "value": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "textSize",
+        "label": "Text size",
+        "value": "m"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
