@@ -3,49 +3,16 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
-/** Normalize to CSS-class-safe name (matches aem.js toClassName). */
-function toClassName(name) {
-  return typeof name === 'string'
-    ? name.toLowerCase().replace(/[^0-9a-z]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
-    : '';
-}
-
-/** First-cell keys that mark a 2-cell row as block config (not a card). */
-const CONFIG_ROW_KEYS = new Set([
-  'columns', 'showarrow', 'show-arrow', 'textsize', 'text-size',
-]);
-
-/**
- * Read block config from rows that have exactly 2 cells and a known config key.
- * Rows with 2 cells but key not in CONFIG_ROW_KEYS (e.g. image + text card) stay as card rows.
- * @param {Element} block - .cards block
- * @returns {{ config: object, cardRows: Element[] }}
- */
-function readCardsBlockConfig(block) {
-  const rows = [...block.querySelectorAll(':scope > div')];
-  const config = {};
-  const cardRows = [];
-  rows.forEach((row) => {
-    if (row.children.length === 2) {
-      const key = toClassName(row.children[0].textContent);
-      if (CONFIG_ROW_KEYS.has(key)) {
-        const col = row.children[1];
-        let value = '';
-        if (col.querySelector('a')) {
-          const a = col.querySelector('a[href]');
-          value = a ? a.href : col.textContent?.trim() ?? '';
-        } else if (col.querySelector('img')) {
-          value = col.querySelector('img')?.src ?? col.textContent?.trim() ?? '';
-        } else {
-          value = col.textContent?.trim() ?? '';
-        }
-        config[key] = value;
-        return;
-      }
-    }
-    cardRows.push(row);
-  });
-  return { config, cardRows };
+/** Block options (columns, arrow, text size) are applied via the reserved "classes" field to the block's class. No config rows. */
+function ensureDefaultBlockClasses(block) {
+  const hasCols = block.classList.contains('cards-cols-3')
+    || block.classList.contains('cards-cols-4')
+    || block.classList.contains('cards-cols-5');
+  if (!hasCols) block.classList.add('cards-cols-4');
+  const hasTextSize = block.classList.contains('cards-text-s')
+    || block.classList.contains('cards-text-m')
+    || block.classList.contains('cards-text-l');
+  if (!hasTextSize) block.classList.add('cards-text-m');
 }
 
 /** Card body icon: 円のみ SVG（本家 .c-icon-link__icon 同様）. 矢印は CSS ::before (Ben \e902) で表示。 */
@@ -141,23 +108,10 @@ function isOpenInNewWindow(cell, row) {
 }
 
 export default function decorate(block) {
-  const { config, cardRows } = readCardsBlockConfig(block);
+  ensureDefaultBlockClasses(block);
 
-  /* Block style classes from dialog config (defaults: 4 col, arrow shown, text m) */
-  const cols = String(config.columns ?? '4').trim();
-  const colsNum = ['3', '4', '5'].includes(cols) ? cols : '4';
-  block.classList.add(`cards-cols-${colsNum}`);
-
-  const showArrowRaw = (config.showarrow ?? config['show-arrow'] ?? '').toString().trim().toLowerCase();
-  if (showArrowRaw === 'false' || showArrowRaw === 'no' || showArrowRaw === '0') {
-    block.classList.add('cards-no-arrow');
-  }
-
-  const textSizeRaw = (config.textsize ?? config['text-size'] ?? 'm').toString().trim().toLowerCase();
-  const textSize = ['s', 'm', 'l'].includes(textSizeRaw) ? textSizeRaw : 'm';
-  block.classList.add(`cards-text-${textSize}`);
-
-  /* Build ul from card rows only (skip config rows) */
+  /* All block children are card rows (Block Options store style on block class, no config rows) */
+  const cardRows = [...block.querySelectorAll(':scope > div')];
   const ul = document.createElement('ul');
   cardRows.forEach((row) => {
     const li = document.createElement('li');
