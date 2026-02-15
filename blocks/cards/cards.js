@@ -4,14 +4,33 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /**
- * Block options (columns, arrow, text size) come from the reserved "classes" field on the block.
- * No config rows; layer shows only Card items.
+ * Read config from first 1-cell rows (Columns, Style). Like ak-eds: two fields, two rows.
+ * Removes those rows so only card rows remain.
+ * @param {Element} block - .cards block
+ * @returns {{ columns: string, styleClasses: string[] }}
  */
-function ensureDefaultBlockClasses(block) {
-  const hasCols = block.classList.contains('cards-cols-3')
-    || block.classList.contains('cards-cols-4')
-    || block.classList.contains('cards-cols-5');
-  if (!hasCols) block.classList.add('cards-cols-4');
+function readConfigFromRows(block) {
+  const rows = [...block.querySelectorAll(':scope > div')];
+  let columns = '4';
+  const styleClasses = [];
+
+  if (rows.length > 0 && rows[0].children.length === 1) {
+    const colVal = rows[0].firstElementChild?.textContent?.trim() || '';
+    if (['3', '4', '5'].includes(colVal)) columns = colVal;
+    rows[0].remove();
+  }
+  if (rows.length > 1 && rows[1].children.length === 1) {
+    const styleVal = rows[1].firstElementChild?.textContent?.trim() || '';
+    if (styleVal) styleVal.split(/\s+/).forEach((c) => { if (c) styleClasses.push(c); });
+    rows[1].remove();
+  }
+
+  return { columns, styleClasses };
+}
+
+function applyBlockClasses(block, columns, styleClasses) {
+  block.classList.add(`cards-cols-${columns}`);
+  styleClasses.forEach((c) => block.classList.add(c));
   const hasTextSize = block.classList.contains('cards-text-s')
     || block.classList.contains('cards-text-m')
     || block.classList.contains('cards-text-l');
@@ -111,9 +130,9 @@ function isOpenInNewWindow(cell, row) {
 }
 
 export default function decorate(block) {
-  ensureDefaultBlockClasses(block);
+  const { columns, styleClasses } = readConfigFromRows(block);
+  applyBlockClasses(block, columns, styleClasses);
 
-  /* All block children are card rows (Block Options store style on block class, no config rows) */
   const cardRows = [...block.querySelectorAll(':scope > div')];
   const ul = document.createElement('ul');
   cardRows.forEach((row) => {

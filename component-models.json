@@ -163,50 +163,55 @@
     "fields": [
       {
         "component": "select",
-        "name": "classes",
-        "label": "Cards options",
+        "name": "columns",
+        "label": "Columns",
+        "valueType": "string",
+        "value": "4",
+        "options": [
+          {
+            "name": "3 columns",
+            "value": "3"
+          },
+          {
+            "name": "4 columns",
+            "value": "4"
+          },
+          {
+            "name": "5 columns",
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "style",
+        "label": "Style",
         "valueType": "string",
         "value": "",
         "options": [
           {
-            "name": "Default (4 columns, arrow, M)",
+            "name": "Standard (arrow, M)",
             "value": ""
           },
           {
-            "name": "3 columns",
-            "value": "cards-cols-3"
-          },
-          {
-            "name": "5 columns",
-            "value": "cards-cols-5"
-          },
-          {
-            "name": "No arrow icon",
+            "name": "No arrow, M",
             "value": "cards-no-arrow"
           },
           {
-            "name": "3 columns, no arrow",
-            "value": "cards-cols-3 cards-no-arrow"
-          },
-          {
-            "name": "5 columns, no arrow",
-            "value": "cards-cols-5 cards-no-arrow"
-          },
-          {
-            "name": "Small text",
+            "name": "Arrow, Small text",
             "value": "cards-text-s"
           },
           {
-            "name": "Large text",
+            "name": "Arrow, Large text",
             "value": "cards-text-l"
           },
           {
-            "name": "3 columns, small text",
-            "value": "cards-cols-3 cards-text-s"
+            "name": "No arrow, Small text",
+            "value": "cards-no-arrow cards-text-s"
           },
           {
-            "name": "5 columns, large text",
-            "value": "cards-cols-5 cards-text-l"
+            "name": "No arrow, Large text",
+            "value": "cards-no-arrow cards-text-l"
           }
         ]
       }
