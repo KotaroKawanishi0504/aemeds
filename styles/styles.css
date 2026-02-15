@@ -112,7 +112,7 @@ h4,
 h5,
 h6 {
   margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-bottom: 40px;
   font-family: var(--heading-font-family);
   font-weight: 600;
   line-height: 1.25;
@@ -236,7 +236,8 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
+  padding: 80px 0;
 }
 
 main > .section > div {
@@ -254,7 +255,7 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: 80px 0;
 }
 
 /* Section: 共通背景画像（DAM: marubeni/common） */
@@ -264,5 +265,5 @@ main .section.background-common {
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
-  padding: 40px 0;
+  padding: 80px 0;
 }
