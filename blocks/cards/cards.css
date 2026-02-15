@@ -210,7 +210,7 @@ main .cards:not(:has(> ul)) > div > div:first-child img {
 .cards:not(:has(> ul)) > div > div:nth-child(2),
 main .cards:not(:has(> ul)) > div > div:nth-child(2) {
   flex: 0 0 auto;
-  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
+  margin: var(--card-body-margin-top, 24px) 0 0;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
   position: relative;
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
@@ -328,9 +328,11 @@ main .cards > ul > li:hover > a.cards-card-link .cards-card-body [data-link-labe
   text-decoration-color: var(--card-text-hover-color, #e60012);
 }
 
-/* 別ウィンドウ表示時: テキスト横にアイコン（本家 :is([data-target],[target]) [data-link-label]::after と同じ Ben \e901）。ホバー時もアイコン下には下線を出さない。 */
+/* 別ウィンドウ表示時: テキスト横にアイコン（本家 Ben \e901）。target="_blank" または data-open-in-new-window で表示。ホバー時もアイコン下には下線を出さない。 */
 .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
-main .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after {
+main .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
+.cards > ul > li > a.cards-card-link[data-open-in-new-window="true"] [data-link-label]::after,
+main .cards > ul > li > a.cards-card-link[data-open-in-new-window="true"] [data-link-label]::after {
   color: #e60012;
   color: var(--card-icon-color, #e60012);
   display: inline-block;
@@ -344,14 +346,14 @@ main .cards > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::af
   text-decoration: none;
 }
 
-/* 本家: 画像の下に本文（赤丸矢印＋ラベル）。方法B: calc(var(--rem)*...) で 18px/27px/24px/36px を算出 */
+/* 本家: 画像の下に本文（赤丸矢印＋ラベル）。画像とテキスト間は固定 24px（テキストサイズに依存しない） */
 .cards .cards-card-body,
 main .cards .cards-card-body {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
-  margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
+  margin: var(--card-body-margin-top, 24px) 0 0;
   position: relative;
   padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
@@ -486,11 +488,15 @@ main .cards > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circ
   transition-delay: 0.3s;
 }
 
+/* 本家と同様: 画像周りに薄いグレー枠線 */
 .cards .cards-card-image,
 main .cards .cards-card-image {
   flex: 0 0 auto;
   line-height: 0;
   overflow: hidden;
+  border: 1px solid var(--card-image-border-color, rgb(0 0 0 / 8%));
+  border-radius: var(--card-image-border-radius, 0);
+  box-sizing: border-box;
 }
 
 /* 本家 https://www.marubeni.com/jp/ と同様: カードホバーで画像を少し拡大 (cleaned.html の img.-zoom) */
@@ -646,7 +652,9 @@ main .cards-wrapper > ul > li:hover > a.cards-card-link .cards-card-body [data-l
 }
 
 .cards-wrapper > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
-main .cards-wrapper > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after {
+main .cards-wrapper > ul > li > a.cards-card-link[target="_blank"] [data-link-label]::after,
+.cards-wrapper > ul > li > a.cards-card-link[data-open-in-new-window="true"] [data-link-label]::after,
+main .cards-wrapper > ul > li > a.cards-card-link[data-open-in-new-window="true"] [data-link-label]::after {
   color: var(--card-icon-color, #e60012);
   display: inline-block;
   font-size: calc(var(--rem, 10) * 1.2 * 1px);
@@ -751,6 +759,9 @@ main .cards-wrapper .cards-card-image {
   flex: 0 0 auto;
   line-height: 0;
   overflow: hidden;
+  border: 1px solid var(--card-image-border-color, rgb(0 0 0 / 8%));
+  border-radius: var(--card-image-border-radius, 0);
+  box-sizing: border-box;
 }
 
 .cards-wrapper > ul > li:hover .cards-card-image img,
@@ -837,6 +848,9 @@ main .cards-wrapper.cards-wrapper > div > ul > li img {
 main .cards-wrapper.cards-wrapper > div > ul > li .cards-card-image {
   flex: 0 0 auto;
   overflow: hidden;
+  border: 1px solid var(--card-image-border-color, rgb(0 0 0 / 8%));
+  border-radius: var(--card-image-border-radius, 0);
+  box-sizing: border-box;
 }
 
 .cards-wrapper.cards-wrapper > div > ul > li .cards-card-image img,
@@ -1042,6 +1056,9 @@ main .cards-wrapper .cards .cards-card-image {
   flex: 0 0 auto;
   line-height: 0;
   overflow: hidden;
+  border: 1px solid var(--card-image-border-color, rgb(0 0 0 / 8%));
+  border-radius: var(--card-image-border-radius, 0);
+  box-sizing: border-box;
 }
 
 .cards-wrapper .cards > ul > li .cards-card-image img,

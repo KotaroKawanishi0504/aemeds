@@ -62,8 +62,12 @@
   --card-list-item-min-width: 242px;
   --card-list-margin-top: 4.8rem;
 
-  /* Card body: font-weight のみ。font-size/line-height/margin は cards.css で calc(var(--rem)*...) にて算出 */
+  /* Card body: 画像とテキスト間は固定 24px（本家 cards-computed-styles margin-top）。テキストサイズに依存しない */
+  --card-body-margin-top: 24px;
   --card-body-font-weight: 500;
+
+  /* 本家: 画像周りの薄いグレー枠線 */
+  --card-image-border-color: rgb(0 0 0 / 8%);
 
   /* 本家ラベル色 rgb(40,40,40) */
   --card-text-color: #282828;

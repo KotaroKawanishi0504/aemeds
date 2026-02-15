@@ -199,6 +199,7 @@ export default function decorate(block) {
       if (openInNewWindow) {
         a.setAttribute('target', '_blank');
         a.setAttribute('rel', 'noopener noreferrer');
+        a.setAttribute('data-open-in-new-window', 'true');
       }
       while (li.firstChild) a.appendChild(li.firstChild);
       li.appendChild(a);
