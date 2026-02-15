@@ -98,6 +98,37 @@
           }
         },
         {
+          "title": "Card+Carousel",
+          "id": "cards-carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Card+Carousel",
+                  "model": "cards-carousel",
+                  "filter": "cards-carousel"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Card",
+          "id": "cards-carousel-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Card",
+                  "model": "cards-carousel-card"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "plugins": {

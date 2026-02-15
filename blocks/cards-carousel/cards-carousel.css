@@ -1,0 +1,206 @@
+/* stylelint-disable no-descending-specificity */
+
+/* Card+Carousel: ≥900px = 3-column grid, <900px = horizontal carousel with pagination */
+
+.cards-carousel,
+main .cards-carousel {
+  position: relative;
+  width: 100%;
+}
+
+.cards-carousel-list,
+main .cards-carousel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Grid mode (≥900px): 3 columns */
+.cards-carousel.cards-carousel-mode-grid .cards-carousel-list,
+main .cards-carousel.cards-carousel-mode-grid .cards-carousel-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  overflow: visible;
+}
+
+.cards-carousel.cards-carousel-mode-grid .cards-carousel-item,
+main .cards-carousel.cards-carousel-mode-grid .cards-carousel-item {
+  flex: none;
+  width: auto;
+  scroll-snap-align: none;
+}
+
+/* Carousel mode (<900px): horizontal scroll + snap */
+.cards-carousel.cards-carousel-mode-carousel .cards-carousel-list,
+main .cards-carousel.cards-carousel-mode-carousel .cards-carousel-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 16px;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards-carousel.cards-carousel-mode-carousel .cards-carousel-list::-webkit-scrollbar,
+main .cards-carousel.cards-carousel-mode-carousel .cards-carousel-list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.cards-carousel.cards-carousel-mode-carousel .cards-carousel-list::-webkit-scrollbar-thumb,
+main .cards-carousel.cards-carousel-mode-carousel .cards-carousel-list::-webkit-scrollbar-thumb {
+  background: rgb(0 0 0 / 20%);
+  border-radius: 3px;
+}
+
+.cards-carousel.cards-carousel-mode-carousel .cards-carousel-item,
+main .cards-carousel.cards-carousel-mode-carousel .cards-carousel-item {
+  flex: 0 0 auto;
+  width: min(85vw, 400px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Card link: block, no underline */
+.cards-carousel-link,
+main .cards-carousel-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.cards-carousel-link:hover,
+main .cards-carousel-link:hover {
+  text-decoration: none;
+}
+
+/* Image area */
+.cards-carousel-image,
+main .cards-carousel-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: rgb(0 0 0 / 6%);
+  border: 1px solid rgb(0 0 0 / 8%);
+}
+
+.cards-carousel-image picture,
+main .cards-carousel-image picture {
+  position: absolute;
+  inset: 0;
+}
+
+.cards-carousel-image img,
+main .cards-carousel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  vertical-align: middle;
+}
+
+/* Title below image */
+.cards-carousel-title,
+main .cards-carousel-title {
+  margin: 0;
+  padding: 12px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #282828;
+}
+
+/* Pagination: visible only in carousel mode */
+.cards-carousel-pagination,
+main .cards-carousel-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+  padding: 16px 0 0;
+  line-height: 0;
+}
+
+.cards-carousel-pagination[hidden],
+main .cards-carousel-pagination[hidden] {
+  display: none;
+}
+
+.cards-carousel-pagination-bullet,
+main .cards-carousel-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(0 0 0 / 25%);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cards-carousel-pagination-bullet:hover,
+main .cards-carousel-pagination-bullet:hover {
+  background-color: rgb(0 0 0 / 45%);
+}
+
+.cards-carousel-pagination-bullet.active,
+main .cards-carousel-pagination-bullet.active,
+.cards-carousel-pagination-bullet[aria-current="true"],
+main .cards-carousel-pagination-bullet[aria-current="true"] {
+  background-color: #e60012;
+}
+
+.cards-carousel-pagination-bullet i,
+main .cards-carousel-pagination-bullet i {
+  display: none;
+}
+
+/* Default: assume grid on load (JS will set mode) */
+@media (width >= 900px) {
+  .cards-carousel .cards-carousel-list,
+  main .cards-carousel .cards-carousel-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    overflow: visible;
+  }
+
+  .cards-carousel .cards-carousel-item,
+  main .cards-carousel .cards-carousel-item {
+    width: auto;
+  }
+
+  .cards-carousel .cards-carousel-pagination,
+  main .cards-carousel .cards-carousel-pagination {
+    display: none;
+  }
+}
+
+@media (width < 900px) {
+  .cards-carousel .cards-carousel-list,
+  main .cards-carousel .cards-carousel-list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 16px;
+  }
+
+  .cards-carousel .cards-carousel-item,
+  main .cards-carousel .cards-carousel-item {
+    flex: 0 0 auto;
+    width: min(85vw, 400px);
+    scroll-snap-align: start;
+  }
+
+  .cards-carousel .cards-carousel-pagination,
+  main .cards-carousel .cards-carousel-pagination {
+    display: flex;
+  }
+}
