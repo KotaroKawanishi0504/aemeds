@@ -38,6 +38,23 @@ function isVideoUrl(url) {
 }
 
 /**
+ * Decode link label for display (fixes URL-encoded text like %20, %7C).
+ * @param {string} label Raw label that may be URL-encoded
+ * @returns {string} Decoded label safe for textContent
+ */
+function decodeLinkLabel(label) {
+  if (typeof label !== 'string' || !label) return '';
+  try {
+    if (/%[0-9A-Fa-f]{2}/.test(label)) {
+      return decodeURIComponent(label.replace(/\+/g, ' '));
+    }
+  } catch {
+    // ignore invalid sequences
+  }
+  return label;
+}
+
+/**
  * Decorates the hero-video block: video (>=900px), poster (<900px), optional link overlay.
  * Config: video, poster, link, linkLabel (from block config table or AEM row structure).
  * @param {Element} block The hero-video block element
@@ -131,7 +148,7 @@ export default async function decorate(block) {
     const linkEl = document.createElement('a');
     linkEl.href = linkUrl;
     linkEl.className = 'hero-video-link';
-    linkEl.textContent = linkLabel;
+    linkEl.textContent = decodeLinkLabel(linkLabel);
     block.append(linkEl);
   }
 }
