@@ -256,3 +256,13 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* Section: 共通背景画像（DAM: marubeni/common） */
+main .section.background-common {
+  background-image: url('/content/dam/marubeni/common/1a1b9eecb7381c5c708de3581621e46c.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 40px 0;
+}

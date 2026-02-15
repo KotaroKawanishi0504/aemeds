@@ -136,6 +136,10 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "背景（共通画像）",
+            "value": "background-common"
           }
         ]
       }
