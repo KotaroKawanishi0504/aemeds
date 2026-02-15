@@ -219,6 +219,11 @@ main .cards:not(:has(> ul)) > div > div:nth-child(2) {
   color: var(--card-text-color, #282828);
 }
 
+.cards.cards-text-s:not(:has(> ul)) > div > div:nth-child(2),
+main .cards.cards-text-s:not(:has(> ul)) > div > div:nth-child(2) {
+  margin-top: 16px;
+}
+
 .cards:not(:has(> ul)) > div > div:nth-child(2)::before,
 main .cards:not(:has(> ul)) > div > div:nth-child(2)::before {
   content: "\e902";
@@ -370,6 +375,9 @@ main .cards-wrapper .cards.cards-text-s .cards-card-body,
 .cards-wrapper.cards-wrapper > div .cards.cards-text-s .cards-card-body,
 main .cards-wrapper.cards-wrapper > div .cards.cards-text-s .cards-card-body {
   --card-font-size: 1.4;
+
+  /* 本家: Small のとき画像とテキスト間は 16px */
+  margin-top: 16px;
 }
 
 .cards.cards-text-l .cards-card-body,
