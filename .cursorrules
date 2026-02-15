@@ -13,3 +13,7 @@ When applying the workflow in this project:
 4. Implement changes to close the gaps.
 
 See [DESIGN_ALIGNMENT.md](DESIGN_ALIGNMENT.md) for the full workflow.
+
+---
+
+**Block consolidation / AEM class aliasing:** When merging two blocks into one or when HTML uses a different block class than the codebase (e.g. `card-carousel` vs `cards-carousel`), follow the **building-blocks** skill: section "Block Consolidation and AEM Class Aliasing" and `resources/block-consolidation-and-aliasing.md`. Do not duplicate block implementations; use loader alias + canonical class in decorate. When consolidating, ensure hover/focus and other interactions from the removed block are present in the kept block's CSS.

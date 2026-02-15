@@ -191,6 +191,15 @@ Import is complete when:
 - ✅ All content imported (no truncation)
 - ✅ Images accessible
 
+## Block Class and Codebase Name
+
+Imported or published HTML may use a block class that differs from the canonical block name in the codebase (e.g. AEM outputs `class="card-carousel"` but the implementation lives under `blocks/cards-carousel/`). Do not create a second block; use **block aliasing** so one implementation serves both:
+
+- In the loader (`scripts/aem.js`), when the short block name is the alias (e.g. `card-carousel`), set `block.dataset.blockName` to the canonical name (e.g. `cards-carousel`) so the correct script and CSS load.
+- In the canonical block's `decorate(block)`, add the canonical class if the block only has the alias class, so CSS applies.
+
+See **building-blocks** skill, section "Block Consolidation and AEM Class Aliasing", and `building-blocks/resources/block-consolidation-and-aliasing.md` for the full pattern.
+
 ## Limitations
 
 This orchestrator manages single-page import with existing blocks. It does NOT:

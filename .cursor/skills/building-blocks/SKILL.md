@@ -266,7 +266,21 @@ If your changes require modifying core files (scripts.js, styles.css, delayed.js
 
 ---
 
+## Block Consolidation and AEM Class Aliasing
+
+When AEM or the import outputs a block class that differs from your canonical block name (e.g. `card-carousel` vs `cards-carousel`), or when merging two blocks into one:
+
+1. **Loader:** In `scripts/aem.js`, map the AEM/alias short name to the canonical block name so the same script and CSS load (e.g. when `shortBlockName === 'card-carousel'` set `block.dataset.blockName = 'cards-carousel'`).
+2. **Decorate:** At the start of the canonical block's `decorate(block)`, if the block has the alias class but not the canonical class, add it: `block.classList.add('cards-carousel')` so CSS scoped to `.cards-carousel` applies.
+3. **Interaction parity:** If the block should match another block's behavior (e.g. same hover: image zoom, link red + underline), add those styles explicitly in this block's CSS—shared styles from the other block will not apply if class names or DOM differ.
+4. **Before deleting a block folder:** Ensure all hover, focus, and other interactions from the removed block exist in the block you keep; then delete the folder, run `npm run lint` and `npm run build:json`, test both class names, and commit.
+
+**Full checklist and patterns:** Read `resources/block-consolidation-and-aliasing.md`
+
+---
+
 ## Reference Materials
 
 - `resources/js-guidelines.md` - Complete JavaScript patterns and best practices
 - `resources/css-guidelines.md` - Complete CSS patterns and best practices
+- `resources/block-consolidation-and-aliasing.md` - Block consolidation, AEM class aliasing, and interaction parity
