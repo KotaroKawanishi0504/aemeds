@@ -3,7 +3,10 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
-/** Block options (columns, arrow, text size) are applied via the reserved "classes" field to the block's class. No config rows. */
+/**
+ * Block options (columns, arrow, text size) come from the reserved "classes" field on the block.
+ * No config rows; layer shows only Card items.
+ */
 function ensureDefaultBlockClasses(block) {
   const hasCols = block.classList.contains('cards-cols-3')
     || block.classList.contains('cards-cols-4')
