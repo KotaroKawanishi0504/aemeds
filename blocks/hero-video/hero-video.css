@@ -73,13 +73,13 @@ main .hero-video-poster img {
   }
 }
 
-/* Link overlay: bottom-right, icon + label (original .p-home__hero-link: color inherit, not red) */
+/* Link overlay: static image (<900px) = bottom-left, video (>=900px) = bottom-right (original .p-home__hero-link) */
 .hero-video-link,
 main .hero-video-link {
   position: absolute;
-  right: 0;
+  left: 0;
+  right: auto;
   bottom: 0;
-  left: auto;
   z-index: 1;
   display: inline-flex;
   align-items: center;
@@ -96,7 +96,18 @@ main .hero-video-link {
 .hero-video-link:hover,
 main .hero-video-link:hover {
   color: #fff;
+}
+
+.hero-video-link-label,
+main .hero-video-link-label {
+  color: inherit;
+}
+
+/* Underline on hover: label text only, not the icon (original: arrow has no underline) */
+.hero-video-link:hover .hero-video-link-label,
+main .hero-video-link:hover .hero-video-link-label {
   text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 /* Icon: same structure as cards, but color inherit (white on hero, not red) */
@@ -182,14 +193,11 @@ main .hero-video-link:hover .hero-video-link-icon .hero-video-link-icon-svg circ
   transition-delay: 0.3s;
 }
 
-.hero-video-link-label,
-main .hero-video-link-label {
-  color: inherit;
-}
-
 @media (width >= 900px) {
   .hero-video-link,
   main .hero-video-link {
+    left: auto;
+    right: 0;
     margin: 32px;
     font-size: 16px;
   }
