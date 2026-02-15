@@ -21,12 +21,6 @@
     ]
   },
   {
-    "id": "card-carousel",
-    "components": [
-      "card-carousel-card"
-    ]
-  },
-  {
     "id": "cards-carousel",
     "components": [
       "cards-carousel-card"

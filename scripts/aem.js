@@ -613,7 +613,8 @@ function decorateBlock(block) {
   const shortBlockName = block.classList[0];
   if (shortBlockName && !block.dataset.blockStatus) {
     block.classList.add('block');
-    block.dataset.blockName = shortBlockName;
+    const blockName = shortBlockName === 'card-carousel' ? 'cards-carousel' : shortBlockName;
+    block.dataset.blockName = blockName;
     block.dataset.blockStatus = 'initialized';
     wrapTextNodes(block);
     const blockWrapper = block.parentElement;

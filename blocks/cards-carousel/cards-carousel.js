@@ -108,6 +108,9 @@ function applyMode(block) {
 }
 
 export default function decorate(block) {
+  if (block.classList.contains('card-carousel') && !block.classList.contains('cards-carousel')) {
+    block.classList.add('cards-carousel');
+  }
   const allRows = [...block.querySelectorAll(':scope > div')];
   const cardRows = allRows.filter((row) => row.children.length >= 2);
   if (cardRows.length === 0) return;
