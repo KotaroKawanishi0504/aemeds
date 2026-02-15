@@ -31,22 +31,10 @@ main .hero-video-video video {
   vertical-align: middle;
 }
 
-@media (width >= 900px) {
-  .hero-video-video,
-  main .hero-video-video {
-    display: block;
-  }
-
-  .hero-video-poster,
-  main .hero-video-poster {
-    display: none;
-  }
-}
-
-/* Poster: visible below 900px */
+/* Poster: visible only at 899px and below (mobile) */
 .hero-video-poster,
 main .hero-video-poster {
-  display: block;
+  display: none;
   width: 100%;
 }
 
@@ -60,9 +48,27 @@ main .hero-video-poster img {
   vertical-align: middle;
 }
 
-@media (width < 900px) {
+@media (width <= 899px) {
+  .hero-video-poster,
+  main .hero-video-poster {
+    display: block;
+  }
+
   .hero-video-video,
   main .hero-video-video {
+    display: none;
+  }
+}
+
+/* Video: visible at 900px and above (desktop) */
+@media (width >= 900px) {
+  .hero-video-video,
+  main .hero-video-video {
+    display: block;
+  }
+
+  .hero-video-poster,
+  main .hero-video-poster {
     display: none;
   }
 }
