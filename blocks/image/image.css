@@ -1,15 +1,15 @@
-/* Linked Image: image with optional link wrapper */
-main .linked-image {
+/* Image block: optional link wrapper when link is set */
+main .image {
   display: block;
 }
 
-main .linked-image a {
+main .image a {
   display: inline-block;
   color: inherit;
   text-decoration: none;
 }
 
-main .linked-image img {
+main .image img {
   display: block;
   width: 100%;
   height: auto;

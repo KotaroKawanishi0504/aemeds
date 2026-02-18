@@ -15,9 +15,9 @@ function getImageUrlFromCell(cell) {
 }
 
 /**
- * Image block with optional link (EDS approach: image first, link as wrapper).
- * Content: config (image, imageAlt, link) or 3 rows: image, alt, link.
- * @param {Element} block The linked-image block element
+ * Image block with optional link. Link not set => no anchor tag (EDS: image first, link as wrapper).
+ * Content: config (image, imageAlt, link) or rows: image, alt, link.
+ * @param {Element} block The image block element
  */
 export default async function decorate(block) {
   const config = readBlockConfig(block);
