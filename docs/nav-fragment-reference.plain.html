@@ -1,0 +1,23 @@
+<!--
+  ナビ用フラグメントの参照例です。
+  AEM の /content/marubeni/jp/nav ページを .plain.html で取得したときに、
+  **このような「本文のセクションのみ」が返る**ようにしてください。
+  ※ フル HTML（<!DOCTYPE, <html>, <head>, <meta>, <title> など）を返すと、
+    ヘッダーが表示されません。ナビページは「通常のコンテンツページ」で作成し、
+    Spreadsheet（テーブル）のみのページにしないでください。
+-->
+<div>
+  <div class="button-container">
+    <a href="/" class="button">丸紅</a>
+  </div>
+</div>
+<div>
+  <ul>
+    <li><a href="/jp/company/">会社情報</a></li>
+    <li><a href="/jp/news/">ニュース</a></li>
+    <li><a href="/jp/business/">事業紹介</a></li>
+  </ul>
+</div>
+<div>
+  <p><a href="/jp/search/">検索</a></p>
+</div>
