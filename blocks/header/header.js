@@ -125,11 +125,19 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 export default async function decorate(block) {
   ensureSkipLink();
 
-  // load nav as fragment (resolve path relative to current page for AEM /content/.../jp.html)
+  // load nav fragment: prefer meta 'nav'; else /nav, parent path, then page path
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : null;
   const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
-  const candidates = navPath ? [navPath] : [`${basePath}/nav`, `${basePath}/Header/nav`];
+  const parentPath = basePath.replace(/\/[^/]+$/, '') || '';
+  const candidates = navPath
+    ? [navPath]
+    : [
+      '/nav',
+      `${parentPath}/nav`,
+      `${basePath}/nav`,
+      `${basePath}/Header/nav`,
+    ];
   const fragment = await candidates.reduce(
     async (prev, path) => (await prev) || loadFragment(path),
     Promise.resolve(null),

@@ -6,11 +6,19 @@ import { loadFragment } from '../fragment/fragment.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment (resolve path relative to current page for AEM /content/.../jp.html)
+  // load footer fragment: prefer meta 'footer'; else /footer, parent path, then page path
   const footerMeta = getMetadata('footer');
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : null;
   const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
-  const candidates = footerPath ? [footerPath] : [`${basePath}/footer`, `${basePath}/Footer/footer`];
+  const parentPath = basePath.replace(/\/[^/]+$/, '') || '';
+  const candidates = footerPath
+    ? [footerPath]
+    : [
+      '/footer',
+      `${parentPath}/footer`,
+      `${basePath}/footer`,
+      `${basePath}/Footer/footer`,
+    ];
   const fragment = await candidates.reduce(
     async (prev, path) => (await prev) || loadFragment(path),
     Promise.resolve(null),
