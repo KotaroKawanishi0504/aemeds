@@ -4,6 +4,21 @@ import { loadFragment } from '../fragment/fragment.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+/**
+ * Injects skip link to main content (Marubeni-style). Ensures main has id="main" for target.
+ */
+function ensureSkipLink() {
+  if (document.querySelector('.skip-link')) return;
+  const main = document.querySelector('main');
+  if (main && !main.id) main.id = 'main';
+  const a = document.createElement('a');
+  a.href = '#main';
+  a.className = 'skip-link';
+  a.textContent = 'メインコンテンツへスキップ';
+  a.setAttribute('tabindex', '0');
+  document.body.insertBefore(a, document.body.firstChild);
+}
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -108,6 +123,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
+  ensureSkipLink();
+
   // load nav as fragment (resolve path relative to current page for AEM /content/.../jp.html)
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : null;
