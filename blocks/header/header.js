@@ -159,13 +159,16 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand?.querySelector('.button');
+  const brandLink = navBrand?.querySelector('.button')
+    || navBrand?.querySelector('a[href] img')?.closest('a');
   if (brandLink) {
-    brandLink.className = '';
-    const btnContainer = brandLink.closest('.button-container');
-    if (btnContainer) btnContainer.className = '';
+    if (brandLink.classList.contains('button')) {
+      brandLink.className = '';
+      const btnContainer = brandLink.closest('.button-container');
+      if (btnContainer) btnContainer.className = '';
+    }
+    // Linked image (e.g. Linked Image block): no extra cleanup
   } else if (navBrand) {
-    // Fallback when nav fragment has no .button (e.g. table/sheet content)
     const fallbackLink = document.createElement('a');
     fallbackLink.href = '/';
     fallbackLink.textContent = 'Home';
