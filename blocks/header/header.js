@@ -107,9 +107,13 @@ function normalizeNavSectionsFromBlocks(navSections) {
     const newLi = document.createElement('li');
     const labelLink = li.querySelector(':scope > a');
     const nestedUl = li.querySelector(':scope > ul');
-    const labelText = (labelLink || li).textContent?.replace(/\s+/g, ' ').trim().split('\n')[0].trim();
+    const cloneForLabel = li.cloneNode(true);
+    cloneForLabel.querySelector(':scope > ul')?.remove();
+    const labelText = cloneForLabel.textContent?.replace(/\s+/g, ' ').trim() ?? '';
     if (labelLink) {
-      newLi.appendChild(labelLink.cloneNode(true));
+      const clonedLink = labelLink.cloneNode(true);
+      clonedLink.textContent = labelText;
+      newLi.appendChild(clonedLink);
     } else {
       const a = document.createElement('a');
       a.href = '#';
