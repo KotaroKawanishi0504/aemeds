@@ -262,6 +262,7 @@ export default async function decorate(block) {
       if (hasDropdown) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
+          if (e.target.closest('.nav-dropdown-panel')) return;
           const isLabelLink = e.target.closest('a[href="#"]');
           if (isLabelLink) e.preventDefault();
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
