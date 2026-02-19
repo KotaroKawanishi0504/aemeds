@@ -68,6 +68,79 @@ function focusNavSection() {
 }
 
 /**
+ * Detects if an element is an image block (nav authoring: image after a text block).
+ * @param {Element} el element to check
+ * @returns {boolean}
+ */
+function isNavImageBlock(el) {
+  return (el.tagName === 'P' && el.querySelector('picture'))
+    || (el.classList?.contains('image') && el.classList?.contains('block'));
+}
+
+/**
+ * Nav authoring: same section has multiple blocks — each Text block (ul) = one
+ * first-level item; Image block(s) immediately after a Text block = images for
+ * that item's dropdown. Rebuilds one ul from multiple uls + images.
+ * @param {Element} navSections .nav-sections element
+ */
+function normalizeNavSectionsFromBlocks(navSections) {
+  const wrapper = navSections.querySelector(':scope .default-content-wrapper');
+  if (!wrapper) return;
+  const children = [...wrapper.children];
+  if (children.length <= 1) return;
+  const items = [];
+  let lastNav = null;
+  children.forEach((el) => {
+    if (el.tagName === 'UL') {
+      const firstLi = el.querySelector(':scope > li');
+      if (firstLi) {
+        lastNav = { li: firstLi, images: [] };
+        items.push(lastNav);
+      }
+    } else if (lastNav && isNavImageBlock(el)) {
+      lastNav.images.push(el);
+    }
+  });
+  if (items.length <= 0) return;
+  const singleUl = document.createElement('ul');
+  items.forEach(({ li, images }) => {
+    const newLi = document.createElement('li');
+    const labelLink = li.querySelector(':scope > a');
+    const nestedUl = li.querySelector(':scope > ul');
+    const labelText = (labelLink || li).textContent?.replace(/\s+/g, ' ').trim().split('\n')[0].trim();
+    if (labelLink) {
+      newLi.appendChild(labelLink.cloneNode(true));
+    } else {
+      const a = document.createElement('a');
+      a.href = '#';
+      a.textContent = labelText;
+      newLi.appendChild(a);
+    }
+    const hasDropdown = nestedUl || images.length > 0;
+    if (hasDropdown) {
+      const panel = document.createElement('div');
+      panel.className = 'nav-dropdown-panel';
+      if (nestedUl) {
+        const listWrap = document.createElement('div');
+        listWrap.className = 'nav-dropdown-list';
+        listWrap.appendChild(nestedUl.cloneNode(true));
+        panel.appendChild(listWrap);
+      }
+      if (images.length > 0) {
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'nav-dropdown-images';
+        images.forEach((imgEl) => imgWrap.appendChild(imgEl.cloneNode(true)));
+        panel.appendChild(imgWrap);
+      }
+      newLi.appendChild(panel);
+    }
+    singleUl.appendChild(newLi);
+  });
+  wrapper.textContent = '';
+  wrapper.appendChild(singleUl);
+}
+
+/**
  * Toggles all nav sections
  * @param {Element} sections The container element
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
@@ -179,10 +252,14 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
+    normalizeNavSectionsFromBlocks(navSections);
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
+      const hasDropdown = navSection.querySelector('ul') || navSection.querySelector('.nav-dropdown-panel');
+      if (hasDropdown) navSection.classList.add('nav-drop');
+      navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
+          const isLabelLink = e.target.closest('a[href="#"]');
+          if (isLabelLink) e.preventDefault();
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
