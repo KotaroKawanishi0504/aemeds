@@ -1,0 +1,180 @@
+/**
+ * 本家 header.min.css からドロップダウン・メガメニュー関連のみ抽出したスタイル
+ * 元: https://www.marubeni.com/common/stylesheets/header.min.css
+ * 本家は :host, var(--rem), var(--vw) を使用。EDS では --rem を 10 相当で換算可能（例: 7.2*1px → 72px）
+ */
+
+/* ========== ドロップダウン表示エリア（全幅・固定） ========== */
+@media print, screen and (width >= 900px) {
+  .l-header__navigation-sub {
+    left: 0;
+    position: fixed;
+    top: calc(var(--rem) * 7.2 * 1px); /* 72px 相当 */
+    transition: 0.3s opacity;
+    width: 100% !important;
+  }
+
+  [aria-expanded="true"] ~ .l-header__navigation-sub {
+    transition-delay: 0.15s;
+  }
+
+  [aria-expanded="false"] ~ .l-header__navigation-sub {
+    opacity: 0;
+  }
+}
+
+@media screen and (width < 900px) {
+  .l-header__navigation-sub-dropdown {
+    display: none;
+  }
+}
+
+@media print, screen and (width >= 900px) {
+  .l-header__navigation-sub-list {
+    display: none;
+  }
+}
+
+@media screen and (width < 900px) {
+  .l-header__navigation-sub-list {
+    background-color: #f2f2f2;
+    grid-column: 1 / -1;
+  }
+}
+
+.l-header__navigation-sub-item {
+  margin-top: max(-1px, var(--rem) * -1 * 1px * 0.1);
+}
+
+.l-header__navigation-sub-link {
+  position: relative;
+}
+
+.l-header__navigation-sub-link::before {
+  aspect-ratio: 1;
+  display: grid;
+  font-size: calc(var(--rem) * 1.2 * 1px);
+  place-items: center;
+  position: absolute;
+  right: calc(var(--rem) * 2 * 1px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--rem) * 2.4 * 1px);
+  color: #e60012;
+  content: "\e902";
+  font-family: Ben, sans-serif !important;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* ========== メガメニュー本体（.l-header__dropdown） ========== */
+.l-header__dropdown:has(.l-header__dropdown-banner) {
+  background: linear-gradient(90deg, #fff 50%, #ecefee 50%);
+}
+
+.l-header__dropdown-content {
+  display: grid;
+  margin-inline: calc(50% - var(--vw) * 50px + var(--rem) * 0 * 1px);
+  width: calc(var(--vw) * 100px - var(--rem) * 0 * 1px);
+}
+
+@media print, screen and (width >= 900px) {
+  .l-header__dropdown-content {
+    padding-inline: calc(max((var(--vw) * 100 - var(--rem) * 145.6) / 2, var(--rem) * 4) * 1px);
+  }
+}
+
+@media screen and (width < 900px) {
+  .l-header__dropdown-content {
+    padding-inline: calc(var(--rem) * 2 * 1px);
+  }
+}
+
+/* リストのみ（バナーなし）: グリッド "header . list" */
+.l-header__dropdown-content:not(:has(.l-header__dropdown-banner)) {
+  grid-template: "header . list" / 12.3626373626% 4rem 1fr;
+}
+
+/* リスト＋バナーあり */
+.l-header__dropdown-content:has(.l-header__dropdown-banner) {
+  grid-template: "header . list banner" / 12.3626373626% 4rem 1fr 21.5666208791%;
+}
+
+.l-header__dropdown-content .f-search {
+  margin-block: calc(var(--rem) * 3.2 * 1px);
+  margin-inline: auto;
+  width: calc(var(--rem) * 115.2 * 1px);
+}
+
+.l-header__dropdown-content:has(.f-search) {
+  display: block;
+}
+
+/* ドロップダウン内の見出し（例: 「会社情報」） */
+.l-header__dropdown-header {
+  align-self: start;
+  font-size: calc(var(--rem) * 2 * 1px);
+  font-weight: 500;
+  grid-area: header;
+  padding-block: calc(var(--rem) * 3.2 * 1px);
+}
+
+/* ドロップダウン内のリンクリスト */
+.l-header__dropdown-list {
+  grid-area: list;
+  padding-block: 3.2rem;
+}
+
+.l-header__dropdown:has(.l-header__dropdown-banner) .l-header__dropdown-list {
+  background: #fff;
+}
+
+.l-header__dropdown-list .c-underline-list {
+  font-size: calc(var(--rem) * 1.5 * 1px);
+}
+
+.l-header__dropdown-list .c-underline-list__item {
+  border-top-color: #dfdfdf !important;
+}
+
+.l-header__dropdown-list .c-underline-list__inner {
+  padding-block: calc(var(--rem) * 1.9 * 1px) calc(var(--rem) * 2 * 1px);
+  padding-right: calc(var(--rem) * 2 * 1px);
+}
+
+/* ドロップダウン内の画像バナー領域 */
+.l-header__dropdown-banner {
+  background-color: #ecefee;
+  border-left: #fff solid calc(var(--rem) * 2.4 * 1px);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--rem) * 1.6 * 1px);
+  grid-area: banner;
+  padding-block: calc(var(--rem) * 3.2 * 1px);
+  padding-left: calc(var(--rem) * 4 * 1px);
+}
+
+/* ========== ドロップダウン背面の白パネル（開時のみ高さあり） ========== */
+@media print, screen and (width >= 900px) {
+  .l-header__background {
+    background: #fff;
+    height: 0;
+    left: 0;
+    position: fixed;
+    top: calc(var(--rem) * 7.2 * 1px);
+    transition: 0.3s height;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .l-header:not(:has([aria-expanded="true"]:not(.l-header__menu))) .l-header__background {
+    height: 0 !important;
+  }
+}
+
+@media screen and (width < 900px) {
+  .l-header__background {
+    display: none;
+  }
+}
