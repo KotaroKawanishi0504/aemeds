@@ -318,7 +318,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     max-width: 560px;
     padding: 20px 24px;
     background: #fff;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
     border-top: 2px solid #e60012;
     white-space: normal;
     z-index: 10;

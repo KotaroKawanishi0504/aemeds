@@ -81,6 +81,7 @@
   :root {
     --max-content-width: min(1344px, calc(100vw - 192px));
     --inline-section-padding: 0;
+
     /* Header bar height: 本家 7.2rem = 72px */
     --nav-height: 72px;
   }
