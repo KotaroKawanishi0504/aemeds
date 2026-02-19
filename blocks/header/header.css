@@ -397,6 +397,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   header nav .nav-sections .nav-dropdown-list ul {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     gap: 0 32px;
     margin: 0;
   }
