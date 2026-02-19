@@ -414,17 +414,21 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     border-top: 1px solid #dfdfdf;
   }
 
-  /* Line above first row (first item of each column): top border on first li (original) */
-  header nav .nav-sections .nav-dropdown-list ul li:first-child {
+  /* Line above first row: top border on first row items (original c-underline-list nth-child(-n+4)) */
+  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-child(-n+4) {
     border-top: 1px solid #dfdfdf;
   }
 
-  /* Line below last row: bottom border on last item of each column (original) */
-  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-child(4n) {
+  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-child(-n+3) {
+    border-top: 1px solid #dfdfdf;
+  }
+
+  /* Line below last row: bottom border on last row items (original; works for any item count) */
+  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-last-child(-n+4) {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-child(3n) {
+  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-last-child(-n+3) {
     border-bottom: 1px solid #dfdfdf;
   }
 
@@ -450,20 +454,21 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     vertical-align: top;
   }
 
+  /* Second-level link: row spacing from original c-underline-list__inner + extra line height */
   header nav .nav-sections .nav-dropdown-list li a {
     display: block;
     position: relative;
-    padding-block: 24px 25px;
+    padding-block: 28px 29px;
     padding-left: 24px;
-    padding-right: 1.75em;
+    padding-right: 28px;
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.6;
     font-weight: 400;
     color: #282828;
   }
 
-  /* Red right-pointing arrow at right end of each dropdown link (original) */
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list li a::after {
+  /* Red right-pointing arrow at right end (original \e902; fallback \203A ›) - class ensures visibility */
+  header nav .nav-sections .nav-dropdown-list .nav-dropdown-link::after {
     content: '\203A';
     position: absolute;
     right: 0;

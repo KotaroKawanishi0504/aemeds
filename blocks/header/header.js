@@ -137,6 +137,7 @@ function normalizeNavSectionsFromBlocks(navSections) {
         const itemCount = clonedUl.querySelectorAll(':scope > li').length;
         listWrap.dataset.columns = itemCount >= 10 ? '4' : '3';
         listWrap.appendChild(clonedUl);
+        listWrap.querySelectorAll('a').forEach((a) => a.classList.add('nav-dropdown-link'));
         content.appendChild(listWrap);
       }
       if (images.length > 0) {
