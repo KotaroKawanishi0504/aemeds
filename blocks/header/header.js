@@ -124,18 +124,28 @@ function normalizeNavSectionsFromBlocks(navSections) {
     if (hasDropdown) {
       const panel = document.createElement('div');
       panel.className = 'nav-dropdown-panel';
+      const content = document.createElement('div');
+      content.className = 'nav-dropdown-content';
       if (nestedUl) {
+        const headerEl = document.createElement('div');
+        headerEl.className = 'nav-dropdown-header';
+        headerEl.textContent = labelText;
+        content.appendChild(headerEl);
         const listWrap = document.createElement('div');
         listWrap.className = 'nav-dropdown-list';
-        listWrap.appendChild(nestedUl.cloneNode(true));
-        panel.appendChild(listWrap);
+        const clonedUl = nestedUl.cloneNode(true);
+        const itemCount = clonedUl.querySelectorAll(':scope > li').length;
+        listWrap.dataset.columns = itemCount >= 10 ? '4' : '3';
+        listWrap.appendChild(clonedUl);
+        content.appendChild(listWrap);
       }
       if (images.length > 0) {
         const imgWrap = document.createElement('div');
         imgWrap.className = 'nav-dropdown-images';
         images.forEach((imgEl) => imgWrap.appendChild(imgEl.cloneNode(true)));
-        panel.appendChild(imgWrap);
+        content.appendChild(imgWrap);
       }
+      panel.appendChild(content);
       newLi.appendChild(panel);
     }
     singleUl.appendChild(newLi);
