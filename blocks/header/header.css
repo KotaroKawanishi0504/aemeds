@@ -484,30 +484,10 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     grid-column: 2;
   }
 
-  /* Dropdown trigger ( .nav-drop ) */
+  /* Dropdown trigger ( .nav-drop ) - no arrow icon per original */
   header nav .nav-sections .nav-drop {
     position: relative;
-    padding-right: 20px;
     cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 4px;
-    margin-top: -3px;
-    width: 6px;
-    height: 6px;
-    border-right: 2px solid #282828;
-    border-bottom: 2px solid #282828;
-    transform: rotate(45deg);
-    transition: transform 0.2s;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    margin-top: -6px;
-    transform: rotate(-135deg);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
