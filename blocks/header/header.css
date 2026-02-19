@@ -455,13 +455,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     vertical-align: top;
   }
 
-  /* Second-level link: 23px space above/below text to separator lines */
+  /* Second-level link: 23px space above/below text (strong specificity for EDS/AEM) */
+  header nav .nav-sections .default-content-wrapper .nav-dropdown-panel .nav-dropdown-content .nav-dropdown-list ul li a,
   header nav .nav-sections .nav-dropdown-list li a {
     display: block;
     position: relative;
-    padding-block: 23px;
-    padding-left: 24px;
-    padding-right: 28px;
+    padding: 23px 28px 23px 24px;
     font-size: 15px;
     line-height: 1.6;
     font-weight: 400;
