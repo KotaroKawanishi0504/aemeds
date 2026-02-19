@@ -507,6 +507,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   }
 
   @media (hover: hover) {
+    /* Hide li gray border on hover so only the 1px red underline shows (avoids thick line at end of animation) */
+    header nav .nav-sections .nav-dropdown-list li:hover {
+      border-bottom-color: transparent;
+    }
+
     header nav .nav-sections .nav-dropdown-list li a:hover {
       color: #e60012;
     }
