@@ -286,9 +286,9 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     align-items: center;
   }
 
-  /* Top-level nav link: grid so ::before/::after can sit at bottom (original .l-header__navigation-link) */
+  /* Top-level nav link: relative so ::before/::after sit at bottom (original .l-header__navigation-link) */
   header nav .nav-sections .default-content-wrapper > ul > li > a {
-    display: grid;
+    display: flex;
     align-items: center;
     height: 100%;
     padding: 0 12px;
@@ -303,19 +303,22 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
 
   header nav .nav-sections .default-content-wrapper > ul > li > a::before,
   header nav .nav-sections .default-content-wrapper > ul > li > a::after {
-    grid-area: 1 / 1;
-    align-self: end;
     content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
     opacity: 0;
     transition: opacity 0.3s;
+    pointer-events: none;
   }
 
-  /* Curved/wavy red underline (original clip-path polygon) */
+  /* Curved/wavy red underline below link (original clip-path polygon) */
   header nav .nav-sections .default-content-wrapper > ul > li > a::before {
-    justify-self: center;
     width: 15px;
     height: 3px;
-    margin-bottom: 1px;
+    left: 50%;
+    margin-left: -7.5px;
+    bottom: 1px;
     background-color: #e60012;
     clip-path: polygon(
       100% 75%, 100% 75%, 90.031% 72.9%, 81.259% 67.2%, 73.649% 58.8%,
@@ -326,9 +329,9 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     );
   }
 
-  /* Straight red bar under link (original ::after) */
+  /* Straight red bar below link (original ::after) */
   header nav .nav-sections .default-content-wrapper > ul > li > a::after {
-    justify-self: stretch;
+    right: 0;
     width: 100%;
     height: 2px;
     background-color: #e60012;
