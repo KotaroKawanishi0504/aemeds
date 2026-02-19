@@ -441,17 +441,18 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     position: relative;
     padding-block: 19px 20px;
     padding-left: 24px;
-    padding-right: 8px;
+    padding-right: 1.5em;
     font-size: 15px;
     font-weight: 400;
     color: #282828;
   }
 
-  /* Red right-pointing arrow before each dropdown link (original .c-underline-list__item::before) */
-  header nav .nav-sections .nav-dropdown-list li a::before {
+  /* Red right-pointing arrow at right end of each dropdown link (original) */
+  header nav .nav-sections .nav-dropdown-list li a::after {
     content: '\203A';
     position: absolute;
-    left: 0;
+    right: 0;
+    left: auto;
     top: 50%;
     transform: translateY(-50%);
     color: #e60012;
@@ -467,7 +468,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   }
   /* stylelint-enable no-descending-specificity */
 
-  /* Dropdown panel: full viewport width (original .l-header__dropdown) */
+  /* Dropdown panel: full viewport width (original .l-header__dropdown), no red top line per original */
   header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel {
     display: none;
     position: fixed;
@@ -480,7 +481,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding-inline: 0;
     background: #fff;
     box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
-    border-top: 2px solid #e60012;
     white-space: normal;
     z-index: 10;
     grid-template-columns: 1fr;
@@ -488,26 +488,33 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     align-items: stretch;
   }
 
-  /* Inner content: centered, max-width like original */
+  /* Inner content: full width, one row = label left + list right (original layout) */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content {
     display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto 1fr;
-    gap: 24px;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    gap: 24px 48px;
     align-items: start;
-    max-width: min(1344px, calc(100vw - 192px));
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     padding-block: 3.2rem;
     padding-inline: 32px;
+    box-sizing: border-box;
+  }
+
+  /* With images: label | list | images (must come before list-only for stylelint) */
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-images) {
+    grid-template-columns: auto 1fr auto;
   }
 
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr;
   }
 
-  /* Dropdown header (e.g. "会社情報") - left-aligned like original */
+  /* Dropdown header (e.g. "会社情報") - left column, same row as list (original) */
   header nav .nav-sections .nav-dropdown-header {
-    grid-column: 1 / -1;
+    grid-column: 1;
     grid-row: 1;
     font-size: 20px;
     font-weight: 500;
@@ -518,13 +525,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   }
 
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list {
-    grid-row: 2;
-    grid-column: 1;
+    grid-row: 1;
+    grid-column: 2;
   }
 
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-images {
-    grid-row: 2;
-    grid-column: 2;
+    grid-row: 1;
+    grid-column: 3;
   }
 
   /* Dropdown trigger ( .nav-drop ) - no arrow icon per original */
