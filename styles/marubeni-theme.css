@@ -71,6 +71,9 @@
 
   /* 本家ラベル色 rgb(40,40,40) */
   --card-text-color: #282828;
+
+  /* Header: 本家 .l-header__bar の高さ（mobile 5.3rem = 53px） */
+  --nav-height: 53px;
 }
 
 /* 本家: 900px 以上で fluid 幅 min(1344px, 100vw - 192px)、左右は margin:auto */
@@ -78,6 +81,8 @@
   :root {
     --max-content-width: min(1344px, calc(100vw - 192px));
     --inline-section-padding: 0;
+    /* Header bar height: 本家 7.2rem = 72px */
+    --nav-height: 72px;
   }
 }
 
@@ -234,29 +239,6 @@ main .cards-wrapper.cards-wrapper .cards .cards-card-body a {
   white-space: normal;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
-}
-
-/* Header nav: 本家のリンク色・ホバー */
-header nav a:any-link {
-  color: var(--text-color);
-}
-
-header nav a:any-link:hover {
-  color: var(--link-hover-color);
-}
-
-/* メガメニュー風: ドロップダウンを多列・広めに（本家 .l-header__dropdown） */
-header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-  width: min(560px, 90vw);
-  max-width: 560px;
-  column-count: 3;
-  column-gap: 24px;
-  padding: 20px 24px;
-}
-
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-  break-inside: avoid;
-  padding: 6px 0;
 }
 
 /* モバイル: ツールを先に表示（本家 .l-header__utility が上） */
