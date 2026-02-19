@@ -396,7 +396,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   /* Panel list: 4 or 3 columns (original data-columns) */
   header nav .nav-sections .nav-dropdown-list ul {
     column-count: 3;
-    column-gap: 24px;
+    column-gap: 32px;
     margin: 0;
   }
 
@@ -412,6 +412,20 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
 
   header nav .nav-sections .nav-dropdown-list li + li {
     border-top: 1px solid #dfdfdf;
+  }
+
+  /* Line above first row (first item of each column): top border on first li (original) */
+  header nav .nav-sections .nav-dropdown-list ul li:first-child {
+    border-top: 1px solid #dfdfdf;
+  }
+
+  /* Line below last row: bottom border on last item of each column (original) */
+  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-child(4n) {
+    border-bottom: 1px solid #dfdfdf;
+  }
+
+  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-child(3n) {
+    border-bottom: 1px solid #dfdfdf;
   }
 
   header nav .nav-sections .nav-dropdown-images {
@@ -439,16 +453,17 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   header nav .nav-sections .nav-dropdown-list li a {
     display: block;
     position: relative;
-    padding-block: 19px 20px;
+    padding-block: 24px 25px;
     padding-left: 24px;
-    padding-right: 1.5em;
+    padding-right: 1.75em;
     font-size: 15px;
+    line-height: 1.5;
     font-weight: 400;
     color: #282828;
   }
 
   /* Red right-pointing arrow at right end of each dropdown link (original) */
-  header nav .nav-sections .nav-dropdown-list li a::after {
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list li a::after {
     content: '\203A';
     position: absolute;
     right: 0;
@@ -459,6 +474,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     font-size: 1.2rem;
     line-height: 1;
     font-weight: 400;
+    pointer-events: none;
   }
 
   @media (hover: hover) {
@@ -488,18 +504,18 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     align-items: stretch;
   }
 
-  /* Inner content: full width, one row = label left + list right (original layout) */
+  /* Inner content: full width, one row = label left + list right (original layout, generous spacing) */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto;
-    gap: 24px 48px;
+    gap: 32px 56px;
     align-items: start;
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding-block: 3.2rem;
-    padding-inline: 32px;
+    padding-block: 3.6rem 4rem;
+    padding-inline: 40px 48px;
     box-sizing: border-box;
   }
 
