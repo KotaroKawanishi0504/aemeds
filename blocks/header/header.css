@@ -408,22 +408,30 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 0;
     border: none;
     break-inside: avoid;
-    /* All items get bottom line; -1px margin so it overlaps with next item's top = no double thickness */
     border-bottom: 1px solid #dfdfdf;
-    margin-bottom: -1px;
   }
 
+  /* Top border on all but first-in-row (avoids double line at row boundary without negative margin) */
   header nav .nav-sections .nav-dropdown-list li + li {
     border-top: 1px solid #dfdfdf;
   }
 
-  /* Line above first row: top border on first row items */
+  /* Line above first row only */
   header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-child(-n+4) {
     border-top: 1px solid #dfdfdf;
   }
 
   header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-child(-n+3) {
     border-top: 1px solid #dfdfdf;
+  }
+
+  /* From row 2 onward: no top border; row boundary = previous row's bottom only (avoids thick first row, same line height) */
+  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-child(n+5) {
+    border-top: none;
+  }
+
+  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-child(n+4) {
+    border-top: none;
   }
 
   header nav .nav-sections .nav-dropdown-images {
