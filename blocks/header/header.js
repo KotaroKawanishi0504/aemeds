@@ -160,15 +160,16 @@ export default async function decorate(block) {
 
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand?.querySelector('.button')
-    || navBrand?.querySelector('a[href] img')?.closest('a');
+    || navBrand?.querySelector('a[href] img')?.closest('a')
+    || navBrand?.querySelector('a[href] picture')?.closest('a')
+    || navBrand?.querySelector('.image.block a[href]');
   if (brandLink) {
     if (brandLink.classList.contains('button')) {
       brandLink.className = '';
       const btnContainer = brandLink.closest('.button-container');
       if (btnContainer) btnContainer.className = '';
     }
-    // Linked image (e.g. Linked Image block): no extra cleanup
-  } else if (navBrand) {
+  } else if (navBrand && !navBrand.querySelector('.image.block')) {
     const fallbackLink = document.createElement('a');
     fallbackLink.href = '/';
     fallbackLink.textContent = 'Home';
