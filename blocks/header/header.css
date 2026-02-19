@@ -393,22 +393,27 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     }
   }
 
-  /* Panel list: 4 or 3 columns; no full-width bottom line (per-item lines only) */
+  /* Panel list: 4 or 3 columns via flex so row height is aligned (underlines at same level) */
   header nav .nav-sections .nav-dropdown-list ul {
-    column-count: 3;
-    column-gap: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 32px;
     margin: 0;
   }
 
-  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul {
-    column-count: 4;
+  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li {
+    width: calc((100% - 32px * 3) / 4);
+  }
+
+  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li {
+    width: calc((100% - 32px * 2) / 3);
   }
 
   header nav .nav-sections .nav-dropdown-list li {
     padding: 0;
     border: none;
-    break-inside: avoid;
     border-bottom: 1px solid #dfdfdf;
+    box-sizing: border-box;
   }
 
   /* Top border on all but first-in-row (avoids double line at row boundary without negative margin) */
