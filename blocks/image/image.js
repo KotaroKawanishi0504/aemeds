@@ -15,7 +15,7 @@ function getImageUrlFromCell(cell) {
 }
 
 /**
- * Image block with optional link. Link not set => no anchor tag (EDS: image first, link as wrapper).
+ * Image block with optional link. Link not set => no anchor (EDS: image first, link as wrapper).
  * Content: config (image, imageAlt, link) or rows: image, alt, link.
  * @param {Element} block The image block element
  */
