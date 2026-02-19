@@ -137,6 +137,13 @@ function normalizeNavSectionsFromBlocks(navSections) {
         const itemCount = clonedUl.querySelectorAll(':scope > li').length;
         listWrap.dataset.columns = itemCount >= 10 ? '4' : '3';
         listWrap.appendChild(clonedUl);
+        const listItems = clonedUl.querySelectorAll(':scope > li');
+        const cols = parseInt(listWrap.dataset.columns, 10);
+        const rows = Math.ceil(listItems.length / cols);
+        for (let j = 0; j < cols; j += 1) {
+          const lastIndex = Math.min((j + 1) * rows, listItems.length) - 1;
+          if (lastIndex >= 0) listItems[lastIndex].classList.add('nav-dropdown-item-last-in-column');
+        }
         listWrap.querySelectorAll('a').forEach((a) => a.classList.add('nav-dropdown-link'));
         content.appendChild(listWrap);
       }

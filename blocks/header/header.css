@@ -393,11 +393,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     }
   }
 
-  /* Panel list: 4 or 3 columns (original data-columns) */
+  /* Panel list: 4 or 3 columns; single bottom border to avoid double line thickness */
   header nav .nav-sections .nav-dropdown-list ul {
     column-count: 3;
     column-gap: 32px;
     margin: 0;
+    border-bottom: 1px solid #dfdfdf;
   }
 
   header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul {
@@ -423,12 +424,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     border-top: 1px solid #dfdfdf;
   }
 
-  /* Line below last row: bottom border on last row items (original; works for any item count) */
-  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-last-child(-n+4) {
+  /* Line below last-in-column items that are NOT in the last row (avoids missing line under 経営理念, コーポレート等) */
+  header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li.nav-dropdown-item-last-in-column:not(:nth-last-child(-n+4)) {
     border-bottom: 1px solid #dfdfdf;
   }
 
-  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-last-child(-n+3) {
+  header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li.nav-dropdown-item-last-in-column:not(:nth-last-child(-n+3)) {
     border-bottom: 1px solid #dfdfdf;
   }
 
@@ -454,11 +455,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     vertical-align: top;
   }
 
-  /* Second-level link: row spacing from original c-underline-list__inner + extra line height */
+  /* Second-level link: 23px space above/below text to separator lines */
   header nav .nav-sections .nav-dropdown-list li a {
     display: block;
     position: relative;
-    padding-block: 28px 29px;
+    padding-block: 23px;
     padding-left: 24px;
     padding-right: 28px;
     font-size: 15px;
