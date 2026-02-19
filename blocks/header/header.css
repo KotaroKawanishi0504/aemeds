@@ -58,6 +58,24 @@ header nav[aria-expanded='true'] {
     position: relative;
   }
 
+  /* Full-width white sheet when dropdown open (original .l-header__background) */
+  header .nav-wrapper::before {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    min-height: 320px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+    z-index: 9;
+  }
+
+  header .nav-wrapper:has(.nav-sections .default-content-wrapper > ul > li[aria-expanded='true'])::before {
+    display: block;
+  }
+
   header nav {
     display: flex;
     flex-wrap: nowrap;
@@ -263,16 +281,24 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   }
 
   header nav .nav-sections .nav-dropdown-list li {
-    padding: 6px 0;
+    padding: 0;
     border: none;
     break-inside: avoid;
+  }
+
+  header nav .nav-sections .nav-dropdown-list li + li {
+    border-top: 1px solid #dfdfdf;
   }
 
   header nav .nav-sections .nav-dropdown-images {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     min-width: 160px;
+    background-color: #ecefee;
+    border-left: 24px solid #fff;
+    padding-block: 3.2rem;
+    padding-left: 40px;
   }
 
   header nav .nav-sections .nav-dropdown-images a,
@@ -288,10 +314,22 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
 
   header nav .nav-sections .nav-dropdown-list li a {
     display: block;
-    padding: 4px 0;
+    position: relative;
+    padding-block: 19px 20px;
+    padding-right: 24px;
     font-size: 15px;
     font-weight: 400;
     color: #282828;
+  }
+
+  header nav .nav-sections .nav-dropdown-list li a::after {
+    content: '›';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e60012;
+    font-size: 1.2rem;
   }
 
   @media (hover: hover) {
@@ -311,7 +349,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     min-width: 200px;
     width: min(560px, 90vw);
     max-width: 560px;
-    padding: 20px 24px;
+    padding-block: 3.2rem;
+    padding-inline: 24px;
     background: #fff;
     box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
     border-top: 2px solid #e60012;
