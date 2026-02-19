@@ -507,8 +507,16 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   }
 
   @media (hover: hover) {
-    /* Hide li gray border on hover so only the 1px red underline shows (avoids thick line at end of animation) */
+    /* Hide li gray border on hover so only the 1px red underline shows (all rows) */
     header nav .nav-sections .nav-dropdown-list li:hover {
+      border-bottom-color: transparent;
+    }
+
+    /* Ensure 1st/3rd row: override any nth-child border so hovered cell shows only red line */
+    header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-child(-n+4):hover,
+    header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li:nth-child(n+9):hover,
+    header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-child(-n+3):hover,
+    header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li:nth-child(n+7):hover {
       border-bottom-color: transparent;
     }
 
