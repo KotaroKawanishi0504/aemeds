@@ -155,6 +155,10 @@
           {
             "name": "ワイド（全幅）",
             "value": "wide"
+          },
+          {
+            "name": "上下余白なし",
+            "value": "no-padding"
           }
         ]
       }

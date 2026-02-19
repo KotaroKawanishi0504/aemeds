@@ -285,3 +285,10 @@ main .section.wide > div {
   padding-right: 0;
   width: 100%;
 }
+
+/* Section: 上下余白なし — Author が Style で選択可能 */
+main .section.no-padding,
+main > .section.no-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
