@@ -14,6 +14,36 @@ import {
 } from '../../scripts/aem.js';
 
 /**
+ * Normalizes AEM Franklin Image prose output (div > p > picture > img) in the first
+ * section into EDS Image block structure so decorateBlocks + image block run correctly.
+ * @param {Element} main Fragment root (main element)
+ */
+function normalizeFragmentFirstSectionImage(main) {
+  const firstSection = main.querySelector(':scope > div');
+  if (!firstSection) return;
+  const firstChild = firstSection.firstElementChild;
+  if (!firstChild || firstChild.tagName !== 'P') return;
+  const picture = firstChild.querySelector('picture');
+  const img = picture?.querySelector('img');
+  if (!picture || !img) return;
+  const imageAlt = img.getAttribute('alt') || '';
+  const row1 = document.createElement('div');
+  const cell1 = document.createElement('div');
+  cell1.appendChild(picture);
+  row1.appendChild(cell1);
+  const row2 = document.createElement('div');
+  const cell2 = document.createElement('div');
+  cell2.textContent = imageAlt;
+  row2.appendChild(cell2);
+  const block = document.createElement('div');
+  block.className = 'image';
+  block.appendChild(row1);
+  block.appendChild(row2);
+  firstSection.textContent = '';
+  firstSection.appendChild(block);
+}
+
+/**
  * Loads a fragment.
  * @param {string} path The path to the fragment
  * @returns {HTMLElement} The root element of the fragment
@@ -36,6 +66,7 @@ export async function loadFragment(path) {
       resetAttributeBase('img', 'src');
       resetAttributeBase('source', 'srcset');
 
+      normalizeFragmentFirstSectionImage(main);
       decorateMain(main);
       await loadSections(main);
       return main;
