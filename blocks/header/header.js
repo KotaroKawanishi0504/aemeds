@@ -127,7 +127,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 export default async function decorate(block) {
   ensureSkipLink();
 
-  // load nav fragment: prefer meta 'nav'; else /nav, parent path, then page path
+  // load nav fragment: prefer meta 'nav'; else content-path nav first, then /nav fallback
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : null;
   const basePath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '';
@@ -135,9 +135,9 @@ export default async function decorate(block) {
   const candidates = navPath
     ? [navPath]
     : [
-      '/nav',
       `${parentPath}/nav`,
       `${basePath}/nav`,
+      '/nav',
       `${basePath}/Header/nav`,
     ];
   const fragment = await candidates.reduce(
