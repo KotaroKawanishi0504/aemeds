@@ -440,13 +440,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     border-top: none;
   }
 
-  /* Image column: fixed width to match original megamenu gray section */
+  /* Image column: width from grid ratio (8fr); min so it doesn't collapse */
   header nav .nav-sections .nav-dropdown-images {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: 320px;
-    min-width: 320px;
+    min-width: 0;
     background-color: #ecefee;
     border-left: 24px solid #fff;
     padding-block: 3.2rem;
@@ -568,13 +567,14 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     box-sizing: border-box;
   }
 
-  /* With images: label | list | images (must come before list-only for stylelint) */
+  /* With images: original ratio 5 : 18 : 8 (title | list | images), responsive */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-images) {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 5fr 18fr minmax(240px, 8fr);
   }
 
+  /* Without images: original ratio 1 : 4 (title | 4-col list), responsive */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 4fr;
   }
 
   /* Dropdown header (e.g. "会社情報") - left column, same row as list (original) */
