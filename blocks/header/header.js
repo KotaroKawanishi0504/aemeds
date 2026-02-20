@@ -274,8 +274,6 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    const pinMenu = new URLSearchParams(window.location.search).get('pinmenu') === '1'
-      || window.location.hash === '#pinmenu'; /* keep dropdown open for measuring (e.g. Page Ruler) */
     normalizeNavSectionsFromBlocks(navSections);
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       const hasDropdown = navSection.querySelector('ul') || navSection.querySelector('.nav-dropdown-panel');
@@ -300,7 +298,6 @@ export default async function decorate(block) {
     });
     navSections.addEventListener('mouseleave', () => {
       if (!isDesktop.matches) return;
-      if (pinMenu) return;
       toggleAllNavSections(navSections, false);
     });
   }
