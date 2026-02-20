@@ -448,7 +448,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     min-width: 0;
     background-color: #ecefee;
     border-left: 24px solid #fff;
-    padding-block: 3.2rem;
+    padding-top: 30.4px;
+    padding-bottom: 3.2rem;
     padding-inline: 38px;
   }
 
@@ -562,7 +563,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding-block: 3.6rem 4rem;
+    padding-block: 30.4px 4rem;
     padding-inline: 38px;
     box-sizing: border-box;
   }
@@ -578,13 +579,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     grid-template-columns: 1fr 5fr;
   }
 
-  /* Dropdown header (e.g. "会社情報") - left column, same row as list (original) */
+  /* Dropdown header (e.g. "会社情報") - left column, same row as list (original 30.4px) */
   header nav .nav-sections .nav-dropdown-header {
     grid-column: 1;
     grid-row: 1;
     font-size: 20px;
     font-weight: 500;
-    padding-block: 0;
+    padding-block: 30.4px;
     margin: 0;
     color: #282828;
     text-align: left;
@@ -593,6 +594,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list {
     grid-row: 1;
     grid-column: 2;
+    padding-top: 30.4px;
   }
 
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-images {
