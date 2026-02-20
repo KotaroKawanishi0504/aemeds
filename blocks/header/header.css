@@ -440,7 +440,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     border-top: none;
   }
 
-  /* Image column: width from grid ratio (8fr); min so it doesn't collapse */
+  /* Image column: width from grid ratio (8fr); same gray padding left and right of images */
   header nav .nav-sections .nav-dropdown-images {
     display: flex;
     flex-direction: column;
@@ -449,7 +449,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     background-color: #ecefee;
     border-left: 24px solid #fff;
     padding-block: 3.2rem;
-    padding-left: 40px;
+    padding-inline: 40px;
   }
 
   header nav .nav-sections .nav-dropdown-images a,
