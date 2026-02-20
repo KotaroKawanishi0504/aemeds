@@ -449,7 +449,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     background-color: #ecefee;
     border-left: 24px solid #fff;
     padding-block: 3.2rem;
-    padding-inline: 40px;
+    padding-inline: 38px;
   }
 
   header nav .nav-sections .nav-dropdown-images a,
@@ -563,13 +563,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     max-width: 100%;
     margin: 0;
     padding-block: 3.6rem 4rem;
-    padding-inline: 40px 48px;
+    padding-inline: 38px;
     box-sizing: border-box;
   }
 
-  /* With images: ratio 3 : 18 : 8 (narrower title), no right padding so gray reaches edge */
+  /* With images: ratio 3 : 18 : 8 (narrower title), same 38px padding as original */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-images) {
-    padding-inline: 40px 0;
+    padding-inline: 38px;
     grid-template-columns: 3fr 18fr minmax(240px, 8fr);
   }
 
