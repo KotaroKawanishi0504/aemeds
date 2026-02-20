@@ -573,9 +573,9 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     grid-template-columns: 3fr 18fr minmax(240px, 8fr);
   }
 
-  /* Without images: original ratio 1 : 4 (title | 4-col list), responsive */
+  /* Without images: narrower title so links get more space (1 : 5) */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 5fr;
   }
 
   /* Dropdown header (e.g. "会社情報") - left column, same row as list (original) */
