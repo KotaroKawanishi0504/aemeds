@@ -567,9 +567,10 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     box-sizing: border-box;
   }
 
-  /* With images: original ratio 5 : 18 : 8 (title | list | images), responsive */
+  /* With images: ratio 3 : 18 : 8 (narrower title), no right padding so gray reaches edge */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-images) {
-    grid-template-columns: 5fr 18fr minmax(240px, 8fr);
+    padding-inline: 40px 0;
+    grid-template-columns: 3fr 18fr minmax(240px, 8fr);
   }
 
   /* Without images: original ratio 1 : 4 (title | 4-col list), responsive */
