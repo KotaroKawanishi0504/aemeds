@@ -134,8 +134,8 @@ function normalizeNavSectionsFromBlocks(navSections) {
         const listWrap = document.createElement('div');
         listWrap.className = 'nav-dropdown-list';
         const clonedUl = nestedUl.cloneNode(true);
-        const itemCount = clonedUl.querySelectorAll(':scope > li').length;
-        listWrap.dataset.columns = itemCount >= 10 ? '4' : '3';
+        /* With images: 3 columns (e.g. 事業紹介). Without images: 4 columns (e.g. ニュース) */
+        listWrap.dataset.columns = images.length > 0 ? '3' : '4';
         listWrap.appendChild(clonedUl);
         const listItems = clonedUl.querySelectorAll(':scope > li');
         const cols = parseInt(listWrap.dataset.columns, 10);

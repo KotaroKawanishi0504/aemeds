@@ -440,11 +440,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     border-top: none;
   }
 
+  /* Image column: fixed width to match original megamenu gray section */
   header nav .nav-sections .nav-dropdown-images {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    min-width: 160px;
+    width: 320px;
+    min-width: 320px;
     background-color: #ecefee;
     border-left: 24px solid #fff;
     padding-block: 3.2rem;
