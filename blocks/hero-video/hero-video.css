@@ -14,28 +14,37 @@ main .hero-video-media {
   position: relative;
   width: 100%;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
 }
 
-/* Video: visible from 900px */
+/* Video: visible from 900px; fill container so bottom can be cropped (original: object-fit cover) */
 .hero-video-video,
 main .hero-video-video {
   display: none;
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
 }
 
 .hero-video-video video,
 main .hero-video-video video {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
   vertical-align: middle;
 }
 
-/* Poster: visible only at 899px and below (mobile) */
+/* Poster: visible only at 899px and below (mobile); fill container like video */
 .hero-video-poster,
 main .hero-video-poster {
   display: none;
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
 }
 
 .hero-video-poster picture,
@@ -43,8 +52,10 @@ main .hero-video-poster picture,
 .hero-video-poster img,
 main .hero-video-poster img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
   vertical-align: middle;
 }
 

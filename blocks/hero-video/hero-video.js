@@ -142,8 +142,6 @@ export default async function decorate(block) {
     mediaWrap.append(posterWrap);
   }
 
-  block.append(mediaWrap);
-
   if (linkUrl && linkLabel) {
     const linkEl = document.createElement('a');
     linkEl.href = linkUrl;
@@ -167,6 +165,8 @@ export default async function decorate(block) {
     labelSpan.className = 'hero-video-link-label';
     labelSpan.textContent = decodeLinkLabel(linkLabel);
     linkEl.appendChild(labelSpan);
-    block.append(linkEl);
+    mediaWrap.append(linkEl);
   }
+
+  block.append(mediaWrap);
 }
