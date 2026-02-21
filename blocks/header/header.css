@@ -44,6 +44,12 @@ body.has-hero-video main > div:first-child.hero-video-container,
 body.has-hero-video main > div.section:first-of-type {
   margin-top: calc(-1 * var(--nav-height, 72px));
   padding-top: 0;
+  overflow: hidden;
+}
+
+/* Shift hero video content up by nav height so the top (e.g. black bar) is drawn under the header */
+body.has-hero-video .hero-video-container .hero-video-media {
+  transform: translateY(calc(-1 * var(--nav-height, 72px)));
 }
 
 /* Scrolled past hero video: restore solid header */
