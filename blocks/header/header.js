@@ -212,10 +212,25 @@ function normalizeNavSectionsFromBlocks(navSections) {
           if (lastIndex >= 0) listItems[lastIndex].classList.add('nav-dropdown-item-last-in-column');
         }
         listWrap.querySelectorAll('a').forEach((a) => {
-          const raw = a.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+          const itemLi = a.closest('li');
+          const raw = itemLi
+            ? (itemLi.textContent?.replace(/\s+/g, ' ').trim() ?? '')
+            : (a.textContent?.replace(/\s+/g, ' ').trim() ?? '');
           const dropParsed = parseNewWindowLabel(raw);
           if (dropParsed.isNewWindow) {
             applyNewWindowToLink(a, dropParsed.displayLabel, 'nav-dropdown-link-label');
+            if (itemLi) {
+              [...itemLi.childNodes].forEach((node) => {
+                if (node.nodeType === Node.TEXT_NODE
+                  && node.nodeValue?.trim() === NEW_WINDOW_SUFFIX) {
+                  node.remove();
+                }
+                if (node.nodeType === Node.ELEMENT_NODE
+                  && node.textContent?.trim() === NEW_WINDOW_SUFFIX) {
+                  node.remove();
+                }
+              });
+            }
           } else {
             a.textContent = dropParsed.displayLabel;
           }
