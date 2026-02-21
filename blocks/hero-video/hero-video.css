@@ -213,8 +213,8 @@ main .hero-video-link:hover .hero-video-link-icon .hero-video-link-icon-svg circ
     left: auto;
     right: 0;
 
-    /* 下に3px、右に2pxずらす */
-    margin: 32px 30px 29px 32px;
+    /* 下に7px、右に4pxずらす（前回+下4px、右2px） */
+    margin: 32px 28px 25px 32px;
     font-size: 14px;
   }
 }
