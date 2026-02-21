@@ -604,9 +604,10 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     grid-area: list;
   }
 
-  /* Images: sibling of content, second column of panel; padding 32px to match content */
+  /* Images: sibling of content, second column of panel; stretch to full height so gray fills to bottom */
   header nav .nav-sections .nav-dropdown-panel > .nav-dropdown-images {
     grid-column: 2;
+    align-self: stretch;
     padding-block: 32px;
     padding-inline: 40px;
   }
