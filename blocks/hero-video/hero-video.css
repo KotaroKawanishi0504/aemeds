@@ -212,7 +212,9 @@ main .hero-video-link:hover .hero-video-link-icon .hero-video-link-icon-svg circ
   main .hero-video-link {
     left: auto;
     right: 0;
-    margin: 32px;
-    font-size: 16px;
+
+    /* 下に3px、右に2pxずらす */
+    margin: 32px 30px 29px 32px;
+    font-size: 14px;
   }
 }
