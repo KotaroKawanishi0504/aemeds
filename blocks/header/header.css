@@ -578,7 +578,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
 
   /* Without images: original 3-column grid (header | 4rem gutter | list), title 12.3626% */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
-    grid-template: "header list" auto / 12.3626% 4rem 1fr;
+    grid-template: "header . list" auto / 12.3626% 4rem 1fr;
     gap: 0;
     padding-inline: 40px;
   }
