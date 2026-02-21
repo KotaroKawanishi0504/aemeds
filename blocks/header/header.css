@@ -576,9 +576,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding-block: 0 4rem;
   }
 
-  /* Without images: narrower title so links get more space (1 : 5) */
+  /* Without images: original 3-column grid (header | 4rem gutter | list), title 12.3626% */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
-    grid-template-columns: 1fr 5fr;
+    grid-template: "header list" auto / 12.3626% 4rem 1fr;
+    gap: 0;
+    padding-inline: 40px;
   }
 
   /* Dropdown header */
@@ -593,7 +595,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     text-align: left;
   }
 
-  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-header {
+  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-header,
+  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) .nav-dropdown-header {
     grid-area: header;
   }
 
@@ -603,7 +606,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding-top: 0;
   }
 
-  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-list {
+  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-list,
+  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) .nav-dropdown-list {
     grid-area: list;
   }
 
