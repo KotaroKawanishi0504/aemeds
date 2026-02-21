@@ -15,9 +15,10 @@ main .hero-video-media {
   width: 100%;
   overflow: hidden;
   aspect-ratio: 16 / 9;
+  background-color: #000;
 }
 
-/* Video: visible from 900px; fill container so bottom can be cropped (original: object-fit cover) */
+/* Video: visible from 900px; anchor bottom so narrow black bar at bottom of asset is visible (original overlap) */
 .hero-video-video,
 main .hero-video-video {
   display: none;
@@ -33,7 +34,7 @@ main .hero-video-video video {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
   vertical-align: middle;
 }
 
@@ -55,7 +56,7 @@ main .hero-video-poster img {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
   vertical-align: middle;
 }
 
