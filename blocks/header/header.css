@@ -553,13 +553,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     align-items: stretch;
   }
 
-  /* Panel with images: content and images as siblings, two columns (align tops) */
-  header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel:has(> .nav-dropdown-images) {
-    grid-template-columns: 21fr minmax(240px, 8fr);
-    align-items: start;
-  }
-
-  /* Inner content: full width, one row = label left + list right; top padding 30.4px */
+  /* Inner content: full width; without images = 2 cols (title | list) */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -574,17 +568,20 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     box-sizing: border-box;
   }
 
-  /* With images: content has only title | list (images is sibling), ratio 3 : 18 */
-  header nav .nav-sections .nav-dropdown-panel:has(> .nav-dropdown-images) .nav-dropdown-content {
-    grid-template-columns: 3fr 18fr;
+  /* With images: original 4-column grid (header . list banner), ratio 178 : 40 : 912 : 311 */
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-images) {
+    grid-template: "header . list banner" auto / 178fr 40fr 912fr 311fr;
+    gap: 0;
+    padding-inline: 40px;
+    padding-block: 0 4rem;
   }
 
   /* Without images: narrower title so links get more space (1 : 5) */
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list) {
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
     grid-template-columns: 1fr 5fr;
   }
 
-  /* Dropdown header: top padding 0 so title aligns with list and images */
+  /* Dropdown header */
   header nav .nav-sections .nav-dropdown-header {
     grid-column: 1;
     grid-row: 1;
@@ -596,15 +593,23 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     text-align: left;
   }
 
+  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-header {
+    grid-area: header;
+  }
+
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list {
     grid-row: 1;
     grid-column: 2;
     padding-top: 0;
   }
 
-  /* Images: sibling of content, second column of panel; top padding 30.4px to align with content */
-  header nav .nav-sections .nav-dropdown-panel > .nav-dropdown-images {
-    grid-column: 2;
+  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-list {
+    grid-area: list;
+  }
+
+  header nav .nav-sections .nav-dropdown-content .nav-dropdown-images {
+    grid-area: banner;
+    padding-top: 0;
   }
 
   /* Dropdown trigger ( .nav-drop ) - no arrow icon per original */

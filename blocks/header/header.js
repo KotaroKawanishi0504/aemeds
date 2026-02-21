@@ -147,13 +147,13 @@ function normalizeNavSectionsFromBlocks(navSections) {
         listWrap.querySelectorAll('a').forEach((a) => a.classList.add('nav-dropdown-link'));
         content.appendChild(listWrap);
       }
-      panel.appendChild(content);
       if (images.length > 0) {
         const imgWrap = document.createElement('div');
         imgWrap.className = 'nav-dropdown-images';
         images.forEach((imgEl) => imgWrap.appendChild(imgEl.cloneNode(true)));
-        panel.appendChild(imgWrap);
+        content.appendChild(imgWrap);
       }
+      panel.appendChild(content);
       newLi.appendChild(panel);
     }
     singleUl.appendChild(newLi);
