@@ -29,13 +29,18 @@ header .nav-wrapper::after {
   transition: background-color 0.25s ease;
 }
 
-/* Top section has hero-video: transparent header over video, overlap */
+/* Top section has hero-video: semi-transparent white over video (original rgba(255,255,255,.8)) */
 body.has-hero-video header .nav-wrapper {
-  background-color: transparent;
+  background-color: rgb(255 255 255 / 80%);
 }
 
 body.has-hero-video header .nav-wrapper::after {
   background-color: transparent;
+}
+
+/* First section overlaps under header so video top is hidden by header height (original overlap) */
+body.has-hero-video main > div:first-child {
+  margin-top: calc(-1 * var(--nav-height, 72px));
 }
 
 /* Scrolled past hero video: restore solid header */
