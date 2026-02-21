@@ -457,7 +457,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 23px 28px 23px 24px;
     font-size: 15px;
     line-height: 1.6;
-    font-weight: 400;
+    font-weight: 500;
+    -webkit-font-smoothing: subpixel-antialiased;
     color: #282828;
     transition: color 0.3s;
   }
