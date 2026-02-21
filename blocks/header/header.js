@@ -349,9 +349,14 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
   const main = document.querySelector('main');
-  if (main?.querySelector(':scope .block')) {
+  const runOverlap = () => {
     applyHeroVideoOverlap();
+    // Retry once after a tick (AEM authoring may decorate blocks slightly later)
+    requestAnimationFrame(() => applyHeroVideoOverlap());
+  };
+  if (main?.querySelector(':scope .block')) {
+    runOverlap();
   } else {
-    document.addEventListener('main-sections-loaded', () => applyHeroVideoOverlap(), { once: true });
+    document.addEventListener('main-sections-loaded', runOverlap, { once: true });
   }
 }
