@@ -553,7 +553,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     align-items: stretch;
   }
 
-  /* Inner content: full width, one row = label left + list right (original layout, generous spacing) */
+  /* Panel with images: content and images as siblings, two columns (align tops) */
+  header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel:has(> .nav-dropdown-images) {
+    grid-template-columns: 21fr minmax(240px, 8fr);
+    align-items: start;
+  }
+
+  /* Inner content: full width, one row = label left + list right; top padding 30.4px */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -568,24 +574,23 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     box-sizing: border-box;
   }
 
-  /* With images: ratio 3 : 18 : 8 (narrower title), same 38px padding as original */
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-images) {
-    padding-inline: 38px;
-    grid-template-columns: 3fr 18fr minmax(240px, 8fr);
+  /* With images: content has only title | list (images is sibling), ratio 3 : 18 */
+  header nav .nav-sections .nav-dropdown-panel:has(> .nav-dropdown-images) .nav-dropdown-content {
+    grid-template-columns: 3fr 18fr;
   }
 
   /* Without images: narrower title so links get more space (1 : 5) */
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list) {
     grid-template-columns: 1fr 5fr;
   }
 
-  /* Dropdown header (e.g. "会社情報") - left column, same row as list (original 30.4px) */
+  /* Dropdown header: top padding 0 so title aligns with list and images */
   header nav .nav-sections .nav-dropdown-header {
     grid-column: 1;
     grid-row: 1;
     font-size: 20px;
     font-weight: 500;
-    padding-block: 30.4px;
+    padding-block: 0;
     margin: 0;
     color: #282828;
     text-align: left;
@@ -594,12 +599,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list {
     grid-row: 1;
     grid-column: 2;
-    padding-top: 30.4px;
+    padding-top: 0;
   }
 
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-images {
-    grid-row: 1;
-    grid-column: 3;
+  /* Images: sibling of content, second column of panel; top padding 30.4px to align with content */
+  header nav .nav-sections .nav-dropdown-panel > .nav-dropdown-images {
+    grid-column: 2;
   }
 
   /* Dropdown trigger ( .nav-drop ) - no arrow icon per original */
