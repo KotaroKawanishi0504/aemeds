@@ -19,6 +19,34 @@ function ensureSkipLink() {
   document.body.insertBefore(a, document.body.firstChild);
 }
 
+/**
+ * When the first block in main is hero-video: add body.has-hero-video, set up scroll-based
+ * header opacity, and ensure the hero section can overlap the header. Call after main content
+ * is ready (e.g. on main-sections-loaded) so the first block is present.
+ */
+export function applyHeroVideoOverlap() {
+  if (document.body.classList.contains('has-hero-video')) return;
+  const main = document.querySelector('main');
+  const firstBlock = main?.querySelector(':scope .block');
+  if (!firstBlock?.classList.contains('hero-video')) return;
+
+  document.body.classList.add('has-hero-video');
+  const heroSection = firstBlock.closest('main > div.section') || firstBlock.closest('main > div') || firstBlock.parentElement;
+  const navHeightPx = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10) || 72;
+
+  const updateHeaderScrolled = () => {
+    const rect = heroSection.getBoundingClientRect();
+    if (rect.bottom <= navHeightPx) {
+      document.body.classList.add('header-scrolled');
+    } else {
+      document.body.classList.remove('header-scrolled');
+    }
+  };
+
+  window.addEventListener('scroll', updateHeaderScrolled, { passive: true });
+  updateHeaderScrolled();
+}
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -320,24 +348,10 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 
-  // When top section has hero-video: transparent header over video, solid after scroll
   const main = document.querySelector('main');
-  const firstBlock = main?.querySelector(':scope .block');
-  if (firstBlock?.classList.contains('hero-video')) {
-    document.body.classList.add('has-hero-video');
-    const heroSection = firstBlock.closest('main > div') || firstBlock.parentElement;
-    const navHeightPx = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10) || 72;
-
-    const updateHeaderScrolled = () => {
-      const rect = heroSection.getBoundingClientRect();
-      if (rect.bottom <= navHeightPx) {
-        document.body.classList.add('header-scrolled');
-      } else {
-        document.body.classList.remove('header-scrolled');
-      }
-    };
-
-    window.addEventListener('scroll', updateHeaderScrolled, { passive: true });
-    updateHeaderScrolled();
+  if (main?.querySelector(':scope .block')) {
+    applyHeroVideoOverlap();
+  } else {
+    document.addEventListener('main-sections-loaded', () => applyHeroVideoOverlap(), { once: true });
   }
 }

@@ -146,6 +146,7 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   if (main) {
     await loadSections(main);
+    document.dispatchEvent(new CustomEvent('main-sections-loaded', { detail: { main } }));
   } else {
     await loadOrphanBlocks(doc);
   }

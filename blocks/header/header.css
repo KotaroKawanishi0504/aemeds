@@ -38,9 +38,10 @@ body.has-hero-video header .nav-wrapper::after {
   background-color: transparent;
 }
 
-/* First section overlaps under header so video top is hidden by header height (original overlap) */
-body.has-hero-video main > div:first-child {
+/* Hero-video section (first section with hero-video) overlaps under header so video top is hidden */
+body.has-hero-video main > div:first-child.hero-video-container {
   margin-top: calc(-1 * var(--nav-height, 72px));
+  padding-top: 0;
 }
 
 /* Scrolled past hero video: restore solid header */
