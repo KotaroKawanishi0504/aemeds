@@ -59,6 +59,11 @@ body.has-hero-video .hero-video-container .hero-video.block {
   margin-bottom: calc(-1 * var(--nav-height, 72px));
 }
 
+/* Shrink wrapper footprint so its 855px content height doesn't leave a 72px gap below */
+body.has-hero-video .hero-video-container .hero-video-wrapper {
+  margin-bottom: calc(-1 * var(--nav-height, 72px));
+}
+
 /* Scrolled past hero video: restore solid header */
 body.has-hero-video.header-scrolled header .nav-wrapper {
   background-color: #fff;
