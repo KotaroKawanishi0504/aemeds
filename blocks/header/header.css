@@ -553,7 +553,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     align-items: stretch;
   }
 
-  /* Inner content: full width; without images = 2 cols (title | list) */
+  /* Panel with images: content and images as siblings, two columns */
+  header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel:has(> .nav-dropdown-images) {
+    grid-template-columns: 1fr minmax(240px, 311fr);
+    align-items: start;
+  }
+
+  /* Inner content: full width; padding-top 32px per original */
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -563,24 +569,25 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding-block: 30.4px 4rem;
+    padding-block: 32px 4rem;
     padding-inline: 38px;
     box-sizing: border-box;
   }
 
-  /* With images: original 4-column grid (header . list banner), ratio 178 : 40 : 912 : 311 */
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-images) {
-    grid-template: "header . list banner" auto / 178fr 40fr 912fr 311fr;
+  /* With images (images outside content): content = 3 cols (header . list), ratio 178 : 40 : 912 */
+  header nav .nav-sections .nav-dropdown-panel:has(> .nav-dropdown-images) .nav-dropdown-content {
+    grid-template: "header . list" auto / 178fr 40fr 912fr;
     gap: 0;
     padding-inline: 40px;
-    padding-block: 0 4rem;
+    padding-block: 32px 4rem;
   }
 
   /* Without images: original 3-column grid (header | 4rem gutter | list), title 12.3626% */
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) {
+  header nav .nav-sections .nav-dropdown-panel:not(:has(> .nav-dropdown-images)) .nav-dropdown-content:has(.nav-dropdown-list) {
     grid-template: "header . list" auto / 12.3626% 4rem 1fr;
     gap: 0;
     padding-inline: 40px;
+    padding-block: 32px 4rem;
   }
 
   /* Dropdown header */
@@ -595,8 +602,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     text-align: left;
   }
 
-  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-header,
-  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) .nav-dropdown-header {
+  header nav .nav-sections .nav-dropdown-panel:has(> .nav-dropdown-images) .nav-dropdown-header,
+  header nav .nav-sections .nav-dropdown-panel:not(:has(> .nav-dropdown-images)) .nav-dropdown-content:has(.nav-dropdown-list) .nav-dropdown-header {
     grid-area: header;
   }
 
@@ -606,14 +613,16 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding-top: 0;
   }
 
-  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-images) .nav-dropdown-list,
-  header nav .nav-sections .nav-dropdown-content:has(.nav-dropdown-list):not(:has(.nav-dropdown-images)) .nav-dropdown-list {
+  header nav .nav-sections .nav-dropdown-panel:has(> .nav-dropdown-images) .nav-dropdown-list,
+  header nav .nav-sections .nav-dropdown-panel:not(:has(> .nav-dropdown-images)) .nav-dropdown-content:has(.nav-dropdown-list) .nav-dropdown-list {
     grid-area: list;
   }
 
-  header nav .nav-sections .nav-dropdown-content .nav-dropdown-images {
-    grid-area: banner;
-    padding-top: 0;
+  /* Images: sibling of content, second column of panel; padding-top 32px to align with content */
+  header nav .nav-sections .nav-dropdown-panel > .nav-dropdown-images {
+    grid-column: 2;
+    padding-top: 32px;
+    padding-inline: 40px;
   }
 
   /* Dropdown trigger ( .nav-drop ) - no arrow icon per original */
