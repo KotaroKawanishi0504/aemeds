@@ -4,6 +4,40 @@ import { loadFragment } from '../fragment/fragment.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+/** Nav link suffix for "open in new window". Strip from display; set target="_blank" and icon. */
+const NEW_WINDOW_SUFFIX = '|NewWindow';
+
+/**
+ * If text ends with |NewWindow, returns display label (suffix stripped) and isNewWindow true.
+ * @param {string} text - Raw label text from nav list
+ * @returns {{ displayLabel: string, isNewWindow: boolean }}
+ */
+function parseNewWindowLabel(text) {
+  const t = (text || '').trim();
+  const isNewWindow = t.endsWith(NEW_WINDOW_SUFFIX);
+  const displayLabel = isNewWindow
+    ? t.slice(0, -NEW_WINDOW_SUFFIX.length).trim()
+    : t;
+  return { displayLabel, isNewWindow };
+}
+
+/**
+ * Apply "open in new window" to an anchor: set attributes and wrap text in span for icon.
+ * @param {HTMLAnchorElement} a - Link element
+ * @param {string} displayLabel - Visible text (without |NewWindow)
+ * @param {string} labelSpanClass - Wrapper span class for icon (e.g. nav-link-label)
+ */
+function applyNewWindowToLink(a, displayLabel, labelSpanClass) {
+  a.setAttribute('target', '_blank');
+  a.setAttribute('rel', 'noopener noreferrer');
+  a.setAttribute('data-open-in-new-window', 'true');
+  a.textContent = '';
+  const span = document.createElement('span');
+  span.className = labelSpanClass;
+  span.textContent = displayLabel;
+  a.appendChild(span);
+}
+
 /**
  * Injects skip link to main content (Marubeni-style). Ensures main has id="main" for target.
  */
@@ -138,14 +172,19 @@ function normalizeNavSectionsFromBlocks(navSections) {
     const cloneForLabel = li.cloneNode(true);
     cloneForLabel.querySelector(':scope > ul')?.remove();
     const labelText = cloneForLabel.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+    const topParsed = parseNewWindowLabel(labelText);
     if (labelLink) {
       const clonedLink = labelLink.cloneNode(true);
-      clonedLink.textContent = labelText;
+      if (topParsed.isNewWindow) {
+        applyNewWindowToLink(clonedLink, topParsed.displayLabel, 'nav-link-label');
+      } else {
+        clonedLink.textContent = topParsed.displayLabel;
+      }
       newLi.appendChild(clonedLink);
     } else {
       const a = document.createElement('a');
       a.href = '#';
-      a.textContent = labelText;
+      a.textContent = topParsed.displayLabel;
       newLi.appendChild(a);
     }
     const hasDropdown = nestedUl || images.length > 0;
@@ -157,7 +196,7 @@ function normalizeNavSectionsFromBlocks(navSections) {
       if (nestedUl) {
         const headerEl = document.createElement('div');
         headerEl.className = 'nav-dropdown-header';
-        headerEl.textContent = labelText;
+        headerEl.textContent = topParsed.displayLabel;
         content.appendChild(headerEl);
         const listWrap = document.createElement('div');
         listWrap.className = 'nav-dropdown-list';
@@ -172,7 +211,16 @@ function normalizeNavSectionsFromBlocks(navSections) {
           const lastIndex = Math.min((j + 1) * rows, listItems.length) - 1;
           if (lastIndex >= 0) listItems[lastIndex].classList.add('nav-dropdown-item-last-in-column');
         }
-        listWrap.querySelectorAll('a').forEach((a) => a.classList.add('nav-dropdown-link'));
+        listWrap.querySelectorAll('a').forEach((a) => {
+          const raw = a.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+          const dropParsed = parseNewWindowLabel(raw);
+          if (dropParsed.isNewWindow) {
+            applyNewWindowToLink(a, dropParsed.displayLabel, 'nav-dropdown-link-label');
+          } else {
+            a.textContent = dropParsed.displayLabel;
+          }
+          a.classList.add('nav-dropdown-link');
+        });
         content.appendChild(listWrap);
       }
       panel.appendChild(content);

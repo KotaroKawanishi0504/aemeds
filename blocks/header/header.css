@@ -286,6 +286,19 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   font-weight: 400;
 }
 
+/* New-window link: red window icon after label (same as Cards block, Ben \e901). All viewports. */
+header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new-window='true'] .nav-link-label::after {
+  content: '\e901';
+  font-family: Ben, sans-serif !important;
+  font-style: normal;
+  font-weight: 400;
+  color: #e60012;
+  display: inline-block;
+  margin-left: calc(var(--rem, 10) * 0.4 * 1px);
+  font-size: calc(var(--rem, 10) * 1.2 * 1px);
+  text-decoration: none;
+}
+
 @media (width >= 900px) {
   header nav .nav-sections {
     display: block;
@@ -536,6 +549,19 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     line-height: 1;
     font-weight: 400;
     pointer-events: none;
+  }
+
+  /* New-window link in dropdown: red window icon after label (same as Cards, Ben \e901) */
+  header nav .nav-sections .nav-dropdown-list .nav-dropdown-link[data-open-in-new-window='true'] .nav-dropdown-link-label::after {
+    content: '\e901';
+    font-family: Ben, sans-serif !important;
+    font-style: normal;
+    font-weight: 400;
+    color: #e60012;
+    display: inline-block;
+    margin-left: calc(var(--rem, 10) * 0.4 * 1px);
+    font-size: calc(var(--rem, 10) * 1.2 * 1px);
+    text-decoration: none;
   }
 
   @media (hover: hover) {
