@@ -64,11 +64,6 @@ body.has-hero-video .hero-video-container .hero-video-wrapper {
   margin-bottom: calc(-1 * var(--nav-height, 72px));
 }
 
-/* Remove top padding from the section immediately after hero so no 80px gap appears below the video */
-body.has-hero-video .hero-video-container + .section {
-  padding-top: 0;
-}
-
 /* Scrolled past hero video: restore solid header */
 body.has-hero-video.header-scrolled header .nav-wrapper {
   background-color: #fff;
