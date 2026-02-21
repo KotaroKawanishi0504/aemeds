@@ -58,23 +58,7 @@ header nav[aria-expanded='true'] {
     position: relative;
   }
 
-  /* Full-width white sheet when dropdown open (original .l-header__background) */
-  header .nav-wrapper::before {
-    content: '';
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    min-height: 320px;
-    background: #fff;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
-    z-index: 9;
-  }
-
-  header .nav-wrapper:has(.nav-sections .default-content-wrapper > ul > li[aria-expanded='true'])::before {
-    display: block;
-  }
+  /* No full-width sheet below nav; dropdown panel has its own background and box-shadow */
 
   header nav {
     display: flex;
