@@ -460,8 +460,10 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
 
   header nav .nav-sections .nav-dropdown-images img {
     width: 100%;
+    max-width: 100%;
     height: auto;
     vertical-align: top;
+    object-fit: contain;
   }
 
   /* Second-level link: 23px space above/below text (strong specificity for EDS/AEM) */
@@ -553,9 +555,9 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     align-items: stretch;
   }
 
-  /* Panel with images: content and images as siblings, two columns */
+  /* Panel with images: content and images as siblings; ratio content : images = 1130 : 311 (original) */
   header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel:has(> .nav-dropdown-images) {
-    grid-template-columns: 1fr minmax(240px, 311fr);
+    grid-template-columns: 1130fr minmax(240px, 311fr);
     align-items: start;
   }
 
