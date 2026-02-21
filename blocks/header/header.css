@@ -47,9 +47,11 @@ body.has-hero-video main > div.section:first-of-type {
   overflow: hidden;
 }
 
-/* Shift hero video content up by nav height so the top (e.g. black bar) is drawn under the header */
+/* Shift hero video content up by nav height so the top (e.g. black bar) is drawn under the header.
+   Negative margin-bottom collapses layout so no gap appears below the media (avoids black band). */
 body.has-hero-video .hero-video-container .hero-video-media {
   transform: translateY(calc(-1 * var(--nav-height, 72px)));
+  margin-bottom: calc(-1 * var(--nav-height, 72px));
 }
 
 /* Scrolled past hero video: restore solid header */
