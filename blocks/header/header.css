@@ -54,9 +54,7 @@ header nav[aria-expanded='true'] {
 }
 
 @media (width >= 900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
+  /* Keep .nav-wrapper position: fixed so header sticks on scroll (original behavior) */
 
   /* No full-width sheet below nav; dropdown panel has its own background and box-shadow */
 
