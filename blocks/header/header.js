@@ -281,6 +281,43 @@ export default async function decorate(block) {
     if (section) section.classList.add(`nav-${c}`);
   });
 
+  // Ensure nav-tools exists and prepend language + search (original: l-header__utility)
+  let navTools = nav.querySelector('.nav-tools');
+  if (!navTools) {
+    navTools = document.createElement('div');
+    navTools.className = 'section nav-tools';
+    navTools.dataset.sectionStatus = 'loaded';
+    nav.appendChild(navTools);
+  }
+  const isEn = (typeof document.documentElement.lang === 'string'
+    && document.documentElement.lang.toLowerCase().startsWith('en'))
+    || (typeof window.location.pathname === 'string' && window.location.pathname.startsWith('/en'));
+  const utility = document.createElement('div');
+  utility.className = 'nav-utility';
+  const langUl = document.createElement('ul');
+  langUl.className = 'nav-language';
+  const jaLi = document.createElement('li');
+  jaLi.className = 'nav-language-item';
+  const enLi = document.createElement('li');
+  enLi.className = 'nav-language-item';
+  if (isEn) {
+    jaLi.innerHTML = '<a href="/jp/">Ja</a>';
+    enLi.setAttribute('data-current', '');
+    enLi.textContent = 'En';
+  } else {
+    jaLi.setAttribute('data-current', '');
+    jaLi.textContent = 'Ja';
+    enLi.innerHTML = '<a href="/en/">En</a>';
+  }
+  langUl.append(jaLi, enLi);
+  const searchLink = document.createElement('a');
+  searchLink.href = isEn ? '/en/search/' : '/jp/search/';
+  searchLink.className = 'nav-search';
+  searchLink.setAttribute('aria-label', '検索');
+  searchLink.innerHTML = '<span class="u-visually-hidden">検索</span>';
+  utility.append(langUl, searchLink);
+  navTools.prepend(utility);
+
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand?.querySelector('.button')
     || navBrand?.querySelector('a[href] img')?.closest('a')

@@ -695,7 +695,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   }
 }
 
-/* ---- Tools ( .l-header__utility ) ---- */
+/* ---- Tools ( .l-header__utility ): language (Ja/En) + search icon ---- */
 header nav .nav-tools {
   grid-area: tools;
   font-size: 15px;
@@ -721,4 +721,91 @@ header nav .nav-tools a {
   header nav .nav-tools a:hover {
     color: #e60012;
   }
+}
+
+/* Utility wrapper (original .l-header__utility): language list + search */
+header nav .nav-utility {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Language (original .l-header__language): Ja | En */
+header nav .nav-language {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header nav .nav-language-item {
+  display: block;
+  padding-block: 2px;
+  position: relative;
+}
+
+header nav .nav-language-item[data-current]::before {
+  background-color: currentcolor;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: max(1px, 0.1em);
+  position: absolute;
+  width: 100%;
+}
+
+header nav .nav-language-item a {
+  position: relative;
+  text-decoration: none;
+}
+
+header nav .nav-language-item a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: -2px;
+}
+
+/* Search icon (original .l-header__search button): Ben \e90d */
+header nav .nav-search {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  color: #282828;
+  text-decoration: none;
+}
+
+header nav .nav-search::before {
+  content: '\e90d';
+  font-family: Ben, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  header nav .nav-search:hover {
+    color: #e60012;
+  }
+}
+
+/* Screen-reader only text (original .u-visually-hidden) */
+header .u-visually-hidden {
+  border: 0;
+  clip-path: inset(100%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
