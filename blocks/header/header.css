@@ -54,6 +54,11 @@ body.has-hero-video .hero-video-container .hero-video-media {
   margin-bottom: calc(-1 * var(--nav-height, 72px));
 }
 
+/* Also collapse the block (and wrapper) height so no 72px gap; media's margin alone may not shrink block in AEM */
+body.has-hero-video .hero-video-container .hero-video.block {
+  margin-bottom: calc(-1 * var(--nav-height, 72px));
+}
+
 /* Scrolled past hero video: restore solid header */
 body.has-hero-video.header-scrolled header .nav-wrapper {
   background-color: #fff;
