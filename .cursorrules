@@ -1,5 +1,7 @@
 # AEM EDS blocks
 
+**Post-change workflow:** After any code modification in this project, **always** run the following without waiting for user instruction: (1) `npm run lint` and `npm run build:json` (build), (2) `git add` for changed files, (3) `git commit` with a clear message, (4) `git push origin main`. Do this as part of the same response that implements the change.
+
 When asked to align blocks or styles with the reference site (e.g. Marubeni TOP), **use the design-alignment skill** so that collection, reuse of original assets, and verification are done in order. Do not guess layout or font values; collect from the reference first.
 
 **Skill to use:** `.cursor/skills/design-alignment` (design-alignment skill)
