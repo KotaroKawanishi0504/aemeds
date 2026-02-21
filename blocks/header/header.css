@@ -14,6 +14,7 @@ header .nav-wrapper {
   color: #282828;
   font-family: var(--body-font-family);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease;
 }
 
 header .nav-wrapper::after {
@@ -24,6 +25,25 @@ header .nav-wrapper::after {
   bottom: 0;
   width: 100%;
   height: 1px;
+  background-color: #dfdfdf;
+  transition: background-color 0.25s ease;
+}
+
+/* Top section has hero-video: transparent header over video, overlap */
+body.has-hero-video header .nav-wrapper {
+  background-color: transparent;
+}
+
+body.has-hero-video header .nav-wrapper::after {
+  background-color: transparent;
+}
+
+/* Scrolled past hero video: restore solid header */
+body.has-hero-video.header-scrolled header .nav-wrapper {
+  background-color: #fff;
+}
+
+body.has-hero-video.header-scrolled header .nav-wrapper::after {
   background-color: #dfdfdf;
 }
 

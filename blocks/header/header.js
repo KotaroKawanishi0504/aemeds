@@ -319,4 +319,25 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // When top section has hero-video: transparent header over video, solid after scroll
+  const main = document.querySelector('main');
+  const firstBlock = main?.querySelector(':scope .block');
+  if (firstBlock?.classList.contains('hero-video')) {
+    document.body.classList.add('has-hero-video');
+    const heroSection = firstBlock.closest('main > div') || firstBlock.parentElement;
+    const navHeightPx = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10) || 72;
+
+    const updateHeaderScrolled = () => {
+      const rect = heroSection.getBoundingClientRect();
+      if (rect.bottom <= navHeightPx) {
+        document.body.classList.add('header-scrolled');
+      } else {
+        document.body.classList.remove('header-scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', updateHeaderScrolled, { passive: true });
+    updateHeaderScrolled();
+  }
 }
