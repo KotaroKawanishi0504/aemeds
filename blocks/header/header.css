@@ -107,15 +107,16 @@ header nav[aria-expanded='true'] {
   header nav {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 0 32px;
-    padding: 0 32px;
+    padding: 0 32px 0 40px;
     width: 100%;
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
   }
+
 
   header nav[aria-expanded='true'] {
     min-height: 0;
@@ -300,10 +301,21 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 }
 
 @media (width >= 900px) {
+  header nav .nav-brand {
+    flex-shrink: 0;
+  }
+
   header nav .nav-sections {
-    display: block;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
     visibility: visible;
     white-space: nowrap;
+  }
+
+  header nav .nav-sections > .default-content-wrapper {
+    flex: 0 0 auto;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
