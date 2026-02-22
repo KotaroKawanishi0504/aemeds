@@ -353,7 +353,8 @@ main .cards > ul > li > a.cards-card-link[data-open-in-new-window="true"] [data-
 
 /* 本家: 画像の下に本文（赤丸矢印＋ラベル）。画像とテキスト間は固定 24px（テキストサイズに依存しない） */
 
-/* AEM: .cards-wrapper 直下でも .cards-card-body に当たるようフォールバックを追加 */
+/* AEM: .cards-wrapper 直下でも .cards-card-body に当たるようフォールバックを追加。.section.cards-container で詳細度を上げて上書きに勝つ */
+main .section.cards-container .cards-wrapper .cards .cards-card-body,
 .cards .cards-card-body,
 main .cards .cards-card-body,
 .cards-wrapper .cards-card-body,
@@ -374,6 +375,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body {
 }
 
 /* Block dialog: text size (s/m/l). Default above uses --card-font-size 1.8 */
+main .section.cards-container .cards-wrapper .cards.cards-text-s .cards-card-body,
 .cards.cards-text-s .cards-card-body,
 main .cards.cards-text-s .cards-card-body,
 .cards-wrapper .cards.cards-text-s .cards-card-body,
@@ -386,6 +388,7 @@ main .cards-wrapper.cards-wrapper > div .cards.cards-text-s .cards-card-body {
   margin-top: 16px;
 }
 
+main .section.cards-container .cards-wrapper .cards.cards-text-l .cards-card-body,
 .cards.cards-text-l .cards-card-body,
 main .cards.cards-text-l .cards-card-body,
 .cards-wrapper .cards.cards-text-l .cards-card-body,
@@ -418,6 +421,7 @@ main .cards-wrapper.cards-wrapper > div .cards.cards-text-l .cards-card-body {
   }
 }
 
+main .section.cards-container .cards-wrapper .cards .cards-card-body-icon,
 .cards .cards-card-body-icon,
 main .cards .cards-card-body-icon,
 .cards-wrapper .cards-card-body-icon,
@@ -463,6 +467,7 @@ main .cards-wrapper .cards.cards-no-arrow .cards-card-body,
 }
 
 /* 矢印: 本家 .c-icon-link__icon::before — Ben \e902, font-size calc(var(--rem)*1px) */
+main .section.cards-container .cards-wrapper .cards .cards-card-body-icon::before,
 .cards .cards-card-body-icon::before,
 main .cards .cards-card-body-icon::before,
 .cards-wrapper .cards-card-body-icon::before,
@@ -483,6 +488,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon::before {
   pointer-events: none;
 }
 
+main .section.cards-container .cards-wrapper .cards .cards-card-body-icon .cards-card-body-icon-svg,
 .cards .cards-card-body-icon .cards-card-body-icon-svg,
 main .cards .cards-card-body-icon .cards-card-body-icon-svg,
 .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg,
@@ -498,6 +504,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-i
 }
 
 /* 本家 .c-icon-link__icon circle: stroke-dasharray でアニメーション */
+main .section.cards-container .cards-wrapper .cards .cards-card-body-icon .cards-card-body-icon-svg circle,
 .cards .cards-card-body-icon .cards-card-body-icon-svg circle,
 main .cards .cards-card-body-icon .cards-card-body-icon-svg circle,
 .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg circle,
@@ -511,6 +518,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-i
   transition: stroke-width 0.3s ease;
 }
 
+main .section.cards-container .cards-wrapper .cards > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle,
 .cards > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle,
 main .cards > ul > li:hover .cards-card-body-icon .cards-card-body-icon-svg circle {
   animation: 0.45s ease-in-out forwards c-icon-link-animation;
@@ -541,6 +549,7 @@ main .cards > ul > li:hover .cards-card-image img {
 }
 
 /* ラベル: 通常時は #282828（ホバー時のみ赤）。inline-flex + align-items:center でアイコンと縦揃え */
+main .section.cards-container .cards-wrapper .cards .cards-card-body a,
 .cards .cards-card-body a,
 main .cards .cards-card-body a,
 .cards-wrapper .cards-card-body a,
