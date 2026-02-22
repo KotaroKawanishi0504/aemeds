@@ -333,7 +333,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
-    gap: 0 12px;
+    gap: 0 8px;
     margin: 0;
     align-items: center;
   }
