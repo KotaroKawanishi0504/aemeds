@@ -112,9 +112,8 @@ header nav[aria-expanded='true'] {
     gap: 0 32px;
     padding: 0 40px;
     width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+
+    /* Keep original bar width and centering: max-width and margin from default (lines above) apply */
   }
 
 
