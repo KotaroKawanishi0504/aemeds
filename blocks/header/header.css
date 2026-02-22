@@ -110,7 +110,7 @@ header nav[aria-expanded='true'] {
     justify-content: flex-start;
     align-items: center;
     gap: 0 32px;
-    padding: 0 32px 0 40px;
+    padding: 0 40px;
     width: 100%;
     max-width: 100%;
     margin-left: 0;
