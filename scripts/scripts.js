@@ -93,14 +93,25 @@ export function decorateMain(main) {
  */
 /**
  * Sets --global-text-scale and --rem on :root from window width.
- * 900px → scale 0.65, 1280px → scale 0.85; --rem base 6–10 by width.
+ * 1280px+: 本家仕様 --rem=10, body 16px, h2 32px のため scale=16/18.
+ * 900–1279px: scale 0.65→0.85, rem=baseRem*scale.
  * Used when CSS 100vw does not re-evaluate on resize (e.g. AEM preview).
  */
 function applyGlobalTextScale() {
   const w = window.innerWidth;
-  const scale = w < 900 ? 0.65 : Math.max(0.65, Math.min(0.85, 0.65 + ((w - 900) * 0.2) / 380));
-  const baseRem = w < 900 ? 6 : Math.max(6, Math.min(10, (w / 1280) * 10));
-  const rem = baseRem * scale;
+  let scale;
+  let rem;
+  if (w < 900) {
+    scale = 0.65;
+    rem = 6;
+  } else if (w >= 1280) {
+    scale = 16 / 18;
+    rem = 10;
+  } else {
+    scale = Math.max(0.65, Math.min(0.85, 0.65 + ((w - 900) * 0.2) / 380));
+    const baseRem = Math.max(6, Math.min(10, (w / 1280) * 10));
+    rem = baseRem * scale;
+  }
   document.documentElement.style.setProperty('--global-text-scale', String(scale));
   document.documentElement.style.setProperty('--rem', String(rem));
 }

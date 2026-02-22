@@ -103,6 +103,23 @@
   }
 }
 
+/* 本家 1280px 以上: --rem=10 固定、body 16px、セクション見出し 32px（ORIGINAL_FONT_SIZES_1280.md） */
+@media screen and (width >= 1280px) {
+  :root {
+    --global-text-scale: 0.8889; /* 16/18: body 16px, h2 32px */
+    --rem: 10;
+    --body-font-size-m: 16px;
+    --body-font-size-s: calc(16 * 16/18 * 1px);
+    --body-font-size-xs: calc(14 * 16/18 * 1px);
+    --heading-font-size-xxl: 45px;
+    --heading-font-size-xl: 32px;
+    --heading-font-size-l: 28px;
+    --heading-font-size-m: 22px;
+    --heading-font-size-s: 20px;
+    --heading-font-size-xs: 18px;
+  }
+}
+
 /*
  * ヘッダ・アイコンなしカード: AEM で --rem 継承が効かない場合の直接指定（幅連動スケール）。
  * header.css の .default-content-wrapper > ul > li > a 等を上書きするため詳細度を合わせて指定。
@@ -130,9 +147,10 @@
   }
   /* stylelint-enable no-descending-specificity */
 
+  /* 本家 1280+ でカードタイトル 18px (--rem*1.8)。アイコンありカードと統一 */
   .cards-carousel-title,
   main .cards-carousel-title {
-    font-size: calc(14 * var(--global-text-scale) * 1px) !important;
+    font-size: calc(var(--rem, 10) * 1.8 * 1px) !important;
   }
 }
 
