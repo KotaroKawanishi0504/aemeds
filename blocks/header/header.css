@@ -327,10 +327,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     align-self: unset;
   }
 
+  /* Menu block width: original ~945px vs AEM ~1033px; reduce gap to match original (logo/tools unchanged) */
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
-    gap: 0 24px;
+    gap: 0 16px;
     margin: 0;
     align-items: center;
   }

@@ -1,0 +1,13 @@
+{
+  "viewport": {
+    "w": 1536,
+    "h": 730
+  },
+  "logoRight": 216.5,
+  "firstLinkLeft": 288.078125,
+  "lastLinkRight": 1232.921875,
+  "gapLogoToMenu": 71.578125,
+  "menuBlockWidth": 944.84375,
+  "gapBetweenItems": 0,
+  "linkCount": 8
+}
