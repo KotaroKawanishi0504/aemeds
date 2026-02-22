@@ -211,7 +211,7 @@ main .cards:not(:has(> ul)) > div > div:first-child img {
 main .cards:not(:has(> ul)) > div > div:nth-child(2) {
   flex: 0 0 auto;
   margin: var(--card-body-margin-top, 24px) 0 0;
-  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + var(--card-icon-gap, 1)) * 1px);
   position: relative;
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
@@ -360,7 +360,7 @@ main .cards .cards-card-body {
   min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: var(--card-body-margin-top, 24px) 0 0;
   position: relative;
-  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + var(--card-icon-gap, 1)) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);
@@ -694,7 +694,7 @@ main .cards-wrapper .cards-card-body {
   min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
-  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + var(--card-icon-gap, 1)) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);
@@ -901,7 +901,7 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body {
   min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
-  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + var(--card-icon-gap, 1)) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);
@@ -1025,7 +1025,7 @@ main .cards-wrapper .cards .cards-card-body {
   min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
   margin: calc(var(--rem, 10) * 2.4 * 1px) 0 0;
   position: relative;
-  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + 1) * 1px);
+  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + var(--card-icon-gap, 1)) * 1px);
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px);
   font-weight: var(--card-body-font-weight, 400);
   line-height: var(--card-body-line-height, 1.5);

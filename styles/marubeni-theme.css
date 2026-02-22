@@ -41,9 +41,10 @@
   --card-icon-color: #e60012;
   --card-icon-arrow-color: #e60012;
 
-  /* 方法B: 本家 01-common.min.css と同じ倍率（--rem との calc で px 算出）。desktop: 2.6→26px, 1.8→18px */
-  --card-icon-size: 2.6;
+  /* 方法B: 本家よりやや小さめの円でアイコン・テキスト重なり防止。desktop: 2.4→24px, 1.8→18px */
+  --card-icon-size: 2.4;
   --card-font-size: 1.8;
+  --card-icon-gap: 1.5;
   --card-icon-stroke-width: 1.5;
   --card-icon-circle-r: 12;
   --card-icon-circle-c: 75.398;
@@ -87,8 +88,8 @@
     /* Header bar height: 本家 7.2*--rem; scale with viewport 900–1280 (51px–72px) */
     --nav-height: clamp(51px, 5.625vw, 72px);
 
-    /* 本家 --rem: min(10, vw/1280*10); フォント・余白を幅に応じてスケール (900px→7.03, 1280px→10) */
-    --rem: clamp(7.03, 100vw / 1280 * 10, 10);
+    /* 本家 --rem: min(10, vw/1280*10); 狭い幅でもメニュー見切れ防止のため最小 6 でスケール */
+    --rem: clamp(6, 100vw / 1280 * 10, 10);
   }
 }
 
@@ -98,6 +99,7 @@
     /* 本家 .c-icon-link モバイル: --icon-size: 2.4, --font-size: 1.6 */
     --card-icon-size: 2.4;
     --card-font-size: 1.6;
+    --card-icon-gap: 1.5;
 
     /* 本家モバイル --rem: vw/393*10 (393px で 10 相当) */
     --rem: calc(100vw / 393 * 10);
