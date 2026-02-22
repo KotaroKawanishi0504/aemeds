@@ -108,6 +108,18 @@
  * header.css の .default-content-wrapper > ul > li > a 等を上書きするため詳細度を合わせて指定。
  */
 @media screen and (width >= 900px) {
+  /* JS で --global-text-scale を更新するため、body・見出しで変数が確実に効くよう !important で指定 */
+  body {
+    font-size: var(--body-font-size-m) !important;
+  }
+
+  h1 { font-size: var(--heading-font-size-xxl) !important; }
+  h2 { font-size: var(--heading-font-size-xl) !important; }
+  h3 { font-size: var(--heading-font-size-l) !important; }
+  h4 { font-size: var(--heading-font-size-m) !important; }
+  h5 { font-size: var(--heading-font-size-s) !important; }
+  h6 { font-size: var(--heading-font-size-xs) !important; }
+
   /* stylelint-disable no-descending-specificity -- header.css を上書きするため詳細度の高いセレクタを併記 */
   header nav a,
   header nav .nav-sections .default-content-wrapper > ul > li > a,
