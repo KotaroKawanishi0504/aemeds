@@ -352,6 +352,7 @@ main .cards > ul > li > a.cards-card-link[data-open-in-new-window="true"] [data-
 }
 
 /* 本家: 画像の下に本文（赤丸矢印＋ラベル）。画像とテキスト間は固定 24px（テキストサイズに依存しない） */
+
 /* AEM: .cards-wrapper 直下でも .cards-card-body に当たるようフォールバックを追加 */
 .cards .cards-card-body,
 main .cards .cards-card-body,
