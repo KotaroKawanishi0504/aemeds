@@ -416,6 +416,23 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   }
 
   /* Responsive: scale down menu (gap, padding, font) so it never overlaps .nav-tools (match original behavior) */
+
+  /* Option A: 1200–1400px tier so link spacing scales in wide range (not fixed above 1200px) */
+  @media (width >= 900px) and (width >= 1200px) and (width < 1400px) {
+    header nav {
+      gap: 0 28px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul {
+      gap: 0 7px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul > li > a {
+      padding: 0 11px;
+      font-size: 14px;
+    }
+  }
+
   @media (width >= 900px) and (width < 1200px) {
     header nav {
       gap: 0 24px;
