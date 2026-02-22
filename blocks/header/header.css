@@ -317,12 +317,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   }
 
   /* Center the menu: direct child is content-sized so justify-content: center works.
-     Slight negative margin pulls block left so "会社情報" start aligns with original. */
+     Negative margin pulls block left so "会社情報" start aligns with original. */
   header nav .nav-sections > * {
     flex: 0 0 auto;
     width: max-content;
     max-width: 100%;
-    margin-left: -12px;
+    margin-left: -26px;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
