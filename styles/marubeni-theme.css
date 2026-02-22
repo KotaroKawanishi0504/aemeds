@@ -88,8 +88,32 @@
     /* Header bar height: 本家 7.2*--rem; scale with viewport 900–1280 (51px–72px) */
     --nav-height: clamp(51px, 5.625vw, 72px);
 
-    /* 本家 --rem: min(10, vw/1280*10); 狭い幅でもメニュー見切れ防止のため最小 6 でスケール */
-    --rem: clamp(6, 100vw / 1280 * 10, 10);
+    /* オリジナルとの差異解消: 900px で 0.65、1280px で 0.85 のスケールで文字サイズを幅連動 */
+    --global-text-scale: clamp(0.65, calc(0.65 + (100vw - 900px) * 0.2 / 380), 0.85);
+    --rem: calc(clamp(6, 100vw / 1280 * 10, 10) * var(--global-text-scale));
+    --body-font-size-m: calc(18 * var(--global-text-scale) * 1px);
+    --body-font-size-s: calc(16 * var(--global-text-scale) * 1px);
+    --body-font-size-xs: calc(14 * var(--global-text-scale) * 1px);
+    --heading-font-size-xxl: calc(45 * var(--global-text-scale) * 1px);
+    --heading-font-size-xl: calc(36 * var(--global-text-scale) * 1px);
+    --heading-font-size-l: calc(28 * var(--global-text-scale) * 1px);
+    --heading-font-size-m: calc(22 * var(--global-text-scale) * 1px);
+    --heading-font-size-s: calc(20 * var(--global-text-scale) * 1px);
+    --heading-font-size-xs: calc(18 * var(--global-text-scale) * 1px);
+  }
+}
+
+/* ヘッダ・アイコンなしカード: AEM で --rem 継承が効かない場合の直接指定（幅連動スケール） */
+@media screen and (width >= 900px) {
+  header nav a,
+  header .nav-tools,
+  header .nav-tools a {
+    font-size: calc(clamp(6, 100vw / 1280 * 10, 10) * 1.5 * var(--global-text-scale) * 1px) !important;
+  }
+
+  .cards-carousel-title,
+  main .cards-carousel-title {
+    font-size: calc(14 * var(--global-text-scale) * 1px) !important;
   }
 }
 
