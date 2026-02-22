@@ -305,7 +305,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     flex-shrink: 0;
   }
 
-  header nav .nav-sections {
+  /* Higher specificity so display: flex wins over AEM/EDS .section { display: block } */
+  header .nav-wrapper nav .nav-sections {
     flex: 1 1 auto;
     display: flex;
     justify-content: center;
@@ -314,8 +315,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     white-space: nowrap;
   }
 
-  header nav .nav-sections > .default-content-wrapper {
+  /* Center the menu: direct child is content-sized so justify-content: center works */
+  header nav .nav-sections > * {
     flex: 0 0 auto;
+    width: max-content;
+    max-width: 100%;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
