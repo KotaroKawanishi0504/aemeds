@@ -21,6 +21,8 @@
 
 /* layout: 本家と同様に fluid。1280 で 1088px、1387 で 1195px、1536+ で 1344px (min(1344px, 100vw - 192px)) */
 :root {
+  /* Fallback until viewport media apply; desktop/mobile override in @media below */
+  --rem: 10;
   --max-content-width: 1088px;
   --inline-section-padding: 24px;
 
@@ -84,6 +86,9 @@
 
     /* Header bar height: 本家 7.2*--rem; scale with viewport 900–1280 (51px–72px) */
     --nav-height: clamp(51px, 5.625vw, 72px);
+
+    /* 本家 --rem: min(10, vw/1280*10); フォント・余白を幅に応じてスケール (900px→7.03, 1280px→10) */
+    --rem: clamp(7.03, 100vw / 1280 * 10, 10);
   }
 }
 
@@ -93,6 +98,9 @@
     /* 本家 .c-icon-link モバイル: --icon-size: 2.4, --font-size: 1.6 */
     --card-icon-size: 2.4;
     --card-font-size: 1.6;
+
+    /* 本家モバイル --rem: vw/393*10 (393px で 10 相当) */
+    --rem: calc(100vw / 393 * 10);
   }
 }
 
@@ -100,15 +108,7 @@
 
 /* Cards block: main scoped + fallback when no main (AEM Author canvas). */
 
-/* 方法B: 本家と同じ基準単位。カード内の calc(var(--rem)*...) は 10px ベースで 18px/26px 等を算出 */
-.cards,
-main .cards,
-.cards-wrapper,
-main .cards-wrapper,
-.cards-wrapper.cards-wrapper > div,
-main .cards-wrapper.cards-wrapper > div {
-  --rem: 10;
-}
+/* 方法B: --rem は :root で viewport 連動。カードは :root の --rem を継承。 */
 
 /* List container: margin-top from cards-computed-styles (ul margin-top 48px) */
 .cards > ul,

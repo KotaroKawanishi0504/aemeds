@@ -349,7 +349,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     align-items: center;
   }
 
-  /* Top-level nav link: relative so ::before/::after sit at bottom (original .l-header__navigation-link) */
+  /* Top-level nav link: relative so ::before/::after sit at bottom (original .l-header__navigation-link). Font scales with --rem. */
   header nav .nav-sections .default-content-wrapper > ul > li > a {
     display: flex;
     align-items: center;
@@ -357,7 +357,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     padding: 0 12px;
     color: #282828;
     font-weight: 500;
-    font-size: 15px;
+    font-size: calc(var(--rem, 10) * 1.5 * 1px);
     line-height: 1.3;
     position: relative;
     text-decoration: none;
@@ -436,7 +436,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 11px;
-      font-size: 14px;
     }
   }
 
@@ -457,7 +456,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 10px;
-      font-size: 14px;
     }
   }
 
@@ -477,7 +475,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 8px;
-      font-size: 14px;
     }
   }
 
@@ -498,7 +495,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 6px;
-      font-size: 13px;
     }
   }
 
@@ -520,7 +516,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 4px;
-      font-size: 12px;
     }
   }
 
@@ -866,7 +861,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 /* ---- Tools ( .l-header__utility ): language (Ja/En) + search icon ---- */
 header nav .nav-tools {
   grid-area: tools;
-  font-size: 15px;
+  font-size: calc(var(--rem, 10) * 1.5 * 1px);
   font-weight: 500;
   line-height: 1;
 }
@@ -875,7 +870,7 @@ header nav .nav-tools {
   header nav .nav-tools {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: calc(var(--rem, 10) * 2.4 * 1px);
     margin-left: auto;
     flex-shrink: 0;
   }
@@ -891,12 +886,12 @@ header nav .nav-tools a {
   }
 }
 
-/* Utility wrapper (original .l-header__utility): language list + search */
+/* Utility wrapper (original .l-header__utility): language list + search; scale with --rem */
 header nav .nav-utility {
   display: flex;
   align-items: center;
-  gap: 24px;
-  font-size: 15px;
+  gap: calc(var(--rem, 10) * 2.4 * 1px);
+  font-size: calc(var(--rem, 10) * 1.5 * 1px);
   font-weight: 500;
   line-height: 1;
 }
@@ -939,12 +934,12 @@ header nav .nav-language-item a::before {
   margin: -2px;
 }
 
-/* Search icon (original .l-header__search button): Ben \e90d */
+/* Search icon (original .l-header__search button): Ben \e90d; scale with --rem */
 header nav .nav-search {
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: calc(var(--rem, 10) * 2.4 * 1px);
+  height: calc(var(--rem, 10) * 2.4 * 1px);
   color: #282828;
   text-decoration: none;
 }
@@ -954,7 +949,7 @@ header nav .nav-search::before {
   font-family: Ben, sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
+  font-size: calc(var(--rem, 10) * 2.4 * 1px);
   line-height: 1;
   text-align: center;
 }
@@ -962,106 +957,6 @@ header nav .nav-search::before {
 @media (hover: hover) {
   header nav .nav-search:hover {
     color: #e60012;
-  }
-}
-
-/* Responsive: scale nav-tools / nav-search by viewport (placed after base so these overrides win) */
-@media (width >= 900px) and (width >= 1200px) and (width < 1400px) {
-  header nav .nav-tools {
-    gap: 22px;
-  }
-
-  header nav .nav-utility {
-    gap: 22px;
-    font-size: 14px;
-  }
-
-  header nav .nav-search {
-    width: 22px;
-    height: 22px;
-  }
-
-  header nav .nav-search::before {
-    font-size: 22px;
-  }
-}
-
-@media (width >= 900px) and (width < 1200px) {
-  header nav .nav-tools {
-    gap: 20px;
-  }
-
-  header nav .nav-utility {
-    gap: 20px;
-    font-size: 14px;
-  }
-
-  header nav .nav-search {
-    width: 20px;
-    height: 20px;
-  }
-
-  header nav .nav-search::before {
-    font-size: 20px;
-  }
-}
-
-@media (width >= 900px) and (width < 1100px) {
-  header nav .nav-tools {
-    gap: 18px;
-  }
-
-  header nav .nav-utility {
-    gap: 18px;
-  }
-
-  header nav .nav-search {
-    width: 18px;
-    height: 18px;
-  }
-
-  header nav .nav-search::before {
-    font-size: 18px;
-  }
-}
-
-@media (width >= 900px) and (width < 1000px) {
-  header nav .nav-tools {
-    gap: 16px;
-  }
-
-  header nav .nav-utility {
-    gap: 16px;
-    font-size: 13px;
-  }
-
-  header nav .nav-search {
-    width: 16px;
-    height: 16px;
-  }
-
-  header nav .nav-search::before {
-    font-size: 16px;
-  }
-}
-
-@media (width >= 900px) and (width < 950px) {
-  header nav .nav-tools {
-    gap: 12px;
-  }
-
-  header nav .nav-utility {
-    gap: 12px;
-    font-size: 12px;
-  }
-
-  header nav .nav-search {
-    width: 14px;
-    height: 14px;
-  }
-
-  header nav .nav-search::before {
-    font-size: 14px;
   }
 }
 
