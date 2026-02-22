@@ -99,7 +99,7 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
-@media (width >= 1100px) {
+@media (width >= 900px) {
   /* Keep .nav-wrapper position: fixed so header sticks on scroll (original behavior) */
 
   /* No full-width sheet below nav; dropdown panel has its own background and box-shadow */
@@ -206,7 +206,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: translateY(-3px) rotate(45deg);
 }
 
-@media (width >= 1100px) {
+@media (width >= 900px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -239,14 +239,14 @@ header nav .nav-brand picture img {
   display: block;
 }
 
-@media (width >= 1100px) {
+@media (width >= 900px) {
   header nav .nav-brand img,
   header nav .nav-brand picture img {
     width: 164px;
   }
 }
 
-@media (width < 1100px) {
+@media (width < 900px) {
   header nav .nav-brand img,
   header nav .nav-brand picture img {
     width: 120px;
@@ -301,7 +301,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   text-decoration: none;
 }
 
-@media (width >= 1100px) {
+@media (width >= 900px) {
   header nav .nav-brand {
     flex-shrink: 0;
   }
@@ -416,7 +416,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   }
 
   /* Responsive: scale down menu (gap, padding, font) so it never overlaps .nav-tools (match original behavior) */
-  @media (width >= 1100px) and (width < 1200px) {
+  @media (width >= 900px) and (width < 1200px) {
     header nav {
       gap: 0 24px;
     }
@@ -431,7 +431,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     }
   }
 
-  @media (width >= 1100px) and (width < 1100px) {
+  @media (width >= 900px) and (width < 1100px) {
     header nav {
       gap: 0 16px;
     }
@@ -446,9 +446,10 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     }
   }
 
-  @media (width >= 1100px) and (width < 1000px) {
+  @media (width >= 900px) and (width < 1000px) {
     header nav {
       gap: 0 12px;
+      padding: 0 24px;
     }
 
     header nav .nav-sections .default-content-wrapper > ul {
@@ -458,6 +459,23 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 6px;
       font-size: 13px;
+    }
+  }
+
+  /* 900–950px: match original --rem scaling near breakpoint (minimal spacing to avoid overlap) */
+  @media (width >= 900px) and (width < 950px) {
+    header nav {
+      gap: 0 8px;
+      padding: 0 16px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul {
+      gap: 0;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul > li > a {
+      padding: 0 4px;
+      font-size: 12px;
     }
   }
 
@@ -764,7 +782,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   }
 }
 
-@media (width < 1100px) {
+@media (width < 900px) {
   header nav .nav-sections .default-content-wrapper > ul > li {
     border-bottom: 1px solid #dfdfdf;
   }
@@ -808,7 +826,7 @@ header nav .nav-tools {
   line-height: 1;
 }
 
-@media (width >= 1100px) {
+@media (width >= 900px) {
   header nav .nav-tools {
     display: flex;
     align-items: center;
