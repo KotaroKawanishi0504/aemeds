@@ -88,9 +88,9 @@
     /* Header bar height: 本家 7.2*--rem; scale with viewport 900–1280 (51px–72px) */
     --nav-height: clamp(51px, 5.625vw, 72px);
 
-    /* オリジナルとの差異解消: 900px で 0.65、1280px で 0.85 のスケールで文字サイズを幅連動 */
-    --global-text-scale: clamp(0.65, calc(0.65 + (100vw - 900px) * 0.2 / 380), 0.85);
-    --rem: calc(clamp(6, 100vw / 1280 * 10, 10) * var(--global-text-scale));
+    /* 本家に合わせ 900px: rem=7.03, body=11.25px。1280px: rem=10, body=16px（ORIGINAL_FONT_SIZES_900.md） */
+    --global-text-scale: min(0.8889, calc(100vw / 1280 * 0.8889));
+    --rem: min(10, calc(100vw / 1280 * 10));
     --body-font-size-m: calc(18 * var(--global-text-scale) * 1px);
     --body-font-size-s: calc(16 * var(--global-text-scale) * 1px);
     --body-font-size-xs: calc(14 * var(--global-text-scale) * 1px);
