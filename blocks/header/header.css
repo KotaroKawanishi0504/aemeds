@@ -322,7 +322,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     min-width: 0;
     width: max-content;
     max-width: 100%;
-    margin-left: -56px;
+    margin-left: 44px;
     overflow: hidden;
   }
 
