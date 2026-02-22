@@ -92,13 +92,17 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 /**
- * Sets --global-text-scale on :root from window width (0.65 at 900px to 0.85 at 1280px).
+ * Sets --global-text-scale and --rem on :root from window width.
+ * 900px → scale 0.65, 1280px → scale 0.85; --rem base 6–10 by width.
  * Used when CSS 100vw does not re-evaluate on resize (e.g. AEM preview).
  */
 function applyGlobalTextScale() {
   const w = window.innerWidth;
   const scale = w < 900 ? 0.65 : Math.max(0.65, Math.min(0.85, 0.65 + ((w - 900) * 0.2) / 380));
+  const baseRem = w < 900 ? 6 : Math.max(6, Math.min(10, (w / 1280) * 10));
+  const rem = baseRem * scale;
   document.documentElement.style.setProperty('--global-text-scale', String(scale));
+  document.documentElement.style.setProperty('--rem', String(rem));
 }
 
 async function loadEager(doc) {

@@ -120,12 +120,13 @@
   h5 { font-size: var(--heading-font-size-s) !important; }
   h6 { font-size: var(--heading-font-size-xs) !important; }
 
+  /* 100vw は AEM でリサイズ時に再計算されないため、JS で更新する --rem のみ使用 */
   /* stylelint-disable no-descending-specificity -- header.css を上書きするため詳細度の高いセレクタを併記 */
   header nav a,
   header nav .nav-sections .default-content-wrapper > ul > li > a,
   header nav .nav-tools,
   header nav .nav-tools a {
-    font-size: calc(clamp(6, 100vw / 1280 * 10, 10) * 1.5 * var(--global-text-scale) * 1px) !important;
+    font-size: calc(var(--rem, 10) * 1.5 * 1px) !important;
   }
   /* stylelint-enable no-descending-specificity */
 
