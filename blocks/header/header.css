@@ -316,22 +316,24 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     white-space: nowrap;
   }
 
-  /* Center the menu: direct child is content-sized so justify-content: center works */
+  /* Center the menu: direct child is content-sized so justify-content: center works.
+     Slight negative margin pulls block left so "会社情報" start aligns with original. */
   header nav .nav-sections > * {
     flex: 0 0 auto;
     width: max-content;
     max-width: 100%;
+    margin-left: -12px;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
   }
 
-  /* Menu block width: original ~945px vs AEM ~1033px; reduce gap to match original (logo/tools unchanged) */
+  /* Menu block width: original ~945px; narrow link spacing (logo/tools unchanged) */
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
-    gap: 0 16px;
+    gap: 0 12px;
     margin: 0;
     align-items: center;
   }
