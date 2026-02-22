@@ -322,7 +322,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     flex: 0 0 auto;
     width: max-content;
     max-width: 100%;
-    margin-left: -36px;
+    margin-left: -46px;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
