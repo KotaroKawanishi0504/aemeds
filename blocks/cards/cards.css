@@ -352,8 +352,13 @@ main .cards > ul > li > a.cards-card-link[data-open-in-new-window="true"] [data-
 }
 
 /* 本家: 画像の下に本文（赤丸矢印＋ラベル）。画像とテキスト間は固定 24px（テキストサイズに依存しない） */
+/* AEM: .cards-wrapper 直下でも .cards-card-body に当たるようフォールバックを追加 */
 .cards .cards-card-body,
-main .cards .cards-card-body {
+main .cards .cards-card-body,
+.cards-wrapper .cards-card-body,
+main .cards-wrapper .cards-card-body,
+.cards-wrapper.cards-wrapper > div .cards-card-body,
+main .cards-wrapper.cards-wrapper > div .cards-card-body {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -413,7 +418,11 @@ main .cards-wrapper.cards-wrapper > div .cards.cards-text-l .cards-card-body {
 }
 
 .cards .cards-card-body-icon,
-main .cards .cards-card-body-icon {
+main .cards .cards-card-body-icon,
+.cards-wrapper .cards-card-body-icon,
+main .cards-wrapper .cards-card-body-icon,
+.cards-wrapper.cards-wrapper > div .cards-card-body-icon,
+main .cards-wrapper.cards-wrapper > div .cards-card-body-icon {
   position: absolute;
   left: 0;
   top: 50%;
@@ -454,7 +463,11 @@ main .cards-wrapper .cards.cards-no-arrow .cards-card-body,
 
 /* 矢印: 本家 .c-icon-link__icon::before — Ben \e902, font-size calc(var(--rem)*1px) */
 .cards .cards-card-body-icon::before,
-main .cards .cards-card-body-icon::before {
+main .cards .cards-card-body-icon::before,
+.cards-wrapper .cards-card-body-icon::before,
+main .cards-wrapper .cards-card-body-icon::before,
+.cards-wrapper.cards-wrapper > div .cards-card-body-icon::before,
+main .cards-wrapper.cards-wrapper > div .cards-card-body-icon::before {
   content: "\e902";
   font-family: Ben, sans-serif;
   font-style: normal;
@@ -470,7 +483,11 @@ main .cards .cards-card-body-icon::before {
 }
 
 .cards .cards-card-body-icon .cards-card-body-icon-svg,
-main .cards .cards-card-body-icon .cards-card-body-icon-svg {
+main .cards .cards-card-body-icon .cards-card-body-icon-svg,
+.cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg,
+main .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg,
+.cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg,
+main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg {
   width: 100%;
   height: 100%;
   display: block;
@@ -481,7 +498,11 @@ main .cards .cards-card-body-icon .cards-card-body-icon-svg {
 
 /* 本家 .c-icon-link__icon circle: stroke-dasharray でアニメーション */
 .cards .cards-card-body-icon .cards-card-body-icon-svg circle,
-main .cards .cards-card-body-icon .cards-card-body-icon-svg circle {
+main .cards .cards-card-body-icon .cards-card-body-icon-svg circle,
+.cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards-wrapper .cards-card-body-icon .cards-card-body-icon-svg circle,
+.cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg circle,
+main .cards-wrapper.cards-wrapper > div .cards-card-body-icon .cards-card-body-icon-svg circle {
   fill: transparent;
   stroke: currentcolor;
   stroke-dasharray: var(--c);
@@ -520,7 +541,11 @@ main .cards > ul > li:hover .cards-card-image img {
 
 /* ラベル: 通常時は #282828（ホバー時のみ赤）。inline-flex + align-items:center でアイコンと縦揃え */
 .cards .cards-card-body a,
-main .cards .cards-card-body a {
+main .cards .cards-card-body a,
+.cards-wrapper .cards-card-body a,
+main .cards-wrapper .cards-card-body a,
+.cards-wrapper.cards-wrapper > div .cards-card-body a,
+main .cards-wrapper.cards-wrapper > div .cards-card-body a {
   display: inline-flex;
   align-items: center;
   min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px);
