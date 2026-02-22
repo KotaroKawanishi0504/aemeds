@@ -82,8 +82,8 @@
     --max-content-width: min(1344px, calc(100vw - 192px));
     --inline-section-padding: 0;
 
-    /* Header bar height: 本家 7.2rem = 72px */
-    --nav-height: 72px;
+    /* Header bar height: 本家 7.2*--rem; scale with viewport 900–1280 (51px–72px) */
+    --nav-height: clamp(51px, 5.625vw, 72px);
   }
 }
 

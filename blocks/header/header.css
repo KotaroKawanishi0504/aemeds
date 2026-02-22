@@ -104,14 +104,15 @@ header nav[aria-expanded='true'] {
 
   /* No full-width sheet below nav; dropdown panel has its own background and box-shadow */
 
-  /* Original bar is full width (maxWidth: none); keep nav full width so logo left / menu center / tools right layout works */
+  /* Original bar is full width (maxWidth: none); keep nav full width so logo left / menu center / tools right layout works.
+     Left padding fixed (40px) so logo start position does not move; only right padding scales by tier. */
   header nav {
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
     gap: 0 32px;
-    padding: 0 40px;
+    padding-inline: 40px;
     width: 100%;
     max-width: 100%;
     margin-left: 0;
@@ -421,7 +422,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   @media (width >= 900px) and (width >= 1200px) and (width < 1400px) {
     header nav {
       gap: 0 28px;
-      padding: 0 36px;
+      padding-inline-end: 36px;
     }
 
     header nav .nav-brand img,
@@ -437,30 +438,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
       padding: 0 11px;
       font-size: 14px;
     }
-
-    header nav .nav-tools {
-      gap: 22px;
-    }
-
-    header nav .nav-utility {
-      gap: 22px;
-      font-size: 14px;
-    }
-
-    header nav .nav-search {
-      width: 22px;
-      height: 22px;
-    }
-
-    header nav .nav-search::before {
-      font-size: 22px;
-    }
   }
 
   @media (width >= 900px) and (width < 1200px) {
     header nav {
       gap: 0 24px;
-      padding: 0 32px;
+      padding-inline-end: 32px;
     }
 
     header nav .nav-brand img,
@@ -475,24 +458,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 10px;
       font-size: 14px;
-    }
-
-    header nav .nav-tools {
-      gap: 20px;
-    }
-
-    header nav .nav-utility {
-      gap: 20px;
-      font-size: 14px;
-    }
-
-    header nav .nav-search {
-      width: 20px;
-      height: 20px;
-    }
-
-    header nav .nav-search::before {
-      font-size: 20px;
     }
   }
 
@@ -514,29 +479,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
       padding: 0 8px;
       font-size: 14px;
     }
-
-    header nav .nav-tools {
-      gap: 18px;
-    }
-
-    header nav .nav-utility {
-      gap: 18px;
-    }
-
-    header nav .nav-search {
-      width: 18px;
-      height: 18px;
-    }
-
-    header nav .nav-search::before {
-      font-size: 18px;
-    }
   }
 
   @media (width >= 900px) and (width < 1000px) {
     header nav {
       gap: 0 12px;
-      padding: 0 24px;
+      padding-inline-end: 24px;
     }
 
     header nav .nav-brand img,
@@ -552,31 +500,13 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
       padding: 0 6px;
       font-size: 13px;
     }
-
-    header nav .nav-tools {
-      gap: 16px;
-    }
-
-    header nav .nav-utility {
-      gap: 16px;
-      font-size: 13px;
-    }
-
-    header nav .nav-search {
-      width: 16px;
-      height: 16px;
-    }
-
-    header nav .nav-search::before {
-      font-size: 16px;
-    }
   }
 
   /* 900–950px: match original --rem scaling near breakpoint (minimal spacing to avoid overlap) */
   @media (width >= 900px) and (width < 950px) {
     header nav {
       gap: 0 8px;
-      padding: 0 16px;
+      padding-inline-end: 16px;
     }
 
     header nav .nav-brand img,
@@ -591,24 +521,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     header nav .nav-sections .default-content-wrapper > ul > li > a {
       padding: 0 4px;
       font-size: 12px;
-    }
-
-    header nav .nav-tools {
-      gap: 12px;
-    }
-
-    header nav .nav-utility {
-      gap: 12px;
-      font-size: 12px;
-    }
-
-    header nav .nav-search {
-      width: 14px;
-      height: 14px;
-    }
-
-    header nav .nav-search::before {
-      font-size: 14px;
     }
   }
 
@@ -1050,6 +962,106 @@ header nav .nav-search::before {
 @media (hover: hover) {
   header nav .nav-search:hover {
     color: #e60012;
+  }
+}
+
+/* Responsive: scale nav-tools / nav-search by viewport (placed after base so these overrides win) */
+@media (width >= 900px) and (width >= 1200px) and (width < 1400px) {
+  header nav .nav-tools {
+    gap: 22px;
+  }
+
+  header nav .nav-utility {
+    gap: 22px;
+    font-size: 14px;
+  }
+
+  header nav .nav-search {
+    width: 22px;
+    height: 22px;
+  }
+
+  header nav .nav-search::before {
+    font-size: 22px;
+  }
+}
+
+@media (width >= 900px) and (width < 1200px) {
+  header nav .nav-tools {
+    gap: 20px;
+  }
+
+  header nav .nav-utility {
+    gap: 20px;
+    font-size: 14px;
+  }
+
+  header nav .nav-search {
+    width: 20px;
+    height: 20px;
+  }
+
+  header nav .nav-search::before {
+    font-size: 20px;
+  }
+}
+
+@media (width >= 900px) and (width < 1100px) {
+  header nav .nav-tools {
+    gap: 18px;
+  }
+
+  header nav .nav-utility {
+    gap: 18px;
+  }
+
+  header nav .nav-search {
+    width: 18px;
+    height: 18px;
+  }
+
+  header nav .nav-search::before {
+    font-size: 18px;
+  }
+}
+
+@media (width >= 900px) and (width < 1000px) {
+  header nav .nav-tools {
+    gap: 16px;
+  }
+
+  header nav .nav-utility {
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  header nav .nav-search {
+    width: 16px;
+    height: 16px;
+  }
+
+  header nav .nav-search::before {
+    font-size: 16px;
+  }
+}
+
+@media (width >= 900px) and (width < 950px) {
+  header nav .nav-tools {
+    gap: 12px;
+  }
+
+  header nav .nav-utility {
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  header nav .nav-search {
+    width: 14px;
+    height: 14px;
+  }
+
+  header nav .nav-search::before {
+    font-size: 14px;
   }
 }
 
