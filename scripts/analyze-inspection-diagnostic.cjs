@@ -59,6 +59,29 @@ if (data.diagnostic) {
   (d.styleSheets || []).forEach((href) => lines.push(`- ${href}`));
   lines.push('');
 
+  if (d.globalTextScale != null || d.bodyFontSizeM != null || (d.computed && Object.keys(d.computed).length)) {
+    lines.push('### テキストスケール（幅連動）');
+    lines.push('');
+    lines.push('| 項目 | 値 |');
+    lines.push('|------|-----|');
+    if (d.globalTextScale != null) lines.push(`| :root --global-text-scale | ${d.globalTextScale} |`);
+    if (d.bodyFontSizeM != null) lines.push(`| :root --body-font-size-m | ${d.bodyFontSizeM} |`);
+    if (d.headingFontSizeXl != null) lines.push(`| :root --heading-font-size-xl | ${d.headingFontSizeXl} |`);
+    if (data.viewport) lines.push(`| viewport width | ${data.viewport.width}px |`);
+    if (d.computed) {
+      if (d.computed.body) lines.push(`| computed body font-size | ${d.computed.body} |`);
+      if (d.computed.headerNav) lines.push(`| computed header nav a | ${d.computed.headerNav} |`);
+      if (d.computed.cardsCardBody) lines.push(`| computed .cards-card-body | ${d.computed.cardsCardBody} |`);
+      if (d.computed.cardsCarouselTitle) lines.push(`| computed .cards-carousel-title | ${d.computed.cardsCarouselTitle} |`);
+    }
+    lines.push('');
+    const vw = data.viewport && data.viewport.width;
+    if (vw != null && vw >= 900 && !d.globalTextScale) {
+      lines.push('※ viewport 900px 以上で --global-text-scale が未設定の場合は、marubeni-theme.css の @media (width >= 900px) が効いていない可能性があります。');
+      lines.push('');
+    }
+  }
+
   // 判定（AEM のときのみ）
   if (isAem) {
   lines.push('## 判定');

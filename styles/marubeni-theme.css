@@ -103,13 +103,19 @@
   }
 }
 
-/* ヘッダ・アイコンなしカード: AEM で --rem 継承が効かない場合の直接指定（幅連動スケール） */
+/*
+ * ヘッダ・アイコンなしカード: AEM で --rem 継承が効かない場合の直接指定（幅連動スケール）。
+ * header.css の .default-content-wrapper > ul > li > a 等を上書きするため詳細度を合わせて指定。
+ */
 @media screen and (width >= 900px) {
+  /* stylelint-disable no-descending-specificity -- header.css を上書きするため詳細度の高いセレクタを併記 */
   header nav a,
-  header .nav-tools,
-  header .nav-tools a {
+  header nav .nav-sections .default-content-wrapper > ul > li > a,
+  header nav .nav-tools,
+  header nav .nav-tools a {
     font-size: calc(clamp(6, 100vw / 1280 * 10, 10) * 1.5 * var(--global-text-scale) * 1px) !important;
   }
+  /* stylelint-enable no-descending-specificity */
 
   .cards-carousel-title,
   main .cards-carousel-title {

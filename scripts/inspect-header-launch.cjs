@@ -78,16 +78,34 @@ const headlessForNarrow = useNarrowViewport && !isAem;
       return { tag: node.tagName, id: node.id || undefined, class: getClassString(node).slice(0, 120), rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height, top: rect.top, left: rect.left }, style: styleObj, children: children.length ? children : undefined };
     }
     const rootStyle = document.documentElement ? getComputedStyle(document.documentElement) : null;
+    function getVar(name) {
+      if (!rootStyle) return null;
+      const v = rootStyle.getPropertyValue(name).trim();
+      return v || null;
+    }
+    function getElFontSize(sel) {
+      var el = document.querySelector(sel);
+      return el ? getComputedStyle(el).fontSize : null;
+    }
     const diagnostic = {
       styleSheets: Array.from(document.styleSheets).map(s => s.href || null).filter(Boolean),
       codeBasePath: (window.hlx && window.hlx.codeBasePath) || null,
       rem: rootStyle ? (rootStyle.getPropertyValue('--rem').trim() || null) : null,
+      globalTextScale: getVar('--global-text-scale'),
+      bodyFontSizeM: getVar('--body-font-size-m'),
+      headingFontSizeXl: getVar('--heading-font-size-xl'),
       hasMain: !!document.querySelector('main'),
       headerBlockStatus: (function(){ var el = document.querySelector('header [data-block-status]'); return el && el.dataset && el.dataset.blockStatus; })() || null,
       cardsWrapperCount: document.querySelectorAll('.cards-wrapper').length,
       linkHeaderCss: !!Array.from(document.styleSheets).some(s => s.href && (s.href.includes('header.css') || s.href.includes('blocks/header'))),
       linkMarubeniTheme: !!Array.from(document.styleSheets).some(s => s.href && s.href.includes('marubeni-theme')),
       linkCardsCss: !!Array.from(document.styleSheets).some(s => s.href && (s.href.includes('cards.css') || s.href.includes('blocks/cards'))),
+      computed: {
+        body: getElFontSize('body'),
+        headerNav: getElFontSize('header nav a'),
+        cardsCardBody: getElFontSize('.cards-card-body') || getElFontSize('.cards .cards-card-body'),
+        cardsCarouselTitle: getElFontSize('.cards-carousel-title'),
+      },
     };
     var cardsSample = null;
     var cardBody = document.querySelector('.cards-card-body') || document.querySelector('.cards .cards-card-body') || document.querySelector('[class*="cards-card-body"]');
