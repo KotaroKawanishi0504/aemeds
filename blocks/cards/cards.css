@@ -374,9 +374,9 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body {
   background-color: var(--card-background, var(--background-color));
 }
 
-/* AEM: 他 CSS の上書きを打ち消し。padding-left でアイコン用余白を確保し、font-size を --rem 連動でスケール（問題1・2） */
+/* AEM: 他 CSS の上書きを打ち消し。padding-left でアイコン用余白を確保し、font-size を --rem 連動でスケール（問題1・2）。コンソールで確定: 35px */
 main .section.cards-container .cards-wrapper .cards .cards-card-body {
-  padding-left: calc(var(--rem, 10) * (var(--card-icon-size, 2.6) + var(--card-icon-gap, 1)) * 1px) !important;
+  padding-left: 35px !important;
   font-size: calc(var(--rem, 10) * var(--card-font-size, 1.8) * 1px) !important;
 }
 
@@ -454,14 +454,20 @@ main .cards-wrapper.cards-wrapper > div .cards-card-body-icon {
   --c: var(--card-icon-circle-c, 75.398);
 }
 
-/* AEM: アイコンが 178px 等で巨大化するのを防ぐ。サイズを強制（問題1） */
+/* AEM: アイコンが 178px 等で巨大化するのを防ぐ。コンソールで確定: 24px */
 main .section.cards-container .cards-wrapper .cards .cards-card-body-icon {
-  width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px) !important;
-  height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px) !important;
-  min-width: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px) !important;
-  min-height: calc(var(--rem, 10) * var(--card-icon-size, 2.6) * 1px) !important;
-  max-width: 40px !important;
-  max-height: 40px !important;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+}
+
+/* AEM: 矢印サイズと中央寄せ。コンソールで確定: 10px, translateX(1px) */
+main .section.cards-container .cards-wrapper .cards .cards-card-body-icon::before {
+  font-size: 10px !important;
+  transform: scale(0.99) translateX(1px) !important;
 }
 
 /* Block dialog: hide arrow icon when "Show arrow" = No */
