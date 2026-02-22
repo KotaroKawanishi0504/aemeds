@@ -104,6 +104,7 @@ header nav[aria-expanded='true'] {
 
   /* No full-width sheet below nav; dropdown panel has its own background and box-shadow */
 
+  /* Original bar is full width (maxWidth: none); keep nav full width so logo left / menu center / tools right layout works */
   header nav {
     display: flex;
     flex-wrap: nowrap;
@@ -112,8 +113,9 @@ header nav[aria-expanded='true'] {
     gap: 0 32px;
     padding: 0 40px;
     width: 100%;
-
-    /* Keep original bar width and centering: max-width and margin from default (lines above) apply */
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
 
