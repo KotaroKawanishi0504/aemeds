@@ -414,6 +414,52 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     }
   }
 
+  /* Responsive: scale down menu (gap, padding, font) so it never overlaps .nav-tools (match original behavior) */
+  @media (width >= 900px) and (width < 1200px) {
+    header nav {
+      gap: 0 24px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul {
+      gap: 0 6px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul > li > a {
+      padding: 0 10px;
+      font-size: 14px;
+    }
+  }
+
+  @media (width >= 900px) and (width < 1100px) {
+    header nav {
+      gap: 0 16px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul {
+      gap: 0 4px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul > li > a {
+      padding: 0 8px;
+      font-size: 14px;
+    }
+  }
+
+  @media (width >= 900px) and (width < 1000px) {
+    header nav {
+      gap: 0 12px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul {
+      gap: 0 2px;
+    }
+
+    header nav .nav-sections .default-content-wrapper > ul > li > a {
+      padding: 0 6px;
+      font-size: 13px;
+    }
+  }
+
   /* Simple dropdown (no panel) - before .nav-dropdown-list for specificity */
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
