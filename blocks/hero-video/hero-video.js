@@ -65,7 +65,7 @@ export default async function decorate(block) {
   let videoUrl = toSingleUrl(config.video) || toSingleUrl(config['video-900px']);
   let posterUrl = toSingleUrl(config.poster) || toSingleUrl(config['poster-image-900px']);
   let linkUrl = toSingleUrl(config.link) || toSingleUrl(config['link-url']);
-  let linkLabel = first(config.linkLabel) || first(config['link-label']) || '';
+  let linkLabel = first(config.linkLabel) || first(config['link-label']) || first(config.linklabel) || '';
   if (!videoUrl && Object.keys(config).length > 0) {
     const videoKey = Object.keys(config).find((k) => /^video/i.test(k));
     if (videoKey) videoUrl = toSingleUrl(config[videoKey]);
