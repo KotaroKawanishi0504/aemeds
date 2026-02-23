@@ -986,6 +986,7 @@ header .nav-search-bar {
   padding: calc(var(--rem, 10) * 2 * 1px) calc(var(--rem, 10) * 4 * 1px);
   padding-bottom: calc(var(--rem, 10) * 3.2 * 1px);
   background-color: #fff;
+  overflow: visible;
 }
 
 header .nav-wrapper.search-open .nav-search-bar {
@@ -996,10 +997,15 @@ header .nav-search-bar[hidden] {
   display: none !important;
 }
 
+/* Original: width calc(var(--rem) * 115.2 * 1px) = 1152px */
 header .nav-search-form {
   display: grid;
-  max-width: min(1344px, calc(100vw - 192px));
+  align-items: center;
+  width: calc(var(--rem, 10) * 115.2 * 1px);
+  max-width: 100%;
   margin: 0 auto;
+  overflow: visible;
+  padding-right: calc(var(--rem, 10) * 0.5 * 1px);
 }
 
 header .nav-search-form > * {
@@ -1010,7 +1016,7 @@ header .nav-search-input {
   width: 100%;
   height: calc(var(--rem, 10) * 5.2 * 1px);
   padding-inline: calc(var(--rem, 10) * 1.5 * 1px);
-  padding-right: calc(var(--rem, 10) * 5.2 * 1px);
+  padding-right: calc(var(--rem, 10) * 6.4 * 1px);
   font-size: calc(var(--rem, 10) * 1.4 * 1px);
   border: 1px solid #dfdfdf;
   border-radius: calc(var(--rem, 10) * 0.4 * 1px);
@@ -1041,9 +1047,13 @@ header .nav-search-input:focus {
 
 header .nav-search-submit {
   justify-self: end;
+  display: grid;
+  place-items: center;
   width: calc(var(--rem, 10) * 2 * 1px);
-  height: calc(var(--rem, 10) * 2 * 1px);
+  height: calc(var(--rem, 10) * 5.2 * 1px);
+  min-height: calc(var(--rem, 10) * 5.2 * 1px);
   margin: 0;
+  margin-right: 15px;
   padding-inline: calc(var(--rem, 10) * 1.6 * 1px);
   border: 0;
   background: transparent;
@@ -1057,6 +1067,7 @@ header .nav-search-submit::before {
   font-style: normal;
   font-weight: 400;
   font-size: calc(var(--rem, 10) * 2 * 1px);
+  line-height: 1;
   display: block;
 }
 

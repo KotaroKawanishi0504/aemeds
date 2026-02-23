@@ -529,17 +529,77 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
   /* Search toggle: show bar, switch header to solid white (original behavior) */
+  const SEARCH_CLOSE_DELAY = 150;
+  const SEARCH_ANIMATION_DURATION = 300;
+  let searchCloseTimer = 0;
+  let searchAnimation = null;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const toggleSearch = (open) => {
     const isOpen = open ?? !navWrapper.classList.contains('search-open');
-    navWrapper.classList.toggle('search-open', isOpen);
-    searchBar.hidden = !isOpen;
-    searchButton.setAttribute('aria-expanded', String(isOpen));
+    window.clearTimeout(searchCloseTimer);
+    searchCloseTimer = 0;
+    searchAnimation?.cancel();
+    searchBar.removeAttribute('hidden');
+    const duration = prefersReducedMotion ? 0 : SEARCH_ANIMATION_DURATION;
     if (isOpen) {
-      searchBar.querySelector('.nav-search-input')?.focus();
+      navWrapper.classList.add('search-open');
+      searchBar.style.overflow = 'clip';
+      searchBar.style.blockSize = '0';
+      requestAnimationFrame(() => {
+        const targetHeight = searchBar.scrollHeight;
+        searchAnimation = searchBar.animate(
+          { blockSize: ['0px', `${targetHeight}px`] },
+          { duration, easing: 'ease' },
+        );
+        searchAnimation.onfinish = () => {
+          searchBar.style.removeProperty('overflow');
+          searchBar.style.removeProperty('block-size');
+          searchAnimation = null;
+        };
+      });
+    } else {
+      const currentHeight = searchBar.offsetHeight;
+      searchBar.style.overflow = 'clip';
+      searchAnimation = searchBar.animate(
+        { blockSize: [`${currentHeight}px`, '0px'] },
+        { duration, easing: 'ease' },
+      );
+      searchAnimation.onfinish = () => {
+        navWrapper.classList.remove('search-open');
+        searchBar.setAttribute('hidden', '');
+        searchBar.style.removeProperty('overflow');
+        searchBar.style.removeProperty('block-size');
+        searchAnimation = null;
+      };
     }
+    searchButton.setAttribute('aria-expanded', String(isOpen));
   };
   const closeSearch = () => toggleSearch(false);
   searchButton.addEventListener('click', () => toggleSearch());
+  /* Mouse leave: close when pointer leaves search bar + button (original: pointerleave + delay) */
+  if (isDesktop.matches) {
+    const cancelSearchClose = () => {
+      window.clearTimeout(searchCloseTimer);
+      searchCloseTimer = 0;
+    };
+    const scheduleSearchClose = () => {
+      if (!navWrapper.classList.contains('search-open')) return;
+      searchCloseTimer = window.setTimeout(() => {
+        closeSearch();
+        searchCloseTimer = 0;
+      }, SEARCH_CLOSE_DELAY);
+    };
+    searchBar.addEventListener('pointerleave', (e) => {
+      if (searchButton.contains(e.relatedTarget)) return;
+      scheduleSearchClose();
+    });
+    searchButton.addEventListener('pointerleave', (e) => {
+      if (searchBar.contains(e.relatedTarget)) return;
+      scheduleSearchClose();
+    });
+    searchBar.addEventListener('pointerenter', cancelSearchClose);
+    searchButton.addEventListener('pointerenter', cancelSearchClose);
+  }
   const onSearchEscape = (e) => {
     if (e.code === 'Escape' && navWrapper.classList.contains('search-open')) {
       closeSearch();
