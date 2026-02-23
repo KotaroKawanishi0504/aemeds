@@ -90,6 +90,22 @@ header nav {
   position: relative;
 }
 
+/* Mobile (< 900px): 本家 .l-header__bar 仕様 – ロゴ左・ハンバーガー右、余白 2rem */
+@media (width < 900px) {
+  header nav {
+    grid-template:
+      'brand hamburger' var(--nav-height)
+      'sections sections' 1fr / 1fr auto;
+    max-width: 100%;
+    padding-inline: calc(var(--rem, 10) * 2 * 1px);
+    gap: 0;
+  }
+
+  header nav[aria-expanded='false'] .nav-tools {
+    display: none;
+  }
+}
+
 header nav[aria-expanded='true'] {
   grid-template:
     'hamburger brand' var(--nav-height)
@@ -97,6 +113,21 @@ header nav[aria-expanded='true'] {
     'sections sections' 1fr / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+}
+
+@media (width < 900px) {
+  header nav[aria-expanded='true'] {
+    grid-template:
+      'brand hamburger' var(--nav-height)
+      'tools tools' auto
+      'sections sections' 1fr / 1fr auto;
+  }
+
+  header nav[aria-expanded='true'] .nav-tools {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--rem, 10) * 2.4 * 1px);
+  }
 }
 
 @media (width >= 900px) {
@@ -213,6 +244,47 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: translateY(-3px) rotate(45deg);
 }
 
+@media (width < 900px) {
+  header nav[aria-expanded='true'] .nav-hamburger-icon::before {
+    transform: translateY(calc(var(--rem, 10) * 0.5 * 1px)) rotate(-45deg);
+  }
+
+  header nav[aria-expanded='true'] .nav-hamburger-icon::after {
+    transform: translateY(calc(var(--rem, 10) * -0.5 * 1px)) rotate(45deg);
+  }
+}
+
+/* モバイル: 本家 .l-header__menu 仕様（ベース width:20px より後に配置して上書き） */
+@media (width < 900px) {
+  header nav .nav-hamburger {
+    height: calc(var(--rem, 10) * 5.3 * 1px);
+    justify-content: flex-end;
+    flex-shrink: 0;
+    min-width: calc(var(--rem, 10) * 2.8 * 1px);
+  }
+
+  header nav .nav-hamburger button {
+    height: calc(var(--rem, 10) * 5.3 * 1px);
+    padding: 0;
+  }
+
+  header nav .nav-hamburger-icon,
+  header nav .nav-hamburger-icon::before,
+  header nav .nav-hamburger-icon::after {
+    width: calc(var(--rem, 10) * 2.8 * 1px);
+    height: max(2px, calc(var(--rem, 10) * 0.2 * 1px));
+  }
+
+  /* 等間隔: 本家 -0.575/0.425 は非対称のため、-0.5/0.5 で均等に */
+  header nav[aria-expanded='false'] .nav-hamburger-icon::before {
+    top: calc(var(--rem, 10) * -0.5 * 1px);
+  }
+
+  header nav[aria-expanded='false'] .nav-hamburger-icon::after {
+    top: calc(var(--rem, 10) * 0.5 * 1px);
+  }
+}
+
 @media (width >= 900px) {
   header nav .nav-hamburger {
     display: none;
@@ -253,10 +325,16 @@ header nav .nav-brand picture img {
   }
 }
 
+/* 本家 .l-header__logo: margin-inline -2rem, padding-inline 2rem, img 12rem */
 @media (width < 900px) {
+  header nav .nav-brand {
+    margin-inline: calc(var(--rem, 10) * -2 * 1px);
+    padding-inline: calc(var(--rem, 10) * 2 * 1px);
+  }
+
   header nav .nav-brand img,
   header nav .nav-brand picture img {
-    width: 120px;
+    width: calc(var(--rem, 10) * 12 * 1px);
   }
 }
 
@@ -353,7 +431,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
-    gap: 0 calc(var(--rem, 10) * 0.8 * 1px);
+    gap: 0 max(2px, calc(var(--rem, 10) * 0.8 * 1px - 2px));
     margin: 0;
     align-items: center;
     width: fit-content;
@@ -372,12 +450,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     align-items: center;
   }
 
-  /* Top-level nav link: relative so ::before/::after sit at bottom (original .l-header__navigation-link). Font scales with --rem. */
+  /* Top-level nav link: relative so ::before/::after sit at bottom. padding -2px to avoid overlap with nav-tools at ~1269px. */
   header nav .nav-sections .default-content-wrapper > ul > li > a {
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 calc(var(--rem, 10) * 1.2 * 1px);
+    padding: 0 max(4px, calc(var(--rem, 10) * 1.2 * 1px - 2px));
     color: #282828;
     font-weight: 500;
     font-size: calc(var(--rem, 10) * 1.5 * 1px);

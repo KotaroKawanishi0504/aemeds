@@ -118,3 +118,18 @@ header nav .nav-sections > * {
 **nav padding-inline の縮小**: 1250px 以下で `padding-inline: calc(var(--rem) * 2.5 * 1px)` に変更（通常は 4）。AEM では --rem が大きくなりロゴ〜メニュー間が広くなるため、狭い幅で padding を縮めメニューに余裕を与える。
 
 **診断**: `node scripts/diagnose-header-overlap.cjs "http://localhost:3001/" 950` で overflow の計算値と rect を確認可能。getBoundingClientRect の重なり検出はレイアウト位置に基づくため、overflow: clip 適用後も「重なり」と表示されるが、描画上はクリップされる。
+
+### 4. モバイルヘッダー（本家仕様忠実再現）
+
+**問題**: ロゴ・ハンバーガーのサイズ、余白が本家と異なっていた。
+
+**本家仕様**（MOBILE_HEADER_ORIGINAL_SPEC.md 参照）:
+- --rem: 393px 基準で (vw/393)*10（キャップなし、899px で約 22.9）
+- バー高さ: 5.3rem、padding-inline: 2.4rem
+- ロゴ: 12rem、margin-inline -2rem、padding-inline 2rem
+- ハンバーガー: icon 2.8rem、line spacing ::before -0.575rem / ::after 0.425rem
+
+**対応**:
+- scripts.js: モバイル --rem を本家式に変更（393px で 10、10 でキャップ）
+- marubeni-theme: --nav-height を calc(var(--rem) * 5.3 * 1px) に変更
+- header.css: padding 2.4rem、ロゴ 12rem、ハンバーガー本家値、brand margin/padding

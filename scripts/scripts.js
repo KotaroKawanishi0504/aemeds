@@ -104,7 +104,8 @@ function applyGlobalTextScale() {
   let rem;
   if (w < 900) {
     scale = 0.65;
-    rem = 6;
+    /* 本家: --rem = var(--vw)*100/393*10。393px で 10、899px で約 22.9（キャップなしでスケール） */
+    rem = (w / 393) * 10;
   } else if (w >= 1280) {
     scale = 16 / 18;
     rem = 10;

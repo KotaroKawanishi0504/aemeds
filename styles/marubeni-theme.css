@@ -75,8 +75,8 @@
   /* 本家ラベル色 rgb(40,40,40) */
   --card-text-color: #282828;
 
-  /* Header: 本家 .l-header__bar の高さ（mobile 5.3rem = 53px） */
-  --nav-height: 53px;
+  /* Header: 本家 .l-header__bar の高さ（モバイル 5.3rem、rem は scripts.js で設定） */
+  --nav-height: calc(var(--rem, 10) * 5.3 * 1px);
 }
 
 /* 本家: 900px 以上で fluid 幅 min(1344px, 100vw - 192px)、左右は margin:auto */
@@ -305,12 +305,12 @@ main .cards-wrapper.cards-wrapper .cards .cards-card-body a {
   font-size: var(--body-font-size-s);
 }
 
-/* モバイル: ツールを先に表示（本家 .l-header__utility が上） */
+/* モバイル: ロゴ左・ハンバーガー右（本家 .l-header__bar と同じ配置）。ツールは展開時のみ表示 */
 @media (width < 900px) {
   header nav[aria-expanded='true'] {
     grid-template:
-      'hamburger brand' var(--nav-height)
+      'brand hamburger' var(--nav-height)
       'tools tools' auto
-      'sections sections' 1fr / auto 1fr;
+      'sections sections' 1fr / 1fr auto;
   }
 }
