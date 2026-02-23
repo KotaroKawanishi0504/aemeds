@@ -118,10 +118,11 @@ header nav[aria-expanded='true'] {
     margin-right: 0;
   }
 
-  /* At 1250px and below: reduce gap so nav-sections gets more space, avoid menu overlap */
+  /* At 1250px and below: reduce gap and padding so nav-sections gets more space (AEM has wider logo-menu gap when --rem is large) */
   @media (width <= 1250px) {
     header nav {
       gap: 0 calc(var(--rem, 10) * 0.8 * 1px);
+      padding-inline: calc(var(--rem, 10) * 2.5 * 1px);
     }
   }
 

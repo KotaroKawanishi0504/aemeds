@@ -113,6 +113,8 @@ header nav .nav-sections > * {
 
 **padding-inline-end**: 1250px 以下で `1rem`、それ以上で `0.5rem` を nav-sections に指定。
 
-**nav gap の縮小**: 1250px 以下で `gap: 0 calc(var(--rem) * 0.8 * 1px)` に変更（通常は 3.2）。言語切り替え左の余白を縮め、メニューに回す。
+**nav gap の縮小**: 1250px 以下で `gap: 0 calc(var(--rem) * 0.8 * 1px)` に変更（通常は 3.2）。
+
+**nav padding-inline の縮小**: 1250px 以下で `padding-inline: calc(var(--rem) * 2.5 * 1px)` に変更（通常は 4）。AEM では --rem が大きくなりロゴ〜メニュー間が広くなるため、狭い幅で padding を縮めメニューに余裕を与える。
 
 **診断**: `node scripts/diagnose-header-overlap.cjs "http://localhost:3001/" 950` で overflow の計算値と rect を確認可能。getBoundingClientRect の重なり検出はレイアウト位置に基づくため、overflow: clip 適用後も「重なり」と表示されるが、描画上はクリップされる。
