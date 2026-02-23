@@ -75,23 +75,21 @@ export default async function decorate(block) {
     if (posterKey) posterUrl = toSingleUrl(config[posterKey]);
   }
 
-  if (!videoUrl || !posterUrl) {
-    const rows = [...block.querySelectorAll(':scope > div')].filter((r) => r.children.length > 0);
-    if (rows.length > 0) {
-      const getVal = (row, preferLink = false) => {
-        const col = row.querySelector('div:last-child') || row.children[row.children.length - 1];
-        if (!col) return getUrlFromCell(row.querySelector('div'));
-        if (preferLink) {
-          const a = col.querySelector('a[href]');
-          if (a?.href) return a.href.trim();
-        }
-        return getUrlFromCell(col) || col.textContent?.trim() || '';
-      };
-      if (!videoUrl && rows[0]) videoUrl = getVal(rows[0], true);
-      if (!posterUrl && rows[1]) posterUrl = getVal(rows[1]);
-      if (!linkUrl && rows[2]) linkUrl = getVal(rows[2], true);
-      if (!linkLabel && rows[3]) linkLabel = (rows[3].textContent || '').trim();
-    }
+  const rows = [...block.querySelectorAll(':scope > div')].filter((r) => r.children.length > 0);
+  if (rows.length > 0) {
+    const getVal = (row, preferLink = false) => {
+      const col = row.querySelector('div:last-child') || row.children[row.children.length - 1];
+      if (!col) return getUrlFromCell(row.querySelector('div'));
+      if (preferLink) {
+        const a = col.querySelector('a[href]');
+        if (a?.href) return a.href.trim();
+      }
+      return getUrlFromCell(col) || col.textContent?.trim() || '';
+    };
+    if (!videoUrl && rows[0]) videoUrl = getVal(rows[0], true);
+    if (!posterUrl && rows[1]) posterUrl = getVal(rows[1]);
+    if (!linkUrl && rows[2]) linkUrl = getVal(rows[2], true);
+    if (!linkLabel && rows[3]) linkLabel = (rows[3].textContent || '').trim();
   }
 
   if (!videoUrl || !posterUrl) {
