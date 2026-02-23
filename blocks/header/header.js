@@ -381,6 +381,13 @@ export default async function decorate(block) {
   utility.append(langUl, searchLink);
   navTools.prepend(utility);
 
+  /* Remove redundant search button from nav fragment; keep only nav-utility */
+  Array.from(navTools.children).forEach((child) => {
+    if (!child.classList.contains('nav-utility')) {
+      child.remove();
+    }
+  });
+
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand?.querySelector('.button')
     || navBrand?.querySelector('a[href] img')?.closest('a')

@@ -101,3 +101,18 @@ header nav .nav-sections > * {
 
 - `--rem` は `applyGlobalTextScale()` で正しく設定されている（1000px: 7.8125、1200px: 9.375、1400px: 10）
 - `gap: calc(var(--rem) * 3.2 * 1px)` により、ロゴとメニュー間の間隔はビューポート幅に応じて変化
+
+### 3. ナロー幅でのメニューと言語切り替えの重なり
+
+**原因**: 900〜1000px 付近で、8項目のメニュー幅が nav-sections の領域を超え、右端の「丸紅経済研究所」が nav-tools（Ja En、検索）と重なって見えなくなっていた。`overflow: hidden` だけでは描画クリップが効かない環境があった。
+
+**対応**:
+- `nav-sections` と `nav-sections > *` に `overflow: clip` + `contain: layout` を追加（`overflow: hidden` をフォールバック）
+- `default-content-wrapper > ul` に `overflow-x: clip` を追加
+- `nav-tools` に `position: relative`、`z-index: 1`、`background-color: #fff` を追加し、万が一の重なり時もツールが前面に表示されるようにする
+
+**padding-inline-end**: 1250px 以下で `1rem`、それ以上で `0.5rem` を nav-sections に指定。
+
+**nav gap の縮小**: 1250px 以下で `gap: 0 calc(var(--rem) * 0.8 * 1px)` に変更（通常は 3.2）。言語切り替え左の余白を縮め、メニューに回す。
+
+**診断**: `node scripts/diagnose-header-overlap.cjs "http://localhost:3001/" 950` で overflow の計算値と rect を確認可能。getBoundingClientRect の重なり検出はレイアウト位置に基づくため、overflow: clip 適用後も「重なり」と表示されるが、描画上はクリップされる。

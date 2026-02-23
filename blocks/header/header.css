@@ -118,6 +118,12 @@ header nav[aria-expanded='true'] {
     margin-right: 0;
   }
 
+  /* At 1250px and below: reduce gap so nav-sections gets more space, avoid menu overlap */
+  @media (width <= 1250px) {
+    header nav {
+      gap: 0 calc(var(--rem, 10) * 0.8 * 1px);
+    }
+  }
 
   header nav[aria-expanded='true'] {
     min-height: 0;
@@ -314,6 +320,17 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     min-width: 0;
     visibility: visible;
     white-space: nowrap;
+    overflow: hidden;
+    overflow: clip;
+    contain: layout;
+    padding-inline-end: 0.5rem;
+  }
+
+  /* At 1250px and below: smaller padding (nav gap is also reduced) so menu has more room */
+  @media (width <= 1250px) {
+    header .nav-wrapper nav .nav-sections {
+      padding-inline-end: 1rem;
+    }
   }
 
   /* Center the menu (本家 justify-self: center). Wrapper fills nav-sections; inner flex centers the ul. */
@@ -323,13 +340,15 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     display: flex;
     justify-content: center;
     overflow: hidden;
+    overflow: clip;
+    contain: layout;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
   }
 
-  /* Menu block: link spacing scales with --rem (本家 --padding-inline). width: fit-content so it centers; max-width: 100% to avoid overflow. */
+  /* Menu block: link spacing scales with --rem (本家 --padding-inline). width: fit-content so it centers; max-width: 100% to avoid overflow. overflow-x: clip prevents overlap with nav-tools when narrow. */
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
@@ -339,6 +358,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     width: fit-content;
     max-width: 100%;
     min-width: 0;
+    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* stylelint-disable no-descending-specificity -- nav dropdown vs panel selectors need this order for correct cascade */
@@ -771,6 +792,9 @@ header nav .nav-tools {
     gap: calc(var(--rem, 10) * 2.4 * 1px);
     margin-left: auto;
     flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
   }
 }
 
