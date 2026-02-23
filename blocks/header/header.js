@@ -523,14 +523,19 @@ export default async function decorate(block) {
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  /* Background element: original .l-header__background - white overlay with transition */
+  const searchBackground = document.createElement('div');
+  searchBackground.className = 'nav-search-background';
+  searchBackground.setAttribute('aria-hidden', 'true');
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
-  navWrapper.append(nav, searchBar);
+  navWrapper.append(nav, searchBar, searchBackground);
   block.append(navWrapper);
 
-  /* Search toggle: show bar, switch header to solid white (original behavior) */
+  /* Search toggle: match original megamenu - aria-expanded at start, blockSize animation */
   const SEARCH_CLOSE_DELAY = 150;
-  const SEARCH_ANIMATION_DURATION = 300;
+  const SEARCH_ANIMATION_DURATION = 200;
   let searchCloseTimer = 0;
   let searchAnimation = null;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -541,12 +546,14 @@ export default async function decorate(block) {
     searchAnimation?.cancel();
     searchBar.removeAttribute('hidden');
     const duration = prefersReducedMotion ? 0 : SEARCH_ANIMATION_DURATION;
+    searchButton.setAttribute('aria-expanded', String(isOpen));
     if (isOpen) {
       navWrapper.classList.add('search-open');
       searchBar.style.overflow = 'clip';
       searchBar.style.blockSize = '0';
       requestAnimationFrame(() => {
         const targetHeight = searchBar.scrollHeight;
+        searchBackground.style.height = `${targetHeight}px`;
         searchAnimation = searchBar.animate(
           { blockSize: ['0px', `${targetHeight}px`] },
           { duration, easing: 'ease' },
@@ -558,10 +565,13 @@ export default async function decorate(block) {
         };
       });
     } else {
-      const currentHeight = searchBar.offsetHeight;
+      /* Keep search-open until animation finishes so search bar stays display:block during close */
+      searchBackground.style.height = '0';
+      const cs = getComputedStyle(searchBar);
+      const startBlockSize = parseInt(cs.blockSize, 10) || searchBar.offsetHeight;
       searchBar.style.overflow = 'clip';
       searchAnimation = searchBar.animate(
-        { blockSize: [`${currentHeight}px`, '0px'] },
+        { blockSize: [`${startBlockSize}px`, '0px'] },
         { duration, easing: 'ease' },
       );
       searchAnimation.onfinish = () => {
@@ -572,7 +582,6 @@ export default async function decorate(block) {
         searchAnimation = null;
       };
     }
-    searchButton.setAttribute('aria-expanded', String(isOpen));
   };
   const closeSearch = () => toggleSearch(false);
   searchButton.addEventListener('click', () => toggleSearch());

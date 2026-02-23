@@ -47,6 +47,24 @@ header .nav-wrapper.search-open::after {
   background-color: #dfdfdf;
 }
 
+/* Original .l-header__background: white overlay below nav, transition on height */
+header .nav-search-background {
+  position: absolute;
+  top: var(--nav-height, 72px);
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #fff;
+  z-index: -1;
+  transition: height 0.2s ease;
+}
+
+@media (width < 900px) {
+  header .nav-search-background {
+    display: none;
+  }
+}
+
 /* Hero-video section overlaps under header so video top is hidden. We only set has-hero-video when
    the first block in main is hero-video, so the first section is always the hero section. */
 body.has-hero-video main > div:first-child.hero-video-container,
