@@ -392,6 +392,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   }
 
   /* Higher specificity so display: flex wins over AEM/EDS .section { display: block } */
+  /* overflow: visible so dropdown panel (position:fixed below) is not clipped; ul has overflow-x: clip for menu overlap with nav-tools */
   header .nav-wrapper nav .nav-sections {
     flex: 1 1 auto;
     display: flex;
@@ -399,9 +400,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     min-width: 0;
     visibility: visible;
     white-space: nowrap;
-    overflow: hidden;
-    overflow: clip;
-    contain: layout;
+    overflow: visible;
     padding-inline-end: 0.5rem;
   }
 
@@ -412,22 +411,20 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     }
   }
 
-  /* Center the menu (本家 justify-self: center). Wrapper fills nav-sections; inner flex centers the ul. */
+  /* Center the menu (本家 justify-self: center). Wrapper fills nav-sections; inner flex centers the ul. overflow: visible so dropdown panel is not clipped. */
   header nav .nav-sections > * {
     flex: 1 1 auto;
     min-width: 0;
     display: flex;
     justify-content: center;
-    overflow: hidden;
-    overflow: clip;
-    contain: layout;
+    overflow: visible;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
   }
 
-  /* Menu block: link spacing scales with --rem (本家 --padding-inline). width: fit-content so it centers; max-width: 100% to avoid overflow. overflow-x: clip prevents overlap with nav-tools when narrow. */
+  /* Menu block: link spacing scales with --rem (本家 --padding-inline). width: fit-content so it centers; max-width: 100% to avoid overflow. overflow: visible so dropdown extends below (Lv2 links not clipped). */
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
@@ -437,8 +434,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     width: fit-content;
     max-width: 100%;
     min-width: 0;
-    overflow-x: hidden;
-    overflow-x: clip;
+    overflow: visible;
   }
 
   /* stylelint-disable no-descending-specificity -- nav dropdown vs panel selectors need this order for correct cascade */
@@ -493,7 +489,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     );
   }
 
-  /* Straight red bar below link (original ::after) */
+  /* Straight red bar below link (original ::after). Full link-text width for all items. */
   header nav .nav-sections .default-content-wrapper > ul > li > a::after {
     right: 0;
     width: 100%;
@@ -517,7 +513,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     }
   }
 
-  /* Simple dropdown (no panel) - before .nav-dropdown-list for specificity */
+  /* Simple dropdown (no panel) - before .nav-dropdown-list for specificity. No red border-top per original panel style. */
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     position: absolute;
@@ -530,7 +526,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     padding-inline: 24px;
     background: #fff;
     box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
-    border-top: 2px solid #e60012;
     white-space: normal;
     z-index: 10;
     column-count: 3;
@@ -557,21 +552,21 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     }
   }
 
-  /* Panel list: 4 or 3 columns via flex so row height is aligned (underlines at same level) */
+  /* Panel list: 4 or 3 columns via flex so row height is aligned (underlines at same level). Column gap 28px (4px narrower than original 32px). */
   header nav .nav-sections .nav-dropdown-list ul {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    gap: 0 32px;
+    gap: 0 28px;
     margin: 0;
   }
 
   header nav .nav-sections .nav-dropdown-list[data-columns='4'] ul li {
-    width: calc((100% - 32px * 3) / 4);
+    width: calc((100% - 28px * 3) / 4);
   }
 
   header nav .nav-sections .nav-dropdown-list[data-columns='3'] ul li {
-    width: calc((100% - 32px * 2) / 3);
+    width: calc((100% - 28px * 2) / 3);
   }
 
   header nav .nav-sections .nav-dropdown-list li {
@@ -629,12 +624,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     object-fit: contain;
   }
 
-  /* Second-level link: 23px space above/below text (strong specificity for EDS/AEM) */
+  /* Second-level link: 23px space above/below text. padding-inline-start: 0 so text aligns with left edge of border lines. padding-inline-end: 12px for icon spacing. */
   header nav .nav-sections .default-content-wrapper .nav-dropdown-panel .nav-dropdown-content .nav-dropdown-list ul li a,
   header nav .nav-sections .nav-dropdown-list li a {
     display: block;
     position: relative;
-    padding: 23px 28px 23px 24px;
+    padding: 23px 12px 23px 0;
     font-size: 15px;
     line-height: 1.6;
     font-weight: 500;
@@ -761,9 +756,9 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     padding-block: 32px;
   }
 
-  /* Without images: original 3-column grid (header | 4rem gutter | list), title 12.3626% */
+  /* Without images: original 3-column grid (header | gutter | list), title 12.3626%. Gutter 40px narrower than 4rem. */
   header nav .nav-sections .nav-dropdown-panel:not(:has(> .nav-dropdown-images)) .nav-dropdown-content:has(.nav-dropdown-list) {
-    grid-template: "header . list" auto / 12.3626% 4rem 1fr;
+    grid-template: "header . list" auto / 12.3626% calc(4rem - 40px) 1fr;
     gap: 0;
     padding-inline: 40px;
     padding-block: 32px;

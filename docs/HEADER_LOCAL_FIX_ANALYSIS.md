@@ -133,3 +133,13 @@ header nav .nav-sections > * {
 - scripts.js: モバイル --rem を本家式に変更（393px で 10、10 でキャップ）
 - marubeni-theme: --nav-height を calc(var(--rem) * 5.3 * 1px) に変更
 - header.css: padding 2.4rem、ロゴ 12rem、ハンバーガー本家値、brand margin/padding
+
+### 5. マウスオーバーでドロップダウンが開かない（ローカル環境）
+
+**原因1**: `nav.plain.html` がフラット構造（`ul > li` のみ、ネストした `ul` なし）のため、`hasDropdown` が常に `false` となり `mouseenter` が登録されない。
+
+**対応**: `nav.plain.html` に「ニュース」「事業紹介」の子リスト（ネストした `ul > li`）を追加。NAV_AND_FOOTER_SETUP.md の想定構造に合わせた。
+
+**原因2**: `nav-sections` と `nav-sections > *` に `overflow: clip` と `contain: layout` が指定されており、ドロップダウンパネルが親要素でクリップされていた。
+
+**対応**: `overflow: clip` と `contain: layout` を削除し、`overflow: visible` に変更。メニューリンクの横オーバーフローは `default-content-wrapper > ul` の `overflow-x: clip` で制御。
