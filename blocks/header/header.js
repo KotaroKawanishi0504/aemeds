@@ -389,10 +389,25 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand?.querySelector('.button')
+  let brandLink = navBrand?.querySelector('.button')
     || navBrand?.querySelector('a[href] img')?.closest('a')
     || navBrand?.querySelector('a[href] picture')?.closest('a')
     || navBrand?.querySelector('.image.block a[href]');
+
+  /* If image block has logo but no link (e.g. AEM nav link not applied), wrap in anchor */
+  if (!brandLink) {
+    const imageBlock = navBrand?.querySelector('.image.block, .image');
+    const logoMedia = imageBlock?.querySelector('picture, img');
+    if (logoMedia && !logoMedia.closest('a[href]')) {
+      const linkUrl = isEn ? '/en/' : '/jp/';
+      const a = document.createElement('a');
+      a.href = linkUrl;
+      logoMedia.parentNode.insertBefore(a, logoMedia);
+      a.appendChild(logoMedia);
+      brandLink = a;
+    }
+  }
+
   if (brandLink) {
     if (brandLink.classList.contains('button')) {
       brandLink.className = '';
@@ -410,6 +425,9 @@ export default async function decorate(block) {
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     normalizeNavSectionsFromBlocks(navSections);
+    let dropdownCloseTimer = 0;
+    const DROPDOWN_CLOSE_DELAY = 150;
+
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       const hasDropdown = navSection.querySelector('ul') || navSection.querySelector('.nav-dropdown-panel');
       if (hasDropdown) navSection.classList.add('nav-drop');
@@ -426,14 +444,35 @@ export default async function decorate(block) {
       if (hasDropdown) {
         navSection.addEventListener('mouseenter', () => {
           if (!isDesktop.matches) return;
+          window.clearTimeout(dropdownCloseTimer);
+          dropdownCloseTimer = 0;
           toggleAllNavSections(navSections, false);
           navSection.setAttribute('aria-expanded', 'true');
         });
+        /* Panel below header: mouseenter cancels close when moving from link to panel */
+        const panel = navSection.querySelector('.nav-dropdown-panel') || navSection.querySelector('ul');
+        if (panel) {
+          panel.addEventListener('mouseenter', () => {
+            if (!isDesktop.matches) return;
+            window.clearTimeout(dropdownCloseTimer);
+            dropdownCloseTimer = 0;
+          });
+          panel.addEventListener('mouseleave', () => {
+            if (!isDesktop.matches) return;
+            dropdownCloseTimer = window.setTimeout(() => {
+              toggleAllNavSections(navSections, false);
+              dropdownCloseTimer = 0;
+            }, DROPDOWN_CLOSE_DELAY);
+          });
+        }
       }
     });
     navSections.addEventListener('mouseleave', () => {
       if (!isDesktop.matches) return;
-      toggleAllNavSections(navSections, false);
+      dropdownCloseTimer = window.setTimeout(() => {
+        toggleAllNavSections(navSections, false);
+        dropdownCloseTimer = 0;
+      }, DROPDOWN_CLOSE_DELAY);
     });
   }
 
