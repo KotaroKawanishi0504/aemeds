@@ -104,15 +104,14 @@ header nav[aria-expanded='true'] {
 
   /* No full-width sheet below nav; dropdown panel has its own background and box-shadow */
 
-  /* Original bar is full width (maxWidth: none); keep nav full width so logo left / menu center / tools right layout works.
-     Left padding fixed (40px) so logo start position does not move; only right padding scales by tier. */
+  /* Original bar: full width. Logo/menu scale with --rem (本家 calc(var(--rem)*16.4*1px) etc). */
   header nav {
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 0 32px;
-    padding-inline: 40px;
+    gap: 0 calc(var(--rem, 10) * 3.2 * 1px);
+    padding-inline: calc(var(--rem, 10) * 4 * 1px);
     width: 100%;
     max-width: 100%;
     margin-left: 0;
@@ -243,7 +242,7 @@ header nav .nav-brand picture img {
 @media (width >= 900px) {
   header nav .nav-brand img,
   header nav .nav-brand picture img {
-    width: 164px;
+    width: calc(var(--rem, 10) * 16.4 * 1px);
   }
 }
 
@@ -323,7 +322,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     min-width: 0;
     width: max-content;
     max-width: 100%;
-    margin-left: 44px;
+    margin-left: calc(var(--rem, 10) * 4.4 * 1px);
     overflow: hidden;
   }
 
@@ -331,11 +330,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     align-self: unset;
   }
 
-  /* Menu block width: original ~945px; narrow link spacing (logo/tools unchanged) */
+  /* Menu block: link spacing scales with --rem (本家 --padding-inline). */
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
-    gap: 0 8px;
+    gap: 0 calc(var(--rem, 10) * 0.8 * 1px);
     margin: 0;
     align-items: center;
   }
@@ -354,7 +353,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 12px;
+    padding: 0 calc(var(--rem, 10) * 1.2 * 1px);
     color: #282828;
     font-weight: 500;
     font-size: calc(var(--rem, 10) * 1.5 * 1px);
@@ -413,109 +412,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     header nav .nav-sections .default-content-wrapper > ul > li > a:hover::before,
     header nav .nav-sections .default-content-wrapper > ul > li > a:hover::after {
       opacity: 1;
-    }
-  }
-
-  /* Responsive: scale down menu (gap, padding, font) so it never overlaps .nav-tools (match original behavior) */
-
-  /* Option A: 1200–1400px tier so link spacing scales in wide range (not fixed above 1200px) */
-  @media (width >= 900px) and (width >= 1200px) and (width < 1400px) {
-    header nav {
-      gap: 0 28px;
-      padding-inline-end: 36px;
-    }
-
-    header nav .nav-brand img,
-    header nav .nav-brand picture img {
-      width: 155px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul {
-      gap: 0 7px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul > li > a {
-      padding: 0 11px;
-    }
-  }
-
-  @media (width >= 900px) and (width < 1200px) {
-    header nav {
-      gap: 0 24px;
-      padding-inline-end: 32px;
-    }
-
-    header nav .nav-brand img,
-    header nav .nav-brand picture img {
-      width: 145px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul {
-      gap: 0 6px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul > li > a {
-      padding: 0 10px;
-    }
-  }
-
-  @media (width >= 900px) and (width < 1100px) {
-    header nav {
-      gap: 0 16px;
-    }
-
-    header nav .nav-brand img,
-    header nav .nav-brand picture img {
-      width: 135px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul {
-      gap: 0 4px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul > li > a {
-      padding: 0 8px;
-    }
-  }
-
-  @media (width >= 900px) and (width < 1000px) {
-    header nav {
-      gap: 0 12px;
-      padding-inline-end: 24px;
-    }
-
-    header nav .nav-brand img,
-    header nav .nav-brand picture img {
-      width: 125px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul {
-      gap: 0 2px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul > li > a {
-      padding: 0 6px;
-    }
-  }
-
-  /* 900–950px: match original --rem scaling near breakpoint (minimal spacing to avoid overlap) */
-  @media (width >= 900px) and (width < 950px) {
-    header nav {
-      gap: 0 8px;
-      padding-inline-end: 16px;
-    }
-
-    header nav .nav-brand img,
-    header nav .nav-brand picture img {
-      width: 115px;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul {
-      gap: 0;
-    }
-
-    header nav .nav-sections .default-content-wrapper > ul > li > a {
-      padding: 0 4px;
     }
   }
 

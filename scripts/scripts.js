@@ -112,6 +112,7 @@ function applyGlobalTextScale() {
     rem = (w / 1280) * 10;
     scale = (w / 1280) * (16 / 18);
   }
+  document.documentElement.style.setProperty('--vw', String(w / 100));
   document.documentElement.style.setProperty('--global-text-scale', String(scale));
   document.documentElement.style.setProperty('--rem', String(rem));
 }
