@@ -388,6 +388,10 @@ export default async function decorate(block) {
     }
   });
 
+  /* Logo locale from page path (not document.lang) to avoid Universal Editor /en/ mismatch */
+  const pathForLogo = basePath || window.location.pathname || '';
+  const logoHref = pathForLogo.includes('/en') ? '/en/' : '/jp/';
+
   const navBrand = nav.querySelector('.nav-brand');
   let brandLink = navBrand?.querySelector('.button')
     || navBrand?.querySelector('a[href] img')?.closest('a')
@@ -399,13 +403,20 @@ export default async function decorate(block) {
     const imageBlock = navBrand?.querySelector('.image.block, .image');
     const logoMedia = imageBlock?.querySelector('picture, img');
     if (logoMedia && !logoMedia.closest('a[href]')) {
-      const linkUrl = isEn ? '/en/' : '/jp/';
       const a = document.createElement('a');
-      a.href = linkUrl;
+      a.href = logoHref;
       logoMedia.parentNode.insertBefore(a, logoMedia);
       a.appendChild(logoMedia);
       brandLink = a;
     }
+  }
+
+  /* Fix logo href when AEM/Universal Editor outputs wrong locale (e.g. /en/ for jp nav) */
+  if (brandLink && brandLink.href) {
+    const hrefPath = new URL(brandLink.href, window.location.origin).pathname;
+    const wrongEn = logoHref === '/jp/' && (hrefPath.startsWith('/en') || hrefPath === '/en');
+    const wrongJp = logoHref === '/en/' && (hrefPath.startsWith('/jp') || hrefPath === '/jp');
+    if (wrongEn || wrongJp) brandLink.setAttribute('href', logoHref);
   }
 
   if (brandLink) {
