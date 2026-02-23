@@ -352,9 +352,11 @@ export default async function decorate(block) {
     navTools.dataset.sectionStatus = 'loaded';
     nav.appendChild(navTools);
   }
-  const isEn = (typeof document.documentElement.lang === 'string'
-    && document.documentElement.lang.toLowerCase().startsWith('en'))
-    || (typeof window.location.pathname === 'string' && window.location.pathname.startsWith('/en'));
+  /* Path-based lang: /jp/ => Ja selected, En link to /en/; /en/ => En selected, Ja link to /jp/ */
+  const pathname = window.location.pathname || '';
+  const isEn = pathname.includes('/en');
+  const enLinkHref = pathname.replace(/\/(jp)(\/|$)/g, '/en$2') || '/en/';
+  const jaLinkHref = pathname.replace(/\/(en)(\/|$)/g, '/jp$2') || '/jp/';
   const utility = document.createElement('div');
   utility.className = 'nav-utility';
   const langUl = document.createElement('ul');
@@ -364,13 +366,13 @@ export default async function decorate(block) {
   const enLi = document.createElement('li');
   enLi.className = 'nav-language-item';
   if (isEn) {
-    jaLi.innerHTML = '<a href="/jp/">Ja</a>';
+    jaLi.innerHTML = `<a href="${jaLinkHref}">Ja</a>`;
     enLi.setAttribute('data-current', '');
     enLi.textContent = 'En';
   } else {
     jaLi.setAttribute('data-current', '');
     jaLi.textContent = 'Ja';
-    enLi.innerHTML = '<a href="/en/">En</a>';
+    enLi.innerHTML = `<a href="${enLinkHref}">En</a>`;
   }
   langUl.append(jaLi, enLi);
   const searchLink = document.createElement('a');
