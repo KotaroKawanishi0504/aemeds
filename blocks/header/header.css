@@ -797,6 +797,16 @@ header nav .nav-tools {
     z-index: 1;
     background-color: #fff;
   }
+
+  /* Semi-transparent header: language switcher blends with header (no solid white patch) */
+  body.has-hero-video header nav .nav-tools {
+    background-color: transparent;
+  }
+
+  /* Scrolled past hero: restore solid background for overlap protection */
+  body.has-hero-video.header-scrolled header nav .nav-tools {
+    background-color: #fff;
+  }
 }
 
 header nav .nav-tools a {
