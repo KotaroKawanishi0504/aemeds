@@ -44,6 +44,7 @@ async function runFixture(name, expectedLabel) {
 async function run() {
   await runFixture('aem-actual', 'More');
   await runFixture('aem-with-label', '#44 | SmartestEnergy');
+  await runFixture('aem-with-label-split-pipe', '#44 | SmartestEnergy');
   console.log('All AEM fixture tests passed.');
 }
 

@@ -90,7 +90,20 @@ export default async function decorate(block) {
     if (!videoUrl && rows[0]) videoUrl = getVal(rows[0], true);
     if (!posterUrl && rows[1]) posterUrl = getVal(rows[1]);
     if (!linkUrl && rows[2]) linkUrl = getVal(rows[2], true);
+    // AEM may split on "|" into multiple rows; join rows 3+ to restore "#44 | SmartestEnergy"
+    if (!linkLabel && rows.length > 4) {
+      const parts = rows.slice(3).map((r) => (r.textContent || '').trim()).filter(Boolean);
+      if (parts.length > 0) linkLabel = parts.join(' | ');
+    }
     if (!linkLabel && rows[3]) linkLabel = (rows[3].textContent || '').trim();
+    // Fallback: link text when linkText is collapsed with link (label in anchor text)
+    if (!linkLabel && rows[2]) {
+      const a = rows[2].querySelector('a[href]');
+      if (a?.href) {
+        const txt = (a.textContent || '').trim();
+        if (txt && txt !== a.href) linkLabel = txt;
+      }
+    }
   }
 
   if (!videoUrl || !posterUrl) {
