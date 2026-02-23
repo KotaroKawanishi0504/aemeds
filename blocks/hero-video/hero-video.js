@@ -75,6 +75,7 @@ export default async function decorate(block) {
     if (posterKey) posterUrl = toSingleUrl(config[posterKey]);
   }
 
+  // AEM may use single-cell rows; we read by row index (0=video,1=poster,2=link,3=label). See docs.
   const rows = [...block.querySelectorAll(':scope > div')].filter((r) => r.children.length > 0);
   if (rows.length > 0) {
     const getVal = (row, preferLink = false) => {

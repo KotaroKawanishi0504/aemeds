@@ -22,6 +22,47 @@ AEM が出力する Hero Video ブロックの HTML では、**4 行目（Link l
 
 ---
 
+## 取得 HTML での確認結果（Link label が "More" のままになる件）
+
+実際に取得した AEM の HTML で診断スクリプトを実行した結果、以下が確定した。
+
+### ブロックの実際の構造
+
+- **行が「2 列」（見出し＋値）ではない**  
+  各 `block > div` は **1 つだけ子の div** を持ち、`readBlockConfig` が期待する「1 列目＝見出し・2 列目＝値」の形になっていない。このため `readBlockConfig(block)` の結果は **空**（config に何も入らない）。
+- **4 行目（Link label 用の行）のセルが空**  
+  該当部分は次のとおり。
+
+```html
+<div>
+    <div></div>
+</div>
+```
+
+  Author は「Link label」に `#44 | SmartestEnergy` を入力しているが、**サーバーが返す HTML にはそのテキストが一切含まれていない**（4 行目の内側の div が空）。
+
+### 結論（"More" のままになる理由）
+
+| 項目 | 状態 |
+|------|------|
+| config | 行が 2 列でないため空。link-label 等のキーは存在しない。 |
+| rows[2] | 3 行目からは `<a href>` で linkUrl を取得可能。 |
+| rows[3] | 4 行目は `<div></div>` のみで textContent が空。linkLabel が取れない。 |
+| 結果 | linkLabel が空のため、フォールバックの "More" が表示される。 |
+
+**根本原因:**  
+**AEM が Hero Video ブロックの「Link label」オーサリング値を、HTML の 4 行目に出力していない。**  
+フロント（hero-video.js）では、HTML に存在しない値を参照することはできない。  
+Author で入力したラベルを表示するには、**AEM 側でブロックのレンダリング（または BYOM／コンポーネント定義）を修正し、Link label の値を 4 行目のセルに出力する**必要がある。
+
+### Frontend 側の対応（実施済み）
+
+- **単一セル行対応:** AEM が「見出し＋値」の 2 列でなく 1 列（値のみ）で出力する場合でも、行インデックス（0=video, 1=poster, 2=link URL, 3=link label）で値を読むようにしてある。AEM が 4 行目に Link label を出力すれば、追加のフロント修正なしで表示される。
+- **フォールバック:** linkUrl のみある場合は "More" を表示。AEM 修正後は 4 行目にラベルが入ればその値が表示される。
+- **依頼事項:** AEM 担当に「Hero Video の Link label をブロック HTML の 4 行目（4 つ目の `block > div` の子要素）に出力する」よう依頼すること。
+
+---
+
 ## 以下は分析の前提メモ（参考）
 
 ---
