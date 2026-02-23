@@ -38,6 +38,15 @@ body.has-hero-video header .nav-wrapper::after {
   background-color: transparent;
 }
 
+/* Search bar open: solid white background (original: click magnifying glass -> header becomes opaque) */
+header .nav-wrapper.search-open {
+  background-color: #fff;
+}
+
+header .nav-wrapper.search-open::after {
+  background-color: #dfdfdf;
+}
+
 /* Hero-video section overlaps under header so video top is hidden. We only set has-hero-video when
    the first block in main is hero-video, so the first section is always the hero section. */
 body.has-hero-video main > div:first-child.hero-video-container,
@@ -947,8 +956,12 @@ header nav .nav-search {
   place-items: center;
   width: calc(var(--rem, 10) * 2.4 * 1px);
   height: calc(var(--rem, 10) * 2.4 * 1px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #282828;
-  text-decoration: none;
+  cursor: pointer;
 }
 
 header nav .nav-search::before {
@@ -965,6 +978,86 @@ header nav .nav-search::before {
   header nav .nav-search:hover {
     color: #e60012;
   }
+}
+
+/* Search bar: expandable below nav (original Marubeni: full-width, white, rounded input) */
+header .nav-search-bar {
+  display: none;
+  padding: calc(var(--rem, 10) * 2 * 1px) calc(var(--rem, 10) * 4 * 1px);
+  padding-bottom: calc(var(--rem, 10) * 3.2 * 1px);
+  background-color: #fff;
+}
+
+header .nav-wrapper.search-open .nav-search-bar {
+  display: block;
+}
+
+header .nav-search-bar[hidden] {
+  display: none !important;
+}
+
+header .nav-search-form {
+  display: grid;
+  max-width: min(1344px, calc(100vw - 192px));
+  margin: 0 auto;
+}
+
+header .nav-search-form > * {
+  grid-area: 1 / 1;
+}
+
+header .nav-search-input {
+  width: 100%;
+  height: calc(var(--rem, 10) * 5.2 * 1px);
+  padding-inline: calc(var(--rem, 10) * 1.5 * 1px);
+  padding-right: calc(var(--rem, 10) * 5.2 * 1px);
+  font-size: calc(var(--rem, 10) * 1.4 * 1px);
+  border: 1px solid #dfdfdf;
+  border-radius: calc(var(--rem, 10) * 0.4 * 1px);
+  font-family: inherit;
+  color: #282828;
+  background-color: #fff;
+  outline: 0;
+  transition: border-color 0.15s;
+}
+
+header .nav-search-input::placeholder {
+  color: #6c6c6c;
+}
+
+header .nav-search-input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+header .nav-search-input:focus {
+  border-color: #282828;
+}
+
+@media (hover: hover) {
+  header .nav-search-input:not(:focus):hover {
+    border-color: #aaa;
+  }
+}
+
+header .nav-search-submit {
+  justify-self: end;
+  width: calc(var(--rem, 10) * 2 * 1px);
+  height: calc(var(--rem, 10) * 2 * 1px);
+  margin: 0;
+  padding-inline: calc(var(--rem, 10) * 1.6 * 1px);
+  border: 0;
+  background: transparent;
+  color: #282828;
+  cursor: pointer;
+}
+
+header .nav-search-submit::before {
+  content: '\e90d';
+  font-family: Ben, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(var(--rem, 10) * 2 * 1px);
+  display: block;
 }
 
 /* Screen-reader only text (original .u-visually-hidden) */

@@ -375,13 +375,34 @@ export default async function decorate(block) {
     enLi.innerHTML = `<a href="${enLinkHref}">En</a>`;
   }
   langUl.append(jaLi, enLi);
-  const searchLink = document.createElement('a');
-  searchLink.href = isEn ? '/en/search/' : '/jp/search/';
-  searchLink.className = 'nav-search';
-  searchLink.setAttribute('aria-label', '検索');
-  searchLink.innerHTML = '<span class="u-visually-hidden">検索</span>';
-  utility.append(langUl, searchLink);
+  const searchAction = isEn ? 'https://search.marubeni.com/en/' : 'https://search.marubeni.com/ja/';
+  const searchPlaceholder = isEn ? 'Enter search keywords' : 'お探しのキーワードを入力してください';
+  const searchButton = document.createElement('button');
+  searchButton.type = 'button';
+  searchButton.className = 'nav-search';
+  searchButton.setAttribute('aria-label', isEn ? 'Search' : '検索');
+  searchButton.setAttribute('aria-expanded', 'false');
+  searchButton.setAttribute('aria-controls', 'nav-search-bar');
+  searchButton.innerHTML = `<span class="u-visually-hidden">${isEn ? 'Search' : '検索'}</span>`;
+  utility.append(langUl, searchButton);
   navTools.prepend(utility);
+
+  /* Search bar: expandable below header (original Marubeni behavior) */
+  const searchBar = document.createElement('div');
+  searchBar.id = 'nav-search-bar';
+  searchBar.className = 'nav-search-bar';
+  searchBar.setAttribute('hidden', '');
+  const searchForm = document.createElement('form');
+  searchForm.action = searchAction;
+  searchForm.method = 'get';
+  searchForm.className = 'nav-search-form';
+  searchForm.innerHTML = `
+    <input type="search" name="kw" class="nav-search-input" placeholder="${searchPlaceholder}" autocomplete="off">
+    <button type="submit" class="nav-search-submit" aria-label="${isEn ? 'Search' : '検索'}">
+      <span class="u-visually-hidden">${isEn ? 'Search' : '検索'}</span>
+    </button>
+  `;
+  searchBar.appendChild(searchForm);
 
   /* Remove redundant search button from nav fragment; keep only nav-utility */
   Array.from(navTools.children).forEach((child) => {
@@ -504,8 +525,31 @@ export default async function decorate(block) {
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
-  navWrapper.append(nav);
+  navWrapper.append(nav, searchBar);
   block.append(navWrapper);
+
+  /* Search toggle: show bar, switch header to solid white (original behavior) */
+  const toggleSearch = (open) => {
+    const isOpen = open ?? !navWrapper.classList.contains('search-open');
+    navWrapper.classList.toggle('search-open', isOpen);
+    searchBar.hidden = !isOpen;
+    searchButton.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      searchBar.querySelector('.nav-search-input')?.focus();
+    }
+  };
+  const closeSearch = () => toggleSearch(false);
+  searchButton.addEventListener('click', () => toggleSearch());
+  const onSearchEscape = (e) => {
+    if (e.code === 'Escape' && navWrapper.classList.contains('search-open')) {
+      closeSearch();
+      searchButton.focus();
+    }
+  };
+  searchBar.querySelector('.nav-search-input')?.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') closeSearch();
+  });
+  document.addEventListener('keydown', onSearchEscape);
 
   const main = document.querySelector('main');
   const runOverlap = () => {
