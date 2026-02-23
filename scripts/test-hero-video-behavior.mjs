@@ -1,12 +1,12 @@
 /**
  * Behavioral test: run hero-video decorate() with a mock block (table structure)
  * and assert the link overlay is created.
- * - Case 1: row headers "Link URL" / "Link label" (AEM labels → config['link-url'], config['link-label']).
+ * - Case 1: row headers "Link URL" / "Link label" (AEM → config['link-url'], config['link-label']).
  * - Case 2: row headers "link" / "linkLabel" (field names → config.link, config.linklabel).
- * If the link still does not show in AEM, the block HTML may not have these rows when delivered
- * (e.g. empty block or different structure). Inspect the block DOM in AEM before decorate runs.
+ * If the link still does not show in AEM, the block HTML may not have these rows when delivered.
  * Run: npm run test:hero-video
  */
+/* eslint-disable import/no-extraneous-dependencies, no-console, max-len -- test script */
 
 import { JSDOM } from 'jsdom';
 
