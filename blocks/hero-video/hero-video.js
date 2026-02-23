@@ -37,35 +37,21 @@ function isVideoUrl(url) {
   return /\.(mp4|webm|ogv|mov)(\?|#|$)/i.test(path);
 }
 
-/** Placeholder for pipe (|) to avoid AEM/UE misinterpretation. Restored on display. */
-const PIPE_PLACEHOLDER = '{{PIPE}}';
-
 /**
- * Encode link label: replace pipe with placeholder for DOM storage (UE round-trip).
- * @param {string} label Raw label that may contain pipe
- * @returns {string} Label with pipe replaced by placeholder
- */
-function encodeLinkLabel(label) {
-  if (typeof label !== 'string' || !label) return '';
-  return label.replace(/\|/g, PIPE_PLACEHOLDER);
-}
-
-/**
- * Decode link label for display (URL-encoded, %7C, restores pipe from placeholder).
- * @param {string} label Raw label that may be URL-encoded or contain {{PIPE}}
+ * Decode link label for display (fixes URL-encoded text like %20, %7C).
+ * @param {string} label Raw label that may be URL-encoded
  * @returns {string} Decoded label safe for textContent
  */
 function decodeLinkLabel(label) {
   if (typeof label !== 'string' || !label) return '';
-  let result = label;
   try {
     if (/%[0-9A-Fa-f]{2}/.test(label)) {
-      result = decodeURIComponent(label.replace(/\+/g, ' '));
+      return decodeURIComponent(label.replace(/\+/g, ' '));
     }
   } catch {
     // ignore invalid sequences
   }
-  return result.replace(/\{\{PIPE\}\}/g, '|');
+  return label;
 }
 
 /**
@@ -174,7 +160,6 @@ export default async function decorate(block) {
     const linkEl = document.createElement('a');
     linkEl.href = linkUrl;
     linkEl.className = 'hero-video-link';
-    linkEl.dataset.linkLabel = encodeLinkLabel(linkLabelToUse);
     const iconWrap = document.createElement('span');
     iconWrap.className = 'hero-video-link-icon';
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
