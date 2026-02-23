@@ -1,8 +1,7 @@
 /**
- * Hero-video link visibility test: verifies that hero-video.js reads all AEM config keys
- * so the overlay link is created when AEM sends "Link URL" / "Link label" (or field names).
- * Run: node scripts/test-hero-video-link.cjs
- * Exit 0 = pass, non-zero = fail.
+ * Source-scan test: checks that hero-video.js source contains expected config key names.
+ * Supplement to test-hero-video-behavior.mjs (which runs decorate with mock DOM).
+ * Run: npm run test:hero-video:source
  */
 
 const fs = require('fs');

@@ -142,7 +142,9 @@ export default async function decorate(block) {
     mediaWrap.append(posterWrap);
   }
 
-  if (linkUrl && linkLabel) {
+  /* AEM が Link label を空で出力することがあるため、linkUrl のみある場合はフォールバック表示を使う */
+  const linkLabelToUse = linkLabel || (linkUrl ? 'More' : '');
+  if (linkUrl && linkLabelToUse) {
     const linkEl = document.createElement('a');
     linkEl.href = linkUrl;
     linkEl.className = 'hero-video-link';
@@ -163,7 +165,7 @@ export default async function decorate(block) {
     linkEl.appendChild(iconWrap);
     const labelSpan = document.createElement('span');
     labelSpan.className = 'hero-video-link-label';
-    labelSpan.textContent = decodeLinkLabel(linkLabel);
+    labelSpan.textContent = decodeLinkLabel(linkLabelToUse);
     linkEl.appendChild(labelSpan);
     mediaWrap.append(linkEl);
   }
