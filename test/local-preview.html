@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hero Video - Local Preview</title>
+  <link rel="stylesheet" href="/blocks/hero-video/hero-video.css">
+</head>
+<body>
+  <main>
+    <div class="section">
+      <div>
+        <!-- AEM actual structure: 4th row (Link label) empty -->
+        <div class="hero-video block" data-block-name="hero-video">
+          <div>
+            <div><a href="/content/dam/marubeni/video/video_smartestenergy2.mp4">/content/dam/marubeni/video/video_smartestenergy2.mp4</a></div>
+          </div>
+          <div>
+            <div><picture><img src="/adobe/dynamicmedia/deliver/dm-aid--86100fcb-2ee2-4096-86c0-d274c4fc3585/21b772a9a76a91773c2284ab6ab194c2.png?preferwebp=true&amp;width=1280&amp;quality=85" alt=""></picture></div>
+          </div>
+          <div>
+            <div><a href="https://www.marubeni.com/jp/brand_media/scope/smartestenergy2/">https://www.marubeni.com/jp/brand_media/scope/smartestenergy2/</a></div>
+          </div>
+          <div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script type="module">
+    window.hlx = window.hlx || { codeBasePath: '/' };
+    const block = document.querySelector('.hero-video');
+    if (block) {
+      const { default: decorate } = await import('/blocks/hero-video/hero-video.js');
+      await decorate(block);
+    }
+  </script>
+</body>
+</html>

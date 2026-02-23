@@ -1,0 +1,26 @@
+---
+description: Avoid try-and-error by verifying before editing; use local fixtures and tests
+alwaysApply: true
+---
+
+# Try-and-Error Prevention
+
+Before making edits, do not guess. Verify first.
+
+## Required Information (gather before editing)
+
+- **HTML DOM structure**: Use actual HTML from AEM (Network → Response copy). Run `node scripts/debug-hero-video-from-html.cjs <path>` to inspect.
+- **Computed / Style**: When fixing layout or visibility, check browser DevTools → Computed, Styles.
+- **Cause location**: Is the issue in frontend (this repo) or AEM (server output)? If AEM does not output the value, frontend cannot fix it.
+
+## Local Reproduction (no AEM deploy)
+
+- **Fixtures**: `test/fixtures/hero-video/` — AEM HTML structure. Do not change DOM when testing JS/CSS changes.
+- **Tests**: `npm run test:hero-video:aem` — runs decorate on fixtures and asserts. Use for fix→test loop.
+- **Preview**: `npm run preview:local` → open http://localhost:3001/test/local-preview.html for visual check.
+
+## Workflow
+
+1. Run the relevant test (`npm run test:hero-video:aem` etc.) before editing.
+2. If test fails, fix the code; verify with test again before pushing.
+3. Do not push without running tests locally first.

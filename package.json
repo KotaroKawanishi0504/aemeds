@@ -10,6 +10,8 @@
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
     "test:hero-video": "node scripts/test-hero-video-behavior.mjs",
     "test:hero-video:source": "node scripts/test-hero-video-link.cjs",
+    "test:hero-video:aem": "node scripts/test-hero-video-aem-fixtures.mjs",
+    "preview:local": "npx serve -p 3001",
     "get-aem-html": "node scripts/get-aem-hero-video-html.cjs",
     "build:json": "npm-run-all -p build:json:models build:json:definitions build:json:filters",
     "build:json:models": "merge-json-cli -i \"models/_component-models.json\" -o \"component-models.json\"",
