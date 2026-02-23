@@ -316,13 +316,12 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     white-space: nowrap;
   }
 
-  /* Center the menu: allow shrink + overflow hidden so menu never overlaps logo/tools when narrow. */
+  /* Center the menu (本家 justify-self: center). Wrapper fills nav-sections; inner flex centers the ul. */
   header nav .nav-sections > * {
     flex: 1 1 auto;
     min-width: 0;
-    width: max-content;
-    max-width: 100%;
-    margin-left: calc(var(--rem, 10) * 4.4 * 1px);
+    display: flex;
+    justify-content: center;
     overflow: hidden;
   }
 
@@ -330,13 +329,16 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     align-self: unset;
   }
 
-  /* Menu block: link spacing scales with --rem (本家 --padding-inline). */
+  /* Menu block: link spacing scales with --rem (本家 --padding-inline). width: fit-content so it centers; max-width: 100% to avoid overflow. */
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
     gap: 0 calc(var(--rem, 10) * 0.8 * 1px);
     margin: 0;
     align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 0;
   }
 
   /* stylelint-disable no-descending-specificity -- nav dropdown vs panel selectors need this order for correct cascade */
