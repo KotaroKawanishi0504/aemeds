@@ -147,170 +147,17 @@ header nav[aria-expanded='true'] {
     grid-template:
       'brand hamburger' var(--nav-height)
       'tools tools' auto
-      'mobile-search mobile-search' auto
       'sections sections' 1fr / 1fr auto;
   }
 
-  /* 本家: 言語切り替えとヘッダの間に線（画面幅いっぱい）。margin-inline で線を端まで */
   header nav[aria-expanded='true'] .nav-tools {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     gap: calc(var(--rem, 10) * 2.4 * 1px);
-    padding: calc(var(--rem, 10) * 1.6 * 1px) calc(var(--rem, 10) * 2 * 1px) calc(var(--rem, 10) * 2.4 * 1px);
-    margin-inline: calc(var(--rem, 10) * -2 * 1px);
-    padding-inline: calc(var(--rem, 10) * 2 * 1px);
-    border-top: 1px solid #dfdfdf;
-  }
-
-  header nav[aria-expanded='true'] .nav-search {
-    display: none;
-  }
-
-  /* 本家: 検索キーワード欄の下に線（画面幅いっぱい） */
-  header .nav-mobile-search {
-    grid-area: mobile-search;
-    display: none;
-    padding: calc(var(--rem, 10) * 1.6 * 1px) calc(var(--rem, 10) * 2 * 1px);
-    margin-inline: calc(var(--rem, 10) * -2 * 1px);
-    padding-inline: calc(var(--rem, 10) * 2 * 1px);
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  header nav[aria-expanded='true'] .nav-mobile-search {
-    display: block;
-  }
-
-  header .nav-mobile-search .nav-search-form {
-    width: 100%;
-    max-width: none;
-  }
-
-  header .nav-accordion-trigger {
-    display: none;
   }
 }
-
-/* デフォルト: モバイル専用検索バーは非表示（モバイルでメニュー展開時のみ表示） */
-header .nav-mobile-search {
-  display: none;
-}
-
-@media (width < 900px) {
-  /* 本家 .l-header__navigation-icon: CSS で＋描画、展開時は−（縦線非表示） */
-  header nav .nav-accordion-trigger {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(var(--rem, 10) * 2.4 * 1px);
-    height: calc(var(--rem, 10) * 2.4 * 1px);
-    margin: 0;
-    padding: calc(var(--rem, 10) * 0.5 * 1px);
-    border: 0;
-    background: transparent;
-    color: #282828;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  /* 横線（＋の水平部分） */
-  header nav .nav-accordion-trigger::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    margin-top: -1px;
-    height: 2px;
-    background-color: currentcolor;
-    transition: opacity 0.3s;
-  }
-
-  /* 縦線（＋の垂直部分）。展開時は非表示で−になる */
-  header nav .nav-accordion-trigger::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -1px;
-    width: 2px;
-    background-color: currentcolor;
-    transition: opacity 0.3s;
-  }
-
-  header nav .nav-accordion-trigger[aria-expanded='true']::after {
-    opacity: 0;
-  }
-
-  /* 本家: メニュー区切り線を画面幅いっぱいに */
-  header nav[aria-expanded='true'] .nav-sections {
-    margin-inline: calc(var(--rem, 10) * -2 * 1px);
-    padding-inline: calc(var(--rem, 10) * 2 * 1px);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > a {
-    flex: 1 1 auto;
-    min-width: 0;
-    font-size: calc(var(--rem, 10) * 1.6 * 1px);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel,
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
-    display: none;
-    width: 100%;
-    flex: 1 1 100%;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > .nav-dropdown-panel,
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
-  }
-
-  /* 本家: 第2階層リンク - 上下の線、灰色背景、右に＞（Ben \e902） */
-  header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel .nav-dropdown-list ul li {
-    margin-top: -1px;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul a,
-  header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel .nav-dropdown-list a {
-    display: block;
-    position: relative;
-    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 5.2 * 1px) calc(var(--rem, 10) * 2.4 * 1px) 2rem;
-    font-size: calc(var(--rem, 10) * 1.4 * 1px);
-    color: #282828;
-    border-block: 1px solid #dfdfdf;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > .nav-dropdown-panel .nav-dropdown-list a::before {
-    content: '\e902';
-    font-family: Ben, sans-serif !important;
-    font-style: normal;
-    font-weight: 400;
-    font-size: calc(var(--rem, 10) * 1.2 * 1px);
-    position: absolute;
-    right: calc(var(--rem, 10) * 2 * 1px);
-    top: 50%;
-    transform: translateY(-50%);
-    color: #e60012;
-  }
-
-}
-
 
 @media (width >= 900px) {
-  /* PC: モバイル専用要素を非表示 */
-  header nav .nav-accordion-trigger {
-    display: none;
-  }
-
   /* Keep .nav-wrapper position: fixed so header sticks on scroll (original behavior) */
 
   /* No full-width sheet below nav; dropdown panel has its own background and box-shadow */
@@ -424,14 +271,23 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: translateY(-3px) rotate(45deg);
 }
 
-/* モバイル: 本家 .l-header__menu 仕様 – 閉じる×は小さめ、右端に見切れない */
+@media (width < 900px) {
+  header nav[aria-expanded='true'] .nav-hamburger-icon::before {
+    transform: translateY(calc(var(--rem, 10) * 0.5 * 1px)) rotate(-45deg);
+  }
+
+  header nav[aria-expanded='true'] .nav-hamburger-icon::after {
+    transform: translateY(calc(var(--rem, 10) * -0.5 * 1px)) rotate(45deg);
+  }
+}
+
+/* モバイル: 本家 .l-header__menu 仕様（ベース width:20px より後に配置して上書き） */
 @media (width < 900px) {
   header nav .nav-hamburger {
     height: calc(var(--rem, 10) * 5.3 * 1px);
     justify-content: flex-end;
     flex-shrink: 0;
-    min-width: auto;
-    padding-inline: calc(var(--rem, 10) * 2 * 1px);
+    min-width: calc(var(--rem, 10) * 2.8 * 1px);
   }
 
   header nav .nav-hamburger button {
@@ -439,29 +295,20 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
     padding: 0;
   }
 
-  /* 本家: icon 2.8×1.35rem を 2×1rem に縮小し画面内に収める */
   header nav .nav-hamburger-icon,
   header nav .nav-hamburger-icon::before,
   header nav .nav-hamburger-icon::after {
-    width: calc(var(--rem, 10) * 2 * 1px);
-    height: max(2px, calc(var(--rem, 10) * 0.1 * 1px));
+    width: calc(var(--rem, 10) * 2.8 * 1px);
+    height: max(2px, calc(var(--rem, 10) * 0.2 * 1px));
   }
 
+  /* 等間隔: 本家 -0.575/0.425 は非対称のため、-0.5/0.5 で均等に */
   header nav[aria-expanded='false'] .nav-hamburger-icon::before {
     top: calc(var(--rem, 10) * -0.5 * 1px);
   }
 
   header nav[aria-expanded='false'] .nav-hamburger-icon::after {
     top: calc(var(--rem, 10) * 0.5 * 1px);
-  }
-
-  /* 本家: ×時 translateY(0.59rem) rotate(±35deg) */
-  header nav[aria-expanded='true'] .nav-hamburger-icon::before {
-    transform: translateY(calc(var(--rem, 10) * 0.59 * 1px)) rotate(-35deg);
-  }
-
-  header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-    transform: translateY(calc(var(--rem, 10) * -0.59 * 1px)) rotate(35deg);
   }
 }
 
@@ -1003,13 +850,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 
   header nav .nav-sections .default-content-wrapper > ul > li a {
     display: block;
-    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 6.4 * 1px) calc(var(--rem, 10) * 2.4 * 1px) 2rem;
-    padding-inline-start: 2rem;
-    font-size: calc(var(--rem, 10) * 1.6 * 1px);
+    padding: 12px 24px 12px 2rem;
+    font-size: 1.6rem;
     color: #282828;
   }
 
-  /* 本家: 第2階層は灰色背景、ヘッダー重複を非表示 */
   header nav .nav-sections .nav-dropdown-panel {
     position: static;
     transform: none;
@@ -1019,18 +864,6 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     padding: 0 24px 12px 2rem;
     box-shadow: none;
     border-top: none;
-  }
-
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-header {
-    display: none;
-  }
-
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content {
-    display: block;
-  }
-
-  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list {
-    background-color: #f2f2f2;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > .nav-dropdown-panel {

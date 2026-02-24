@@ -262,8 +262,6 @@ function toggleAllNavSections(sections, expanded = false) {
   if (!sections) return;
   sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
-    const trigger = section.querySelector('.nav-accordion-trigger');
-    if (trigger) trigger.setAttribute('aria-expanded', expanded);
   });
 }
 
@@ -278,7 +276,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, false);
+  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   if (button) button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections ? navSections.querySelectorAll('.nav-drop') : [];
@@ -406,13 +404,6 @@ export default async function decorate(block) {
   `;
   searchBar.appendChild(searchForm);
 
-  /* Mobile: full search bar in menu (original: language top right, search bar below, accordion) */
-  const mobileSearchBar = document.createElement('div');
-  mobileSearchBar.className = 'nav-mobile-search';
-  const mobileSearchForm = searchForm.cloneNode(true);
-  mobileSearchForm.className = 'nav-search-form';
-  mobileSearchBar.appendChild(mobileSearchForm);
-
   /* Remove redundant search button from nav fragment; keep only nav-utility */
   Array.from(navTools.children).forEach((child) => {
     if (!child.classList.contains('nav-utility')) {
@@ -518,34 +509,6 @@ export default async function decorate(block) {
       }, DROPDOWN_CLOSE_DELAY);
     });
   }
-
-  /* Mobile: insert search bar between tools and sections (original layout) */
-  if (navSections && navTools) {
-    nav.insertBefore(mobileSearchBar, navSections);
-  }
-
-  /* Mobile accordion: add + trigger for second level (original: + to expand) */
-  navSections?.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((li) => {
-    const panel = li.querySelector('.nav-dropdown-panel, ul');
-    if (!panel) return;
-    if (li.querySelector('.nav-accordion-trigger')) return;
-    const trigger = document.createElement('button');
-    trigger.type = 'button';
-    trigger.className = 'nav-accordion-trigger';
-    trigger.setAttribute('aria-expanded', 'false');
-    trigger.setAttribute('aria-label', 'メニューを開く');
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!isDesktop.matches) {
-        const expanded = li.getAttribute('aria-expanded') === 'true';
-        toggleAllNavSections(navSections);
-        li.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        trigger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      }
-    });
-    li.insertBefore(trigger, panel);
-  });
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
