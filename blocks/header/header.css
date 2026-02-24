@@ -146,16 +146,28 @@ header nav {
     min-height: var(--nav-height);
   }
 
+  /* 本家: ロゴ・メニューともに height 5.3rem でバーを埋め、上部スペースを確保 */
   header nav .nav-header-row .nav-brand {
     grid-area: brand;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
   }
 
   header nav .nav-header-row .nav-hamburger {
     grid-area: hamburger;
+    height: var(--nav-height);
     padding-inline-end: 21.832px;
   }
 
+  header nav:not(:has(.nav-header-row)) .nav-brand {
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+  }
+
   header nav:not(:has(.nav-header-row)) .nav-hamburger {
+    height: var(--nav-height);
     padding-inline-end: 21.832px;
   }
 
@@ -277,8 +289,26 @@ header nav[aria-expanded='true'] {
     position: relative;
   }
 
-  /* 本家: height max(1px, var(--rem)*1*1px*.1), background #dfdfdf, width 100% */
-  header nav::before {
+  /* 本家: 線はバー（.l-header__bar）の ::before で bottom:0。バーが sticky なら線も追従する */
+  /* nav-header-row に線を ::after で追加。sticky 時は線も一緒に追従（position: relative は expanded 時のみ付けない） */
+  header nav[aria-expanded='false'] .nav-header-row {
+    position: relative;
+  }
+
+  header nav .nav-header-row::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: max(1px, calc(var(--rem, 10) * 1 * 1px * 0.1));
+    background-color: #dfdfdf;
+    pointer-events: none;
+  }
+
+  /* nav-header-row がない場合のフォールバック */
+  header nav:not(:has(.nav-header-row))::before {
     content: '';
     position: absolute;
     top: var(--nav-height);
@@ -290,10 +320,6 @@ header nav[aria-expanded='true'] {
     pointer-events: none;
   }
 
-  header nav[aria-expanded='true'] .nav-brand,
-  header nav[aria-expanded='true'] .nav-hamburger {
-    padding-block-end: calc(var(--rem, 10) * 1.6 * 1px);
-  }
 
   /* ② Language switcher right-aligned (original .l-header__language: justify-content: end) */
   header nav[aria-expanded='true'] .nav-tools .nav-utility {
