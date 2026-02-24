@@ -276,7 +276,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  /* Accordion (①): mobile menu opens with all sections collapsed; desktop keeps hover expand */
+  toggleAllNavSections(navSections, 'false');
   if (button) button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections ? navSections.querySelectorAll('.nav-drop') : [];
@@ -411,6 +412,24 @@ export default async function decorate(block) {
     }
   });
 
+  /* Mobile: search input below language switcher (original ③) */
+  const navSectionsEl = nav.querySelector('.nav-sections');
+  const mobileSearchBar = document.createElement('div');
+  mobileSearchBar.className = 'nav-mobile-search';
+  mobileSearchBar.setAttribute('aria-hidden', 'true');
+  const mobileSearchForm = document.createElement('form');
+  mobileSearchForm.action = searchAction;
+  mobileSearchForm.method = 'get';
+  mobileSearchForm.className = 'nav-mobile-search-form';
+  mobileSearchForm.innerHTML = `
+    <input type="search" name="kw" class="nav-mobile-search-input" placeholder="${searchPlaceholder}" autocomplete="off">
+    <button type="submit" class="nav-mobile-search-submit" aria-label="${isEn ? 'Search' : '検索'}">
+      <span class="u-visually-hidden">${isEn ? 'Search' : '検索'}</span>
+    </button>
+  `;
+  mobileSearchBar.appendChild(mobileSearchForm);
+  if (navSectionsEl) nav.insertBefore(mobileSearchBar, navSectionsEl);
+
   /* Logo locale from page path (not document.lang) to avoid Universal Editor /en/ mismatch */
   const pathForLogo = basePath || window.location.pathname || '';
   const logoHref = pathForLogo.includes('/en') ? '/en/' : '/jp/';
@@ -464,7 +483,14 @@ export default async function decorate(block) {
 
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       const hasDropdown = navSection.querySelector('ul') || navSection.querySelector('.nav-dropdown-panel');
-      if (hasDropdown) navSection.classList.add('nav-drop');
+      if (hasDropdown) {
+        navSection.classList.add('nav-drop');
+        /* Accordion icon (①): + when collapsed, − when expanded */
+        const icon = document.createElement('span');
+        icon.className = 'nav-accordion-icon';
+        icon.setAttribute('aria-hidden', 'true');
+        navSection.querySelector(':scope > a')?.after(icon);
+      }
       navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
           if (e.target.closest('.nav-dropdown-panel')) return;
@@ -472,6 +498,13 @@ export default async function decorate(block) {
           if (isLabelLink) e.preventDefault();
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else {
+          /* Mobile accordion (①): whole row is trigger; tapping expands/collapses, no navigation */
+          if (e.target.closest('.nav-dropdown-panel a')) return;
+          e.preventDefault();
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections, false);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });

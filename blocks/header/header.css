@@ -147,6 +147,7 @@ header nav[aria-expanded='true'] {
     grid-template:
       'brand hamburger' var(--nav-height)
       'tools tools' auto
+      'search search' auto
       'sections sections' 1fr / 1fr auto;
   }
 
@@ -154,6 +155,76 @@ header nav[aria-expanded='true'] {
     display: flex;
     align-items: center;
     gap: calc(var(--rem, 10) * 2.4 * 1px);
+    padding-block: calc(var(--rem, 10) * 1.6 * 1px);
+  }
+
+  /* Mobile search: below language switcher (original ③) */
+  header nav .nav-mobile-search {
+    grid-area: search;
+    display: none;
+    padding: calc(var(--rem, 10) * 1.6 * 1px) 0;
+    border-bottom: 1px solid #dfdfdf;
+  }
+
+  header nav[aria-expanded='true'] .nav-mobile-search {
+    display: block;
+  }
+
+  header nav .nav-mobile-search-form {
+    display: grid;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding-right: calc(var(--rem, 10) * 0.5 * 1px);
+  }
+
+  header nav .nav-mobile-search-form > * {
+    grid-area: 1 / 1;
+  }
+
+  header nav .nav-mobile-search-input {
+    width: 100%;
+    height: calc(var(--rem, 10) * 4.4 * 1px);
+    padding-inline: calc(var(--rem, 10) * 1.5 * 1px);
+    padding-right: calc(var(--rem, 10) * 5.2 * 1px);
+    font-size: calc(var(--rem, 10) * 1.4 * 1px);
+    border: 1px solid #dfdfdf;
+    border-radius: calc(var(--rem, 10) * 0.4 * 1px);
+    font-family: inherit;
+    color: #282828;
+    background-color: #fff;
+    outline: 0;
+  }
+
+  header nav .nav-mobile-search-input::placeholder {
+    color: #6c6c6c;
+  }
+
+  header nav .nav-mobile-search-submit {
+    justify-self: end;
+    display: grid;
+    place-items: center;
+    width: calc(var(--rem, 10) * 2 * 1px);
+    height: calc(var(--rem, 10) * 4.4 * 1px);
+    min-height: calc(var(--rem, 10) * 4.4 * 1px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #6c6c6c;
+    cursor: pointer;
+  }
+
+  header nav .nav-mobile-search-submit::before {
+    content: '\e90d';
+    font-family: Ben, sans-serif;
+    font-size: calc(var(--rem, 10) * 1.6 * 1px);
+  }
+
+  /* ② Border under logo and hamburger row */
+  header nav[aria-expanded='true'] .nav-brand,
+  header nav[aria-expanded='true'] .nav-hamburger {
+    border-bottom: 1px solid #dfdfdf;
   }
 }
 
@@ -249,37 +320,11 @@ header nav .nav-hamburger-icon::after {
   background: #282828;
 }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
 header nav[aria-expanded='true'] .nav-hamburger-icon {
   background: transparent;
 }
 
-header nav[aria-expanded='true'] .nav-hamburger-icon::before {
-  top: 0;
-  transform: translateY(3px) rotate(-45deg);
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 0;
-  transform: translateY(-3px) rotate(45deg);
-}
-
-@media (width < 900px) {
-  header nav[aria-expanded='true'] .nav-hamburger-icon::before {
-    transform: translateY(calc(var(--rem, 10) * 0.5 * 1px)) rotate(-45deg);
-  }
-
-  header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-    transform: translateY(calc(var(--rem, 10) * -0.5 * 1px)) rotate(45deg);
-  }
-}
+/* デスクトップ用 transform は削除（900px以上ではハンバーガー非表示のため不要。モバイルで競合しないよう） */
 
 /* モバイル: 本家 .l-header__menu 仕様（ベース width:20px より後に配置して上書き） */
 @media (width < 900px) {
@@ -293,22 +338,42 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   header nav .nav-hamburger button {
     height: calc(var(--rem, 10) * 5.3 * 1px);
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
+  /* 本家: icon 2.8rem、line height 2px、transform-origin center */
   header nav .nav-hamburger-icon,
   header nav .nav-hamburger-icon::before,
   header nav .nav-hamburger-icon::after {
     width: calc(var(--rem, 10) * 2.8 * 1px);
-    height: max(2px, calc(var(--rem, 10) * 0.2 * 1px));
+    height: 2px;
+    transform-origin: center center;
   }
 
-  /* 等間隔: 本家 -0.575/0.425 は非対称のため、-0.5/0.5 で均等に */
-  header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-    top: calc(var(--rem, 10) * -0.5 * 1px);
+  /* 本家: 非対称 top (-0.575rem / 0.425rem) が×交差の要。展開時も変更しない */
+  header nav .nav-hamburger-icon::before {
+    top: calc(var(--rem, 10) * -0.575 * 1px);
   }
 
-  header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-    top: calc(var(--rem, 10) * 0.5 * 1px);
+  header nav .nav-hamburger-icon::after {
+    top: calc(var(--rem, 10) * 0.425 * 1px);
+  }
+
+  /* 本家: ×時 translateY(±0.59rem) rotate(±35deg)、transition .3s */
+  header nav[aria-expanded='true'] .nav-hamburger-icon::before,
+  header nav[aria-expanded='true'] .nav-hamburger-icon::after {
+    height: 2px;
+    min-height: 2px;
+  }
+
+  header nav[aria-expanded='true'] .nav-hamburger-icon::before {
+    transform: translateY(calc(var(--rem, 10) * 0.59 * 1px)) rotate(-35deg);
+  }
+
+  header nav[aria-expanded='true'] .nav-hamburger-icon::after {
+    transform: translateY(calc(var(--rem, 10) * -0.59 * 1px)) rotate(35deg);
   }
 }
 
@@ -844,13 +909,44 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 }
 
 @media (width < 900px) {
+  /* 第1階層リンク名の重複を防ぐ: アコーディオン展開時、li>a に既に表示されているため header を非表示 */
+  header nav .nav-sections .nav-dropdown-header {
+    display: none;
+  }
+
+  /* header 非表示に合わせて、パネル内グリッドをリストのみの1列に簡略化 */
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-content {
+    grid-template: 1fr / 1fr;
+    padding-inline: 0;
+  }
+
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list {
+    grid-column: 1;
+    grid-row: 1;
+    background-color: #f2f2f2;
+  }
+
+  /* ⑤ Borders above and below links (original: margin-top -1px to collapse) */
   header nav .nav-sections .default-content-wrapper > ul > li {
+    border-top: 1px solid #dfdfdf;
     border-bottom: 1px solid #dfdfdf;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li + li {
+    margin-top: -1px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li:first-child {
+    border-top: none;
+  }
+
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list ul li + li {
+    margin-top: -1px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li a {
     display: block;
-    padding: 12px 24px 12px 2rem;
+    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 6.4 * 1px) calc(var(--rem, 10) * 2.4 * 1px) 2rem;
     font-size: 1.6rem;
     color: #282828;
   }
@@ -861,9 +957,28 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     width: 100%;
     max-width: none;
     margin-top: 0;
-    padding: 0 24px 12px 2rem;
+    padding: 0;
     box-shadow: none;
     border-top: none;
+  }
+
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list ul li a {
+    position: relative;
+    border-block: 1px solid #dfdfdf;
+    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 6.4 * 1px) calc(var(--rem, 10) * 2.4 * 1px) 2rem;
+  }
+
+  /* Second-level arrow: original \e902 (Ben font) */
+  header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list .nav-dropdown-link::before {
+    content: '\e902';
+    font-family: Ben, sans-serif !important;
+    font-size: calc(var(--rem, 10) * 1.2 * 1px);
+    position: absolute;
+    right: calc(var(--rem, 10) * 2 * 1px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #282828;
+    pointer-events: none;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > .nav-dropdown-panel {
@@ -877,6 +992,51 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   header nav .nav-sections .nav-dropdown-images {
     min-width: unset;
   }
+
+  /* ① Accordion +/− icon (original .l-header__navigation-icon) */
+  header nav .nav-sections .nav-drop .nav-accordion-icon {
+    position: absolute;
+    right: calc(var(--rem, 10) * 2 * 1px);
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: calc(var(--rem, 10) * 2.4 * 1px);
+    height: calc(var(--rem, 10) * 2.4 * 1px);
+    margin-left: auto;
+    color: #6c6c6c;
+  }
+
+  header nav .nav-sections .nav-drop .nav-accordion-icon::before,
+  header nav .nav-sections .nav-drop .nav-accordion-icon::after {
+    content: '';
+    display: block;
+    background-color: currentColor;
+    grid-area: 1 / 1;
+  }
+
+  header nav .nav-sections .nav-drop .nav-accordion-icon::before {
+    width: 100%;
+    height: max(2px, calc(var(--rem, 10) * 0.2 * 1px));
+  }
+
+  header nav .nav-sections .nav-drop .nav-accordion-icon::after {
+    width: max(2px, calc(var(--rem, 10) * 0.2 * 1px));
+    height: 100%;
+    transition: opacity 0.3s;
+  }
+
+  header nav .nav-sections .nav-drop[aria-expanded='true'] .nav-accordion-icon::after {
+    opacity: 0;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop {
+    position: relative;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > a {
+    padding-right: calc(var(--rem, 10) * 6 * 1px);
+  }
 }
 
 /* ---- Tools ( .l-header__utility ): language (Ja/En) + search icon ---- */
@@ -888,6 +1048,18 @@ header nav .nav-tools {
 }
 
 @media (width >= 900px) {
+  header nav .nav-mobile-search {
+    display: none !important;
+  }
+
+  header nav .nav-sections .nav-accordion-icon {
+    display: none;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > a {
+    padding-right: unset;
+  }
+
   header nav .nav-tools {
     display: flex;
     align-items: center;
