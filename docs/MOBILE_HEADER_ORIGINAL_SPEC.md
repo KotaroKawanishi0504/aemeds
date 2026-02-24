@@ -45,6 +45,19 @@
 | ::before top | calc(var(--rem) * -.575 * 1px) | -5.75px |
 | ::after top | calc(var(--rem) * .425 * 1px) | 4.25px |
 
+## モバイル ハンバーガー → ×（閉じる）アニメーション
+
+メニュー展開時（`[aria-expanded=true]`）にハンバーガー3本線が×に変形する。
+
+| プロパティ | 値 | 備考 |
+|-----------|-----|------|
+| transition | .3s all | 本家 l-header__menu-line |
+| .menu-line | background: transparent | 中央線を非表示 |
+| ::before | transform: translateY(0.59rem) rotate(-35deg) | 上線が中央で交差 |
+| ::after | transform: translateY(-0.59rem) rotate(35deg) | 下線が中央で交差 |
+
+**重要**: 非対称の top（-0.575rem / 0.425rem）により、translateY(±0.59rem) で中央で交差して×になる。**top を 0 や対称値に変更すると×の交差位置がずれる。** 展開時も top は変更しない。
+
 ## レスポンシブ挙動
 
 - 393px: rem=10 → 基準サイズ

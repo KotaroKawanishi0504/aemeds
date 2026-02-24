@@ -429,28 +429,29 @@ header nav[aria-expanded='true'] .nav-hamburger-icon {
     transform-origin: center center;
   }
 
-  /* 本家: 非対称 top (-0.575rem / 0.425rem) が×交差の要。展開時も変更しない */
+  /* 対称 top (±0.5rem): 3本線の間隔を均等に。×時は translateY(±0.5rem) で中央に揃える */
   header nav .nav-hamburger-icon::before {
-    top: calc(var(--rem, 10) * -0.575 * 1px);
+    top: calc(var(--rem, 10) * -0.5 * 1px);
   }
 
   header nav .nav-hamburger-icon::after {
-    top: calc(var(--rem, 10) * 0.425 * 1px);
+    top: calc(var(--rem, 10) * 0.5 * 1px);
   }
 
-  /* 本家: ×時 translateY(±0.59rem) rotate(±35deg)、transition .3s */
+  /* ×時: translateY(±0.5rem) で中央に集約、rotate(±35deg) で交差。transform-origin 50% で対称に */
   header nav[aria-expanded='true'] .nav-hamburger-icon::before,
   header nav[aria-expanded='true'] .nav-hamburger-icon::after {
     height: 2px;
     min-height: 2px;
+    transform-origin: 50% 50%;
   }
 
   header nav[aria-expanded='true'] .nav-hamburger-icon::before {
-    transform: translateY(calc(var(--rem, 10) * 0.59 * 1px)) rotate(-35deg);
+    transform: translateY(calc(var(--rem, 10) * 0.5 * 1px)) rotate(-35deg);
   }
 
   header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-    transform: translateY(calc(var(--rem, 10) * -0.59 * 1px)) rotate(35deg);
+    transform: translateY(calc(var(--rem, 10) * -0.5 * 1px)) rotate(35deg);
   }
 }
 
@@ -521,6 +522,13 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
+}
+
+/* 本家 .l-header__content: font-size 1.5*--rem。モバイル展開時のみ */
+@media (width < 900px) {
+  header nav[aria-expanded='true'] .nav-sections {
+    font-size: calc(var(--rem, 10) * 1.5 * 1px);
+  }
 }
 
 header nav .nav-sections ul {
@@ -1029,11 +1037,11 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     margin-top: -1px;
   }
 
-  /* ④ Reduced padding (original 2.4 6.4 2.4 2rem; trim excess) */
+  /* ④ Reduced padding (original 2.4 6.4 2.4 2rem; trim excess). 本家 font-size: 1.6rem → calc(var(--rem)*1.6*1px) */
   header nav .nav-sections .default-content-wrapper > ul > li a {
     display: block;
     padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 5 * 1px) calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 1.6 * 1px);
-    font-size: 1.6rem;
+    font-size: calc(var(--rem, 10) * 1.6 * 1px);
     color: #282828;
   }
 
@@ -1053,7 +1061,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     position: relative;
     border-block: 1px solid #dfdfdf;
     padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 5 * 1px) calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 1.6 * 1px);
-    font-size: 1.6rem;
+    font-size: calc(var(--rem, 10) * 1.6 * 1px);
   }
 
   /* Second-level arrow: original \e902 (Ben font) */
@@ -1081,7 +1089,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     min-width: unset;
   }
 
-  /* ① Accordion +/− icon (original .l-header__navigation-icon) */
+  /* ① Accordion +/− icon (original .l-header__navigation-icon: width 2.4rem, padding 0.5rem → 内側 1.4rem) */
   header nav .nav-sections .nav-drop .nav-accordion-icon {
     position: absolute;
     right: calc(var(--rem, 10) * 2 * 1px + 21.832px);
@@ -1089,8 +1097,10 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     transform: translateY(-50%);
     display: grid;
     place-items: center;
+    box-sizing: border-box;
     width: calc(var(--rem, 10) * 2.4 * 1px);
     height: calc(var(--rem, 10) * 2.4 * 1px);
+    padding: calc(var(--rem, 10) * 0.5 * 1px);
     margin-left: auto;
     color: #6c6c6c;
   }
@@ -1139,6 +1149,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     transform: none;
     margin-left: 0;
     margin-right: 21.832px;
+    box-sizing: border-box;
+    padding: calc(var(--rem, 10) * 0.5 * 1px);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > .nav-dropdown-panel {
