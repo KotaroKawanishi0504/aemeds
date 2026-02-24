@@ -4,6 +4,9 @@ import { loadFragment } from '../fragment/fragment.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+/** Mobile: set when tapping accordion to prevent focusout from closing menu before click */
+let accordionTapInProgress = false;
+
 /** Nav link suffix for "open in new window". Strip from display; set target="_blank" and icon. */
 const NEW_WINDOW_SUFFIX = '|NewWindow';
 
@@ -100,6 +103,10 @@ function closeOnEscape(e) {
 }
 
 function closeOnFocusLost(e) {
+  if (!isDesktop.matches && accordionTapInProgress) {
+    accordionTapInProgress = false;
+    return;
+  }
   const nav = e.currentTarget;
   if (!nav.contains(e.relatedTarget)) {
     const navSections = nav.querySelector('.nav-sections');
@@ -485,6 +492,7 @@ export default async function decorate(block) {
       const hasDropdown = navSection.querySelector('ul') || navSection.querySelector('.nav-dropdown-panel');
       if (hasDropdown) {
         navSection.classList.add('nav-drop');
+        navSection.setAttribute('aria-expanded', 'false');
         /* Accordion icon (①): + when collapsed, − when expanded */
         const icon = document.createElement('span');
         icon.className = 'nav-accordion-icon';
@@ -541,6 +549,13 @@ export default async function decorate(block) {
         dropdownCloseTimer = 0;
       }, DROPDOWN_CLOSE_DELAY);
     });
+
+    /* Mobile: prevent focusout from closing menu when tapping accordion + (focusout fires before click) */
+    navSections.addEventListener('pointerdown', (e) => {
+      if (!isDesktop.matches && e.target.closest('.nav-drop')) {
+        accordionTapInProgress = true;
+      }
+    });
   }
 
   // hamburger for mobile
@@ -550,7 +565,19 @@ export default async function decorate(block) {
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
+
+  const navBrandEl = nav.querySelector('.nav-brand');
+  if (navBrandEl && !isDesktop.matches) {
+    /* Mobile: wrap brand+hamburger to prevent vertical shift when menu opens */
+    const headerRow = document.createElement('div');
+    headerRow.className = 'nav-header-row';
+    headerRow.setAttribute('aria-hidden', 'true');
+    headerRow.append(navBrandEl, hamburger);
+    nav.prepend(headerRow);
+  } else {
+    nav.prepend(hamburger);
+  }
+
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);

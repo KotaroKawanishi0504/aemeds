@@ -117,15 +117,44 @@ header nav {
   position: relative;
 }
 
-/* Mobile (< 900px): 本家 .l-header__bar 仕様 – ロゴ左・ハンバーガー右、余白 2rem */
+/* Mobile (< 900px): 本家 .l-header__bar 仕様 – ロゴ左・ハンバーガー右、21.832px padding */
 @media (width < 900px) {
   header nav {
     grid-template:
-      'brand hamburger' var(--nav-height)
+      'header-row header-row' var(--nav-height)
       'sections sections' 1fr / 1fr auto;
     max-width: 100%;
-    padding-inline: calc(var(--rem, 10) * 2 * 1px);
+    padding-inline: 0;
     gap: 0;
+  }
+
+  /* Fallback when nav-header-row not present (e.g. resize from desktop) */
+  header nav:not(:has(.nav-header-row)) {
+    grid-template:
+      'brand hamburger' var(--nav-height)
+      'sections sections' 1fr / 1fr auto;
+  }
+
+  header nav .nav-header-row {
+    grid-area: header-row;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'brand hamburger';
+    align-items: center;
+    min-height: var(--nav-height);
+  }
+
+  header nav .nav-header-row .nav-brand {
+    grid-area: brand;
+  }
+
+  header nav .nav-header-row .nav-hamburger {
+    grid-area: hamburger;
+    padding-inline-end: 21.832px;
+  }
+
+  header nav:not(:has(.nav-header-row)) .nav-hamburger {
+    padding-inline-end: 21.832px;
   }
 
   header nav[aria-expanded='false'] .nav-tools {
@@ -140,10 +169,19 @@ header nav[aria-expanded='true'] {
     'sections sections' 1fr / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+  align-content: start;
 }
 
 @media (width < 900px) {
   header nav[aria-expanded='true'] {
+    grid-template:
+      'header-row header-row' var(--nav-height)
+      'tools tools' auto
+      'search search' auto
+      'sections sections' 1fr / 1fr auto;
+  }
+
+  header nav[aria-expanded='true']:not(:has(.nav-header-row)) {
     grid-template:
       'brand hamburger' var(--nav-height)
       'tools tools' auto
@@ -151,23 +189,34 @@ header nav[aria-expanded='true'] {
       'sections sections' 1fr / 1fr auto;
   }
 
+  header nav[aria-expanded='true'] .nav-header-row {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #fff;
+  }
+
   header nav[aria-expanded='true'] .nav-tools {
     display: flex;
     align-items: center;
     gap: calc(var(--rem, 10) * 2.4 * 1px);
     padding-block: calc(var(--rem, 10) * 1.6 * 1px);
+    padding-inline-end: 21.832px;
+    font-size: calc(var(--rem, 10) * 1.5 * 1px);
   }
 
   /* Mobile search: below language switcher (original ③) */
   header nav .nav-mobile-search {
     grid-area: search;
     display: none;
-    padding: calc(var(--rem, 10) * 1.6 * 1px) 0;
+    padding-block: 0 calc(var(--rem, 10) * 1.6 * 1px);
+    padding-inline: 0;
     border-bottom: 1px solid #dfdfdf;
   }
 
   header nav[aria-expanded='true'] .nav-mobile-search {
     display: block;
+    padding-inline: 21.832px;
   }
 
   header nav .nav-mobile-search-form {
@@ -221,10 +270,38 @@ header nav[aria-expanded='true'] {
     font-size: calc(var(--rem, 10) * 1.6 * 1px);
   }
 
-  /* ② Border under logo and hamburger row */
+  /* ① Line below logo/hamburger row (original .l-header__bar::before) */
+  header nav {
+    position: relative;
+  }
+
+  /* 本家: height max(1px, var(--rem)*1*1px*.1), background #dfdfdf, width 100% */
+  header nav::before {
+    content: '';
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: max(1px, calc(var(--rem, 10) * 1 * 1px * 0.1));
+    background-color: #dfdfdf;
+    pointer-events: none;
+  }
+
   header nav[aria-expanded='true'] .nav-brand,
   header nav[aria-expanded='true'] .nav-hamburger {
-    border-bottom: 1px solid #dfdfdf;
+    padding-block-end: calc(var(--rem, 10) * 1.6 * 1px);
+  }
+
+  /* ② Language switcher right-aligned (original .l-header__language: justify-content: end) */
+  header nav[aria-expanded='true'] .nav-tools .nav-utility {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  /* ③ Hide magnifying glass in nav-utility on mobile (search input is below) */
+  header nav[aria-expanded='true'] .nav-tools .nav-search {
+    display: none !important;
   }
 }
 
@@ -417,11 +494,10 @@ header nav .nav-brand picture img {
   }
 }
 
-/* 本家 .l-header__logo: margin-inline -2rem, padding-inline 2rem, img 12rem */
+/* 本家 .l-header__logo: padding-inline-start 21.832px, img 12rem */
 @media (width < 900px) {
   header nav .nav-brand {
-    margin-inline: calc(var(--rem, 10) * -2 * 1px);
-    padding-inline: calc(var(--rem, 10) * 2 * 1px);
+    padding-inline-start: 21.832px;
   }
 
   header nav .nav-brand img,
@@ -909,6 +985,15 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
 }
 
 @media (width < 900px) {
+  /* ② Accordion: hide second-level by default (raw ul or panel) */
+  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+    display: none;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+    display: block;
+  }
+
   /* 第1階層リンク名の重複を防ぐ: アコーディオン展開時、li>a に既に表示されているため header を非表示 */
   header nav .nav-sections .nav-dropdown-header {
     display: none;
@@ -944,14 +1029,16 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     margin-top: -1px;
   }
 
+  /* ④ Reduced padding (original 2.4 6.4 2.4 2rem; trim excess) */
   header nav .nav-sections .default-content-wrapper > ul > li a {
     display: block;
-    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 6.4 * 1px) calc(var(--rem, 10) * 2.4 * 1px) 2rem;
+    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 5 * 1px) calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 1.6 * 1px);
     font-size: 1.6rem;
     color: #282828;
   }
 
   header nav .nav-sections .nav-dropdown-panel {
+    display: none;
     position: static;
     transform: none;
     width: 100%;
@@ -965,7 +1052,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   header nav .nav-sections .nav-dropdown-panel .nav-dropdown-list ul li a {
     position: relative;
     border-block: 1px solid #dfdfdf;
-    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 6.4 * 1px) calc(var(--rem, 10) * 2.4 * 1px) 2rem;
+    padding: calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 5 * 1px) calc(var(--rem, 10) * 2.4 * 1px) calc(var(--rem, 10) * 1.6 * 1px);
+    font-size: 1.6rem;
   }
 
   /* Second-level arrow: original \e902 (Ben font) */
@@ -996,7 +1084,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
   /* ① Accordion +/− icon (original .l-header__navigation-icon) */
   header nav .nav-sections .nav-drop .nav-accordion-icon {
     position: absolute;
-    right: calc(var(--rem, 10) * 2 * 1px);
+    right: calc(var(--rem, 10) * 2 * 1px + 21.832px);
     top: 50%;
     transform: translateY(-50%);
     display: grid;
@@ -1030,12 +1118,32 @@ header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new
     opacity: 0;
   }
 
+  /* ③ + icon in first row only (grid prevents overlap with second-level) */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop {
-    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr auto;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > a {
-    padding-right: calc(var(--rem, 10) * 6 * 1px);
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > .nav-accordion-icon {
+    grid-row: 1;
+    grid-column: 2;
+    align-self: center;
+    position: static;
+    top: auto;
+    transform: none;
+    margin-left: 0;
+    margin-right: 21.832px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > .nav-dropdown-panel {
+    grid-row: 2;
+    grid-column: 1 / -1;
   }
 }
 
@@ -1170,10 +1278,10 @@ header nav .nav-search::before {
   }
 }
 
-/* Search bar: expandable below nav (original Marubeni: full-width, white, rounded input) */
+/* Search bar: expandable below nav (original Marubeni: padding-inline 21.832px) */
 header .nav-search-bar {
   display: none;
-  padding: calc(var(--rem, 10) * 2 * 1px) calc(var(--rem, 10) * 4 * 1px);
+  padding: calc(var(--rem, 10) * 2 * 1px) 21.832px;
   padding-bottom: calc(var(--rem, 10) * 3.2 * 1px);
   background-color: #fff;
   overflow: visible;
