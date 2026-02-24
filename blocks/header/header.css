@@ -29,13 +29,15 @@ header .nav-wrapper::after {
   transition: background-color 0.25s ease;
 }
 
-/* Top section has hero-video: semi-transparent white over video (original rgba(255,255,255,.8)) */
-body.has-hero-video header .nav-wrapper {
-  background-color: rgb(255 255 255 / 80%);
-}
+/* Top section has hero-video: semi-transparent white over video (desktop only; mobile keeps solid) */
+@media (width >= 900px) {
+  body.has-hero-video header .nav-wrapper {
+    background-color: rgb(255 255 255 / 80%);
+  }
 
-body.has-hero-video header .nav-wrapper::after {
-  background-color: transparent;
+  body.has-hero-video header .nav-wrapper::after {
+    background-color: transparent;
+  }
 }
 
 /* Search bar open: solid white background (original: click magnifying glass -> header becomes opaque) */
