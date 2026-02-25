@@ -63,10 +63,11 @@ main .hero-video-poster img {
 }
 
 @media (width <= 899px) {
-  /* Mobile: push hero below fixed header so full poster image is visible (no overlap) */
+  /* Mobile: header already reserves space (height: var(--nav-height)), so margin-top: 0.
+     hero-video.css only needs to avoid negative margin from header.css (which is desktop-only now). */
   body.has-hero-video main > div:first-child.hero-video-container,
   body.has-hero-video main > div.section:first-of-type {
-    margin-top: var(--nav-height, 72px);
+    margin-top: 0;
     overflow: visible;
   }
 
