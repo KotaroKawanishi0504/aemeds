@@ -295,8 +295,10 @@ header nav[aria-expanded='true'] {
     overflow: hidden;
   }
 
-  /* 本家: 線はバー（.l-header__bar）の ::before で bottom:0。バーが sticky なら線も追従する */
-  /* nav-header-row に線を ::after で追加。sticky 時は線も一緒に追従（position: relative は expanded 時のみ付けない） */
+  /*
+   * 本家: 線はバー（.l-header__bar）の ::before で bottom:0。バーが sticky なら線も追従する
+   * nav-header-row に線を ::after で追加。sticky 時は線も一緒に追従（position: relative は expanded 時のみ付けない）
+   */
   header nav[aria-expanded='false'] .nav-header-row {
     position: relative;
   }
@@ -308,6 +310,7 @@ header nav[aria-expanded='true'] {
     left: 0;
     right: 0;
     width: 100%;
+
     /* 本家 .l-header__bar::before: max(1px, var(--rem) * 1 * 1px * .1) */
     height: max(1px, calc(var(--rem, 10) * 1 * 1px * 0.1));
     background-color: #dfdfdf;
@@ -417,6 +420,7 @@ header nav .nav-hamburger-icon::after {
   display: block;
   position: relative;
   width: 20px;
+
   /* 本家 .l-header__menu-line: max(2px, var(--rem) * 2 * 1px * .1) */
   height: max(2px, calc(var(--rem, 10) * 2 * 1px * 0.1));
   background: #282828;
@@ -1118,6 +1122,7 @@ header nav .nav-sections .nav-dropdown-list .nav-dropdown-link[data-open-in-new-
     display: grid;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity -- mobile accordion list order */
   header nav .nav-sections .nav-dropdown-list ul {
     column-count: 1;
   }
@@ -1146,7 +1151,7 @@ header nav .nav-sections .nav-dropdown-list .nav-dropdown-link[data-open-in-new-
   header nav .nav-sections .nav-drop .nav-accordion-icon::after {
     content: '';
     display: block;
-    background-color: currentColor;
+    background-color: currentcolor;
     grid-area: 1 / 1;
   }
 

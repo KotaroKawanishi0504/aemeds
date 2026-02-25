@@ -70,24 +70,27 @@ main .hero-video-poster img {
     margin-top: 0;
     overflow: visible;
   }
-  body.has-hero-video .hero-video-container .hero-video-media,
-  body.has-hero-video .hero-video-media {
-    transform: none;
-    margin-bottom: 0;
-  }
-  body.has-hero-video .hero-video-container .hero-video.block,
-  body.has-hero-video .hero-video.block {
-    margin-bottom: 0;
-  }
-  body.has-hero-video .hero-video-container .hero-video-wrapper,
-  body.has-hero-video .hero-video-wrapper {
-    margin-bottom: 0;
-  }
 
   /* Mobile: no fixed aspect ratio; image fills width, no black bars on sides */
   .hero-video-media,
   main .hero-video-media {
     aspect-ratio: auto;
+  }
+
+  body.has-hero-video .hero-video-media,
+  body.has-hero-video .hero-video-container .hero-video-media {
+    transform: none;
+    margin-bottom: 0;
+  }
+
+  body.has-hero-video .hero-video.block,
+  body.has-hero-video .hero-video-container .hero-video.block {
+    margin-bottom: 0;
+  }
+
+  body.has-hero-video .hero-video-wrapper,
+  body.has-hero-video .hero-video-container .hero-video-wrapper {
+    margin-bottom: 0;
   }
 
   .hero-video-poster,
