@@ -67,30 +67,32 @@ header .nav-search-background {
   }
 }
 
-/* Hero-video section overlaps under header so video top is hidden. We only set has-hero-video when
-   the first block in main is hero-video, so the first section is always the hero section. */
-body.has-hero-video main > div:first-child.hero-video-container,
-body.has-hero-video main > div.section:first-of-type {
-  margin-top: calc(-1 * var(--nav-height, 72px));
-  padding-top: 0;
-  overflow: hidden;
-}
+/* Hero-video section overlaps under header so video top is hidden (desktop only).
+   Mobile: hero-video.css sets margin-top so hero starts below header. */
+@media (width >= 900px) {
+  body.has-hero-video main > div:first-child.hero-video-container,
+  body.has-hero-video main > div.section:first-of-type {
+    margin-top: calc(-1 * var(--nav-height, 72px));
+    padding-top: 0;
+    overflow: hidden;
+  }
 
-/* Shift hero video content up by nav height so the top (e.g. black bar) is drawn under the header.
-   Negative margin-bottom collapses layout so no gap appears below the media (avoids black band). */
-body.has-hero-video .hero-video-container .hero-video-media {
-  transform: translateY(calc(-1 * var(--nav-height, 72px)));
-  margin-bottom: calc(-1 * var(--nav-height, 72px));
-}
+  /* Shift hero video content up by nav height so the top (e.g. black bar) is drawn under the header.
+     Negative margin-bottom collapses layout so no gap appears below the media (avoids black band). */
+  body.has-hero-video .hero-video-container .hero-video-media {
+    transform: translateY(calc(-1 * var(--nav-height, 72px)));
+    margin-bottom: calc(-1 * var(--nav-height, 72px));
+  }
 
-/* Also collapse the block (and wrapper) height so no 72px gap; media's margin alone may not shrink block in AEM */
-body.has-hero-video .hero-video-container .hero-video.block {
-  margin-bottom: calc(-1 * var(--nav-height, 72px));
-}
+  /* Also collapse the block (and wrapper) height so no 72px gap; media's margin alone may not shrink block in AEM */
+  body.has-hero-video .hero-video-container .hero-video.block {
+    margin-bottom: calc(-1 * var(--nav-height, 72px));
+  }
 
-/* Shrink wrapper footprint so its 855px content height doesn't leave a 72px gap below */
-body.has-hero-video .hero-video-container .hero-video-wrapper {
-  margin-bottom: calc(-1 * var(--nav-height, 72px));
+  /* Shrink wrapper footprint so its 855px content height doesn't leave a 72px gap below */
+  body.has-hero-video .hero-video-container .hero-video-wrapper {
+    margin-bottom: calc(-1 * var(--nav-height, 72px));
+  }
 }
 
 /* Scrolled past hero video: restore solid header */
