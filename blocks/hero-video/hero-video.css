@@ -68,6 +68,15 @@ main .hero-video-poster img {
     display: block;
   }
 
+  /* Mobile: poster image must not be cropped (video crop spec is for video only) */
+  .hero-video-poster picture,
+  main .hero-video-poster picture,
+  .hero-video-poster img,
+  main .hero-video-poster img {
+    object-fit: contain;
+    object-position: center center;
+  }
+
   .hero-video-video,
   main .hero-video-video {
     display: none;
