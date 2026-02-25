@@ -63,11 +63,10 @@ main .hero-video-poster img {
 }
 
 @media (width <= 899px) {
-  /* Mobile: do not overlap header - show full poster image without top cropping.
-     (Desktop video keeps header overlap + top crop via header.css) */
+  /* Mobile: push hero below fixed header so full poster image is visible (no overlap) */
   body.has-hero-video main > div:first-child.hero-video-container,
   body.has-hero-video main > div.section:first-of-type {
-    margin-top: 0;
+    margin-top: var(--nav-height, 72px);
     overflow: visible;
   }
 
