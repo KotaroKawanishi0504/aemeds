@@ -586,7 +586,7 @@ export default async function decorate(block) {
       }, DROPDOWN_CLOSE_DELAY);
     });
 
-    /* Mobile: prevent focusout from closing menu when tapping accordion + (focusout fires before click) */
+    /* Mobile: prevent focusout from closing menu when tapping accordion + */
     navSections.addEventListener('pointerdown', (e) => {
       if (!isDesktop.matches && e.target.closest('.nav-drop')) {
         accordionTapInProgress = true;
