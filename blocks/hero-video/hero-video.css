@@ -63,6 +63,27 @@ main .hero-video-poster img {
 }
 
 @media (width <= 899px) {
+  /* Mobile: do not overlap header - show full poster image without top cropping.
+     (Desktop video keeps header overlap + top crop via header.css) */
+  body.has-hero-video main > div:first-child.hero-video-container,
+  body.has-hero-video main > div.section:first-of-type {
+    margin-top: 0;
+    overflow: visible;
+  }
+  body.has-hero-video .hero-video-container .hero-video-media,
+  body.has-hero-video .hero-video-media {
+    transform: none;
+    margin-bottom: 0;
+  }
+  body.has-hero-video .hero-video-container .hero-video.block,
+  body.has-hero-video .hero-video.block {
+    margin-bottom: 0;
+  }
+  body.has-hero-video .hero-video-container .hero-video-wrapper,
+  body.has-hero-video .hero-video-wrapper {
+    margin-bottom: 0;
+  }
+
   /* Mobile: no fixed aspect ratio; image fills width, no black bars on sides */
   .hero-video-media,
   main .hero-video-media {
