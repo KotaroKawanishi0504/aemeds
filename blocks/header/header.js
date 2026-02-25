@@ -182,7 +182,8 @@ function normalizeNavSectionsFromBlocks(navSections) {
     const topParsed = parseNewWindowLabel(labelText);
     if (labelLink) {
       const clonedLink = labelLink.cloneNode(true);
-      if (topParsed.isNewWindow) {
+      const isTargetBlank = clonedLink.getAttribute('target') === '_blank';
+      if (topParsed.isNewWindow || isTargetBlank) {
         applyNewWindowToLink(clonedLink, topParsed.displayLabel, 'nav-link-label');
       } else {
         clonedLink.textContent = topParsed.displayLabel;
@@ -224,7 +225,8 @@ function normalizeNavSectionsFromBlocks(navSections) {
             ? (itemLi.textContent?.replace(/\s+/g, ' ').trim() ?? '')
             : (a.textContent?.replace(/\s+/g, ' ').trim() ?? '');
           const dropParsed = parseNewWindowLabel(raw);
-          if (dropParsed.isNewWindow) {
+          const isTargetBlank = a.getAttribute('target') === '_blank';
+          if (dropParsed.isNewWindow || isTargetBlank) {
             applyNewWindowToLink(a, dropParsed.displayLabel, 'nav-dropdown-link-label');
             if (itemLi) {
               [...itemLi.childNodes].forEach((node) => {
@@ -258,6 +260,39 @@ function normalizeNavSectionsFromBlocks(navSections) {
   });
   wrapper.textContent = '';
   wrapper.appendChild(singleUl);
+}
+
+/**
+ * Processes all nav links for |NewWindow suffix when normalizeNavSectionsFromBlocks
+ * did not run (single-block case). Ensures data-open-in-new-window and label span
+ * are applied so the "open in new window" icon displays in both PC and mobile.
+ * @param {Element} navSections .nav-sections element
+ */
+function processAllNavLinksForNewWindow(navSections) {
+  if (!navSections) return;
+  const wrapper = navSections.querySelector(':scope .default-content-wrapper');
+  if (!wrapper) return;
+
+  const isDropdownLink = (a) => {
+    const li = a.closest('li');
+    const ul = li?.parentElement;
+    return ul?.tagName === 'UL' && ul.parentElement?.tagName === 'LI';
+  };
+
+  wrapper.querySelectorAll('a[href]').forEach((a) => {
+    if (a.hasAttribute('data-open-in-new-window')) return;
+    const labelEl = a.querySelector('.nav-link-label, .nav-dropdown-link-label');
+    const raw = labelEl
+      ? labelEl.textContent.replace(/\s+/g, ' ').trim()
+      : (a.textContent?.replace(/\s+/g, ' ').trim() ?? '');
+    const parsed = parseNewWindowLabel(raw);
+    const isTargetBlank = a.getAttribute('target') === '_blank';
+    if (!parsed.isNewWindow && !isTargetBlank) return;
+
+    const labelClass = isDropdownLink(a) ? 'nav-dropdown-link-label' : 'nav-link-label';
+    applyNewWindowToLink(a, parsed.displayLabel, labelClass);
+    if (isDropdownLink(a)) a.classList.add('nav-dropdown-link');
+  });
 }
 
 /**
@@ -485,6 +520,7 @@ export default async function decorate(block) {
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     normalizeNavSectionsFromBlocks(navSections);
+    processAllNavLinksForNewWindow(navSections);
     let dropdownCloseTimer = 0;
     const DROPDOWN_CLOSE_DELAY = 150;
 

@@ -289,6 +289,12 @@ header nav[aria-expanded='true'] {
     position: relative;
   }
 
+  /* 本家: 線は1本のみ、height max(1px, var(--rem)*1*1px*.1)。閉じ時は nav-wrapper::after を非表示にして重複を防ぐ */
+  header .nav-wrapper:has(nav[aria-expanded='false'])::after {
+    height: 0;
+    overflow: hidden;
+  }
+
   /* 本家: 線はバー（.l-header__bar）の ::before で bottom:0。バーが sticky なら線も追従する */
   /* nav-header-row に線を ::after で追加。sticky 時は線も一緒に追従（position: relative は expanded 時のみ付けない） */
   header nav[aria-expanded='false'] .nav-header-row {
@@ -302,6 +308,7 @@ header nav[aria-expanded='true'] {
     left: 0;
     right: 0;
     width: 100%;
+    /* 本家 .l-header__bar::before: max(1px, var(--rem) * 1 * 1px * .1) */
     height: max(1px, calc(var(--rem, 10) * 1 * 1px * 0.1));
     background-color: #dfdfdf;
     pointer-events: none;
@@ -410,9 +417,9 @@ header nav .nav-hamburger-icon::after {
   display: block;
   position: relative;
   width: 20px;
-  height: 2px;
+  /* 本家 .l-header__menu-line: max(2px, var(--rem) * 2 * 1px * .1) */
+  height: max(2px, calc(var(--rem, 10) * 2 * 1px * 0.1));
   background: #282828;
-  border-radius: 1px;
   transition: transform 0.3s, background 0.3s;
 }
 
@@ -448,16 +455,16 @@ header nav[aria-expanded='true'] .nav-hamburger-icon {
     justify-content: flex-end;
   }
 
-  /* 本家: icon 2.8rem、line height 2px、transform-origin center */
+  /* 本家 .l-header__menu-line: icon 2.8rem、line height max(2px, var(--rem)*2*1px*.1)、transform-origin center */
   header nav .nav-hamburger-icon,
   header nav .nav-hamburger-icon::before,
   header nav .nav-hamburger-icon::after {
     width: calc(var(--rem, 10) * 2.8 * 1px);
-    height: 2px;
+    height: max(2px, calc(var(--rem, 10) * 2 * 1px * 0.1));
     transform-origin: center center;
   }
 
-  /* 対称 top (±0.5rem): 3本線の間隔を均等に。×時は translateY(±0.5rem) で中央に揃える */
+  /* 3本線の間隔を均等に: 対称 top ±0.5rem。×時も対称 translateY(±0.5rem) で中央で交差し左右均等に */
   header nav .nav-hamburger-icon::before {
     top: calc(var(--rem, 10) * -0.5 * 1px);
   }
@@ -466,11 +473,11 @@ header nav[aria-expanded='true'] .nav-hamburger-icon {
     top: calc(var(--rem, 10) * 0.5 * 1px);
   }
 
-  /* ×時: translateY(±0.5rem) で中央に集約、rotate(±35deg) で交差。transform-origin 50% で対称に */
+  /* ×時: translateY(±0.5rem) で中央に集約、rotate(±35deg) で交差。対称値で左右均等の×に */
   header nav[aria-expanded='true'] .nav-hamburger-icon::before,
   header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-    height: 2px;
-    min-height: 2px;
+    height: max(2px, calc(var(--rem, 10) * 2 * 1px * 0.1));
+    min-height: max(2px, calc(var(--rem, 10) * 2 * 1px * 0.1));
     transform-origin: 50% 50%;
   }
 
@@ -578,7 +585,9 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
 }
 
 /* New-window link: red window icon after label (same as Cards block, Ben \e901). All viewports. */
-header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new-window='true'] .nav-link-label::after {
+header nav .nav-sections .default-content-wrapper > ul > li > a[data-open-in-new-window='true'] .nav-link-label::after,
+header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a[data-open-in-new-window='true'] .nav-dropdown-link-label::after,
+header nav .nav-sections .nav-dropdown-list .nav-dropdown-link[data-open-in-new-window='true'] .nav-dropdown-link-label::after {
   content: '\e901';
   font-family: Ben, sans-serif !important;
   font-style: normal;
