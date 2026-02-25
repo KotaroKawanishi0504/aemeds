@@ -63,18 +63,31 @@ main .hero-video-poster img {
 }
 
 @media (width <= 899px) {
+  /* Mobile: no fixed aspect ratio; image fills width, no black bars on sides */
+  .hero-video-media,
+  main .hero-video-media {
+    aspect-ratio: auto;
+  }
+
   .hero-video-poster,
   main .hero-video-poster {
     display: block;
+    position: relative;
+    inset: unset;
+    width: 100%;
+    height: auto;
   }
 
-  /* Mobile: poster image must not be cropped (video crop spec is for video only) */
   .hero-video-poster picture,
   main .hero-video-poster picture,
   .hero-video-poster img,
   main .hero-video-poster img {
-    object-fit: contain;
-    object-position: center center;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: unset;
+    object-position: unset;
+    vertical-align: middle;
   }
 
   .hero-video-video,
