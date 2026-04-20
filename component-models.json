@@ -93,33 +93,51 @@
       {
         "component": "aem-content",
         "name": "link",
-        "label": "Link"
+        "label": "Link - リンク",
+        "description": "URL for the button",
+        "valueType": "string",
+        "required": true,
+        "validation": {
+          "customErrorMsg": "Please enter a URL - URLを入力してください"
+        }
       },
       {
         "component": "text",
         "name": "linkText",
-        "label": "Text"
+        "label": "Label - ラベル",
+        "description": "Button text",
+        "valueType": "string",
+        "required": true,
+        "validation": {
+          "customErrorMsg": "Please enter button text - ボタンテキストを入力してください"
+        }
       },
       {
         "component": "text",
         "name": "linkTitle",
-        "label": "Title"
+        "label": "Supplementary Text - 補足テキスト",
+        "description": "Additional information shown on hover",
+        "valueType": "string",
+        "required": false
       },
       {
         "component": "select",
         "name": "linkType",
-        "label": "Type",
+        "label": "Style - スタイル",
+        "description": "Option to select button style",
+        "valueType": "string",
+        "value": "textlink",
         "options": [
           {
-            "name": "default",
-            "value": ""
+            "name": "Textlink - テキストリンク",
+            "value": "textlink"
           },
           {
-            "name": "primary",
+            "name": "Primary - プライマリ",
             "value": "primary"
           },
           {
-            "name": "secondary",
+            "name": "Secondary - セカンダリ",
             "value": "secondary"
           }
         ]
