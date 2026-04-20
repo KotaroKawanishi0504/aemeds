@@ -94,7 +94,6 @@
         "component": "aem-content",
         "name": "link",
         "label": "Link - リンク",
-        "description": "URL for the button",
         "valueType": "string",
         "required": true,
         "validation": {
@@ -105,7 +104,6 @@
         "component": "text",
         "name": "linkText",
         "label": "Label - ラベル",
-        "description": "Button text",
         "valueType": "string",
         "required": true,
         "validation": {
@@ -116,7 +114,6 @@
         "component": "text",
         "name": "linkTitle",
         "label": "Supplementary Text - 補足テキスト",
-        "description": "Additional information shown on hover",
         "valueType": "string",
         "required": false
       },
@@ -124,7 +121,6 @@
         "component": "select",
         "name": "linkType",
         "label": "Style - スタイル",
-        "description": "Option to select button style",
         "valueType": "string",
         "value": "textlink",
         "options": [
